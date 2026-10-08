@@ -1,0 +1,32 @@
+---
+// StatsGrid.astro — Small verified-stats row for case study sections.
+// Only pass values that are already verified in the content frontmatter.
+import type { AstroProps } from 'astro';
+
+interface Stat {
+  value: string;
+  label: string;
+}
+
+interface Props extends AstroProps {
+  stats: Stat[];
+  /** Accessible label for the grid. */
+  label?: string;
+  class?: string;
+}
+
+const { stats, label, class: className = '' } = Astro.props;
+---
+
+<ul
+  class={`not-prose my-6 grid grid-cols-1 gap-4 sm:grid-cols-3 ${className}`}
+  role="list"
+  aria-label={label ?? 'Key figures'}
+>
+  {stats.map((stat) => (
+    <li class="rounded-xl border border-border bg-card p-5">
+      <div class="text-heading-lg font-bold text-foreground">{stat.value}</div>
+      <div class="mt-1 text-body-sm text-muted-foreground">{stat.label}</div>
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,54 @@
+---
+// MetricCard.astro - Reusable metric display card
+import type { AstroProps } from 'astro';
+
+interface Props extends AstroProps {
+  value: string;
+  label: string;
+  note?: string;
+  trend?: { value: string; positive: boolean };
+  /** Optional link (e.g. to the related case) — whole card becomes clickable */
+  href?: string;
+  /** Visible call-to-action label, e.g. "Ver case" */
+  cta?: string;
+  class?: string;
+  icon?: string;
+}
+
+const {
+  value,
+  label,
+  note,
+  trend,
+  href,
+  cta,
+  class: className = '',
+  icon,
+} = Astro.props;
+---
+
+<div class={`card relative p-6 ${className}`}>
+  {icon && (
+    <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4 text-accent" aria-hidden="true">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={icon} />
+    </div>
+  )}
+  <div class="text-display-sm font-bold text-foreground mb-1">{value}</div>
+  <div class="text-body-sm text-muted-foreground mb-2">{label}</div>
+  {note && (
+    <div class="text-caption text-muted-foreground/60 line-clamp-2">{note}</div>
+  )}
+  {href && cta && (
+    <div class="mt-3 flex items-center gap-1 text-caption font-medium text-accent">
+      {cta}
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  )}
+  {href && (
+    <a href={href} class="absolute inset-0 rounded-2xl" aria-label={cta || label}>
+      <span class="sr-only">{cta || label}</span>
+    </a>
+  )}
+</div>

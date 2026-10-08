@@ -1,0 +1,112 @@
+---
+// ProjectCard.astro - Reusable project card component
+import type { AstroProps } from 'astro';
+import { ui, statusLabel, type Locale } from '@/i18n';
+import { caseUrl, projectKey, verifiedOnly, type ProjectEntry } from '@/lib/projects';
+
+interface Props extends AstroProps {
+  project: ProjectEntry;
+  variant?: 'default' | 'featured' | 'hero' | 'compact';
+  class?: string;
+  locale?: Locale;
+  /** Heading level for the card title (2 under a page h1, 3 under a section h2) */
+  headingLevel?: 2 | 3;
+}
+
+const { project, variant = 'default', class: className = '', locale = 'pt-BR', headingLevel = 3 } = Astro.props;
+const { data } = project;
+const { title, subtitle, description, year, status, featured, cover, tags, metrics, demonstrates } = data;
+const work = ui[locale].work;
+
+const key = projectKey(project);
+const href = caseUrl(locale, key);
+
+// Only verified metrics may be rendered publicly (max 4, 2-column grid)
+// Hero variant shows up to 4; others max 4 too but visually smaller
+const cardMetrics = verifiedOnly(metrics).slice(0, 4);
+---
+
+<article class={`card group h-full flex flex-col ${variant === 'featured' ? 'lg:col-span-2' : ''} ${className}`} aria-labelledby={`project-${key}-title`}>
+  {cover && (
+    <div class={`relative overflow-hidden ${variant === 'hero' ? 'aspect-[16/7]' : 'aspect-video'}`}>
+      <img
+        src={cover}
+        alt=""
+        class="w-full h-full object-cover transition-transform duration-slow group-hover:scale-105"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-normal" />
+      {featured && (
+        <span class="absolute left-4 top-4 tag tag-primary">Featured</span>
+      )}
+    </div>
+  )}
+
+  <div class={`flex flex-col flex-1 ${variant === 'hero' ? 'p-7 lg:p-8' : 'p-6'}`}>
+    <header class="mb-4">
+      <div class="flex items-center gap-2 mb-2">
+        <time class="text-caption text-muted-foreground font-mono" datetime={year.toString()}>
+          {year}
+        </time>
+        <span class="text-caption text-muted-foreground" aria-hidden="true">·</span>
+        <span class="text-caption text-muted-foreground">{statusLabel(locale, status)}</span>
+      </div>
+      {headingLevel === 2 ? (
+        <h2 id={`project-${key}-title`} class={`font-semibold text-foreground group-hover:text-accent transition-colors duration-fast ${variant === 'hero' ? 'text-display-sm' : 'text-heading-lg'}`}>
+          {title}
+        </h2>
+      ) : (
+        <h3 id={`project-${key}-title`} class={`font-semibold text-foreground group-hover:text-accent transition-colors duration-fast ${variant === 'hero' ? 'text-display-sm' : 'text-heading-lg'}`}>
+          {title}
+        </h3>
+      )}
+      {subtitle && (
+        <p class="text-body-sm text-muted-foreground mt-1">{subtitle}</p>
+      )}
+    </header>
+
+    <p class={`text-muted-foreground mb-4 line-clamp-3 flex-1 ${variant === 'hero' ? 'text-body-lg' : 'text-body-md'}`}>
+      {description}
+    </p>
+
+    {demonstrates.length > 0 && (
+      <p class="mb-4 text-caption text-muted-foreground/80">
+        <span class="font-semibold uppercase tracking-wider">{work.demonstrates}:</span>
+        {demonstrates.join(' · ')}
+      </p>
+    )}
+
+    {variant !== 'compact' && cardMetrics.length > 0 && (
+      <div class="grid grid-cols-2 gap-4 mb-4 pt-4 border-t border-border">
+        {cardMetrics.map((metric) => (
+          <div class="min-w-0">
+            <div class="text-display-sm font-bold text-foreground">{metric.value}</div>
+            <div class="text-caption text-muted-foreground">{metric.label}</div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <footer class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-border">
+      {tags.slice(0, 5).map((tag: string) => (
+        <span class="tag text-caption">{tag}</span>
+      ))}
+      {tags.length > 5 && (
+        <span class="tag text-caption text-muted-foreground/60">+{tags.length - 5}</span>
+      )}
+    </footer>
+
+    <!-- CTA -->
+    <div class="mt-4 pt-4 border-t border-border">
+      <a
+        href={href}
+        class="link-underline inline-flex items-center gap-1.5 text-body-sm font-medium text-accent hover:text-accent/80 transition-colors duration-fast group"
+      >
+        {work.viewCase}
+        <svg class="w-4 h-4 transition-transform duration-fast group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>

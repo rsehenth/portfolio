@@ -1,0 +1,286 @@
+---
+title: Universal Technical Docs Starter
+locale: pt-BR
+subtitle: Technical Product · Developer Experience
+description: "Starter reutilizável para integrar documentação técnica diretamente a um produto, com isolamento visual, configuração de branding, busca, i18n e conteúdo organizado como código."
+tagline: "Documentação que vive dentro do produto sem se transformar em um segundo produto."
+summary: "O projeto nasceu da necessidade de manter documentação e produto no mesmo ambiente sem transformar as docs em uma segunda aplicação. A solução separa conteúdo, navegação, branding e layout para tornar a integração previsível e reutilizável."
+year: 2025
+role: "Technical Product · Developer Experience · Hands-on Development"
+stage: "Starter · Validado no projeto"
+stageNote: "Desenvolvido e validado no ambiente do Cripto Host. Ainda não comprovado em múltiplos produtos hospedeiros."
+productType: Technical Product · Developer Experience
+focus: Reusability · Docs-as-Code · i18n · CSS Isolation
+status: Active
+draft: false
+featured: true
+# cover: re-enable only with a real screenshot/image (public/projects/universal-docs-cover.jpg)
+tags:
+  - Technical Product
+  - Developer Experience
+  - Docs-as-Code
+  - i18n
+  - Meteor
+  - Blaze
+  - Reusability
+demonstrates:
+  - Technical Product
+  - Developer Experience
+  - Reusable Architecture
+  - Docs-as-Code
+technologies:
+  - Meteor
+  - Blaze
+  - Bootstrap (scoped)
+  - JavaScript
+metrics:
+  - value: "3"
+    label: Idiomas
+    state: verified
+  - value: "57"
+    label: Test cases
+    state: verified
+  - value: "4"
+    label: Categorias
+    state: verified
+  - value: "0"
+    label: Bibliotecas externas para busca e highlighting
+    state: verified
+snapshot:
+  primary:
+    - value: "3"
+      label: Idiomas
+      state: verified
+    - value: "57"
+      label: Test cases
+      state: verified
+    - value: "4"
+      label: Categorias
+      state: verified
+    - value: "0"
+      label: Bibliotecas externas para busca e highlighting
+      state: verified
+  secondary: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "Universal Technical Docs Starter | Technical Product & Developer Experience | Lucas Sehnem"
+  description: "Case sobre um starter reutilizável de documentação técnica integrado ao produto, cobrindo Developer Experience, isolamento de CSS, i18n, Docs-as-Code e decisões de arquitetura."
+order: 3
+---
+
+## O problema
+
+Documentação técnica costuma começar simples e, com o tempo, acaba virando uma aplicação paralela ao produto principal. Outro layout, outro conjunto de estilos, outra navegação, mais dependências e mais um contexto técnico para manter.
+
+Isso cria dois problemas ao mesmo tempo. A documentação fica desconectada visualmente do produto. E a manutenção se torna mais custosa porque há dois ambientes técnicos diferentes para evoluir.
+
+A pergunta que guiou este projeto foi diferente: seria possível tratar documentação como parte do próprio produto, sem exigir uma aplicação separada e sem deixar que ela interferisse no restante da aplicação?
+
+## Meu papel
+
+Atuei entre Technical Product, Developer Experience e implementação hands-on. Parte do trabalho foi decidir o que o starter precisava resolver, o que deveria permanecer configurável e onde valia a pena aceitar mais complexidade técnica para tornar a integração mais previsível.
+
+Trabalhei diretamente na implementação e na validação dessas decisões: isolamento de estilos, estrutura de conteúdo, busca client-side, i18n e o registry utilizado para resolver as páginas.
+
+## Docs como parte do produto
+
+<Callout variant="info" title="Princípio central">
+Documentação como módulo, não como um segundo produto.
+</Callout>
+
+A diferença entre uma aplicação de docs separada e um módulo integrado não é apenas técnica. É uma decisão de produto sobre quanto contexto você está disposto a manter e quanto isolamento você consegue garantir.
+
+<ComparisonBlock
+  titleA="Aplicação separada"
+  titleB="Módulo integrado"
+  arrows={false}
+  label="Comparação entre documentação separada e módulo integrado"
+  itemsA={[
+    "Framework e layout próprios",
+    "Branding duplicado",
+    "Navegação independente",
+    "Estilos conflitantes com o host",
+    "Dependências extras",
+  ]}
+  itemsB={[
+    "Mesmo produto hospedeiro",
+    "Branding por configuração",
+    "Navegação integrada",
+    "CSS isolado por escopo",
+    "Dependências mínimas",
+  ]}
+/>
+
+## O que o módulo precisava entregar
+
+Para que a integração funcionasse como produto, o módulo precisava cobrir algumas áreas de forma coesa.
+
+**Navegação:** estrutura de categorias e páginas, breadcrumb de localização, links para anterior e próxima página.
+
+**Conteúdo:** páginas técnicas com blocos de código, botão de cópia, suporte a formatação.
+
+**Descoberta:** busca client-side com atalho de teclado, sem serviço externo.
+
+**Localização:** troca de idioma preservando a página atual, fallback quando a tradução não existe.
+
+**Integração ao produto:** metadados SEO por página, consistência visual com o host, estilos de impressão e sugestões em páginas 404.
+
+O objetivo não era ter o maior número de recursos. Era ter o conjunto certo para que a documentação funcionasse como parte do produto, não como uma área separada que o usuário precisa sair do produto para acessar.
+
+## Integrar sem quebrar o produto hospedeiro
+
+Incorporar qualquer framework de UI em um produto existente carrega um risco: os estilos do módulo podem vazar para o restante da aplicação, ou os estilos do produto podem interferir na interface das docs.
+
+A decisão foi compilar o Bootstrap utilizado pelas docs inteiramente dentro de um escopo CSS:
+
+```
+.docs-root { ... }
+```
+
+Isso significa que os estilos das docs afetam apenas elementos dentro de `.docs-root`, sem vazar para o produto hospedeiro. Da mesma forma, o que o host já tem definido globalmente tem impacto reduzido sobre a interface das docs.
+
+O trade-off é direto: o CSS compilado fica maior, porque o Bootstrap é incluído dentro do escopo em vez de ser compartilhado globalmente. Esse é o custo deliberado de uma integração mais previsível.
+
+## Reutilizar sem duplicar a interface
+
+Para que o módulo pudesse ser reutilizado em um segundo produto sem reescrever os componentes, a identidade visual e a estrutura do site precisavam estar fora do código dos componentes.
+
+A solução foi centralizar em configuração tudo que varia entre produtos: nome, links, SEO, idiomas disponíveis, rotas e cor de destaque. Os componentes apenas consomem essa configuração.
+
+<ComparisonBlock
+  titleA="Camada"
+  titleB="Responsabilidade"
+  arrows={true}
+  label="Separação de responsabilidades no módulo de docs"
+  itemsA={[
+    "Config",
+    "Navigation",
+    "Content",
+    "Layout",
+  ]}
+  itemsB={[
+    "Branding, SEO, rotas, idiomas",
+    "Categorias, ordem, labels",
+    "EN · PT · ES por arquivo",
+    "Header, Sidebar, Search, Docs page",
+  ]}
+/>
+
+A consequência prática: atualizar o branding não exige tocar no conteúdo. Adicionar um idioma não exige alterar a navegação. Reorganizar categorias não afeta a configuração global. Cada camada evolui de forma independente.
+
+## Resolver o necessário sem criar outra stack
+
+Dois recursos poderiam facilmente puxar dependências externas significativas: busca e syntax highlighting.
+
+A decisão foi implementar os dois client-side, sem bibliotecas especializadas. A busca funciona com navegação por teclado. O highlighting cobre as linguagens mais comuns dentro do contexto de uso.
+
+Vantagens:
+- menos dependências no projeto
+- comportamento controlado e auditável
+- sem serviço externo para busca
+
+Limitações:
+- o highlighting cobre aproximadamente seis linguagens
+- a busca é adequada para bases de documentação de pequeno e médio porte
+- não substitui um motor de busca para volumes maiores
+
+Essas limitações fazem parte do escopo definido para o starter. Para o contexto de uso, elas são aceitáveis. Para volumes maiores, um search engine dedicado passaria a fazer mais sentido.
+
+## i18n desde a arquitetura
+
+O suporte a múltiplos idiomas foi parte da estrutura desde o início, não algo adicionado depois.
+
+O módulo suporta EN, PT e ES. Cada página de conteúdo existe como arquivo separado por locale. Quando um conteúdo ainda não está traduzido, o fallback exibe a versão em inglês. A troca de idioma preserva a página em que o usuário está.
+
+Uma ressalva importante: o suporte de idioma é real, mas parte do conteúdo atual ainda está em versão scaffold ou placeholder. A arquitetura está pronta; o conteúdo final depende de preenchimento.
+
+## Quando carregamento dinâmico virou 404
+
+A primeira abordagem usava carregamento dinâmico para resolver as páginas de docs conforme necessário. No código, era uma solução mais flexível e elegante. No build, porém, alguns arquivos não eram incluídos como esperado e determinadas rotas terminavam em 404 em runtime.
+
+A saída foi criar um registry estático de conteúdo: um mapa explícito de todas as páginas disponíveis, resolvido antes do build. Em vez de carregar qualquer arquivo dinamicamente, o sistema consulta o registry e resolve o arquivo correto.
+
+O custo foi pequeno: adicionar uma nova página de docs exige atualizar o registry. Para o volume de uma base de documentação, esse passo extra é aceitável. O ganho foi resolução previsível de páginas e eliminação da dependência de um comportamento do bundler que não estava se comportando como esperado.
+
+## Arquitetura
+
+<ArchitectureDiagram
+  label="Arquitetura do módulo de docs"
+  steps={[
+    { label: "Usuário" },
+    { label: "Router" },
+    { label: "Docs Root" },
+    { label: "Docs Layout", detail: "Header · Sidebar · Search · Language Selector" },
+    { label: "Content Loader" },
+    { label: "Content Registry" },
+    { label: "Conteúdo localizado" },
+  ]}
+  servicesLabel="Tudo client-side. Sem backend, banco de dados ou serviço externo de busca."
+  services={[
+    "localStorage (preferências)",
+    "Busca client-side",
+    "Registry estático",
+  ]}
+/>
+
+A arquitetura foi construída para não depender de nenhum serviço externo. Isso é uma consequência do escopo definido: um módulo que precisa funcionar dentro de um produto existente sem adicionar infraestrutura nova.
+
+## Copiar, configurar, adaptar
+
+O modelo de reuso foi pensado em três etapas:
+
+<FlowDiagram
+  label="Modelo de reuso do starter"
+  steps={[
+    "1. Copiar o módulo de docs",
+    "2. Configurar: brand, rotas, idiomas, navegação",
+    "3. Substituir o conteúdo scaffold pelo conteúdo real",
+  ]}
+/>
+
+A implementação atual foi criada e validada no ecossistema Meteor + Blaze. O fluxo de reuso é simples dentro desse contexto: copiar o módulo, configurar identidade e navegação e substituir o conteúdo.
+
+A distinção que importa é esta: a arquitetura foi preparada para reutilização. O que ainda precisa ser comprovado é quanto dessa promessa se sustenta quando o starter entra em um segundo produto real, com outro host, outros estilos globais e outro time de manutenção.
+
+O padrão arquitetural, separação de config e conteúdo, CSS isolado por escopo e registry estático, pode inspirar adaptações em outras stacks. Mas essa portabilidade não foi validada e não é afirmada aqui como compatibilidade com React, Next.js, Vue ou outros frameworks.
+
+## Onde o starter está hoje
+
+O starter funciona no contexto para o qual foi criado. A implementação foi validada no ambiente do projeto de origem, com os testes automatizados cobrindo os fluxos principais.
+
+O que ainda não existe:
+- evidência de uso em um segundo produto hospedeiro real
+- métricas de uso ou adoção
+- validação do isolamento de CSS em outro host com estilos diferentes
+- conteúdo final nos três idiomas (parte ainda é scaffold)
+
+Essa é a diferença entre uma arquitetura reutilizável e uma arquitetura já validada em vários ambientes. O primeiro está demonstrado. O segundo ainda não.
+
+## O que quero validar a seguir
+
+O próximo passo não é adicionar mais recursos. É entender até onde a promessa de reutilização se sustenta fora do projeto de origem.
+
+As perguntas que guiam essa validação:
+
+- Quanto esforço é necessário para integrar o starter em um segundo produto real?
+- Quantas alterações seriam necessárias fora de configuração e conteúdo?
+- O isolamento de CSS continua funcionando com outro conjunto de estilos globais no host?
+- Como a busca se comporta conforme a base de conteúdo cresce?
+- Qual é a experiência real de autoria e manutenção do conteúdo?
+- Em que ponto um search engine dedicado passa a fazer mais sentido do que a solução client-side?
+- Como o registry se comporta com um volume maior de páginas?
+
+Essas são hipóteses para validação futura, não métricas atuais.
+
+## O que este projeto demonstra
+
+<Callout variant="demonstrates" title="O que este projeto demonstra">
+
+- **Technical Product:** identificar um problema recorrente de integração e transformá-lo em um módulo com escopo e trade-offs claros
+- **Developer Experience:** projetar o módulo pensando em quem vai copiar, configurar, navegar e manter as docs
+- **Reusable Architecture:** separar configuração, navegação, conteúdo e interface para reduzir acoplamento entre camadas
+- **Docs-as-Code:** tratar documentação como parte da arquitetura do produto, com estrutura versionável e previsível
+- **Product × Engineering:** escolher soluções técnicas com base em integração, manutenção e previsibilidade, não apenas elegância do código
+
+</Callout>

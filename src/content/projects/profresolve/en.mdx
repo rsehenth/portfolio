@@ -1,0 +1,335 @@
+---
+title: ProfResolve
+locale: en
+subtitle: AI SaaS for educators
+description: "A platform that turns teaching needs into structured, editable and exportable materials, combining AI, credit-based monetization and workflows designed for educators."
+tagline: "Building a reliable AI product for educators."
+summary: "An AI SaaS for educators that turns recurring teaching tasks into structured, editable and distribution-ready materials. The product is publicly available and has surpassed 1,200 registered users."
+year: 2026
+role: Technical Product / Product + Hands-on Development
+productType: SaaS · AI · Education
+focus: AI Reliability · Product Economics · APIs · Payments
+stage: "Live Product · Active Development"
+status: Active
+draft: false
+featured: true
+externalUrl: "https://www.profresolve.com.br"
+externalUrlLabel: "Visit ProfResolve ↗"
+snapshotMode: "product-technical"
+# cover: re-enable only with a real screenshot/image (public/projects/...)
+tags:
+  - AI Product
+  - SaaS
+  - APIs
+  - Payments
+  - Reliability
+demonstrates:
+  - AI Product
+  - Reliability
+  - Product Economics
+  - Hands-on Execution
+technologies:
+  - TypeScript
+  - Next.js
+  - PostgreSQL
+  - Redis
+  - Cloudflare R2
+  - Gemini
+  - DeepSeek
+  - Asaas
+  - Resend
+  - Sentry
+metrics:
+  - value: "1.2K+"
+    label: Registered users
+    state: verified
+  - value: "16"
+    label: Generators
+    state: verified
+  - value: "2.4K+"
+    label: Test cases
+    state: verified
+snapshot:
+  primary:
+    - value: "1.2K+"
+      label: Registered users
+      state: verified
+    - value: "16"
+      label: Content generators
+      state: verified
+    - value: "7"
+      label: Educational games
+      state: verified
+    - value: "Live"
+      label: Public product
+      state: verified
+  secondary:
+    - value: "94"
+      label: API handlers
+      state: verified
+    - value: "8"
+      label: External integrations
+      state: verified
+    - value: "2.4K+"
+      label: Test cases
+      state: verified
+    - value: "277"
+      label: Test files
+      state: verified
+scaleMetrics:
+  - value: "94"
+    label: API handlers
+    state: verified
+  - value: "8"
+    label: Integrations
+    state: verified
+  - value: "2.4K+"
+    label: Test cases
+    state: verified
+  - value: "~40"
+    label: Database tables
+    state: verified
+productMetrics:
+  - value: "1.2K+"
+    label: Registered users
+    state: verified
+seo:
+  title: "ProfResolve · AI Product & Technical Product Case Study | Lucas Sehnem"
+  description: "A case study on the evolution of an AI SaaS for educators with more than 1,200 registered users, covering product strategy, LLM reliability, monetization, architecture and hands-on execution."
+order: 10
+---
+
+## Product in Use
+
+ProfResolve is publicly available at profresolve.com.br and has surpassed 1,200 registered users. The platform sees recurring usage while continuing to evolve based on how teachers actually use it.
+
+Having a product in active use changes how decisions get made. Instead of working from assumptions, we can observe which flows educators return to, where they run into friction and which features are worth building next.
+
+## The Problem
+
+Educators spend a significant part of their time creating lesson plans, assessments, activities and adaptations. ProfResolve was built to reduce that repetitive workload by turning a pedagogical need into structured, editable and ready-to-use content.
+
+That hypothesis now exists beyond a prototype: the product is publicly available and has surpassed 1,200 registered users.
+
+## From Hypothesis to a Product in Use
+
+The project started with a simple idea: AI could reduce the repetitive side of content preparation without taking control away from the educator.
+
+The platform grew from that idea into a product with multiple content generators, editing, exports, credits, payments, educational games and reliability mechanisms built around LLM operations.
+
+With more than 1,200 registered users and recurring platform usage, the next step is not just building more features. It is about understanding behavior, usage patterns and which workflows genuinely deliver value.
+
+## My Role
+
+I work across product and technology on ProfResolve. That means being part of the decisions on what to build, how to prioritize each change and how to turn those choices into something that actually ships.
+
+In practice, my work spans feature scope, generation flows, credit economics, AI model behavior, integrations, reliability criteria, user experience and the implementation itself. The role is hands-on from decision to delivery.
+
+<RoleBlocks
+  label="Role breakdown on ProfResolve"
+  blocks={[
+    {
+      title: 'Product',
+      items: ['Discovery', 'Prioritization', 'Scope', 'Monetization', 'Experience', 'Metrics'],
+    },
+    {
+      title: 'AI Product',
+      items: ['Model routing', 'Prompt architecture', 'AI reliability', 'Fallback strategy', 'Cost awareness', 'Failure handling'],
+    },
+    {
+      title: 'Technical Product',
+      items: ['APIs', 'Architecture', 'Credits', 'Payments', 'Storage', 'Observability', 'Security', 'Trade-offs'],
+    },
+    {
+      title: 'Hands-on Execution',
+      items: ['Implementation', 'Prototyping', 'Testing', 'Debugging', 'Iteration'],
+    },
+  ]}
+/>
+
+## Core Product Flow
+
+The main flow was designed to fit an educator's daily routine: a few choices before generation, usable material right after.
+
+<FlowDiagram
+  label="ProfResolve core flow"
+  steps={[
+    'Educator',
+    'Selects subject, grade and topic',
+    'AI generation',
+    'Structured material',
+    'Editing',
+    'PDF / DOCX / Print / WhatsApp',
+  ]}
+/>
+
+## Turning an AI Call into a Reliable Product
+
+A generation is not just sending a prompt to an LLM. In ProfResolve, every generation goes through a control chain that turns an AI call into a predictable product process:
+
+<FlowDiagram
+  label="Generation execution chain"
+  steps={[
+    'User request',
+    'Validation',
+    'Credit debit',
+    'Prompt + context',
+    'Primary model',
+    'Retry / fallback',
+    'Sanitization',
+    'Persistence',
+    'Editor / export',
+  ]}
+  branch={{
+    at: 5,
+    label: 'Failure',
+    steps: ['Automatic credit refund'],
+  }}
+/>
+
+Validation, credit debit, prompt and context assembly, model routing, retry, fallback, sanitization, persistence and automatic refund are all part of the flow. The educator's experience cannot depend on a single point of failure.
+
+## AI Fails. The Product Should Not Fail With It.
+
+A provider failure cannot consume the educator's credits and end their task. The generation flow treats failure as an expected part of the operation.
+
+Reliability was treated as a product requirement, not an implementation detail. At a conceptual level, the strategy includes:
+
+- **Model chain:** more than one model available for the same generation
+- **Retries with a time budget:** additional attempts within a defined time limit
+- **Cross-provider fallback:** switching providers when the primary one fails
+- **Circuit breaker:** temporarily pausing a problematic path
+- **Context fallback:** degraded generation instead of an error shown to the user
+- **Automatic credit refund:** a failure never costs the educator credits
+- **Kill switch and recovery:** operational-level stop and restart
+
+These mechanisms are intentionally described at a conceptual level. Parameters, thresholds and internal configuration are part of the implementation and are not published. No success rate is claimed here without real data to back it up.
+
+## When AI Cost Becomes a Product Decision
+
+ProfResolve uses **credits** as its consumption unit. Each generation type has a different cost, and the price of a generation is a product decision, not just an infrastructure variable.
+
+<FlowDiagram
+  label="Cost-to-price chain"
+  steps={[
+    'Model cost',
+    'Generation cost',
+    'Credits',
+    'Product pricing',
+  ]}
+/>
+
+Credits sit at the intersection of computational cost, perceived value and monetization. When a model's cost changes, it directly affects the price of a generation and how users are likely to behave.
+
+A documented change reclassified one generator from **100 credits to 300 credits**, alongside a change in strategy and model. The goal is to keep AI cost visible and manageable inside the product itself.
+
+## Not Every Technical Experiment Should Stay in the Product
+
+**Context:** SSE streaming was tested to improve the generation experience.
+
+**Problem:** Parsing failures could interrupt the flow and produce partial content.
+
+**Decision:** The implementation was rolled back to a more predictable synchronous generation, with stricter timeout control.
+
+**Trade-off:** less sense of progressive response in exchange for greater predictability and reliability.
+
+The rollback was treated as a normal part of development. What matters is that the trade-off was deliberate.
+
+<Callout variant="info">
+  Rollback is also a product decision.
+</Callout>
+
+## Build vs Buy: Where Engineering Effort Creates Value
+
+<Callout title="Build vs Buy">
+  A custom crossword engine only placed part of the words. Rather than continuing to invest in the internal algorithm, the product moved to a specialized library and the effort was redirected toward experience and output quality.
+</Callout>
+
+<FlowDiagram
+  label="Crossword generator evolution"
+  steps={[
+    'Custom engine: 4 to 7 of 20 words',
+    'Specialized library',
+    'All or nearly all words',
+  ]}
+/>
+
+The final result is described qualitatively based on project documentation. No percentage is claimed here.
+
+## Architecture
+
+Conceptual representation of the product architecture. No internal endpoints, database schema, security thresholds or credentials.
+
+<ArchitectureDiagram
+  label="ProfResolve conceptual architecture"
+  steps={[
+    { label: 'User' },
+    { label: 'Next.js Application' },
+    { label: 'Application Layer', detail: 'Auth · Credits · AI · APIs' },
+  ]}
+  servicesLabel="Data, AI and external services"
+  services={[
+    'PostgreSQL',
+    'Redis',
+    'Cloudflare R2',
+    'Gemini / DeepSeek',
+    'Asaas',
+    'Resend',
+    'Sentry',
+  ]}
+/>
+
+## Engineering as Part of Product Trust
+
+Test coverage and engineering discipline are part of the product experience, because a generation failure hits the educator directly.
+
+- **2.4K+ test cases**
+- **277 test files**
+- **Property-based testing**
+- **Regression and characterization testing**
+- **Strict TypeScript**
+- **Structured logging**
+- **Observability**
+- **Idempotent credits and payments**
+
+These numbers represent technical scale and engineering discipline. They are not substitutes for product impact metrics.
+
+## Product Signals & Technical Scale
+
+<p class="not-prose mb-2 text-caption font-semibold uppercase tracking-widest text-muted-foreground">Product</p>
+
+<StatsGrid
+  label="Product signals"
+  stats={[
+    { value: '1.2K+', label: 'Registered users' },
+    { value: 'Live', label: 'Public product' },
+    { value: 'Recurring', label: 'Platform usage' },
+  ]}
+/>
+
+<p class="not-prose mb-2 text-caption font-semibold uppercase tracking-widest text-muted-foreground">Technical Scale</p>
+
+<StatsGrid
+  label="Technical scale"
+  stats={[
+    { value: '16', label: 'Generators' },
+    { value: '94', label: 'API handlers' },
+    { value: '8', label: 'Integrations' },
+    { value: '2.4K+', label: 'Test cases' },
+  ]}
+/>
+
+## What I Want to Understand Next
+
+The product has enough real usage for future decisions to rely increasingly on observed behavior.
+
+- 7-day and 30-day active users
+- Generation frequency per user
+- Most-used generators
+- First-generation completion rate
+- Credit consumption over time
+- Freemium to paid conversion
+- Retention
+- Regeneration rate
+
+These are signals I want to measure. They are not metrics that are currently available.

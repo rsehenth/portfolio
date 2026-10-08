@@ -1,0 +1,286 @@
+---
+title: Universal Technical Docs Starter
+locale: en
+subtitle: Technical Product · Developer Experience
+description: "A reusable starter for embedding technical documentation directly into a product, with visual isolation, configurable branding, search, i18n and docs-as-code content."
+tagline: "Documentation that lives inside the product without becoming a second product."
+summary: "The project started from a need to keep documentation and product in the same environment without turning the docs into a second application. The solution separates content, navigation, branding and layout to make integration predictable and reusable."
+year: 2025
+role: "Technical Product · Developer Experience · Hands-on Development"
+stage: "Starter · Validated in Project Environment"
+stageNote: "Developed and validated in the Cripto Host environment. Not yet proven across multiple host products."
+productType: Technical Product · Developer Experience
+focus: Reusability · Docs-as-Code · i18n · CSS Isolation
+status: Active
+draft: false
+featured: true
+# cover: re-enable only with a real screenshot/image (public/projects/universal-docs-cover.jpg)
+tags:
+  - Technical Product
+  - Developer Experience
+  - Docs-as-Code
+  - i18n
+  - Meteor
+  - Blaze
+  - Reusability
+demonstrates:
+  - Technical Product
+  - Developer Experience
+  - Reusable Architecture
+  - Docs-as-Code
+technologies:
+  - Meteor
+  - Blaze
+  - Bootstrap (scoped)
+  - JavaScript
+metrics:
+  - value: "3"
+    label: Languages
+    state: verified
+  - value: "57"
+    label: Test cases
+    state: verified
+  - value: "4"
+    label: Categories
+    state: verified
+  - value: "0"
+    label: External libraries for search & highlighting
+    state: verified
+snapshot:
+  primary:
+    - value: "3"
+      label: Languages
+      state: verified
+    - value: "57"
+      label: Test cases
+      state: verified
+    - value: "4"
+      label: Categories
+      state: verified
+    - value: "0"
+      label: External libraries for search & highlighting
+      state: verified
+  secondary: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "Universal Technical Docs Starter | Technical Product & Developer Experience Case Study | Lucas Sehnem"
+  description: "A case study on a reusable technical documentation starter embedded within the product, covering Developer Experience, CSS isolation, i18n, Docs-as-Code and architecture decisions."
+order: 3
+---
+
+## The Problem
+
+Technical documentation tends to start simple and, over time, grow into a parallel application running alongside the main product. A separate framework, its own layout, styles that conflict with the host, duplicated branding and one more technical context to maintain.
+
+That pattern creates two problems at once. The documentation feels visually disconnected from the product. And maintenance becomes more expensive because there are two separate environments to evolve.
+
+This project asked a different question: could documentation be treated as part of the product itself, without requiring a separate application and without interfering with the rest of the codebase?
+
+## My Role
+
+I worked across Technical Product, Developer Experience and hands-on implementation. Part of the work was deciding what the starter needed to solve, what had to remain configurable and where it made sense to accept more technical complexity in exchange for more predictable integration.
+
+I worked directly on the implementation and validation of those decisions: style isolation, content structure, client-side search, i18n and the registry used to resolve pages.
+
+## Docs as Part of the Product
+
+<Callout variant="info" title="Central principle">
+Documentation as a module, not a second product.
+</Callout>
+
+The difference between a standalone docs application and an integrated module is not just technical. It is a product decision about how much context you are willing to maintain and how much isolation you can guarantee.
+
+<ComparisonBlock
+  titleA="Standalone application"
+  titleB="Integrated module"
+  arrows={false}
+  label="Comparison between standalone documentation and an integrated module"
+  itemsA={[
+    "Own framework and layout",
+    "Duplicated branding",
+    "Independent navigation",
+    "Styles conflicting with the host",
+    "Extra dependencies",
+  ]}
+  itemsB={[
+    "Same host product",
+    "Config-driven branding",
+    "Integrated navigation",
+    "CSS scoped by class",
+    "Minimal dependencies",
+  ]}
+/>
+
+## What the Module Needed to Deliver
+
+For the integration to work as a product, the module needed to cover a few areas cohesively.
+
+**Navigation:** category and page structure, location breadcrumb, previous and next page links.
+
+**Content:** technical pages with code blocks, copy button, formatting support.
+
+**Discovery:** client-side search with keyboard shortcut, no external service required.
+
+**Localization:** language switching that preserves the current page, fallback when a translation does not exist.
+
+**Product integration:** per-page SEO metadata, visual consistency with the host, print styles and suggestions on 404 pages.
+
+The goal was not to have the most features. It was to have the right set so that documentation worked as part of the product, not as a separate area the user has to leave the product to reach.
+
+## Embedding Without Breaking the Host Product
+
+Bringing any UI framework into an existing product carries a risk: the module's styles might leak into the rest of the application, or the host's global styles might interfere with the docs interface.
+
+The decision was to compile the Bootstrap used by the docs entirely within a CSS scope:
+
+```
+.docs-root { ... }
+```
+
+This means the docs styles only affect elements inside `.docs-root`, without leaking into the host product. Conversely, whatever the host defines globally has a reduced impact on the docs interface.
+
+The trade-off is straightforward: the compiled CSS is larger, because Bootstrap is included inside the scope rather than shared globally. That is the deliberate cost of a more predictable integration.
+
+## Reuse Without Rebuilding the Interface
+
+For the module to work in a second product without rewriting the components, visual identity and site structure had to live outside the component code.
+
+The solution was to centralize in configuration everything that varies between products: name, links, SEO, available languages, routes and accent color. Components simply consume that configuration.
+
+<ComparisonBlock
+  titleA="Layer"
+  titleB="Responsibility"
+  arrows={true}
+  label="Separation of concerns in the docs module"
+  itemsA={[
+    "Config",
+    "Navigation",
+    "Content",
+    "Layout",
+  ]}
+  itemsB={[
+    "Branding, SEO, routes, languages",
+    "Categories, order, labels",
+    "EN · PT · ES per file",
+    "Header, Sidebar, Search, Docs page",
+  ]}
+/>
+
+The practical result: updating branding does not require touching content. Adding a language does not require changing navigation. Reorganizing categories does not affect the global config. Each layer evolves independently.
+
+## Solve the Need Without Adding Another Stack
+
+Two features could easily pull in significant external dependencies: search and syntax highlighting.
+
+The decision was to implement both client-side, without specialized libraries. Search works with keyboard navigation. Highlighting covers the most common languages within the intended use context.
+
+Advantages:
+- fewer project dependencies
+- controlled and auditable behavior
+- no external service for search
+
+Honest limitations:
+- syntax highlighting covers roughly six languages
+- search is suited for small to medium documentation sets
+- not a replacement for a dedicated search engine at larger volumes
+
+These limitations are part of the defined scope. For the intended context, they are acceptable. At larger volumes, a dedicated search engine would start to make more sense.
+
+## i18n from the Start
+
+Support for multiple languages was part of the structure from the beginning, not something layered on later.
+
+The module supports EN, PT and ES. Each content page exists as a separate file per locale. When content is not yet translated, the fallback displays the English version. Language switching preserves the page the user is on.
+
+One honest note: the language infrastructure is in place, but part of the current content is still scaffold or placeholder. The architecture is ready; the final content depends on filling it in.
+
+## When Dynamic Loading Became a 404
+
+The first approach used dynamic imports to resolve documentation pages on demand. In the code, it was a more flexible and elegant solution. In the build, however, some files were not being included as expected and certain routes ended up as 404 errors at runtime.
+
+The fix was to create a static content registry: an explicit map of all available pages, resolved before the build. Instead of dynamically loading any file, the system queries the registry and resolves the correct one.
+
+The cost was small: adding a new documentation page requires updating the registry. For the volume of a documentation base, that extra step is acceptable. The gain was predictable page resolution and the removal of a dependency on bundler behavior that was not working as expected.
+
+## Architecture
+
+<ArchitectureDiagram
+  label="Docs module architecture"
+  steps={[
+    { label: "User" },
+    { label: "Router" },
+    { label: "Docs Root" },
+    { label: "Docs Layout", detail: "Header · Sidebar · Search · Language Selector" },
+    { label: "Content Loader" },
+    { label: "Content Registry" },
+    { label: "Localized content" },
+  ]}
+  servicesLabel="All client-side. No backend, no database, no external search service."
+  services={[
+    "localStorage (preferences)",
+    "Client-side search",
+    "Static registry",
+  ]}
+/>
+
+The architecture was built not to depend on any external service. That is a consequence of the defined scope: a module that needs to work inside an existing product without adding new infrastructure.
+
+## Copy, Configure, Adapt
+
+The reuse model was designed in three steps:
+
+<FlowDiagram
+  label="Starter reuse model"
+  steps={[
+    "1. Copy the docs module",
+    "2. Configure: brand, routes, languages, navigation",
+    "3. Replace scaffold content with real content",
+  ]}
+/>
+
+The current implementation was built and validated in the Meteor + Blaze ecosystem. Within that context, the reuse flow is straightforward: copy the module, configure identity and navigation, replace the content.
+
+The distinction that matters is this: the architecture was designed for reuse. What still needs to be proven is how much of that promise holds when the starter moves into a second real product, with a different host, different global styles and a different team maintaining it.
+
+The architectural pattern, config and content separation, CSS scoped by class and a static registry, can inform adaptations in other stacks. But that portability has not been validated and is not claimed here as compatibility with React, Next.js, Vue or any other framework.
+
+## Where the Starter Stands Today
+
+The starter works in the context it was built for. The implementation was validated in the project's environment, with automated tests covering the main flows.
+
+What does not yet exist:
+- evidence of use in a second real host product
+- usage or adoption metrics
+- validation of CSS isolation against a different host's global styles
+- final content in all three languages (part is still scaffold)
+
+That is the difference between a reusable architecture and an architecture validated across multiple environments. The first is demonstrated. The second is not.
+
+## What I Want to Validate Next
+
+The next step is not to add more features. It is to understand how far the reuse promise holds outside the original project.
+
+The questions driving that validation:
+
+- How much effort does it take to integrate the starter into a second real product?
+- How many changes would be needed outside of configuration and content?
+- Does the CSS isolation hold with a different set of global styles in the host?
+- How does search perform as the content base grows?
+- What is the actual experience of authoring and maintaining content over time?
+- At what point does a dedicated search engine make more sense than the client-side solution?
+- How does the registry scale with a larger number of pages?
+
+These are hypotheses for future validation, not current metrics.
+
+## What This Project Demonstrates
+
+<Callout variant="demonstrates" title="What this project demonstrates">
+
+- **Technical Product:** identifying a recurring integration problem and turning the solution into a module with clear scope and trade-offs
+- **Developer Experience:** designing the module for the person who will copy, configure, navigate and maintain the docs
+- **Reusable Architecture:** separating configuration, navigation, content and interface to reduce coupling between layers
+- **Docs-as-Code:** treating documentation as part of the product's architecture, with a versionable and predictable structure
+- **Product × Engineering:** choosing technical solutions based on integration, maintainability and predictability, not just code elegance
+
+</Callout>

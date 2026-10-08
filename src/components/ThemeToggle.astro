@@ -1,0 +1,126 @@
+---
+import type { AstroProps } from 'astro';
+import { ui, type Locale } from '@/i18n';
+
+interface Props extends AstroProps {
+  locale?: Locale;
+  class?: string;
+}
+
+const { locale = 'pt-BR', class: className = '' } = Astro.props;
+const labels = ui[locale].theme;
+---
+
+<button
+  type="button"
+  class={`theme-toggle ${className}`}
+  aria-label={labels.switchToDark}
+  aria-pressed="false"
+  data-theme-toggle
+  data-label-dark={labels.switchToDark}
+  data-label-light={labels.switchToLight}
+>
+  <svg class="theme-toggle__icon theme-toggle__sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="4" stroke-width="1.8" />
+    <path stroke-linecap="round" stroke-width="1.8" d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.72 5.28l-1.41 1.41M6.69 17.31l-1.41 1.41M18.72 18.72l-1.41-1.41M6.69 6.69L5.28 5.28" />
+  </svg>
+  <svg class="theme-toggle__icon theme-toggle__moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.5 8.5 0 1 0 20.5 15.2Z" />
+  </svg>
+  <span class="sr-only" data-theme-toggle-text>{labels.switchToDark}</span>
+</button>
+
+<script is:inline>
+  (function () {
+    var storageKey = 'portfolio-theme';
+    var toggle = document.querySelector('[data-theme-toggle]');
+
+    if (!toggle || toggle.dataset.themeBound === 'true') return;
+    toggle.dataset.themeBound = 'true';
+
+    var root = document.documentElement;
+    var systemPreference = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+    function getStoredTheme() {
+      try {
+        var theme = window.localStorage.getItem(storageKey);
+        return theme === 'light' || theme === 'dark' ? theme : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function updateControl(theme) {
+      var isDark = theme === 'dark';
+      var nextLabel = isDark ? toggle.dataset.labelLight : toggle.dataset.labelDark;
+      var text = toggle.querySelector('[data-theme-toggle-text]');
+
+      toggle.setAttribute('aria-pressed', String(isDark));
+      toggle.setAttribute('aria-label', nextLabel || 'Toggle theme');
+      if (text) text.textContent = nextLabel || 'Toggle theme';
+    }
+
+    function applyTheme(theme, persist) {
+      root.classList.toggle('dark', theme === 'dark');
+      if (persist) {
+        try {
+          window.localStorage.setItem(storageKey, theme);
+        } catch (_) {
+          // The visual change still works when storage is unavailable.
+        }
+      }
+      updateControl(theme);
+      document.dispatchEvent(new CustomEvent('portfolio:themechange', { detail: { theme: theme } }));
+    }
+
+    toggle.addEventListener('click', function () {
+      applyTheme(root.classList.contains('dark') ? 'light' : 'dark', true);
+    });
+
+    if (systemPreference) {
+      systemPreference.addEventListener('change', function (event) {
+        if (!getStoredTheme()) applyTheme(event.matches ? 'dark' : 'light', false);
+      });
+    }
+
+    updateControl(root.classList.contains('dark') ? 'dark' : 'light');
+  })();
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(var(--color-border-rgb));
+    border-radius: 0.5rem;
+    color: rgb(var(--color-muted-foreground-rgb));
+    background-color: rgb(var(--color-background-rgb) / 0.56);
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  }
+
+  .theme-toggle:hover {
+    color: rgb(var(--color-foreground-rgb));
+    border-color: rgb(var(--color-accent-rgb) / 0.35);
+    background-color: rgb(var(--color-muted-rgb) / 0.8);
+  }
+
+  .theme-toggle__icon {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .theme-toggle__sun {
+    display: none;
+  }
+
+  :global(html.dark) .theme-toggle__sun {
+    display: block;
+  }
+
+  :global(html.dark) .theme-toggle__moon {
+    display: none;
+  }
+</style>

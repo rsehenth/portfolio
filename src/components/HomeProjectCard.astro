@@ -1,0 +1,138 @@
+---
+/**
+ * HomeProjectCard.astro
+ *
+ * Home-EXCLUSIVE project card component.
+ * Uses the homeProjects editorial layer from ui.ts — NOT MDX frontmatter.
+ * This component must NOT be used in /projects or case pages.
+ *
+ * Renders:
+ *   1. Category chip        — homeData.category
+ *   2. Title (h3)           — MDX data.title (authoritative project name)
+ *   3. Description          — homeData.description
+ *   4. Focus chips (max 3)  — homeData.focus (no label)
+ *   5. Highlights (2-col)   — homeData.highlights (value + label; qualitative ok)
+ *   6. CTA link             — homeData.viewCase + href
+ *
+ * No "Demonstra" label. No tags list. No year/status in hero variant.
+ */
+import type { AstroProps } from 'astro';
+import type { Locale } from '@/i18n';
+
+interface HomeHighlight {
+  value: string;
+  label: string;
+}
+
+interface HomeProjectData {
+  category: string;
+  description: string;
+  highlights: HomeHighlight[];
+  focus: string[];
+}
+
+interface Props extends AstroProps {
+  /** Authoritative project title from MDX data.title */
+  title: string;
+  /** Localized case URL */
+  href: string;
+  /** Home editorial data from ui[locale].homeProjects.projects[slug] */
+  homeData: HomeProjectData;
+  /** CTA label from ui[locale].homeProjects.viewCase */
+  viewCaseLabel: string;
+  /** hero = top-row larger cards; default = bottom-row standard cards */
+  variant?: 'hero' | 'default';
+  locale?: Locale;
+  /** data-reveal-delay value in ms (used by scroll-reveal JS) */
+  revealDelay?: number;
+}
+
+const {
+  title,
+  href,
+  homeData,
+  viewCaseLabel,
+  variant = 'default',
+  revealDelay = 0,
+} = Astro.props;
+
+const isHero = variant === 'hero';
+---
+
+<article
+  class={`card group relative flex flex-col h-full hover:border-accent/40 hover:shadow-xl transition-all duration-normal`}
+  aria-labelledby={`hpc-${href.replace(/\//g, '-').replace(/^-|-$/g, '')}-title`}
+  data-reveal
+  data-reveal-delay={String(revealDelay)}
+>
+  <div class={`flex flex-col flex-1 ${isHero ? 'p-7 lg:p-8' : 'p-6'}`}>
+
+    <!-- Category chip -->
+    <p class="text-caption font-medium text-muted-foreground mb-3">
+      {homeData.category}
+    </p>
+
+    <!-- Title -->
+    <h3
+      id={`hpc-${href.replace(/\//g, '-').replace(/^-|-$/g, '')}-title`}
+      class={`font-bold tracking-tight text-foreground group-hover:text-accent transition-colors duration-fast mb-3 ${isHero ? 'text-display-sm' : 'text-heading-lg'}`}
+    >
+      {title}
+    </h3>
+
+    <!-- Description -->
+    <p class={`text-muted-foreground leading-relaxed mb-5 flex-1 ${isHero ? 'text-body-lg' : 'text-body-md'}`}>
+      {homeData.description}
+    </p>
+
+    <!-- Focus chips (max 3, no label) -->
+    {homeData.focus.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-5" aria-label="Focus areas">
+        {homeData.focus.slice(0, 3).map((item) => (
+          <span class="inline-flex items-center px-2.5 py-1 text-caption font-medium rounded-md bg-accent/8 text-accent border border-accent/20">
+            {item}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <!-- Highlights (2-col grid) -->
+    {homeData.highlights.length > 0 && (
+      <div class="grid grid-cols-2 gap-4 mb-5 pt-4 border-t border-border">
+        {homeData.highlights.slice(0, 2).map((h) => (
+          <div class="min-w-0">
+            <div class={`font-bold text-foreground ${isHero ? 'text-display-sm' : 'text-heading-lg'}`}>
+              {h.value}
+            </div>
+            <div class="text-caption text-muted-foreground leading-tight">
+              {h.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <!-- CTA -->
+    <div class="mt-auto pt-4 border-t border-border">
+      <a
+        href={href}
+        class="link-underline inline-flex items-center gap-1.5 text-body-sm font-medium text-accent hover:text-accent/80 transition-colors duration-fast group/cta"
+      >
+        {viewCaseLabel}
+        <svg
+          class="w-4 h-4 transition-transform duration-fast group-hover/cta:translate-x-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Full-card accessible overlay link (hidden from AT, for pointer users) -->
+  <a href={href} class="absolute inset-0 rounded-2xl" tabindex="-1" aria-hidden="true"></a>
+</article>

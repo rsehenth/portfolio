@@ -1,0 +1,64 @@
+---
+// [slug].astro - Individual project case study page (Portuguese)
+import { render } from 'astro:content';
+import CaseLayout from '@/layouts/CaseLayout.astro';
+import { getPublishedProjects, projectKey } from '@/lib/projects';
+
+export async function getStaticPaths() {
+  const projects = await getPublishedProjects('pt-BR');
+  return projects.map((project) => ({
+    params: { slug: projectKey(project) },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+
+// Dynamic import components to avoid Vite parsing issues during config
+const mdxComponents = {
+  AnimatedChart: (await import('@/components/AnimatedChart.astro')).default,
+  DataTable: (await import('@/components/DataTable.astro')).default,
+  MetricCard: (await import('@/components/MetricCard.astro')).default,
+  ProjectCard: (await import('@/components/ProjectCard.astro')).default,
+  Tag: (await import('@/components/Tag.astro')).default,
+  ArchitectureDiagram: (await import('@/components/ArchitectureDiagram.astro')).default,
+  FlowDiagram: (await import('@/components/FlowDiagram.astro')).default,
+  Callout: (await import('@/components/Callout.astro')).default,
+  RoleBlocks: (await import('@/components/RoleBlocks.astro')).default,
+  ComparisonBlock: (await import('@/components/ComparisonBlock.astro')).default,
+  StatsGrid: (await import('@/components/StatsGrid.astro')).default,
+};
+---
+
+<CaseLayout
+  title={d.title}
+  tagline={d.tagline}
+  summary={d.summary}
+  description={d.description}
+  seoTitle={d.seo?.title}
+  seoDescription={d.seo?.description}
+  year={d.year}
+  role={d.role}
+  productType={d.productType}
+  focus={d.focus}
+  stage={d.stage}
+  stageNote={d.stageNote}
+  openSourceUrl={d.openSourceUrl}
+  status={d.status}
+  tags={d.tags}
+  technologies={d.technologies}
+  metrics={d.metrics}
+  snapshot={d.snapshot}
+  scaleMetrics={d.scaleMetrics}
+  productMetrics={d.productMetrics}
+  cover={d.cover}
+  externalUrl={d.externalUrl}
+  externalUrlLabel={d.externalUrlLabel}
+  snapshotMode={d.snapshotMode}
+  slug={projectKey(project)}
+  locale="pt-BR"
+>
+  <Content components={mdxComponents} />
+</CaseLayout>

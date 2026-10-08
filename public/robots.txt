@@ -1,0 +1,11 @@
+# Robots.txt for Lucas Sehnem Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://lucassehnem.com/sitemap-index.xml
+
+# Disallow private/admin paths
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /*.json$

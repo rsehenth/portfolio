@@ -1,0 +1,124 @@
+---
+// Hero.astro - Hero section for homepage
+import type { AstroProps } from 'astro';
+import { profile, ctaButtons } from '@/data/profile';
+import { ui, type Locale, t } from '@/i18n';
+
+interface Props extends AstroProps {
+  class?: string;
+  locale?: Locale;
+}
+
+const { class: className = '', locale = 'pt-BR' } = Astro.props;
+const hero = ui[locale].hero;
+---
+
+<section class={`relative isolate min-h-[calc(100vh-4rem)] flex items-center justify-center pt-16 lg:pt-20 pb-12 lg:pb-16 ${className}`} aria-labelledby="hero-heading">
+  <div class="container">
+    <div class="max-w-3xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border mb-6 hero-fade" style="animation-delay: 100ms; opacity: 0;">
+        <span class="text-caption font-medium text-muted-foreground">{hero.badge}</span>
+      </div>
+
+      <!-- Name -->
+      <h1 id="hero-heading" class="text-display-xl lg:text-display-lg font-bold tracking-tight text-foreground mb-4 hero-slide-up" style="animation-delay: 200ms; opacity: 0;">
+        {profile.name}
+      </h1>
+
+      <!-- Headline -->
+      <h2 class="text-display-sm lg:text-display-md font-medium text-muted-foreground mb-6 hero-slide-up" style="animation-delay: 300ms; opacity: 0;">
+        {hero.tagline}
+      </h2>
+
+      <!-- Subheadline -->
+      <p class="text-body-lg text-muted-foreground max-w-2xl mx-auto mb-8 hero-slide-up" style="animation-delay: 400ms; opacity: 0;">
+        {hero.subheadline}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 hero-slide-up" style="animation-delay: 500ms; opacity: 0;">
+        <a
+          href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+          class="btn-primary w-full sm:w-auto"
+        >
+          {hero.ctaPrimary}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        <a
+          href={ctaButtons.secondary.href}
+          class="btn-secondary w-full sm:w-auto"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          {hero.ctaSecondary}
+        </a>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hero-slide-up hero-bounce-arrow" style="animation-delay: 700ms; opacity: 0;" aria-hidden="true">
+        <svg class="w-6 h-6 text-muted-foreground/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background decoration -->
+  <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="hero-decoration absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" />
+    <div class="hero-decoration absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" />
+  </div>
+</section>
+
+<style>
+  @keyframes hero-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes hero-slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes hero-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  .hero-fade {
+    animation: hero-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-slide-up {
+    animation: hero-slide-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-bounce-arrow {
+    animation: hero-slide-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+               hero-bounce 2s ease-in-out 1.5s infinite;
+  }
+
+  .hero-decoration {
+    background-color: rgb(var(--color-accent-rgb) / 0.025);
+  }
+
+  :global(html.dark) .hero-decoration {
+    background-color: rgb(var(--color-accent-rgb) / 0.012);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fade,
+    .hero-slide-up,
+    .hero-bounce-arrow {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+  }
+</style>

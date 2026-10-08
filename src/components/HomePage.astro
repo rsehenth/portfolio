@@ -1,0 +1,249 @@
+---
+// HomePage.astro - Shared homepage for both locales (PT-BR / EN)
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import HomeProjectCard from '@/components/HomeProjectCard.astro';
+import { profile } from '@/data/profile';
+import { ui, type Locale } from '@/i18n';
+import { getPublishedProjects, projectKey, caseUrl } from '@/lib/projects';
+
+const { locale = 'pt-BR' } = Astro.props;
+
+const projects = await getPublishedProjects(locale);
+const featuredProjects = projects.filter((p) => p.data.featured);
+
+const meta = ui[locale].meta;
+const work = ui[locale].work;
+const homeProjectsData = ui[locale].homeProjects;
+const howIWork = ui[locale].howIWork;
+const about = ui[locale].about;
+const contact = ui[locale].contact;
+
+// Pre-resolve home editorial data for featured projects in the frontmatter block
+// (avoids TypeScript generic syntax inside JSX template which esbuild cannot parse)
+type HomeProjectKey = keyof typeof homeProjectsData.projects;
+
+const topRow = featuredProjects.slice(0, 2).map((project, i) => {
+  const key = projectKey(project);
+  const href = caseUrl(locale, key);
+  const homeData = homeProjectsData.projects[key as HomeProjectKey] ?? null;
+  return { project, key, href, homeData, delay: i * 100 };
+});
+
+const bottomRow = featuredProjects.slice(2, 4).map((project, i) => {
+  const key = projectKey(project);
+  const href = caseUrl(locale, key);
+  const homeData = homeProjectsData.projects[key as HomeProjectKey] ?? null;
+  return { project, key, href, homeData, delay: (i + 2) * 100 };
+});
+
+const singleProject = featuredProjects.length === 1 ? (() => {
+  const project = featuredProjects[0];
+  const key = projectKey(project);
+  const href = caseUrl(locale, key);
+  const homeData = homeProjectsData.projects[key as HomeProjectKey] ?? null;
+  return { project, key, href, homeData };
+})() : null;
+---
+
+<BaseLayout fullTitle={meta.siteTitle} description={meta.siteDescription} locale={locale}>
+  <Hero locale={locale} />
+
+  <!-- Selected Work -->
+  <section id="work" class="section" aria-labelledby="work-heading">
+    <div class="container">
+      <header class="text-center max-w-2xl mx-auto mb-12 lg:mb-16" data-reveal>
+        <h2 id="work-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-4">
+          {work.title}
+        </h2>
+        <p class="text-body-lg text-muted-foreground">
+          {homeProjectsData.subtitle}
+        </p>
+      </header>
+
+      {featuredProjects.length > 0 ? (
+        <>
+          {/* Top row: first two featured projects — hero variant (larger) */}
+          {featuredProjects.length >= 2 && (
+            <div class="grid gap-6 sm:gap-8 md:grid-cols-2 mb-6 sm:mb-8 items-stretch">
+              {topRow.map(({ project, href, homeData, delay }) =>
+                homeData ? (
+                  <div class="h-full">
+                    <HomeProjectCard
+                      title={project.data.title}
+                      href={href}
+                      homeData={homeData}
+                      viewCaseLabel={homeProjectsData.viewCase}
+                      variant="hero"
+                      locale={locale}
+                      revealDelay={delay}
+                    />
+                  </div>
+                ) : null
+              )}
+            </div>
+          )}
+
+          {/* Bottom row: remaining featured projects — default variant */}
+          {featuredProjects.length > 2 && (
+            <div class="grid gap-6 sm:gap-8 md:grid-cols-2 items-stretch">
+              {bottomRow.map(({ project, href, homeData, delay }) =>
+                homeData ? (
+                  <div class="h-full">
+                    <HomeProjectCard
+                      title={project.data.title}
+                      href={href}
+                      homeData={homeData}
+                      viewCaseLabel={homeProjectsData.viewCase}
+                      variant="default"
+                      locale={locale}
+                      revealDelay={delay}
+                    />
+                  </div>
+                ) : null
+              )}
+            </div>
+          )}
+
+          {/* Fallback: single project */}
+          {singleProject && singleProject.homeData && (
+            <div class="grid-auto-fit items-stretch">
+              <div class="h-full">
+                <HomeProjectCard
+                  title={singleProject.project.data.title}
+                  href={singleProject.href}
+                  homeData={singleProject.homeData}
+                  viewCaseLabel={homeProjectsData.viewCase}
+                  variant="default"
+                  locale={locale}
+                  revealDelay={0}
+                />
+              </div>
+            </div>
+          )}
+
+          <div class="text-center mt-10" data-reveal>
+            <a href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'} class="btn-secondary">
+              {homeProjectsData.viewAll}
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </>
+      ) : (
+        <p class="text-center text-body-md text-muted-foreground">
+          {work.empty}
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- How I Work -->
+  <section id="how-i-work" class="section" aria-labelledby="how-i-work-heading">
+    <div class="container">
+      <header class="text-center max-w-2xl mx-auto mb-12 lg:mb-16" data-reveal>
+        <h2 id="how-i-work-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-4">
+          {howIWork.title}
+        </h2>
+        <p class="text-body-lg text-muted-foreground">
+          {howIWork.subtitle}
+        </p>
+      </header>
+
+      <div class="grid-3">
+        <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="0">
+          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.product.title}</h3>
+          <p class="text-body-md text-muted-foreground mb-6">{howIWork.product.description}</p>
+          <ul class="space-y-2" role="list">
+            {howIWork.skills.product.map((skill) => (
+              <li class="flex items-center gap-2 text-body-md text-muted-foreground">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="100">
+          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 16l4-16M6 16l-4-8m16 8l-4-8m0 0L8 4m8 8v12" />
+            </svg>
+          </div>
+          <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.technology.title}</h3>
+          <p class="text-body-md text-muted-foreground mb-6">{howIWork.technology.description}</p>
+          <ul class="space-y-2" role="list">
+            {howIWork.skills.technology.map((skill) => (
+              <li class="flex items-center gap-2 text-body-md text-muted-foreground">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="200">
+          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.execution.title}</h3>
+          <p class="text-body-md text-muted-foreground mb-6">{howIWork.execution.description}</p>
+          <ul class="space-y-2" role="list">
+            {howIWork.skills.execution.map((skill) => (
+              <li class="flex items-center gap-2 text-body-md text-muted-foreground">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About — single-column layout; duplicate contact card removed (Phase 4) -->
+  <section id="about" class="section bg-muted/30" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="max-w-3xl mx-auto" data-reveal>
+        <h2 id="about-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6">
+          {about.title}
+        </h2>
+        <div class="prose prose-lg max-w-none">
+          <p class="text-body-lg text-muted-foreground mb-6">
+            {about.bio.p1}
+          </p>
+          <p class="text-body-md text-muted-foreground">
+            {about.bio.p2}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section id="contact" class="section" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="card p-8 lg:p-12 text-center max-w-2xl mx-auto" data-reveal="scale">
+        <h2 id="contact-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-4">
+          {contact.title}
+        </h2>
+        <p class="text-body-lg text-muted-foreground mb-8">
+          {contact.subtitle}
+        </p>
+        <div class="flex items-center justify-center">
+          <a href={profile.linkedin} class="btn-primary" target="_blank" rel="noopener noreferrer">
+            {contact.ctaLinkedin}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

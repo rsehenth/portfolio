@@ -1,0 +1,207 @@
+---
+// Header.astro - Site header with navigation and language selector
+import type { AstroProps } from 'astro';
+import { navigation, ctaButtons } from '@/data/profile';
+import { ui, type Locale, t } from '@/i18n';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+
+interface Props extends AstroProps {
+  class?: string;
+  locale?: Locale;
+}
+
+const { class: className = '', locale = 'pt-BR' } = Astro.props;
+
+const navItems = ui[locale].nav;
+const headerCta = ui[locale].header;
+const altLocale = locale === 'pt-BR' ? 'en' : 'pt-BR';
+const altLocaleLabel = altLocale === 'pt-BR' ? 'PT' : 'EN';
+const currentPath = Astro.url.pathname;
+
+// Generate alternate URL for language switch
+const pathWithoutLocale = currentPath.startsWith('/en/') ? currentPath.slice(3) : currentPath;
+const altUrl = altLocale === 'pt-BR' ? (pathWithoutLocale || '/') : `/en${pathWithoutLocale || '/'}`;
+---
+
+<header class={`fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-md border-b border-border transition-colors duration-normal ${className}`}>
+  <div class="container">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo / Name -->
+      <a href={locale === 'pt-BR' ? '/' : '/en/'} class="flex items-center gap-2 text-foreground font-medium text-body-lg hover:opacity-80 transition-opacity duration-fast" aria-label="LS — Go to homepage">
+        <span class="font-semibold tracking-tight">LS</span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+        <a
+          href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+          class="link-underline text-body-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-fast"
+        >
+          {navItems.projects}
+        </a>
+        <a
+          href={locale === 'pt-BR' ? '/about/' : '/en/about/'}
+          class="link-underline text-body-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-fast"
+        >
+          {navItems.about}
+        </a>
+        <a
+          href={locale === 'pt-BR' ? '/#contact' : '/en/#contact'}
+          class="link-underline text-body-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-fast"
+        >
+          {navItems.contact}
+        </a>
+      </nav>
+
+      <!-- CTA Buttons + Language Selector -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Language Selector -->
+        <div class="hidden sm:block" aria-label="Language selection">
+          <a
+            href={altUrl}
+            class="px-3 py-1.5 text-body-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-fast rounded-lg hover:bg-muted"
+            aria-label={`${altLocaleLabel} — ${altLocale === 'pt-BR' ? 'Português' : 'English'}`}
+            hreflang={altLocale}
+          >
+            {altLocaleLabel}
+          </a>
+        </div>
+
+        <ThemeToggle locale={locale} />
+
+        <a
+          href={ctaButtons.secondary.href}
+          class="hidden sm:inline-flex btn-ghost"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          {headerCta.linkedin}
+        </a>
+        <a
+          href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+          class="btn-primary hidden sm:inline-flex"
+        >
+          {headerCta.viewWork}
+        </a>
+
+        <!-- Mobile menu button -->
+        <button
+          class="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-fast"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-mobile-menu-toggle
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-normal" role="navigation" aria-label="Mobile navigation">
+      <div class="py-4 space-y-2 border-t border-border">
+        <a
+          href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+          class="block px-2 py-3 text-body-md font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors duration-fast"
+        >
+          {navItems.projects}
+        </a>
+        <a
+          href={locale === 'pt-BR' ? '/about/' : '/en/about/'}
+          class="block px-2 py-3 text-body-md font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors duration-fast"
+        >
+          {navItems.about}
+        </a>
+        <a
+          href={locale === 'pt-BR' ? '/#contact' : '/en/#contact'}
+          class="block px-2 py-3 text-body-md font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors duration-fast"
+        >
+          {navItems.contact}
+        </a>
+
+        <!-- Language selector in mobile menu -->
+        <div class="pt-2 pb-4 border-t border-border">
+          <a
+            href={altUrl}
+            class="block px-2 py-2 text-body-md font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors duration-fast flex items-center justify-between"
+            hreflang={altLocale}
+          >
+            <span>Idioma / Language</span>
+            <span class="font-semibold text-foreground">{altLocaleLabel}</span>
+          </a>
+        </div>
+
+        <div class="pt-4 space-y-2 border-t border-border">
+          <a
+            href={ctaButtons.secondary.href}
+            class="block px-2 py-3 text-body-md font-medium text-muted-foreground hover:text-foreground transition-colors duration-fast"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {headerCta.linkedin}
+          </a>
+          <a
+            href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+            class="block px-2 py-3 text-body-md font-medium text-center btn-primary"
+          >
+            {headerCta.viewWork}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // Mobile menu toggle
+    const toggle = document.querySelector('[data-mobile-menu-toggle]');
+    const menu = document.getElementById('mobile-menu');
+    const header = document.querySelector('header');
+
+    function closeMenu() {
+      if (!menu || !toggle) return;
+      menu.classList.add('max-h-0', 'opacity-0');
+      menu.classList.remove('max-h-96', 'opacity-100');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const isOpen = menu.classList.contains('max-h-0');
+        if (isOpen) {
+          menu.classList.remove('max-h-0', 'opacity-0');
+          menu.classList.add('max-h-96', 'opacity-100');
+          toggle.setAttribute('aria-expanded', 'true');
+        } else {
+          closeMenu();
+        }
+      });
+
+      // Close on link click
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Close when viewport becomes desktop width
+      const mq = window.matchMedia('(min-width: 1024px)');
+      mq.addEventListener('change', (e) => {
+        if (e.matches) closeMenu();
+      });
+    }
+
+    // Add shadow to header on scroll
+    if (header) {
+      const updateHeader = () => {
+        if (window.scrollY > 8) {
+          header.classList.add('shadow-sm');
+        } else {
+          header.classList.remove('shadow-sm');
+        }
+      };
+      window.addEventListener('scroll', updateHeader, { passive: true });
+      updateHeader();
+    }
+  </script>
+</header>

@@ -1,0 +1,17 @@
+{
+  "name": "Lucas Sehnem — Technical Product Manager",
+  "short_name": "Lucas Sehnem",
+  "description": "Technical Product Manager at the intersection of AI, Product & Engineering",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#f4f6f8",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

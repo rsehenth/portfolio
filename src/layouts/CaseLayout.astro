@@ -1,0 +1,353 @@
+---
+// CaseLayout.astro - Layout for individual case study pages
+import type { AstroProps } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import CaseNavigation from '@/components/CaseNavigation.astro';
+import { ui, statusLabel, type Locale } from '@/i18n';
+import { caseUrl, projectsIndexUrl, verifiedOnly, type ProjectMetric } from '@/lib/projects';
+
+interface Props extends AstroProps {
+  title: string;
+  /** Case hero headline (localized in the content file) */
+  tagline?: string;
+  /** Case hero paragraph (localized in the content file) */
+  summary?: string;
+  /** Meta description fallback */
+  description: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  year: number;
+  role: string;
+  productType?: string;
+  focus?: string;
+  /** Free-form stage label (overrides the localized status row when present) */
+  stage?: string;
+  /** Optional note rendered under the stage */
+  stageNote?: string;
+  /** Upstream/open-source attribution link for the "Base" row */
+  openSourceUrl?: string;
+  status: string;
+  tags: string[];
+  technologies: string[];
+  metrics?: ProjectMetric[];
+  snapshot?: { primary: ProjectMetric[]; secondary: ProjectMetric[] };
+  scaleMetrics?: ProjectMetric[];
+  productMetrics?: ProjectMetric[];
+  cover?: string;
+  /** External product URL — renders a discrete CTA link near the hero */
+  externalUrl?: string;
+  /** Localized label for the external CTA */
+  externalUrlLabel?: string;
+  /**
+   * Controls how the snapshot section is rendered.
+   * 'default'           → original layout (no sub-headings)
+   * 'product-technical' → opt-in split: Product + Technical Scale headings
+   * Other cases that do not set this field continue to render exactly as before.
+   */
+  snapshotMode?: 'default' | 'product-technical';
+  /** Project key (same URL slug across locales) */
+  slug: string;
+  locale?: Locale;
+}
+
+const {
+  title,
+  tagline,
+  summary,
+  description,
+  seoTitle,
+  seoDescription,
+  year,
+  role,
+  productType,
+  focus,
+  stage,
+  stageNote,
+  openSourceUrl,
+  status,
+  tags = [],
+  technologies = [],
+  metrics = [],
+  snapshot,
+  scaleMetrics = [],
+  productMetrics = [],
+  cover,
+  externalUrl,
+  externalUrlLabel,
+  snapshotMode = 'default',
+  slug,
+  locale = 'pt-BR',
+  ...rest
+} = Astro.props;
+
+const caseStudy = ui[locale].caseStudy;
+
+const canonical = caseUrl(locale, slug);
+const scale = verifiedOnly(scaleMetrics);
+const productImpact = verifiedOnly(productMetrics);
+const snapshotPrimary = verifiedOnly(snapshot?.primary);
+const snapshotSecondary = verifiedOnly(snapshot?.secondary);
+const hasResults = scale.length > 0 || productImpact.length > 0;
+---
+
+<BaseLayout
+  title={title}
+  fullTitle={seoTitle}
+  description={seoDescription || description}
+  canonical={canonical}
+  locale={locale}
+  {...rest}
+>
+  <article class="container max-w-5xl py-12 lg:py-16">
+    <!-- Hero -->
+    <header class="mb-10" data-reveal>
+      {cover && (
+        <div class="relative aspect-video mb-8 overflow-hidden rounded-2xl border border-border">
+          <img src={cover} alt="" class="h-full w-full object-cover" />
+        </div>
+      )}
+
+      <time class="mb-3 block font-mono text-body-sm text-muted-foreground" datetime={year.toString()}>
+        {year}
+      </time>
+
+      <h1 class="mb-3 text-display-xl font-bold tracking-tight text-foreground">
+        {title}
+      </h1>
+
+      {tagline && (
+        <p class="mb-4 max-w-3xl text-display-sm font-medium leading-snug text-foreground">
+          {tagline}
+        </p>
+      )}
+
+      {summary && (
+        <p class="max-w-2xl text-body-lg text-muted-foreground">
+          {summary}
+        </p>
+      )}
+
+      {externalUrl && (
+        <p class="mt-4">
+          <a
+            href={externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 text-body-sm font-medium text-muted-foreground transition-colors duration-fast hover:text-foreground"
+          >
+            {externalUrlLabel ?? caseStudy.visitProduct}
+            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </p>
+      )}
+
+      <!-- Visual metadata -->
+      <dl class="mt-8 grid gap-x-8 gap-y-5 border-t border-border pt-6 sm:grid-cols-2">
+        {role !== 'needs_confirmation' && (
+          <div>
+            <dt class="text-caption font-semibold uppercase tracking-wider text-muted-foreground">{caseStudy.role}</dt>
+            <dd class="mt-1 text-body-md text-foreground">{role}</dd>
+          </div>
+        )}
+        <div>
+          <dt class="text-caption font-semibold uppercase tracking-wider text-muted-foreground">
+            {stage ? caseStudy.stage : caseStudy.status}
+          </dt>
+          <dd class="mt-1 text-body-md text-foreground">{stage ?? statusLabel(locale, status)}</dd>
+          {stageNote && (
+            <dd class="mt-1 text-body-sm text-muted-foreground">{stageNote}</dd>
+          )}
+        </div>
+        {productType && !openSourceUrl && (
+          <div>
+            <dt class="text-caption font-semibold uppercase tracking-wider text-muted-foreground">{caseStudy.product}</dt>
+            <dd class="mt-1 text-body-md text-foreground">{productType}</dd>
+          </div>
+        )}
+        {openSourceUrl && (
+          <div>
+            <dt class="text-caption font-semibold uppercase tracking-wider text-muted-foreground">{caseStudy.base}</dt>
+            <dd class="mt-1 text-body-md text-foreground">
+              <a
+                href={openSourceUrl}
+                class="link-underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {productType ?? openSourceUrl}
+              </a>
+            </dd>
+          </div>
+        )}
+        {focus && (
+          <div>
+            <dt class="text-caption font-semibold uppercase tracking-wider text-muted-foreground">{caseStudy.focus}</dt>
+            <dd class="mt-1 text-body-md text-foreground">{focus}</dd>
+          </div>
+        )}
+      </dl>
+
+      {tags.length > 0 && (
+        <ul class="mt-6 flex flex-wrap gap-2" role="list">
+          {tags.map((tag) => (
+            <li class="tag">{tag}</li>
+          ))}
+        </ul>
+      )}
+    </header>
+
+    <!-- Technical scope snapshot (verified numbers only) -->
+    {(snapshotPrimary.length > 0 || snapshotSecondary.length > 0) && (
+      <section class="mb-10 rounded-2xl border border-border bg-muted/30 p-6 lg:p-8" aria-labelledby="snapshot-heading" data-reveal="scale">
+        <h2 id="snapshot-heading" class="mb-6 text-caption font-semibold uppercase tracking-widest text-muted-foreground">
+          {caseStudy.snapshotLabel}
+        </h2>
+
+        {snapshotMode === 'product-technical' ? (
+          <>
+            {snapshotPrimary.length > 0 && (
+              <div>
+                <p class="mb-4 text-caption font-semibold uppercase tracking-widest text-muted-foreground/70">
+                  {caseStudy.snapshotProductLabel}
+                </p>
+                <ul class="grid grid-cols-2 gap-6 lg:grid-cols-4" role="list">
+                  {snapshotPrimary.map((metric) => (
+                    <li>
+                      <div class="text-display-sm font-bold text-foreground">{metric.value}</div>
+                      <div class="text-body-sm text-muted-foreground">{metric.label}</div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {snapshotSecondary.length > 0 && (
+              <div class="mt-6 border-t border-border pt-6">
+                <p class="mb-4 text-caption font-semibold uppercase tracking-widest text-muted-foreground/70">
+                  {caseStudy.snapshotTechnicalLabel}
+                </p>
+                <ul class="grid grid-cols-2 gap-4 lg:grid-cols-4" role="list">
+                  {snapshotSecondary.map((metric) => (
+                    <li>
+                      <div class="text-heading-md font-semibold text-muted-foreground">{metric.value}</div>
+                      <div class="text-caption text-muted-foreground/70">{metric.label}</div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            {snapshotPrimary.length > 0 && (
+              <ul class="grid grid-cols-2 gap-6 lg:grid-cols-4" role="list">
+                {snapshotPrimary.map((metric) => (
+                  <li>
+                    <div class="text-display-sm font-bold text-foreground">{metric.value}</div>
+                    <div class="text-body-sm text-muted-foreground">{metric.label}</div>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {snapshotSecondary.length > 0 && (
+              <ul class="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-6 lg:grid-cols-4" role="list">
+                {snapshotSecondary.map((metric) => (
+                  <li>
+                    <div class="text-heading-md font-semibold text-muted-foreground">{metric.value}</div>
+                    <div class="text-caption text-muted-foreground/70">{metric.label}</div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        )}
+      </section>
+    )}
+
+    <!-- Back to projects -->
+    <div class="mb-8">
+      <a
+        href={projectsIndexUrl(locale)}
+        class="link-underline group inline-flex items-center gap-2 text-body-sm font-medium text-muted-foreground transition-colors duration-fast hover:text-foreground"
+      >
+        <svg class="h-4 w-4 transition-transform duration-fast group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        {caseStudy.backToProjects}
+      </a>
+    </div>
+
+    <!-- Content -->
+    <div class="grid gap-8 lg:grid-cols-12 lg:gap-12">
+      <div class="prose lg:col-span-8">
+        <slot />
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-4">
+        <div class="sticky top-24 space-y-6">
+          {technologies.length > 0 && (
+            <div class="card p-6">
+              <h2 class="mb-4 text-caption font-semibold uppercase tracking-wider text-muted-foreground">{caseStudy.stack}</h2>
+              <ul class="flex flex-wrap gap-2" role="list">
+                {technologies.map((tech) => (
+                  <li class="tag">{tech}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+
+    <!-- Verified results: technical scale + product impact (never empty cards) -->
+    {hasResults && (
+      <section class="mt-14 border-t border-border pt-10" aria-labelledby="results-heading" data-reveal>
+        <h2 id="results-heading" class="mb-6 text-display-sm font-bold tracking-tight text-foreground">
+          {caseStudy.verifiedResults}
+        </h2>
+
+        {scale.length > 0 && (
+          <div class="mb-8">
+            <h3 class="mb-4 text-caption font-semibold uppercase tracking-widest text-muted-foreground">
+              {caseStudy.technicalScale}
+            </h3>
+            <ul class="grid grid-cols-2 gap-4 lg:grid-cols-4" role="list">
+              {scale.map((metric) => (
+                <li class="card p-4">
+                  <div class="text-heading-lg font-bold text-foreground">{metric.value}</div>
+                  <div class="text-body-sm text-muted-foreground">{metric.label}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {productImpact.length > 0 && (
+          <div>
+            <h3 class="mb-4 text-caption font-semibold uppercase tracking-widest text-muted-foreground">
+              {caseStudy.productImpact}
+            </h3>
+            <ul class="grid grid-cols-2 gap-4 lg:grid-cols-4" role="list">
+              {productImpact.map((metric) => (
+                <li class="card p-4">
+                  <div class="text-heading-lg font-bold text-foreground">{metric.value}</div>
+                  <div class="text-body-sm text-muted-foreground">{metric.label}</div>
+                  {metric.context && (
+                    <div class="mt-1 text-caption text-muted-foreground/70">{metric.context}</div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
+    )}
+
+    <!-- Navigation -->
+    <div class="mt-12">
+      <CaseNavigation currentSlug={slug} locale={locale} />
+    </div>
+  </article>
+</BaseLayout>

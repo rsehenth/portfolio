@@ -1,0 +1,174 @@
+---
+// Footer.astro - Site footer
+import type { AstroProps } from 'astro';
+import { footerLinks, profile } from '@/data/profile';
+import { ui, type Locale } from '@/i18n';
+
+interface Props extends AstroProps {
+  class?: string;
+  locale?: Locale;
+}
+
+const { class: className = '', locale = 'pt-BR' } = Astro.props;
+const currentYear = new Date().getFullYear();
+const footer = ui[locale].footer;
+
+const currentPath = Astro.url.pathname;
+const pathWithoutLocale = currentPath.startsWith('/en/') ? currentPath.slice(3) : currentPath;
+const ptUrl = pathWithoutLocale || '/';
+const enUrl = `/en${pathWithoutLocale || '/'}`;
+
+const isPt = locale === 'pt-BR';
+---
+
+<footer class={`border-t border-border ${className}`} role="contentinfo">
+  <div class="container py-10 lg:py-12">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+
+      <!-- Brand / About -->
+      <div>
+        <a
+          href={isPt ? '/' : '/en/'}
+          class="inline-flex items-center text-foreground font-semibold text-body-lg mb-4"
+          aria-label="LS — Ir para página inicial"
+        >
+          LS
+        </a>
+        <p class="text-body-md text-muted-foreground max-w-xs mb-2">
+          {profile.headline}
+        </p>
+        <p class="text-body-sm text-muted-foreground/60">
+          {footer.copyright.replace('{year}', currentYear.toString())}
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <h3 class="text-heading-sm font-semibold text-foreground mb-4">Links</h3>
+        <ul class="space-y-3" role="list">
+          {footerLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="link-underline text-body-md text-muted-foreground hover:text-foreground transition-colors duration-fast inline-flex items-center gap-2"
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
+              >
+                {link.label}
+                {link.external && (
+                  <svg class="w-3.5 h-3.5 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Language toggle -->
+      <div class="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
+        <div>
+          <p class="text-heading-sm font-semibold text-foreground mb-4">
+            {isPt ? 'Idioma' : 'Language'}
+          </p>
+
+          <div
+            class="lang-toggle"
+            role="group"
+            aria-label={isPt ? 'Selecionar idioma' : 'Select language'}
+          >
+            <a
+              href={ptUrl}
+              class={`lang-toggle__option ${isPt ? 'lang-toggle__option--active' : ''}`}
+              hreflang="pt-BR"
+              aria-current={isPt ? 'true' : undefined}
+            >
+              <span>PT</span>
+            </a>
+            <a
+              href={enUrl}
+              class={`lang-toggle__option ${!isPt ? 'lang-toggle__option--active' : ''}`}
+              hreflang="en"
+              aria-current={!isPt ? 'true' : undefined}
+            >
+              <span>EN</span>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-body-sm text-muted-foreground/50 mt-auto">
+          {footer.builtBy}
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<style>
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    border-radius: 9999px;
+    border: 1px solid rgb(var(--color-border-rgb));
+    background-color: rgb(var(--color-muted-rgb));
+  }
+
+  .lang-toggle__option {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 1.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: rgb(var(--color-muted-foreground-rgb));
+    transition: color 200ms ease;
+  }
+
+  /* The sliding pill background */
+  .lang-toggle__option::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background-color: rgb(var(--color-card-rgb));
+    box-shadow: 0 1px 3px rgb(var(--color-shadow-rgb) / 0.10), 0 1px 2px rgb(var(--color-shadow-rgb) / 0.06);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lang-toggle__option--active {
+    color: rgb(var(--color-foreground-rgb));
+    pointer-events: none;
+  }
+
+  .lang-toggle__option--active::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .lang-toggle__option:not(.lang-toggle__option--active):hover {
+    color: rgb(var(--color-foreground-rgb));
+  }
+
+  .lang-toggle__option:not(.lang-toggle__option--active):hover::before {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  /* Text sits above the pill pseudo-element */
+  .lang-toggle__option span {
+    position: relative;
+    z-index: 1;
+  }
+</style>

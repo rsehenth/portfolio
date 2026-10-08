@@ -1,0 +1,191 @@
+---
+title: CultoOS
+locale: pt-BR
+subtitle: Technical Product · Desktop
+description: "MVP desktop para a operação de mídia em igrejas brasileiras, com experiência localizada, funcionamento offline e sincronização opcional com a nuvem."
+tagline: "Adaptando uma base desktop madura para a realidade de igrejas brasileiras."
+summary: "O CultoOS adapta uma base desktop madura para um contexto em que simplicidade, operação offline e segurança durante o culto têm prioridade. Minha atuação esteve entre produto, adaptação da experiência e colaboração direta com engenharia."
+year: 2026
+order: 7
+role: "Product / Technical Product · colaboração direta com Engineering Lead"
+stage: "MVP · Primeira release"
+stageNote: "Produto funcional e instalável. A comercialização ainda não foi iniciada."
+productType: Desktop MVP
+status: Active
+draft: false
+featured: true
+# cover: reativar somente com screenshot real (public/projects/...)
+tags:
+  - Technical Product
+  - Desktop
+  - Electron
+  - Local-first
+  - Cloud Sync
+  - Localization
+demonstrates:
+  - Product Adaptation
+  - Technical Product
+  - Local-first
+  - UX Simplification
+technologies:
+  - Electron
+  - Svelte 3
+  - TypeScript
+  - Vite
+  - GitHub Actions
+metrics:
+  - value: "9 + mídia"
+    label: coleções sincronizadas
+    state: verified
+  - value: "Offline-first"
+    label: operação local
+    state: verified
+  - value: Windows
+    label: release automatizada
+    state: verified
+snapshot:
+  primary:
+    - value: "MVP"
+      label: primeira release instalável
+      state: verified
+    - value: "Offline-first"
+      label: operação local
+      state: verified
+    - value: "9 + mídia"
+      label: escopo de sincronização
+      state: verified
+    - value: "2"
+      label: Bíblias PT-BR offline
+      state: verified
+  secondary:
+    - value: "3"
+      label: suítes de teste
+      state: verified
+    - value: Windows
+      label: release automatizada
+      state: verified
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: 'CultoOS | Technical Product & Product Adaptation Case | Lucas Sehnem'
+  description: 'Case sobre a adaptação de um produto desktop para a operação de mídia em igrejas brasileiras, cobrindo simplificação de UX, localização, arquitetura local-first e sincronização opcional com a nuvem.'
+---
+
+## O problema de operação
+
+Operar mídia durante um culto é diferente de usar um software de apresentações em um ambiente comum. Quem está no computador precisa trocar conteúdos rapidamente, reagir a mudanças de última hora e continuar trabalhando mesmo quando a internet falha.
+
+Em muitas igrejas, essa operação fica nas mãos de voluntários ou pessoas sem formação técnica. Isso muda as prioridades do produto: a interface precisa ser compreensível sem treinamento, a terminologia precisa ser familiar e qualquer falha visível durante o culto tem um custo real.
+
+As necessidades que orientaram as decisões:
+
+- interface compreensível para quem não tem treinamento técnico
+- terminologia familiar ao contexto de igreja
+- funcionamento offline, sem depender de conexão
+- ações rápidas em situações de pressão
+- sincronização que não crie dependência da nuvem
+
+## Meu papel
+
+Minha atuação no CultoOS ficou entre Product e Technical Product. Trabalhei na definição das adaptações necessárias para o contexto brasileiro, na simplificação da experiência, na priorização do MVP e na tradução dessas decisões para uma implementação viável junto à engenharia.
+
+Isso incluiu discutir quais recursos deveriam ficar visíveis por padrão, como o produto deveria se comportar sem internet, quais dados precisavam sincronizar e quais adaptações realmente mudavam a experiência do operador.
+
+Trabalhei diretamente com o Engineering Lead na definição, adaptação e entrega da primeira release.
+
+## Adaptar em vez de reconstruir
+
+Antes de qualquer decisão de produto, já existia uma base desktop madura para apresentações, com engine de apresentação, suporte a mídia e estrutura Electron funcionando.
+
+Reconstruir essa infraestrutura do zero não faria sentido. O trabalho real estava em outro lugar: entender o que precisava mudar para que o produto funcionasse para igrejas brasileiras, e então concentrar o esforço nessas adaptações.
+
+O foco foi em localização, simplificação da experiência, operação offline, Bíblias em PT-BR, referências bíblicas no padrão brasileiro e sincronização com a nuvem. Essas não são apenas funcionalidades adicionadas. São decisões sobre o que o produto precisa ser para fazer sentido nesse contexto.
+
+O valor do CultoOS não está em reimplementar o que já funcionava. Está em decidir o que precisava mudar para que a experiência fizesse sentido para quem vai usar.
+
+## Simplificar sem limitar
+
+Durante um culto, complexidade visível atrapalha. O operador precisa agir rápido, muitas vezes sob pressão, sem tempo para procurar opções em menus que não vai usar.
+
+A decisão foi reduzir o que aparece na tela por padrão sem retirar capacidade de quem precisa de controles avançados. O produto inicia em uma experiência mais simples, escondendo opções que o operador comum não usa. Quem precisa delas pode ativá-las.
+
+Também existe uma ação rápida pensada para momentos de pressão: limpar imediatamente a saída de vídeo e exibir a identidade da igreja. Útil quando o operador precisa interromper uma apresentação com segurança, sem tempo para navegar por menus.
+
+## Localização como decisão de produto
+
+Localizar um produto para um contexto específico vai além de traduzir a interface. Significa que o produto precisa entender o contexto em que vai ser usado.
+
+- **PT-BR desde o primeiro run:** sem configuração de idioma necessária
+- **Terminologia de igreja:** Culto, Música, Retorno, em vez de termos genéricos
+- **2 Bíblias PT-BR disponíveis offline:** sem precisar baixar nada durante o culto
+- **Referências bíblicas no padrão brasileiro:** normalização local, não genérica
+
+Cada uma dessas decisões foi tomada pensando no operador que vai usar o produto, não no desenvolvedor que vai construí-lo.
+
+## A nuvem amplia o produto. O culto não depende dela.
+
+Durante um culto, perda de conexão não pode interromper a apresentação. Por isso, os dados necessários para a operação vivem localmente e a nuvem funciona como uma extensão do produto, não como condição para ele funcionar.
+
+Os dados ficam no dispositivo. A sincronização automática só acontece em estado seguro, nunca durante uma apresentação em andamento. Se o serviço de nuvem estiver fora, o produto continua normalmente.
+
+<FlowDiagram
+  label="Sincronização opcional entre painel web e desktop"
+  steps={[
+    "Painel Web da igreja",
+    "Cloud API",
+    "Sincronização por diferença",
+    "CultoOS Desktop",
+    "Dados locais — 9 coleções + mídia",
+    "Apresentação durante o culto",
+  ]}
+/>
+
+A sincronização compara o que mudou em vez de transferir tudo novamente, em 9 coleções mais mídia.
+
+<Callout variant="info">
+
+O modelo local-first aumenta a complexidade de sincronização e exige cuidado com conflitos e estados seguros. Em troca, a operação principal deixa de depender da disponibilidade da internet.
+
+</Callout>
+
+## Da adaptação à primeira release
+
+A primeira release foi empacotada para Windows, plataforma escolhida para o MVP.
+
+O build é automatizado via GitHub Actions e a publicação parte de uma tag. Isso tornou a release reproduzível: qualquer versão pode ser gerada de forma previsível, sem depender de passos manuais.
+
+Existe uma primeira release funcional e instalável. Velocidade de commit não é impacto de negócio e não tratamos isso como métrica.
+
+## Estado atual
+
+O CultoOS tem uma primeira release funcional e instalável. O produto está no estágio de MVP e a comercialização ainda não começou.
+
+Por isso, não apresento números de clientes, receita, retenção ou uso recorrente. Essas métricas ainda precisam existir antes de serem usadas como evidência de impacto.
+
+## O que quero validar a seguir
+
+Com o MVP funcional, o que precisa ser validado agora é se essa adaptação realmente melhora a operação de mídia nas igrejas que queremos atender.
+
+Os sinais que vão orientar as próximas decisões:
+
+- instalações ativas
+- igrejas usando o produto de forma recorrente
+- frequência de uso semanal
+- cultos operados com o software
+- quais recursos são mais utilizados
+- com que frequência o modo simplificado é mantido
+- se a sincronização com a nuvem é usada e com qual frequência
+- fricções ou erros durante a operação ao vivo
+- conversão de trial para pagamento
+
+## O que este projeto demonstra
+
+<Callout variant="demonstrates" title="O que este projeto demonstra">
+
+- **Product Adaptation:** identificar o que realmente precisa mudar quando um produto é levado para um contexto específico.
+- **Technical Product:** transformar requisitos como offline-first e sincronização segura em decisões concretas de produto e arquitetura.
+- **UX Simplification:** reduzir complexidade visível sem retirar capacidades de usuários avançados.
+- **Local-first Product Thinking:** projetar a operação principal para continuar funcionando mesmo sem conectividade.
+- **Product × Engineering:** trabalhar próximo à engenharia para transformar decisões de produto em um MVP funcional e instalável.
+
+</Callout>

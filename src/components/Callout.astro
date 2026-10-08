@@ -1,0 +1,21 @@
+---
+// Callout.astro — Reusable editorial callout for MDX case studies.
+import type { AstroProps } from 'astro';
+
+interface Props extends AstroProps {
+  variant?: 'info' | 'warning' | 'success' | 'error' | 'attribution' | 'demonstrates';
+  title?: string;
+  class?: string;
+}
+
+const { variant = 'info', title, class: className = '' } = Astro.props;
+---
+
+<aside class={`not-prose callout callout-${variant} my-8 ${className}`} role="note">
+  {title && (
+    <p class="mb-2 text-caption font-semibold uppercase tracking-wider">{title}</p>
+  )}
+  <div class="text-body-md [&>p:last-child]:mb-0 [&>p]:mb-3">
+    <slot />
+  </div>
+</aside>

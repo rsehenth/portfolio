@@ -1,0 +1,389 @@
+---
+title: Super Squad AI
+locale: pt-BR
+subtitle: AI Product · Multi-Agent Systems
+description: "Plataforma de orquestração de agentes de IA para desenvolvimento de software, com planejamento estruturado, execução isolada em Git, verificação determinística e controles de autonomia."
+tagline: "Autonomia para agentes de IA sem abrir mão do controle."
+summary: "Plataforma local de orquestração multiagente que transforma modelos de IA em uma squad coordenada de desenvolvimento, com planejamento, isolamento Git, verificação determinística, persistência de estado e recuperação de falhas."
+year: 2026
+role: needs_confirmation
+stage: Funcional · Em desenvolvimento ativo
+productType: AI Product · Developer Tool
+focus: Agent Orchestration · Verification · Git Isolation · Reliability
+status: Active
+draft: false
+featured: true
+# cover: /projects/super-squad-ai-cover.jpg
+tags:
+  - AI Product
+  - Multi-Agent
+  - Python
+  - Git
+  - Developer Tools
+  - Technical Product
+demonstrates:
+  - AI Product
+  - Agent Orchestration
+  - Reliability
+  - Technical Product
+technologies:
+  - Python
+  - SQLite
+  - Git / Worktrees
+  - CLI
+  - Structured Outputs
+  - Typed Contracts
+metrics:
+  - value: "147+"
+    label: Testes automatizados
+    state: needs_confirmation
+    context: "Verificar no HEAD atual antes de exibir"
+  - value: "1 + N"
+    label: Arquitetura Leader + Workers
+    state: verified
+  - value: "2"
+    label: Estágios de verificação
+    state: verified
+  - value: Capabilities
+    label: Seleção de agentes por capability
+    state: verified
+snapshot:
+  primary:
+    - value: "1 + N"
+      label: Leader + Workers
+      state: verified
+    - value: "2"
+      label: Estágios de verificação
+      state: verified
+    - value: Capabilities
+      label: Roteamento de agentes
+      state: verified
+    - value: SQLite
+      label: Persistência de estado
+      state: verified
+  secondary: []
+scaleMetrics: []
+productMetrics:
+  - value: "?"
+    label: runs executadas
+    state: needs_confirmation
+  - value: "?"
+    label: taxa de sucesso de runs
+    state: needs_confirmation
+  - value: "?"
+    label: tempo médio de run
+    state: needs_confirmation
+  - value: "?"
+    label: taxa de falha de verificação
+    state: needs_confirmation
+seo:
+  title: "Super Squad AI — AI Product & Technical Product Case | Lucas Sehnem"
+  description: "Case sobre uma plataforma multiagente para desenvolvimento de software, explorando orquestração de agentes, Git isolation, verificação determinística, confiabilidade e controle de autonomia."
+order: 9
+---
+
+## O problema
+
+Coordenar uma IA é simples. Coordenar várias com segurança não é.
+
+Coding agents conseguem executar tarefas individualmente. Quando vários agentes trabalham sobre um mesmo repositório ao mesmo tempo, surgem outros problemas: conflitos entre mudanças, alterações fora do escopo de cada tarefa, perda de contexto entre agentes, estados incompatíveis, custo acumulado, falhas sem recuperação e uma dificuldade real de auditoria sobre o que cada agente fez.
+
+O desafio do Super Squad AI não é gerar código. É governar a execução de agentes sobre um repositório com regras determinísticas, fronteiras claras e verificação baseada em evidência, não em declaração.
+
+## A IA propõe. O sistema verifica.
+
+Este é o princípio central do projeto.
+
+<ComparisonBlock
+  titleA="O que um agente pode fazer"
+  titleB="O que o sistema valida"
+  arrows={false}
+  label="Separação entre relato do agente e estado verificado"
+  itemsA={[
+    "Afirmar que a tarefa foi concluída",
+    "Afirmar que os testes passaram",
+    "Afirmar que o código funciona",
+    "Produzir um WorkerReport",
+  ]}
+  itemsB={[
+    "Executar os testes de forma independente",
+    "Verificar evidências antes de avançar",
+    "Exigir dois estágios de verificação",
+    "Promover estado somente com evidência autorizada",
+  ]}
+/>
+
+Um agente pode afirmar que terminou. Isso não modifica o estado real da tarefa. A tarefa somente avança quando existe evidência autorizada produzida pelo sistema, não pelo agente.
+
+WorkerReport é uma declaração. VERIFIED é um estado que exige prova.
+
+## Como funciona
+
+<FlowDiagram
+  label="Fluxo de orquestração do Super Squad AI"
+  steps={[
+    "Solicitação do usuário",
+    "Squad Leader",
+    "Plano estruturado",
+    "Task DAG (grafo de dependências)",
+    "Seleção de agente por capability",
+    "ContextPack por tarefa",
+    "Task Worktree isolado",
+    "Execução com ferramentas restritas",
+    "Verificação da tarefa",
+    "Integração controlada",
+    "Verificação da Run",
+    "Evidência persistida no estado",
+  ]}
+/>
+
+Cada etapa é determinística. A IA ocupa os nós de execução. O controle do fluxo, das fronteiras e da verificação é do sistema.
+
+## Uma squad baseada em capabilities, não em agentes fixos
+
+A arquitetura não define posições rígidas como `worker_01`, `worker_02` ou `security_worker`. Os agentes registram capabilities. O scheduler seleciona os compatíveis com cada tarefa.
+
+<ArchitectureDiagram
+  label="Roteamento por capability"
+  steps={[
+    { label: "Leader" },
+    { label: "Agent Registry" },
+    { label: "Scheduler", detail: "Seleciona agentes compatíveis com as capabilities da tarefa" },
+  ]}
+  servicesLabel="Workers disponíveis"
+  services={[
+    "Backend Worker",
+    "QA Worker",
+    "Security Specialist",
+    "Frontend Worker",
+  ]}
+/>
+
+Novos especialistas podem entrar na squad sem redesenhar o core. A modularidade é real porque está no contrato de capabilities, não no código de orquestração.
+
+## Planejar antes de executar
+
+O Leader não distribui tarefas diretamente. Ele interpreta o objetivo, cria um plano estruturado, decompõe em tarefas, define dependências entre elas e associa a cada uma as capabilities necessárias.
+
+<FlowDiagram
+  label="Processo de planejamento"
+  steps={[
+    "Objetivo recebido",
+    "Leader interpreta e estrutura",
+    "Tarefas decompostas",
+    "Dependências definidas (DAG)",
+    "Capabilities associadas a cada tarefa",
+    "Scheduler recebe o grafo",
+  ]}
+/>
+
+A execução começa somente depois que o plano existe. Isso evita que agentes iniciem trabalho paralelo sem contexto sobre o que os outros estão fazendo.
+
+## Cada agente trabalha isolado
+
+Esta é a segunda grande história de arquitetura do projeto.
+
+Múltiplos agentes não trabalham livremente sobre o mesmo working tree. Cada tarefa possui uma fronteira Git própria: um worktree isolado criado a partir da Run Branch.
+
+<FlowDiagram
+  label="Estrutura de branches e worktrees"
+  steps={[
+    "Human Branch (fora do ciclo automático)",
+    "Run Branch",
+    "Task Worktrees (um por tarefa ativa)",
+    "Verificação da tarefa no worktree",
+    "Commit controlado para a Run Branch",
+    "Verificação da Run integrada",
+  ]}
+/>
+
+A branch humana permanece fora do ciclo automático. Mudanças chegam a ela somente depois de passar pelos dois estágios de verificação.
+
+Benefícios conceituais dessa abordagem: isolamento entre agentes concorrentes, rollback granular por tarefa, auditoria do que cada agente fez separadamente, integração controlada e menor risco de contaminação entre tarefas.
+
+## Funcionar isolado não significa funcionar integrado
+
+A verificação acontece em dois momentos distintos por razão arquitetural.
+
+<ComparisonBlock
+  titleA="Verificação de Tarefa"
+  titleB="Verificação de Run"
+  arrows={false}
+  label="Dois estágios de verificação"
+  itemsA={[
+    "Valida a tarefa no worktree isolado",
+    "Executa antes da integração",
+    "Evidência local",
+    "Erros contidos no worktree",
+  ]}
+  itemsB={[
+    "Valida o estado integrado na Run Branch",
+    "Executa depois de todas as integrações",
+    "Evidência do sistema combinado",
+    "Detecta conflitos entre tarefas",
+  ]}
+/>
+
+Código correto isoladamente pode quebrar o sistema quando integrado. A segunda verificação existe justamente para capturar isso.
+
+## Dar a cada agente o contexto necessário, e somente ele
+
+O sistema utiliza um ContextPack por tarefa e por agente. Existe um ContextCache determinístico para reduzir duplicação de contexto entre tarefas correlatas.
+
+<FlowDiagram
+  label="Gerenciamento de contexto"
+  steps={[
+    "Contexto do projeto",
+    "Context Cache (determinístico)",
+    "ContextPack específico por tarefa",
+    "Worker recebe apenas o contexto relevante",
+  ]}
+/>
+
+O objetivo não é memória de IA. É controle sobre o que cada agente enxerga: menos arquivos irrelevantes, maior isolamento, menor superfície de exposição.
+
+## Autonomia limitada por políticas
+
+Os agentes operam dentro de fronteiras definidas pelo sistema. Cada worker tem acesso apenas ao conjunto de ferramentas e caminhos autorizados para aquela tarefa.
+
+O sistema define conceitualmente:
+
+- quais caminhos um agente pode ler e escrever
+- quais ferramentas estão disponíveis por tarefa
+- quais comandos podem ser executados
+- como segredos são filtrados do contexto
+- quais evidências são necessárias para avançar o estado
+
+Os detalhes de implementação dessas políticas não são publicados. O princípio é: o agente opera dentro do espaço que o sistema define, não no espaço que o agente gostaria de ter.
+
+## Falha não significa perder a execução inteira
+
+Falhas fazem parte do design, não são exceções não tratadas.
+
+O sistema utiliza budgets de tentativa por tarefa, estratégias de retry, fail-fast quando o budget é esgotado, persistência do estado entre tentativas, recuperação de runs interrompidas e retenção dos worktrees de tarefas que falharam para análise posterior.
+
+Worktrees de tarefas bem-sucedidas são limpos. Worktrees de tarefas com falha permanecem disponíveis para diagnóstico.
+
+## Testar também o sistema contra formas de enganá-lo
+
+O Super Squad AI utiliza regressões adversariais como parte do processo de desenvolvimento.
+
+<FlowDiagram
+  label="Ciclo de validação adversarial"
+  steps={[
+    "Finding identificado",
+    "Teste de regressão criado",
+    "Fix aplicado",
+    "Guard permanente",
+  ]}
+/>
+
+O objetivo é garantir que APIs públicas, registros fabricados ou evidências inválidas não consigam promover artificialmente o estado de uma execução. Detalhes de implementação desses controles não são publicados.
+
+## Não é um wrapper de múltiplos modelos
+
+<ComparisonBlock
+  titleA="O que não é"
+  titleB="O que é"
+  arrows={false}
+  label="Posicionamento do Super Squad AI"
+  itemsA={[
+    "Um wrapper que chama vários LLMs",
+    "Uma interface para múltiplos provedores",
+    "Um framework de prompts encadeados",
+    "Uma ferramenta de automação de tarefas",
+  ]}
+  itemsB={[
+    "Orquestração com controle de estado",
+    "Git isolation por tarefa",
+    "Verificação determinística em dois estágios",
+    "Gerenciamento de contexto por agente",
+    "Fronteiras de segurança por política",
+    "Recuperação de falhas por design",
+  ]}
+/>
+
+## Decisões de produto e engenharia
+
+**Decisão 1 — Relato do agente não é estado real**
+
+O problema era que um modelo pode afirmar sucesso sem prova verificável.
+
+A decisão foi tratar WorkerReport como declaração e exigir evidência autorizada para qualquer avanço de estado. O trade-off é um lifecycle mais complexo em troca de maior confiança operacional sobre o que o sistema realmente executou.
+
+---
+
+**Decisão 2 — Git como fronteira operacional**
+
+O problema era que vários agentes alterando o mesmo working tree tornavam rollback e auditoria difíceis de realizar com confiança.
+
+A decisão foi worktrees isolados por tarefa com integração controlada. O trade-off é mais gerenciamento Git em troca de isolamento real entre agentes concorrentes.
+
+---
+
+**Decisão 3 — Capabilities em vez de papéis fixos**
+
+O problema era que uma arquitetura com posições fixas de agentes não escala conceitualmente e exige redesenho do core para adicionar especialistas.
+
+A decisão foi seleção por capabilities no scheduler. O trade-off é um scheduler mais sofisticado em troca de modularidade real.
+
+---
+
+**Decisão 4 — Verificação antes e depois da integração**
+
+O problema era que código correto isoladamente pode quebrar o sistema quando integrado com outras tarefas concorrentes.
+
+A decisão foi two-stage verification com estágios independentes. O trade-off é mais tempo e custo de execução em troca de maior confiabilidade do estado integrado.
+
+## Arquitetura
+
+<ArchitectureDiagram
+  label="Arquitetura do Super Squad AI"
+  steps={[
+    { label: "Usuário" },
+    { label: "CLI" },
+    { label: "Leader", detail: "Planejamento · Decomposição · Task DAG" },
+    { label: "Scheduler", detail: "Seleção por capability · ContextPack" },
+    { label: "Worker", detail: "Execução · Ferramentas restritas · Git Worktree" },
+    { label: "Verification", detail: "Tarefa (isolada) · Run (integrada)" },
+    { label: "State Persistence", detail: "SQLite · Evidências · Histórico de runs" },
+  ]}
+  servicesLabel="Tudo local. Sem backend externo, sem banco de dados remoto, sem serviço de orquestração externo."
+  services={[
+    "Git / Worktrees",
+    "SQLite",
+    "CLI",
+    "Structured Outputs",
+  ]}
+/>
+
+## Estado atual
+
+O Super Squad AI é um produto funcional em evolução ativa. O que existe hoje:
+
+- execução controlada com Leader e Workers dinâmicos
+- persistência de estado em SQLite
+- Git isolation por tarefa com worktrees
+- orquestração multiagente com planejamento estruturado
+- verificação em dois estágios
+- recuperação de runs interrompidas
+- testes automatizados cobrindo os contratos principais
+
+Não há usuários externos, empresas, receita ou métricas de produtividade confirmadas. Esses dados não existem e não são afirmados aqui.
+
+O projeto também serviu como ambiente para experimentação com desenvolvimento assistido por múltiplos agentes, com revisão e validação humana ao longo do processo.
+
+## O que este projeto demonstra
+
+<Callout variant="demonstrates" title="O que este projeto demonstra">
+
+- **AI Product:** orquestração de agentes com controles de produto reais, não só chamadas de API
+- **Technical Product:** decisões arquiteturais com trade-offs explícitos e verificáveis
+- **Multi-Agent Architecture:** planejamento, capabilities, isolamento e integração coordenada
+- **AI Reliability:** verificação determinística, dois estágios, evidência antes de estado
+- **Developer Experience:** CLI local, persistência, recuperação e auditabilidade
+- **System Design:** separação entre o que a IA propõe e o que o sistema valida
+- **Security Thinking:** políticas de ferramentas, filtragem de segredos e validação adversarial
+- **Hands-on Execution:** do problema ao sistema funcional com arquitetura deliberada
+
+</Callout>

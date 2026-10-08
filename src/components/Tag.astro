@@ -1,0 +1,46 @@
+---
+// Tag.astro - Reusable tag component
+import type { AstroProps } from 'astro';
+
+interface Props extends AstroProps {
+  children: string;
+  variant?: 'default' | 'primary' | 'outline' | 'subtle';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  class?: string;
+}
+
+const {
+  children,
+  variant = 'default',
+  size = 'md',
+  href,
+  class: className = '',
+} = Astro.props;
+
+const variantClasses = {
+  default: 'bg-muted text-muted-foreground border-border',
+  primary: 'bg-accent/10 text-accent border-accent/20',
+  outline: 'bg-transparent text-foreground border-border',
+  subtle: 'bg-muted/50 text-muted-foreground border-transparent',
+};
+
+const sizeClasses = {
+  sm: 'px-2 py-0.5 text-[0.6875rem]',
+  md: 'px-3 py-1 text-caption',
+  lg: 'px-4 py-1.5 text-body-sm',
+};
+
+const baseClasses = 'inline-flex items-center font-medium rounded-full border transition-colors duration-fast';
+
+const TagComponent = href ? 'a' : 'span';
+---
+
+<TagComponent
+  href={href}
+  class={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+  target={href && href.startsWith('http') ? '_blank' : undefined}
+  rel={href && href.startsWith('http') ? 'noopener noreferrer' : undefined}
+>
+  <slot />
+</TagComponent>

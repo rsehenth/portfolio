@@ -1,0 +1,335 @@
+---
+title: ProfResolve
+locale: pt-BR
+subtitle: SaaS de IA para educadores
+description: "Plataforma que transforma necessidades pedagógicas em materiais estruturados, editáveis e exportáveis, combinando IA, monetização por créditos e fluxos pensados para a rotina docente."
+tagline: "Construindo um produto de IA confiável para educadores."
+summary: "SaaS de IA para educadores que transforma tarefas recorrentes da rotina docente em materiais estruturados, editáveis e prontos para distribuição. O produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados."
+year: 2026
+role: Technical Product / Product + Hands-on Development
+productType: SaaS · IA · Educação
+focus: Confiabilidade de IA · Economia de Produto · APIs · Pagamentos
+stage: "Produto ativo · Em evolução"
+status: Active
+draft: false
+featured: true
+externalUrl: "https://www.profresolve.com.br"
+externalUrlLabel: "Acessar ProfResolve ↗"
+snapshotMode: "product-technical"
+# cover: re-enable only with a real screenshot/image (public/projects/...)
+tags:
+  - AI Product
+  - SaaS
+  - APIs
+  - Payments
+  - Reliability
+demonstrates:
+  - AI Product
+  - Reliability
+  - Product Economics
+  - Hands-on Execution
+technologies:
+  - TypeScript
+  - Next.js
+  - PostgreSQL
+  - Redis
+  - Cloudflare R2
+  - Gemini
+  - DeepSeek
+  - Asaas
+  - Resend
+  - Sentry
+metrics:
+  - value: "1.2K+"
+    label: Usuários cadastrados
+    state: verified
+  - value: "16"
+    label: Geradores
+    state: verified
+  - value: "2.4K+"
+    label: Test cases
+    state: verified
+snapshot:
+  primary:
+    - value: "1.2K+"
+      label: Usuários cadastrados
+      state: verified
+    - value: "16"
+      label: Geradores de conteúdo
+      state: verified
+    - value: "7"
+      label: Jogos educativos
+      state: verified
+    - value: "Live"
+      label: Produto público
+      state: verified
+  secondary:
+    - value: "94"
+      label: Handlers de API
+      state: verified
+    - value: "8"
+      label: Integrações externas
+      state: verified
+    - value: "2.4K+"
+      label: Test cases
+      state: verified
+    - value: "277"
+      label: Arquivos de teste
+      state: verified
+scaleMetrics:
+  - value: "94"
+    label: Handlers de API
+    state: verified
+  - value: "8"
+    label: Integrações externas
+    state: verified
+  - value: "2.4K+"
+    label: Test cases
+    state: verified
+  - value: "~40"
+    label: Tabelas de banco de dados
+    state: verified
+productMetrics:
+  - value: "1.2K+"
+    label: Usuários cadastrados
+    state: verified
+seo:
+  title: "ProfResolve · AI Product & Technical Product Case | Lucas Sehnem"
+  description: "Case sobre a evolução de um SaaS de IA para educadores com mais de 1.200 usuários cadastrados, cobrindo produto, confiabilidade de LLMs, monetização, arquitetura e execução hands-on."
+order: 10
+---
+
+## Produto em uso
+
+O ProfResolve está disponível publicamente em profresolve.com.br e já ultrapassou 1.200 usuários cadastrados. A plataforma tem uso recorrente enquanto continua evoluindo com base no comportamento real dos professores que a utilizam.
+
+Com o produto em uso, as decisões deixam de depender só de hipótese. Passamos a observar quais fluxos os professores realmente utilizam, onde encontram dificuldade e quais recursos voltam a usar.
+
+## O problema
+
+Professores produzem continuamente planos de aula, avaliações, atividades e adaptações. O ProfResolve nasceu para reduzir parte desse trabalho repetitivo, transformando uma necessidade pedagógica em material estruturado, editável e pronto para uso.
+
+Hoje essa hipótese existe além de um protótipo: o produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados.
+
+## Da hipótese ao produto em uso
+
+O projeto começou com uma hipótese simples: IA poderia reduzir parte do trabalho repetitivo de preparação de materiais sem tirar do professor o controle sobre o resultado.
+
+A plataforma evoluiu dessa hipótese para um produto com múltiplos geradores de conteúdo, edição, exportação, créditos, pagamentos, jogos educacionais e mecanismos de confiabilidade para operações com LLMs.
+
+Com mais de 1.200 usuários cadastrados e uso recorrente da plataforma, a próxima etapa não é só construir mais funcionalidades. É entender comportamento, frequência de uso, retenção e quais fluxos entregam mais valor.
+
+## Meu papel
+
+Atuo no ProfResolve entre produto e tecnologia. Participo diretamente das decisões sobre o que construir, como priorizar cada evolução e como transformar essas escolhas em algo tecnicamente viável.
+
+Na prática, isso significa trabalhar com funcionalidades, fluxos de geração, economia de créditos, comportamento dos modelos de IA, integrações, critérios de confiabilidade, experiência do usuário e a implementação em si. Não me limito à definição do que construir: estou presente também no como.
+
+<RoleBlocks
+  label="Frentes de trabalho no ProfResolve"
+  blocks={[
+    {
+      title: 'Produto',
+      items: ['Discovery', 'Prioritização', 'Escopo', 'Monetização', 'Experiência', 'Métricas'],
+    },
+    {
+      title: 'AI Product',
+      items: ['Model routing', 'Prompt architecture', 'AI reliability', 'Fallback strategy', 'Cost awareness', 'Failure handling'],
+    },
+    {
+      title: 'Technical Product',
+      items: ['APIs', 'Architecture', 'Credits', 'Payments', 'Storage', 'Observability', 'Security', 'Trade-offs'],
+    },
+    {
+      title: 'Hands-on Execution',
+      items: ['Implementation', 'Prototyping', 'Testing', 'Debugging', 'Iteration'],
+    },
+  ]}
+/>
+
+## Fluxo do produto
+
+O fluxo principal foi desenhado para caber na rotina docente: poucas escolhas antes da geração, material utilizável depois dela.
+
+<FlowDiagram
+  label="Fluxo principal do ProfResolve"
+  steps={[
+    'Professor',
+    'Seleciona disciplina, série e tema',
+    'Geração com IA',
+    'Material estruturado',
+    'Edição',
+    'PDF / DOCX / Impressão / WhatsApp',
+  ]}
+/>
+
+## Transformando uma chamada de IA em um produto confiável
+
+Uma geração não é só enviar um prompt para um LLM. No ProfResolve, cada geração passa por uma cadeia de controle que transforma uma chamada de IA em um processo previsível:
+
+<FlowDiagram
+  label="Cadeia de execução de uma geração"
+  steps={[
+    'Pedido do usuário',
+    'Validação',
+    'Débito de créditos',
+    'Prompt + contexto',
+    'Modelo primário',
+    'Retry / fallback',
+    'Sanitização',
+    'Persistência',
+    'Editor / export',
+  ]}
+  branch={{
+    at: 5,
+    label: 'Falha',
+    steps: ['Reembolso automático de créditos'],
+  }}
+/>
+
+Validação, débito de créditos, montagem de prompt e contexto, roteamento de modelo, retry, fallback, sanitização, persistência e reembolso automático fazem parte do fluxo. A experiência do professor não pode depender de um único ponto de falha.
+
+## IA falha. O produto não pode falhar junto.
+
+Uma falha do provedor não poderia consumir os créditos do professor e encerrar a tarefa. Por isso, o fluxo trata falha como parte esperada da operação.
+
+Confiabilidade foi tratada como requisito de produto, não como detalhe de implementação. Em nível conceitual, a estratégia inclui:
+
+- **Cadeia de modelos:** mais de um modelo disponível para a mesma geração
+- **Retries com orçamento de tempo:** tentativas adicionais dentro de um limite definido
+- **Fallback entre providers:** troca de provedor quando o primário falha
+- **Circuit breaker:** pausa temporária de um caminho problemático
+- **Fallback de contexto:** geração degradada em vez de erro exposto ao usuário
+- **Reembolso automático de créditos:** uma falha não custa crédito ao professor
+- **Kill switch e recuperação:** parada e retomada em nível operacional
+
+Estes mecanismos são descritos de forma conceitual intencionalmente. Parâmetros, limiares e configurações internas são parte da implementação e não são publicados. Nenhuma taxa de sucesso é afirmada aqui sem dado real para sustentá-la.
+
+## Quando o custo de IA vira decisão de produto
+
+O ProfResolve usa **créditos** como unidade de consumo. Cada tipo de geração tem um custo diferente, e o preço de cada geração é uma decisão de produto, não só uma variável de infraestrutura.
+
+<FlowDiagram
+  label="Cadeia de custo até o preço"
+  steps={[
+    'Custo do modelo',
+    'Custo da geração',
+    'Créditos',
+    'Preço do produto',
+  ]}
+/>
+
+Os créditos são a interface entre custo computacional, valor percebido pelo professor e monetização. Quando o custo de um modelo muda, isso afeta diretamente o preço de uma geração e o comportamento esperado do usuário.
+
+Uma alteração documentada reclassificou um gerador de **100 créditos para 300 créditos**, junto com mudança na estratégia e no modelo utilizados. O objetivo é manter o custo de IA visível e administrável dentro do próprio produto.
+
+## Nem toda evolução técnica deve permanecer no produto
+
+**Contexto:** Streaming via SSE foi testado para melhorar a experiência de geração.
+
+**Problema:** Falhas de parsing podiam interromper o fluxo e produzir conteúdo parcial.
+
+**Decisão:** O projeto voltou para uma geração síncrona mais previsível, com controle de timeout mais rigoroso.
+
+**Trade-off:** menos percepção de resposta progressiva em troca de maior previsibilidade e confiabilidade.
+
+O rollback foi tratado como parte normal do desenvolvimento. O que importa é que o trade-off foi explícito.
+
+<Callout variant="info">
+  Rollback também é decisão de produto.
+</Callout>
+
+## Build vs Buy: onde vale a pena investir engenharia
+
+<Callout title="Build vs Buy">
+  Um motor próprio de palavras cruzadas posicionava apenas parte das palavras. Em vez de continuar investindo no algoritmo interno, o produto passou a usar uma biblioteca especializada e o esforço foi redirecionado para a experiência e a qualidade do resultado.
+</Callout>
+
+<FlowDiagram
+  label="Evolução do gerador de palavras cruzadas"
+  steps={[
+    'Motor próprio: 4 a 7 de 20 palavras',
+    'Biblioteca especializada',
+    'Todas ou quase todas as palavras',
+  ]}
+/>
+
+O resultado final é descrito de forma qualitativa com base na documentação do projeto. Nenhuma porcentagem é afirmada aqui.
+
+## Arquitetura
+
+Representação conceitual da arquitetura do produto, sem endpoints internos, schema de banco, limiares de segurança ou credenciais.
+
+<ArchitectureDiagram
+  label="Arquitetura conceitual do ProfResolve"
+  steps={[
+    { label: 'Usuário' },
+    { label: 'Next.js Application' },
+    { label: 'Application Layer', detail: 'Auth · Credits · AI · APIs' },
+  ]}
+  servicesLabel="Dados, IA e serviços externos"
+  services={[
+    'PostgreSQL',
+    'Redis',
+    'Cloudflare R2',
+    'Gemini / DeepSeek',
+    'Asaas',
+    'Resend',
+    'Sentry',
+  ]}
+/>
+
+## Engenharia como parte da confiança do produto
+
+Cobertura de testes e disciplina de engenharia fazem parte da experiência do produto, porque uma falha de geração atinge diretamente o professor.
+
+- **2.4K+ test cases**
+- **277 arquivos de teste**
+- **Property-based testing**
+- **Testes de regressão e caracterização**
+- **TypeScript estrito**
+- **Logging estruturado**
+- **Observabilidade**
+- **Créditos e pagamentos idempotentes**
+
+Esses números descrevem escala e disciplina técnica. Não substituem métricas de impacto do produto.
+
+## Produto e escala técnica
+
+<p class="not-prose mb-2 text-caption font-semibold uppercase tracking-widest text-muted-foreground">Produto</p>
+
+<StatsGrid
+  label="Sinais de produto"
+  stats={[
+    { value: '1.2K+', label: 'Usuários cadastrados' },
+    { value: 'Live', label: 'Produto público' },
+    { value: 'Recorrente', label: 'Plataforma em uso' },
+  ]}
+/>
+
+<p class="not-prose mb-2 text-caption font-semibold uppercase tracking-widest text-muted-foreground">Escala técnica</p>
+
+<StatsGrid
+  label="Escala técnica"
+  stats={[
+    { value: '16', label: 'Geradores' },
+    { value: '94', label: 'API handlers' },
+    { value: '8', label: 'Integrações' },
+    { value: '2.4K+', label: 'Test cases' },
+  ]}
+/>
+
+## O que quero entender a seguir
+
+O produto tem uso suficiente para que as próximas decisões dependam cada vez mais de comportamento real.
+
+- Usuários ativos em 7 e 30 dias
+- Frequência de geração por usuário
+- Geradores mais utilizados
+- Taxa de conclusão da primeira geração
+- Consumo de créditos ao longo do tempo
+- Conversão de freemium para plano pago
+- Retenção
+- Taxa de regeneração
+
+Estes são sinais que quero medir. Não são métricas que já estão disponíveis.

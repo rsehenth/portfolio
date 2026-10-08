@@ -1,0 +1,166 @@
+---
+// en/about.astro - About page (English)
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { profile } from '@/data/profile';
+import { ui } from '@/i18n';
+
+const about = ui['en'].about;
+const howIWork = ui['en'].howIWork;
+const contact = ui['en'].contact;
+---
+
+<BaseLayout
+  title={about.meta.title}
+  fullTitle={about.meta.title}
+  description={about.meta.description}
+  locale="en"
+>
+  <section class="section pt-28 lg:pt-32" aria-labelledby="about-heading">
+    <div class="container">
+
+      <!-- Hero -->
+      <header class="max-w-3xl mx-auto text-center mb-16 lg:mb-20" data-reveal>
+        <h1 id="about-heading" class="text-display-xl lg:text-display-lg font-bold tracking-tight text-foreground mb-6">
+          {about.title}
+        </h1>
+        <p class="text-body-lg lg:text-display-sm text-muted-foreground">
+          {about.heroTagline}
+        </p>
+      </header>
+
+      <!-- Intro -->
+      <div class="max-w-3xl mx-auto mb-16 lg:mb-20" data-reveal>
+        <p class="text-body-lg text-muted-foreground mb-6">
+          {about.intro.p1}
+        </p>
+        <p class="text-body-md text-muted-foreground">
+          {about.intro.p2}
+        </p>
+      </div>
+
+      <!-- Where I Work -->
+      <div class="max-w-4xl mx-auto mb-16 lg:mb-20">
+        <h2 class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-10 text-center" data-reveal>
+          {about.focus.title}
+        </h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="card p-6" data-reveal data-reveal-delay="0">
+            <h3 class="text-heading-md font-semibold text-foreground mb-3">{about.focus.aiProducts.title}</h3>
+            <p class="text-body-md text-muted-foreground">{about.focus.aiProducts.description}</p>
+          </div>
+          <div class="card p-6" data-reveal data-reveal-delay="80">
+            <h3 class="text-heading-md font-semibold text-foreground mb-3">{about.focus.technicalProduct.title}</h3>
+            <p class="text-body-md text-muted-foreground">{about.focus.technicalProduct.description}</p>
+          </div>
+          <div class="card p-6" data-reveal data-reveal-delay="160">
+            <h3 class="text-heading-md font-semibold text-foreground mb-3">{about.focus.productStrategy.title}</h3>
+            <p class="text-body-md text-muted-foreground">{about.focus.productStrategy.description}</p>
+          </div>
+          <div class="card p-6" data-reveal data-reveal-delay="240">
+            <h3 class="text-heading-md font-semibold text-foreground mb-3">{about.focus.experimentation.title}</h3>
+            <p class="text-body-md text-muted-foreground">{about.focus.experimentation.description}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How I Work -->
+      <div class="max-w-4xl mx-auto mb-16 lg:mb-20">
+        <h2 class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-10 text-center" data-reveal>
+          {howIWork.title}
+        </h2>
+        <div class="grid sm:grid-cols-3 gap-6">
+          <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="0">
+            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.product.title}</h3>
+            <p class="text-body-md text-muted-foreground mb-6">{howIWork.product.description}</p>
+            <ul class="space-y-2" role="list">
+              {howIWork.skills.product.map((skill) => (
+                <li class="flex items-center gap-2 text-body-md text-muted-foreground">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="100">
+            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 16l4-16M6 16l-4-8m16 8l-4-8m0 0L8 4m8 8v12" />
+              </svg>
+            </div>
+            <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.technology.title}</h3>
+            <p class="text-body-md text-muted-foreground mb-6">{howIWork.technology.description}</p>
+            <ul class="space-y-2" role="list">
+              {howIWork.skills.technology.map((skill) => (
+                <li class="flex items-center gap-2 text-body-md text-muted-foreground">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="200">
+            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.execution.title}</h3>
+            <p class="text-body-md text-muted-foreground mb-6">{howIWork.execution.description}</p>
+            <ul class="space-y-2" role="list">
+              {howIWork.skills.execution.map((skill) => (
+                <li class="flex items-center gap-2 text-body-md text-muted-foreground">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Toolkit -->
+      <div class="max-w-4xl mx-auto mb-16 lg:mb-20" data-reveal>
+        <h2 class="text-display-sm font-bold tracking-tight text-foreground mb-8 text-center">
+          {about.toolkit.title}
+        </h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          {about.toolkit.groups.map((group) => (
+            <div class="card p-5">
+              <h3 class="text-heading-sm font-semibold text-foreground mb-3">{group.category}</h3>
+              <div class="flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span class="tag">{item}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="max-w-2xl mx-auto" data-reveal="scale">
+        <div class="card p-8 lg:p-12 text-center">
+          <h2 class="text-display-sm font-bold tracking-tight text-foreground mb-4">
+            {contact.title}
+          </h2>
+          <p class="text-body-lg text-muted-foreground mb-8">
+            {contact.subtitle}
+          </p>
+          <div class="flex items-center justify-center">
+            <a href={profile.linkedin} class="btn-primary" target="_blank" rel="noopener noreferrer">
+              {contact.ctaLinkedin}
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

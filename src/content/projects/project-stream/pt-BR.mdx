@@ -1,0 +1,124 @@
+---
+title: Project Stream
+locale: pt-BR
+subtitle: Technical Product · Desktop Media
+description: "Conceito de produto desktop de streaming em fase de arquitetura, voltado a simplificar convidados, layouts e transmissão com processamento audiovisual principal no host."
+tagline: "Levando o estúdio de streaming para o computador do criador."
+summary: "O Project Stream explora como simplificar a produção de streaming sem transferir o processamento audiovisual principal para uma infraestrutura própria de vídeo na nuvem. Está em Discovery · Pre-PoC: a arquitetura é candidata e as decisões centrais ainda precisam ser testadas."
+year: 2026
+role: Technical Product · Product Architecture
+stage: Discovery · Pre-PoC
+stageNote: "Visão, arquitetura candidata e riscos mapeados. A primeira PoC ainda não foi concluída."
+productType: Desktop Streaming Concept
+focus: Product Architecture · Media Systems · Risk Reduction
+status: Active
+draft: false
+featured: false
+tags:
+  - Technical Product
+  - Desktop Media
+  - Media Systems
+  - Product Architecture
+  - Technical Discovery
+demonstrates:
+  - Technical Product
+  - Product Architecture
+  - Risk Reduction
+  - PoC Scoping
+  - Product × Engineering
+technologies: []
+metrics: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "Project Stream | Technical Product & Product Architecture Case | Lucas Sehnem"
+  description: "Case em fase Pre-PoC sobre a arquitetura de um produto desktop de streaming, cobrindo processamento local, WebRTC, libobs, riscos técnicos e definição da primeira prova de conceito."
+order: 1
+---
+
+## O problema
+
+Ferramentas profissionais de streaming oferecem controle, mas esse controle costuma exigir uma configuração extensa. Experiências mais simples podem deslocar essa complexidade para serviços próprios de coordenação, composição e transmissão.
+
+A pergunta do Project Stream é quanto dessa simplicidade pode ser explorada mantendo o processamento audiovisual principal no computador do host. O objetivo é manter captura, composição, renderização, encoding, gravação e transmissão próximos de quem produz, evitando infraestrutura própria de vídeo na nuvem.
+
+## Meu papel
+
+Neste estágio, meu trabalho está concentrado em visão de produto, arquitetura candidata, escopo da PoC, trade-offs e redução de risco. Antes de construir um MVP, estou definindo quais decisões precisam de evidência e quais promessas ainda não podem ser feitas.
+
+Isso inclui discutir a experiência desejada para o host e para convidados, os limites do hardware local, a conectividade, alternativas de stack e as implicações de distribuição.
+
+## Controle local com experiência simplificada
+
+A proposta é dar ao host o controle de um estúdio de streaming sem exigir que toda a complexidade do pipeline audiovisual apareça na experiência de uso. Layouts, templates e automações são possibilidades planejadas, sujeitas ao que a PoC confirmar sobre integração, desempenho e operação.
+
+O princípio é local-first para o processamento principal. Isso não equivale a ausência de serviços externos.
+
+## O maior risco está na conexão
+
+Convidados remotos podem exigir signaling, STUN, TURN, relay ou outros serviços auxiliares. NAT, CGNAT, firewalls e condições variáveis de rede tornam a conectividade uma das principais incertezas do projeto.
+
+Sem processamento de vídeo na nuvem não significa ausência de serviços externos. A arquitetura candidata precisa identificar quando uma conexão direta é viável e quando assistência de conectividade se torna necessária.
+
+Os cenários em estudo são rede local, conexão direta pela internet e conectividade assistida. Eles representam hipóteses de arquitetura, não modos já implementados.
+
+## Arquitetura candidata
+
+Hipótese técnica para validação na PoC.
+
+<ArchitectureDiagram
+  label="Arquitetura candidata do Project Stream"
+  steps={[
+    { label: 'Interface desktop', detail: 'React + TypeScript como proposta para a camada de interface.' },
+    { label: 'Camada desktop e controle', detail: 'Tauri + Rust como candidato, sujeito à validação de preview e ciclo de vida nativo.' },
+    { label: 'Integração nativa', detail: 'C++ e libobs como proposta para integrar captura, composição e encoding.' },
+    { label: 'Saída e persistência', detail: 'RTMP / RTMPS e SQLite ou arquivos locais como elementos candidatos.' },
+  ]}
+  services={['WebRTC para conectividade de convidados', 'Signaling, STUN, TURN ou relay quando a rede exigir']}
+  servicesLabel="Conectividade candidata"
+/>
+
+Tauri + Rust é a opção candidata para a camada desktop. Qt + C++ continua sendo uma alternativa se a PoC indicar que preview, integração nativa ou controle das fontes têm custo alto demais nessa proposta.
+
+libobs é candidato porque oferece uma base madura para captura, composição, encoding, gravação e transmissão. A intenção não é reconstruir um motor audiovisual do zero. A escolha precisa ser avaliada junto ao modelo de distribuição antes de um lançamento comercial, inclusive pelas implicações da licença GPL.
+
+## O que a PoC precisa provar
+
+O próximo passo não é adicionar recursos. É reduzir as incertezas que definem se a arquitetura vale a pena.
+
+1. A integração com libobs funciona de forma estável dentro da aplicação desktop?
+2. Tauri + Rust + C++ é sustentável para preview e controle das fontes?
+3. Um convidado WebRTC pode ser recebido e composto em ambiente controlado?
+4. A composição pode ser gravada ou transmitida via RTMP com estabilidade suficiente para continuar investindo?
+5. Qual é o custo real em CPU e GPU antes de definir limites de convidados ou resolução?
+6. Quais condições de rede exigem infraestrutura auxiliar?
+
+Essas são perguntas de risco, não uma lista de funcionalidades entregues. A PoC só terá cumprido seu propósito quando houver evidência suficiente para decidir se a direção técnica merece o próximo investimento.
+
+## Riscos principais
+
+Os riscos que orientam a primeira PoC são a integração entre libobs e WebRTC, a conectividade em redes reais, a carga de CPU e GPU, a sincronização de áudio e vídeo e as implicações de distribuição da base tecnológica. Cada um deles afeta a experiência do produto e precisa ser testado antes de ampliar o escopo.
+
+## Roadmap de alto nível
+
+Discovery / Pre-PoC → PoC audiovisual → MVP → Capacidades avançadas → Preparação comercial
+
+Este é o planejamento atual, não uma promessa de entrega. A continuidade depende do que a PoC revelar sobre viabilidade, custo de desenvolvimento e experiência de uso.
+
+## Onde o Project Stream está hoje
+
+O Project Stream está em Discovery / Pre-PoC. A visão de produto, a arquitetura candidata, os principais fluxos e os riscos técnicos já foram mapeados. Ainda não existe um MVP funcional e as decisões centrais de integração audiovisual e conectividade precisam ser comprovadas na primeira PoC.
+
+Por isso, nenhuma funcionalidade planejada é apresentada aqui como entregue, e ainda não existem métricas de usuários, performance ou impacto.
+
+## O que quero aprender primeiro
+
+Quero descobrir se a integração nativa, o custo de hardware, a conectividade de convidados, a estabilidade audiovisual, a complexidade de desenvolvimento e as restrições de distribuição permitem uma base sustentável para o produto.
+
+## O que este projeto demonstra
+
+- **Technical Product:** transformar uma visão de produto em decisões técnicas e perguntas verificáveis.
+- **Product Architecture:** definir fronteiras entre interface, controle, mídia, conectividade e persistência.
+- **Risk Reduction:** identificar incertezas técnicas antes de investir em um MVP.
+- **PoC Scoping:** definir o menor experimento capaz de testar as decisões mais arriscadas.
+- **Product × Engineering:** conectar a experiência desejada aos limites técnicos e aos trade-offs de implementação.

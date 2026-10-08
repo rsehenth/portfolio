@@ -1,0 +1,31 @@
+---
+// en/404.astro - Not found page (English)
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { profile } from '@/data/profile';
+import { ui } from '@/i18n';
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The page you're looking for doesn't exist."
+  noIndex={true}
+  locale="en"
+>
+  <section class="min-h-[60vh] flex items-center justify-center px-4">
+    <div class="text-center max-w-md">
+      <h1 class="text-display-xl font-bold tracking-tight text-foreground mb-4">404</h1>
+      <h2 class="text-display-sm font-semibold text-foreground mb-4">Page Not Found</h2>
+      <p class="text-body-lg text-muted-foreground mb-8">
+        Sorry, the page you're looking for doesn't exist or has been moved.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/en/" class="btn-primary">
+          Back to Home
+        </a>
+        <a href="/en/#work" class="btn-secondary">
+          View Work
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

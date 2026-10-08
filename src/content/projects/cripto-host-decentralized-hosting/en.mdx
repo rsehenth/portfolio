@@ -1,0 +1,203 @@
+---
+title: Cripto Host Decentralized Hosting
+locale: en
+subtitle: Technical Product · Web3 Infrastructure
+description: "Product discovery and architecture for a decentralized hosting concept designed to provide a simple deployment experience for Web3 frontends using IPFS, Filecoin and Arweave."
+tagline: "Abstracting Web3 infrastructure complexity behind a simpler deployment experience."
+summary: "The proposal explored how to deliver a modern hosting experience for Web3 frontends using a modular architecture capable of integrating different networks, storage providers and gateways. The project moved through discovery, MVP scoping and technical design before being discontinued prior to implementation."
+year: 2025
+role: "Product Owner · Product Discovery & Technical Architecture"
+stage: "Discovery · Technical Architecture"
+stageNote: "Discovery, MVP scope and architecture defined. Implementation was not started."
+productType: Web3 Hosting Platform Concept
+focus: Product Discovery · Technical Architecture · MVP Scoping
+status: Archived
+draft: false
+featured: false
+tags:
+  - Technical Product
+  - Product Discovery
+  - Web3
+  - Infrastructure
+  - System Design
+  - MVP
+  - IPFS
+demonstrates:
+  - Technical Product
+  - Product Discovery
+  - MVP Scoping
+  - Product Architecture
+  - Technical Trade-offs
+  - Product × Engineering
+technologies: []
+metrics: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "Cripto Host Decentralized Hosting | Technical Product Case Study | Lucas Sehnem"
+  description: "A Product Discovery and Technical Architecture case study for a decentralized hosting concept using IPFS, Filecoin and Arweave, covering MVP scoping, modular architecture and technical trade-offs."
+order: 4
+---
+
+## The Problem
+
+Publishing a traditional frontend can be straightforward. Publishing applications and assets using decentralized technologies often requires familiarity with IPFS, pinning, gateways, CIDs, storage providers, blockchains, domains, persistence and infrastructure.
+
+The product question was: how much of that complexity could be hidden behind a simple deployment experience without removing the properties that make these technologies interesting?
+
+## My Role
+
+My work sat between product decisions and technical choices. I was involved in the proposal's discovery, technology research, backlog definition and MVP scoping, alongside participating in the architecture design and the trade-offs needed to keep the first version viable.
+
+Because the project did not move into implementation, the work was focused on turning a broad idea about decentralized hosting into a proposal that could be discussed, prioritized and eventually built.
+
+## Complexity Should Stay Behind the Deploy
+
+The central thesis was that developers should not need to understand all the underlying infrastructure to publish their project. The intended experience was:
+
+connect repository → configure project → deploy
+
+While the system would handle build, storage, persistence, versioning, CID, gateway and domain.
+
+The proposal was not to hide decentralization: it was to make it accessible without requiring users to understand all the operational complexity behind it.
+
+## This Was Not About Building a New Blockchain
+
+<Callout variant="info" title="Product decision">
+The goal was not to create a new blockchain, a new storage protocol or a proprietary global infrastructure.
+
+The proposal was to build an orchestration layer on top of existing technologies. Differentiation would come from the product experience, abstraction and orchestration, not from reinventing the underlying infrastructure.
+</Callout>
+
+## What Would Actually Be in the MVP
+
+The initial MVP was defined with a deliberately lean scope. The exclusion exercise was as important as defining what was in: each item left out represented complexity that could be introduced later, backed by usage evidence.
+
+<ComparisonBlock
+  titleA="Out of MVP"
+  titleB="In MVP"
+  arrows={true}
+  itemsA={[
+    "Proprietary global node network",
+    "Filecoin / Arweave as required",
+    "Own gateways",
+    "Public CLI and SDK",
+    "Advanced multi-chain",
+  ]}
+  itemsB={[
+    "VPS + external pinning provider",
+    "IPFS via external provider",
+    "Initial public gateway",
+    "Web dashboard",
+    "IPFS as primary storage",
+  ]}
+/>
+
+A dashboard with projects, deployments and history; authentication; static site uploads; GitHub integration; automated builds; IPFS publishing; public links; CID history; and rollback formed the proposed core. Distributed microservices, multi-region infrastructure and advanced blockchain capabilities would come later.
+
+## Candidate Architecture
+
+The proposed architecture was organized around four main blocks. Separating the control plane from the data plane was one of the central decisions: it would allow the storage infrastructure to evolve without rebuilding the core product experience.
+
+<ArchitectureDiagram
+  label="Candidate architecture — Cripto Host Decentralized Hosting"
+  steps={[
+    { label: 'User interface', detail: 'Dashboard for projects, deployments, domains, versions and settings. Next.js + TypeScript + Tailwind as the candidate stack.' },
+    { label: 'Control Plane', detail: 'Authentication, permissions, projects, deployments, plans, policies and orchestration. NestJS + TypeScript + PostgreSQL as the core proposal.' },
+    { label: 'Build Engine', detail: 'Receive code, detect framework, run isolated build and produce artifacts. Node.js + Docker workers with Redis/BullMQ as the candidate queue.' },
+    { label: 'Data Plane', detail: 'Storage, replication, gateways and content delivery. IPFS as the primary layer in the MVP; Filecoin and Arweave as future evolution paths.' },
+  ]}
+/>
+
+**Candidate architecture and evolution paths**
+
+The technical exploration below was produced during discovery. Some components represent possible future evolution and were not part of the initial MVP.
+
+<img
+  src="/projects/cripto-host-decentralized-hosting-diagram.png"
+  alt="Conceptual architecture diagram for Cripto Host, showing the developer entry point, control plane, build runtime, adapter layer, data plane and decentralized deployment flow."
+  loading="lazy"
+  class="w-full rounded-xl border border-border"
+/>
+
+## The Deploy Flow
+
+A deployment would follow these steps conceptually. Developers would see only the beginning and the final result; each intermediate step would be the responsibility of a specific architecture component.
+
+<FlowDiagram
+  label="Deploy flow — Cripto Host Decentralized Hosting"
+  steps={[
+    "Git push or file upload",
+    "API receives and queues the deployment",
+    "Build Worker runs the isolated build",
+    "Storage Adapter sends artifacts to IPFS",
+    "CID generated and recorded",
+    "Gateway or domain pointed to the CID",
+    "Public link available",
+  ]}
+/>
+
+## Avoiding Provider Lock-in
+
+One of the most relevant technical decisions was the proposal for an adapter layer. The idea was that the rest of the application would work through standardized interfaces, so switching a provider would not require rebuilding the dashboard and core logic.
+
+**Storage Adapters:** IPFS as the primary layer in the MVP, with Filecoin, Arweave and other providers as future possibilities.
+
+**Blockchain Adapters:** Ethereum, Polygon, Base, Arbitrum and other networks when needed for specific features.
+
+**Gateway Adapters:** public IPFS gateways, fallback options and custom domains.
+
+This approach translated into portability, simpler maintenance, reduced vendor lock-in and the ability to evolve without rewriting the product core.
+
+## Starting Simple Without Closing Doors to Scale
+
+This is perhaps the central technical product story of this case.
+
+The initial strategy deliberately did not include Kubernetes, Kafka, Go or Rust, dozens of microservices, a proprietary global node network or multi-region infrastructure from day one.
+
+The proposal was a modular monolith: TypeScript, NestJS, PostgreSQL, Redis with BullMQ, separate workers, Docker and a VPS with an external pinning provider.
+
+The reasoning was direct: less initial complexity means lower cost, lower operational overhead, more speed to validate and a real possibility of separating components when usage justified that decision. Starting with complex distributed architecture before having any users would mean optimizing for a problem that did not yet exist.
+
+## Infrastructure and Costs
+
+The initial infrastructure proposal was deliberately lean: a VPS for the main services, separate build workers, PostgreSQL, Redis, an external IPFS pinning provider, an initial public gateway, backups and basic monitoring.
+
+The decision not to operate a proprietary global node network from the start was explicit. The cost, operational complexity and the need to validate the product before scaling infrastructure made that choice hard to justify at that stage.
+
+## Privacy, Security and Real Limits
+
+The commercial proposal involved topics like privacy, data sovereignty and resistance to blocking. An important part of the product discovery work was separating what was marketing narrative from what were actual technical guarantees.
+
+IPFS provides content addressing, distribution and the possibility of redundancy. But it does not automatically provide persistence (active pinning is required), encryption (content is public by CID by default), anonymity (gateways and nodes log access) or guaranteed uptime.
+
+The MVP would have a centralized control plane: authentication, billing and orchestration would all be centralized components. Claiming that the product would be "fully decentralized" would not be technically defensible. Gateways and domains can still fail; availability would depend on the gateway infrastructure used.
+
+This calibration exercise between commercial promise and technical reality was a core part of the discovery.
+
+## Roadmap
+
+The roadmap was developed as planning during discovery, not as a delivery commitment. Discontinuation happened before any phase was started.
+
+**Phase 1: Functional MVP** — Dashboard, authentication, uploads, automated builds, IPFS publishing, public links and CID history.
+
+**Phase 2: Modularity and commercialization** — Plans, billing, custom domains, DNSLink and a consolidated adapter layer.
+
+**Phase 3: Web3 expansion** — Filecoin and Arweave as storage options, ENS and additional capabilities for DApps.
+
+**Phase 4: Scale** — Separating components where usage justified it, additional infrastructure and potentially distributed workers.
+
+## Where the Project Stopped
+
+The proposal moved through discovery, technology research, MVP definition, backlog and architecture design. Development of the platform was never started. The initiative remained in the Cripto Host backlog and was later discontinued.
+
+No feature was implemented. There are no users, product metrics or operational infrastructure associated with this proposal.
+
+## What This Project Demonstrates
+
+- **Technical Product:** connecting product decisions, infrastructure and developer experience before committing to implementation.
+- **Product Discovery:** turning a broad idea into a problem, proposal and scope that could be discussed and challenged.
+- **MVP Scoping:** separating what was needed to validate from what could come later, and justifying each exclusion.
+- **Product Architecture:** defining boundaries between the control plane, build engine, storage and distribution.
+- **Technical Trade-offs:** avoiding premature complexity without closing off future evolution paths.
+- **Product × Engineering:** translating technical research into backlog, requirements and product decisions.

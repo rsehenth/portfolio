@@ -1,0 +1,191 @@
+---
+title: CultoOS
+locale: en
+subtitle: Technical Product · Desktop
+description: "A desktop MVP for media operations in Brazilian churches, combining localized UX, offline-first operation and optional cloud synchronization."
+tagline: "Adapting a mature desktop foundation for Brazilian churches."
+summary: "CultoOS adapts a mature desktop foundation for a context where simplicity, offline operation and reliability during live use take priority. My work sits across product, experience adaptation and close collaboration with engineering."
+year: 2026
+order: 7
+role: "Product / Technical Product · working closely with the Engineering Lead"
+stage: "MVP · First Release"
+stageNote: "Functional and installable product. Commercial rollout has not started yet."
+productType: Desktop MVP
+status: Active
+draft: false
+featured: true
+# cover: re-enable only with a real screenshot/image (public/projects/...)
+tags:
+  - Technical Product
+  - Desktop
+  - Electron
+  - Local-first
+  - Cloud Sync
+  - Localization
+demonstrates:
+  - Product Adaptation
+  - Technical Product
+  - Local-first
+  - UX Simplification
+technologies:
+  - Electron
+  - Svelte 3
+  - TypeScript
+  - Vite
+  - GitHub Actions
+metrics:
+  - value: "9 + media"
+    label: cloud-synced collections
+    state: verified
+  - value: "Offline-first"
+    label: local operation
+    state: verified
+  - value: Windows
+    label: automated release
+    state: verified
+snapshot:
+  primary:
+    - value: "MVP"
+      label: first installable release
+      state: verified
+    - value: "Offline-first"
+      label: local operation
+      state: verified
+    - value: "9 + media"
+      label: sync scope
+      state: verified
+    - value: "2"
+      label: PT-BR Bible translations offline
+      state: verified
+  secondary:
+    - value: "3"
+      label: test suites
+      state: verified
+    - value: Windows
+      label: automated release pipeline
+      state: verified
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: 'CultoOS | Technical Product & Product Adaptation Case Study | Lucas Sehnem'
+  description: 'A case study on adapting a desktop product for media operations in Brazilian churches, covering UX simplification, localization, local-first architecture and optional cloud synchronization.'
+---
+
+## The Operational Problem
+
+Running media during a church service is different from using presentation software in a typical setting. The person at the computer needs to switch content quickly, react to last-minute changes and keep working even when the internet connection drops.
+
+In many churches, this role falls to volunteers or people without a technical background. That changes the product priorities: the interface has to be understandable without training, the terminology has to feel familiar, and any visible failure during the service has a real cost.
+
+The needs that shaped the product decisions:
+
+- an interface that works for people without technical training
+- terminology that fits the church context
+- offline operation, with no dependency on a connection
+- fast actions for high-pressure moments
+- synchronization that does not create a dependency on the cloud
+
+## My Role
+
+My work on CultoOS sat between Product and Technical Product. I defined what adaptations were needed for the Brazilian context, worked on simplifying the experience, helped prioritize the MVP scope and translated those decisions into a viable implementation alongside engineering.
+
+That meant deciding which controls should be visible by default, how the product should behave without internet, which data needed to sync and which changes would actually move the needle for the operator.
+
+I worked directly with the Engineering Lead through definition, adaptation and delivery of the first release.
+
+## Adapt Instead of Rebuild
+
+Before any product decision, there was already a mature desktop foundation in place: a presentation engine, media support and an Electron structure that worked.
+
+Rebuilding that infrastructure from scratch would not have been the right use of effort. The real work was elsewhere: understanding what needed to change for the product to work for Brazilian churches, and then directing the effort toward those adaptations.
+
+The focus was on localization, experience simplification, offline operation, PT-BR Bibles, Brazilian scripture references and cloud synchronization. These are not just added features. They are decisions about what the product needs to be to make sense in this context.
+
+The value of CultoOS is not in reimplementing what already worked. It is in deciding what needed to change so the experience would work for the people using it.
+
+## Simplify Without Limiting
+
+During a service, visible complexity gets in the way. The operator needs to act fast, often under pressure, with no time to search through menus for options they will not use.
+
+The decision was to reduce what appears on screen by default without removing capability for those who need advanced controls. The product starts in a simpler experience, keeping advanced options out of the way. Anyone who needs them can turn them on.
+
+There is also a fast action built for high-pressure moments: clear the video output immediately and display the church identity on screen. Useful when the operator needs to stop a presentation safely, with no time to navigate through menus.
+
+## Localization as a Product Decision
+
+Localizing a product for a specific context is more than translating the interface. It means the product has to understand the situation it will be used in.
+
+- **PT-BR from the first run:** no language setup needed
+- **Church terminology:** Culto, Música, Retorno instead of generic labels
+- **2 PT-BR Bible translations available offline:** no downloading during the service
+- **Brazilian scripture references:** local normalization, not generic
+
+Each of these decisions was made thinking about the operator using the product, not the developer building it.
+
+## The cloud extends the product. Live operation does not depend on it.
+
+During a service, losing the connection cannot interrupt the presentation. So the data needed for live operation lives locally, and the cloud works as an extension of the product rather than a condition for it to run.
+
+Data stays on the device. Automatic sync only runs in a safe state, never during an active presentation. If the cloud service goes down, the product keeps working normally.
+
+<FlowDiagram
+  label="Optional synchronization between web panel and desktop"
+  steps={[
+    "Church Web Panel",
+    "Cloud API",
+    "Differential sync",
+    "CultoOS Desktop",
+    "Local data — 9 collections + media",
+    "Live presentation",
+  ]}
+/>
+
+Synchronization compares what changed rather than transferring everything again, across 9 collections plus media.
+
+<Callout variant="info">
+
+The local-first model adds synchronization complexity and requires care around conflicts and safe states. In return, the main operation no longer depends on internet availability.
+
+</Callout>
+
+## From Adaptation to First Release
+
+The first release was packaged for Windows, the platform chosen for the MVP.
+
+The build is automated via GitHub Actions and publishing starts from a tag. That made the release reproducible: any version can be generated predictably, without relying on manual steps.
+
+A first functional, installable release exists. Commit velocity is not business impact and we do not treat it as a metric.
+
+## Current Stage
+
+CultoOS has a first functional, installable release. The product is at the MVP stage and commercial rollout has not started.
+
+That means there are no numbers to show yet for customers, revenue, retention or recurring usage. Those metrics need to exist before they can be used as evidence of impact.
+
+## What I Want to Validate Next
+
+With a functional MVP in place, what needs to be validated now is whether this adaptation actually improves media operations for the churches we want to serve.
+
+The signals that will guide the next decisions:
+
+- active installations
+- churches using the product on a recurring basis
+- weekly usage frequency
+- services operated with the software
+- which features are used most
+- how often the simplified mode is kept on
+- whether cloud sync is used and how often
+- friction or errors during live operation
+- trial to payment conversion
+
+## What This Project Demonstrates
+
+<Callout variant="demonstrates" title="What this project demonstrates">
+
+- **Product Adaptation:** identifying what actually needs to change when a product is taken into a specific context.
+- **Technical Product:** turning requirements like offline-first and safe synchronization into concrete product and architecture decisions.
+- **UX Simplification:** reducing visible complexity without removing capability from advanced users.
+- **Local-first Product Thinking:** designing the main operation to keep working even without connectivity.
+- **Product × Engineering:** working closely with engineering to turn product decisions into a functional, installable MVP.
+
+</Callout>

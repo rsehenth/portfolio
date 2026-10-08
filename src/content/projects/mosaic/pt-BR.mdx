@@ -1,0 +1,251 @@
+---
+title: Mosaic
+locale: pt-BR
+subtitle: Product Prototyping · UX
+description: "MVP de link-in-bio que permite a criadores montar páginas pessoais com blocos arrastáveis, redimensionáveis e editáveis, sem escrever código."
+tagline: "Transformando uma lista de links em uma página pessoal modular."
+summary: "O Mosaic explora a hipótese de que uma página pessoal pode comunicar melhor o trabalho de um criador quando cada conteúdo pode receber peso, formato e posição diferentes. O MVP foi construído para tornar essa experiência testável antes de investir em contas, backend ou infraestrutura."
+year: 2025
+role: "Product Prototyping · UX Systems · Hands-on Development"
+stage: MVP funcional · Demo
+productType: Product Prototype
+focus: Product Prototyping · UX · Interaction Design
+status: Active
+draft: false
+featured: true
+# cover: re-enable only with a real screenshot/image (public/projects/mosaic-cover.jpg)
+tags:
+  - Product Thinking
+  - UX
+  - React
+  - Drag & Drop
+  - Prototyping
+demonstrates:
+  - Product Prototyping
+  - UX Systems
+  - Interaction Design
+  - MVP Scoping
+technologies:
+  - React 18
+  - Vite
+  - Tailwind CSS
+  - Framer Motion
+  - dnd-kit
+  - React Router
+metrics:
+  - value: "6"
+    label: Tipos de bloco
+    state: verified
+  - value: "5"
+    label: Tamanhos de layout
+    state: verified
+  - value: "2"
+    label: Temas
+    state: verified
+  - value: "Client-side"
+    label: MVP sem backend
+    state: verified
+snapshot:
+  primary:
+    - value: "6"
+      label: Tipos de bloco
+      state: verified
+    - value: "5"
+      label: Tamanhos de layout
+      state: verified
+    - value: "2"
+      label: Temas
+      state: verified
+    - value: "Client-side"
+      label: MVP sem backend
+      state: verified
+  secondary: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "Mosaic | Product Prototyping & UX Case | Lucas Sehnem"
+  description: "Case sobre um MVP de link-in-bio modular criado para testar uma experiência baseada em blocos, drag-and-drop e hierarquia visual antes de investir em backend e infraestrutura."
+order: 2
+---
+
+## A hipótese
+
+Grande parte das experiências de link-in-bio organiza conteúdo em uma sequência de itens visualmente parecidos. Isso funciona bem para listar destinos, mas oferece pouco espaço para criar hierarquia entre trabalhos, imagens, textos, redes sociais ou outros tipos de conteúdo.
+
+A hipótese do Mosaic é que o criador pode comunicar melhor o próprio trabalho quando cada conteúdo pode ter tamanho, posição e formato diferentes. Em vez de uma lista de links, uma composição pessoal.
+
+Essa hipótese ainda não foi validada com usuários em escala. O primeiro objetivo foi torná-la navegável.
+
+## Meu papel
+
+Meu trabalho no Mosaic ficou entre definição do produto, experiência e prototipação. O foco foi transformar a hipótese em uma interação funcional, decidir o que precisava entrar no MVP e, principalmente, o que ainda não precisava ser construído.
+
+Também trabalhei diretamente na implementação do editor, da grade e dos principais comportamentos de interação.
+
+## Da lista para uma página modular
+
+A diferença não está em ter mais features. Está em como o conteúdo é organizado e qual controle o criador tem sobre isso.
+
+<ComparisonBlock
+  titleA="Modelo mais linear"
+  titleB="Mosaic"
+  arrows={true}
+  label="Comparação entre modelo linear e Mosaic"
+  itemsA={[
+    "Links em sequência",
+    "Peso visual semelhante",
+    "Estrutura predominantemente vertical",
+    "Personalização limitada pela estrutura",
+  ]}
+  itemsB={[
+    "Blocos de formatos diferentes",
+    "Hierarquia visual por tamanho",
+    "Reorganização por arraste",
+    "Composição mais livre",
+  ]}
+/>
+
+"Um único link, diferentes formas de mostrar o trabalho."
+
+## Editar manipulando a própria página
+
+O editor foi construído ao redor de manipulação direta. O criador não preenche formulários em um painel separado: ele adiciona um bloco, escolhe o tipo, edita o conteúdo e reposiciona na grade. A página muda em tempo real, enquanto a edição acontece.
+
+<FlowDiagram
+  label="Fluxo do editor Mosaic"
+  steps={[
+    "Criador",
+    "Adiciona bloco",
+    "Escolhe tipo",
+    "Edita conteúdo",
+    "Redimensiona",
+    "Arrasta e reordena",
+    "Visualização final",
+  ]}
+/>
+
+O resultado é uma página com blocos organizados visualmente, sem nenhuma linha de código.
+
+O Mosaic suporta seis categorias de conteúdo, cada uma com comportamento e visualização próprios:
+
+<ComparisonBlock
+  titleA="Tipo"
+  titleB="Uso"
+  arrows={true}
+  label="Tipos de bloco do Mosaic"
+  itemsA={[
+    "Social",
+    "Link",
+    "Texto",
+    "Imagem",
+    "Mapa",
+    "Tópico",
+  ]}
+  itemsB={[
+    "Redes sociais e perfis",
+    "URLs externas com título",
+    "Parágrafos e bio",
+    "Fotos e portfolio visual",
+    "Localização incorporada",
+    "Listas e destaques",
+  ]}
+/>
+
+Cada bloco aceita cinco tamanhos: Small, Medium, Large, Wide e Tall. O criador decide quanto espaço cada conteúdo merece na grade, e essa escolha é o que cria hierarquia visual. Uma imagem grande ao lado de dois links compactos comunica algo diferente de uma lista com tudo do mesmo tamanho.
+
+## Testar a experiência antes de construir a infraestrutura
+
+O MVP não tem backend, autenticação, banco de dados ou sincronização entre dispositivos. Isso foi uma decisão de escopo, não uma limitação a resolver depois.
+
+A pergunta central era: a interação faz sentido? A grade comunica algo? Editar blocos parece natural para o criador? Essas perguntas podiam ser respondidas sem servidor.
+
+<ComparisonBlock
+  titleA="Com backend desde o início"
+  titleB="Com localStorage (decisão tomada)"
+  arrows={false}
+  label="Trade-off de escopo do MVP"
+  itemsA={[
+    "Autenticação",
+    "Banco de dados",
+    "Sincronização entre dispositivos",
+    "Infraestrutura de deploy",
+    "Ciclo de validação mais longo",
+  ]}
+  itemsB={[
+    "Dados no navegador",
+    "Zero infraestrutura de servidor",
+    "Demo funcional imediata",
+    "Foco total na interação",
+    "Ciclo de aprendizado mais curto",
+  ]}
+/>
+
+Essa escolha define o escopo do protótipo. Os dados permanecem no navegador e não sincronizam entre dispositivos. Esse custo foi aceito para manter o foco na experiência que queríamos testar.
+
+## Uma interface de manipulação direta
+
+A interação não é ornamento. Ela é a proposta de valor do editor.
+
+O criador enxerga a página enquanto edita, sem alternar entre uma interface de configuração e um preview separado. Os blocos podem ser arrastados para outra posição, redimensionados para dar mais ou menos destaque a um conteúdo, e editados diretamente no seu contexto visual. As mudanças são salvas no navegador sem nenhuma ação manual.
+
+A implementação utiliza dnd-kit para dar mais controle sobre o comportamento de arraste e posicionamento dos blocos dentro da grade.
+
+## Consistência entre editor e página
+
+Editor e resultado final precisam parecer partes do mesmo produto. Para isso, Mosaic usa um conjunto de tokens de cor semânticos e dois temas visuais, claro e escuro, controlados por CSS variables. Trocar de tema não reescreve componentes, substitui tokens.
+
+Isso garante que o que o criador vê enquanto edita corresponde ao que a página vai exibir.
+
+## Arquitetura
+
+Intencionalmente simples. O MVP não tem backend, então a arquitetura reflete isso.
+
+<ArchitectureDiagram
+  label="Arquitetura do Mosaic MVP"
+  steps={[
+    { label: "Usuário" },
+    { label: "React Application" },
+    { label: "Módulos", detail: "Landing · Profile Editor" },
+    { label: "Editor", detail: "Block Grid · Editor Panel · Edit Modal" },
+  ]}
+  servicesLabel="Persistência local"
+  services={[
+    "localStorage",
+  ]}
+/>
+
+A landing page e o editor evoluem de formas diferentes, então mantê-los como módulos separados reduz o acoplamento e facilita a evolução independente de cada parte.
+
+## Onde o MVP está hoje
+
+O Mosaic hoje é um MVP funcional voltado à experiência do editor. Ele permite criar, editar, redimensionar e reorganizar uma página no navegador, mas ainda não possui contas, sincronização entre dispositivos, pagamentos ou infraestrutura de publicação.
+
+Essas camadas ficaram fora do primeiro escopo porque não eram necessárias para tornar a hipótese de interação testável.
+
+Também ainda não existem dados suficientes para afirmar adoção, retenção ou impacto com usuários reais.
+
+## O que quero validar a seguir
+
+As perguntas que precisam de resposta antes de qualquer decisão sobre infraestrutura ou escala:
+
+- Quanto tempo leva para um criador montar uma página do zero?
+- Quantas pessoas completam o fluxo sem abandonar?
+- Onde ocorrem os abandonos?
+- Quais blocos são mais utilizados?
+- Os cinco tamanhos ajudam a criar hierarquia ou adicionam complexidade desnecessária?
+- Reorganizar os blocos parece intuitivo?
+- Como a manipulação direta se comporta em telas menores?
+- A pessoa consegue chegar a uma página que gostaria de compartilhar?
+- Ela retorna para editar novamente?
+
+## O que este projeto demonstra
+
+<Callout variant="demonstrates" title="O que este projeto demonstra">
+
+- **Product Prototyping:** transformar uma hipótese de experiência em um produto navegável antes de construir infraestrutura.
+- **MVP Scoping:** decidir deliberadamente o que não construir para aprender mais cedo sobre o que realmente importa.
+- **UX Systems:** projetar blocos, hierarquia, grade e edição como partes de um mesmo sistema coerente.
+- **Interaction Design:** usar manipulação direta, drag-and-drop, resize e feedback visual como parte central da proposta de valor.
+- **Product × Engineering:** traduzir decisões de produto em escolhas técnicas proporcionais ao estágio do MVP.
+
+</Callout>
