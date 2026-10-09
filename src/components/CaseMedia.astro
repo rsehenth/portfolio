@@ -12,6 +12,10 @@ interface Props {
 
 const { src, alt, width, height, kind = 'image', caption } = Astro.props;
 if (!alt.trim()) throw new Error('CaseMedia requires descriptive alt text.');
+if (!src.trim()) throw new Error('CaseMedia requires a media source.');
+if (!Number.isFinite(width) || width <= 0 || !Number.isFinite(height) || height <= 0) {
+  throw new Error('CaseMedia requires positive width and height.');
+}
 ---
 
 <figure class="not-prose my-8">
