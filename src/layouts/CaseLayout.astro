@@ -5,7 +5,8 @@ import CaseNavigation from '@/components/CaseNavigation.astro';
 import CaseSummary from '@/components/CaseSummary.astro';
 import StatusEvidence from '@/components/StatusEvidence.astro';
 import { ui, statusLabel, type Locale } from '@/i18n';
-import { caseUrl, projectsIndexUrl, verifiedOnly, type ProjectMetric } from '@/lib/projects';
+import { caseUrl, projectsIndexUrl, verifiedOnly } from '@/lib/projects';
+import type { ProjectMetric } from '@/content/config';
 
 interface Props {
   title: string;

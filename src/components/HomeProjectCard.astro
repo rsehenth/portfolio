@@ -16,7 +16,6 @@
  *
  * No "Demonstra" label. No tags list. No year/status in hero variant.
  */
-import type { AstroProps } from 'astro';
 import type { Locale } from '@/i18n';
 
 interface HomeHighlight {
@@ -32,7 +31,7 @@ interface HomeProjectData {
   focus: string[];
 }
 
-interface Props extends AstroProps {
+interface Props {
   /** Authoritative project title from MDX data.title */
   title: string;
   /** Localized case URL */
