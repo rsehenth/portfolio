@@ -1,30 +1,40 @@
 ---
 title: Super Squad AI
 locale: pt-BR
-subtitle: AI Product · Multi-Agent Systems
+subtitle: Produto de IA · Sistemas multiagente
 description: "Plataforma de orquestração de agentes de IA para desenvolvimento de software, com planejamento estruturado, execução isolada em Git, verificação determinística e controles de autonomia."
 tagline: "Autonomia para agentes de IA sem abrir mão do controle."
 summary: "Plataforma local de orquestração multiagente que transforma modelos de IA em uma squad coordenada de desenvolvimento, com planejamento, isolamento Git, verificação determinística, persistência de estado e recuperação de falhas."
 year: 2026
-role: needs_confirmation
+role: Criador · Technical Product + desenvolvimento
 stage: Funcional · Em desenvolvimento ativo
-productType: AI Product · Developer Tool
-focus: Agent Orchestration · Verification · Git Isolation · Reliability
+statusBadge: "Ferramenta de uso próprio"
+caseSummary:
+  problem: "Coordenar trabalho de agentes de IA sem perder controle sobre planejamento, isolamento e verificação."
+  role: "Construção e evolução de uma ferramenta local para o próprio fluxo de desenvolvimento."
+  result: "Ferramenta funcional com planejamento, worktrees Git e verificação em dois estágios."
+  keyDecision: "Tratar autonomia como política explícita e não como comportamento implícito do agente."
+statusEvidence:
+  stage: "Ferramenta de uso próprio, em desenvolvimento."
+  evidence: "Uso no fluxo de desenvolvimento para orquestrar planejamento, execução isolada e verificação."
+  nextValidation: "Amadurecer a operação antes de avaliar uma oferta comercial."
+productType: Produto de IA · Ferramenta de desenvolvimento
+focus: Orquestração de agentes · Verificação · Isolamento Git · Confiabilidade
 status: Active
 draft: false
 featured: true
 # cover: /projects/super-squad-ai-cover.jpg
 tags:
-  - AI Product
-  - Multi-Agent
+  - Produto de IA
+  - Multiagente
   - Python
   - Git
-  - Developer Tools
+  - Ferramentas de desenvolvimento
   - Technical Product
 demonstrates:
-  - AI Product
-  - Agent Orchestration
-  - Reliability
+  - Produto de IA
+  - Orquestração de agentes
+  - Confiabilidade
   - Technical Product
 technologies:
   - Python
@@ -77,7 +87,7 @@ productMetrics:
     label: taxa de falha de verificação
     state: needs_confirmation
 seo:
-  title: "Super Squad AI — AI Product & Technical Product Case | Lucas Sehnem"
+  title: "Super Squad AI | Orquestração de agentes | Lucas Sehnem"
   description: "Case sobre uma plataforma multiagente para desenvolvimento de software, explorando orquestração de agentes, Git isolation, verificação determinística, confiabilidade e controle de autonomia."
 order: 9
 ---
@@ -89,6 +99,12 @@ Coordenar uma IA é simples. Coordenar várias com segurança não é.
 Coding agents conseguem executar tarefas individualmente. Quando vários agentes trabalham sobre um mesmo repositório ao mesmo tempo, surgem outros problemas: conflitos entre mudanças, alterações fora do escopo de cada tarefa, perda de contexto entre agentes, estados incompatíveis, custo acumulado, falhas sem recuperação e uma dificuldade real de auditoria sobre o que cada agente fez.
 
 O desafio do Super Squad AI não é gerar código. É governar a execução de agentes sobre um repositório com regras determinísticas, fronteiras claras e verificação baseada em evidência, não em declaração.
+
+## Por que construí
+
+O Super Squad AI é uma ferramenta de uso próprio, em uso no meu fluxo de desenvolvimento. Foi criado para demonstrar uma arquitetura de orquestração e ampliar minha capacidade de execução por meio de agentes especializados.
+
+Quando estiver madura, a ferramenta poderá ser avaliada como uma oferta comercial. Hoje, o foco é aprender com o uso próprio e evoluir seus controles.
 
 ## A IA propõe. O sistema verifica.
 
@@ -345,7 +361,7 @@ A decisão foi two-stage verification com estágios independentes. O trade-off �
     { label: "Leader", detail: "Planejamento · Decomposição · Task DAG" },
     { label: "Scheduler", detail: "Seleção por capability · ContextPack" },
     { label: "Worker", detail: "Execução · Ferramentas restritas · Git Worktree" },
-    { label: "Verification", detail: "Tarefa (isolada) · Run (integrada)" },
+    { label: "Verificação", detail: "Tarefa (isolada) · Run (integrada)" },
     { label: "State Persistence", detail: "SQLite · Evidências · Histórico de runs" },
   ]}
   servicesLabel="Tudo local. Sem backend externo, sem banco de dados remoto, sem serviço de orquestração externo."
@@ -369,7 +385,7 @@ O Super Squad AI é um produto funcional em evolução ativa. O que existe hoje:
 - recuperação de runs interrompidas
 - testes automatizados cobrindo os contratos principais
 
-Não há usuários externos, empresas, receita ou métricas de produtividade confirmadas. Esses dados não existem e não são afirmados aqui.
+O estágio atual é de ferramenta de uso próprio. As próximas validações concentram-se em amadurecer o fluxo antes de qualquer avaliação de uso externo ou oferta comercial.
 
 O projeto também serviu como ambiente para experimentação com desenvolvimento assistido por múltiplos agentes, com revisão e validação humana ao longo do processo.
 
@@ -377,13 +393,13 @@ O projeto também serviu como ambiente para experimentação com desenvolvimento
 
 <Callout variant="demonstrates" title="O que este projeto demonstra">
 
-- **AI Product:** orquestração de agentes com controles de produto reais, não só chamadas de API
+- **Produto de IA:** orquestração de agentes com controles de produto reais, não só chamadas de API
 - **Technical Product:** decisões arquiteturais com trade-offs explícitos e verificáveis
-- **Multi-Agent Architecture:** planejamento, capabilities, isolamento e integração coordenada
-- **AI Reliability:** verificação determinística, dois estágios, evidência antes de estado
-- **Developer Experience:** CLI local, persistência, recuperação e auditabilidade
-- **System Design:** separação entre o que a IA propõe e o que o sistema valida
-- **Security Thinking:** políticas de ferramentas, filtragem de segredos e validação adversarial
-- **Hands-on Execution:** do problema ao sistema funcional com arquitetura deliberada
+- **Arquitetura multiagente:** planejamento, capacidades, isolamento e integração coordenada
+- **Confiabilidade em IA:** verificação determinística, dois estágios, evidência antes de estado
+- **Experiência do desenvolvedor:** CLI local, persistência, recuperação e auditabilidade
+- **Design de sistemas:** separação entre o que a IA propõe e o que o sistema valida
+- **Segurança:** políticas de ferramentas, filtragem de segredos e validação adversarial
+- **Execução prática:** do problema ao sistema funcional com arquitetura deliberada
 
 </Callout>

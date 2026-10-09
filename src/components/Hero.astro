@@ -1,10 +1,9 @@
 ---
 // Hero.astro - Hero section for homepage
-import type { AstroProps } from 'astro';
 import { profile, ctaButtons } from '@/data/profile';
 import { ui, type Locale, t } from '@/i18n';
 
-interface Props extends AstroProps {
+interface Props {
   class?: string;
   locale?: Locale;
 }
@@ -39,7 +38,7 @@ const hero = ui[locale].hero;
       <!-- CTAs -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 hero-slide-up" style="animation-delay: 500ms; opacity: 0;">
         <a
-          href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+          href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
           class="btn-primary w-full sm:w-auto"
         >
           {hero.ctaPrimary}
@@ -59,7 +58,7 @@ const hero = ui[locale].hero;
           {hero.ctaSecondary}
         </a>
         <a
-          href={locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas.cven.pdf'}
+          href={locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas-cven.pdf'}
           download
           aria-label={hero.ctaCVAriaLabel}
           class="inline-flex items-center justify-center gap-2 px-4 py-2 text-body-sm font-medium text-muted-foreground border border-border rounded-lg hover:text-foreground hover:border-foreground/40 transition-colors duration-fast w-full sm:w-auto"
@@ -71,10 +70,19 @@ const hero = ui[locale].hero;
         </a>
       </div>
 
+      <ul class="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-3 text-left sm:grid-cols-4" role="list" aria-label={locale === 'pt-BR' ? 'Evidências de experiência' : 'Experience evidence'}>
+        {(locale === 'pt-BR'
+          ? ['1.200+ professores cadastrados', 'Piloto em 3 escolas · 20+ professores', '100+ respostas de survey', 'PT · EN · ES']
+          : ['1,200+ registered teachers', 'Pilot in 3 schools · 20+ teachers', '100+ survey responses', 'PT · EN · ES']
+        ).map((item) => (
+          <li class="rounded-xl border border-border bg-muted/50 px-3 py-3 text-caption font-medium leading-snug text-foreground">{item}</li>
+        ))}
+      </ul>
+
       <!-- Scroll indicator -->
       <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hero-slide-up hero-bounce-arrow" style="animation-delay: 700ms; opacity: 0;" aria-hidden="true">
-        <svg class="w-6 h-6 text-muted-foreground/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        <svg class="w-10 h-10 text-muted-foreground/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </div>
     </div>

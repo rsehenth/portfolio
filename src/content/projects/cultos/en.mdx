@@ -10,10 +10,22 @@ order: 7
 role: "Product / Technical Product · working closely with the Engineering Lead"
 stage: "MVP · First Release"
 stageNote: "Functional and installable product. Commercial rollout has not started yet."
+statusBadge: "In development"
+caseSummary:
+  problem: "Adapt desktop media operations for Brazilian churches, with simplicity and continuity during services."
+  role: "Product definition, backlog, roadmap and collaboration with the Engineering Lead."
+  result: "A first functional, installable Windows release."
+  keyDecision: "Adapt a mature foundation and focus effort on the Brazilian operating context."
+statusEvidence:
+  stage: "MVP, in development."
+  evidence: "There is a first functional, installable release based on FreeShow and adapted to the context described in this case."
+  nextValidation: "Validate operation with churches before the next product stage."
 productType: Desktop MVP
+openSourceUrl: https://github.com/ChurchApps/FreeShow
+openSourceLabel: FreeShow (GPL-3.0)
 status: Active
 draft: false
-featured: false
+featured: true
 # cover: re-enable only with a real screenshot/image (public/projects/...)
 tags:
   - Technical Product
@@ -95,13 +107,22 @@ I worked directly with the Engineering Lead through definition, adaptation and d
 
 ## Adapt Instead of Rebuild
 
-Before any product decision, there was already a mature desktop foundation in place: a presentation engine, media support and an Electron structure that worked.
+Before any product decision, there was already a mature desktop foundation: [FreeShow](https://github.com/ChurchApps/FreeShow), free software under GPL-3.0, with a working presentation engine, media support and Electron structure.
 
 Rebuilding that infrastructure from scratch would not have been the right use of effort. The real work was elsewhere: understanding what needed to change for the product to work for Brazilian churches, and then directing the effort toward those adaptations.
 
 The focus was on localization, experience simplification, offline operation, PT-BR Bibles, Brazilian scripture references and cloud synchronization. These are not just added features. They are decisions about what the product needs to be to make sense in this context.
 
 The value of CultoOS is not in reimplementing what already worked. It is in deciding what needed to change so the experience would work for the people using it.
+
+## What came from the foundation / What is CultoOS
+
+- **From FreeShow:** the presentation engine, media support and Electron structure.
+- **From CultoOS:** PT-BR localization, church terminology, offline PT-BR Bibles, UX simplification, a quick action to clear the output, cloud synchronization and automated releases.
+
+## License and credits
+
+CultoOS uses FreeShow as its foundation, under GPL-3.0. The project recognizes and credits its original authors.
 
 ## Simplify Without Limiting
 
@@ -154,15 +175,13 @@ The first release was packaged for Windows, the platform chosen for the MVP.
 
 The build is automated via GitHub Actions and publishing starts from a tag. That made the release reproducible: any version can be generated predictably, without relying on manual steps.
 
-A first functional, installable release exists. Commit velocity is not business impact and we do not treat it as a metric.
+A first functional, installable release exists.
 
 ## Current Stage
 
 CultoOS has a first functional, installable release. The product is at the MVP stage and commercial rollout has not started.
 
-That means there are no numbers to show yet for customers, revenue, retention or recurring usage. Those metrics need to exist before they can be used as evidence of impact.
-
-## What I Want to Validate Next
+## Next Validations
 
 With a functional MVP in place, what needs to be validated now is whether this adaptation actually improves media operations for the churches we want to serve.
 

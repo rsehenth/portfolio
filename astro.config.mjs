@@ -6,8 +6,10 @@ import sitemap from '@astrojs/sitemap';
 // Import component registry
 import mdxComponents from './src/components/index.js';
 
+const site = process.env.PUBLIC_SITE_URL || 'https://lsehnemportfolio.pages.dev';
+
 export default defineConfig({
-  site: 'https://lucassehnem.com',
+  site,
   integrations: [
     mdx({
       components: mdxComponents,

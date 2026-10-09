@@ -325,11 +325,11 @@ export const profile = {
   tagline: 'I build products at the intersection of AI, Product & Engineering.',
   subheadline: 'Technical Product Manager focused on turning complex problems into simple, scalable products.',
   description: `Longer bio...`,
-  email: 'lucas@sehnem.com',
+  email: 'lucas.sehnemb@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sehenth/',
   github: 'https://github.com/lucassehnem',
   twitter: 'https://x.com/lucassehnem',
-  location: 'São Paulo, Brazil',
+  location: 'Santiago, RS, Brazil',
   avatar: '/avatar.jpg',
   ogImage: '/og-image.jpg',
 };
@@ -354,7 +354,7 @@ export const navigation = [
 export const footerLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sehenth/', external: true },
   { label: 'GitHub', href: 'https://github.com/lucassehnem', external: true },
-  { label: 'Email', href: 'mailto:lucas@sehnem.com', external: true },
+  { label: 'Email', href: 'mailto:lucas.sehnemb@gmail.com', external: true },
 ];
 ```
 
@@ -545,4 +545,4 @@ MIT — Feel free to use as a template for your own portfolio.
 
 ## 🙋 Questions?
 
-Open an issue or reach out via [LinkedIn](https://www.linkedin.com/in/sehenth/) or [Email](mailto:lucas@sehnem.com).
+Open an issue or reach out via [LinkedIn](https://www.linkedin.com/in/sehenth/) or [Email](mailto:lucas.sehnemb@gmail.com).

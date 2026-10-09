@@ -16,7 +16,6 @@
  *
  * No "Demonstra" label. No tags list. No year/status in hero variant.
  */
-import type { AstroProps } from 'astro';
 import type { Locale } from '@/i18n';
 
 interface HomeHighlight {
@@ -26,12 +25,13 @@ interface HomeHighlight {
 
 interface HomeProjectData {
   category: string;
+  statusBadge?: string;
   description: string;
-  highlights: HomeHighlight[];
-  focus: string[];
+  highlights: readonly HomeHighlight[];
+  focus: readonly string[];
 }
 
-interface Props extends AstroProps {
+interface Props {
   /** Authoritative project title from MDX data.title */
   title: string;
   /** Localized case URL */
@@ -53,6 +53,7 @@ const {
   homeData,
   viewCaseLabel,
   variant = 'default',
+  locale = 'pt-BR',
   revealDelay = 0,
 } = Astro.props;
 
@@ -68,9 +69,10 @@ const isHero = variant === 'hero';
   <div class={`flex flex-col flex-1 ${isHero ? 'p-7 lg:p-8' : 'p-6'}`}>
 
     <!-- Category chip -->
-    <p class="text-caption font-medium text-muted-foreground mb-3">
-      {homeData.category}
-    </p>
+    <div class="mb-3 flex flex-wrap items-center gap-2">
+      <p class="text-caption font-medium text-muted-foreground">{homeData.category}</p>
+      {homeData.statusBadge && <span class="tag">{homeData.statusBadge}</span>}
+    </div>
 
     <!-- Title -->
     <h3
@@ -87,7 +89,7 @@ const isHero = variant === 'hero';
 
     <!-- Focus chips (max 3, no label) -->
     {homeData.focus.length > 0 && (
-      <div class="flex flex-wrap gap-2 mb-5" aria-label="Focus areas">
+      <div class="flex flex-wrap gap-2 mb-5" aria-label={locale === 'pt-BR' ? 'Áreas de atuação' : 'Focus areas'}>
         {homeData.focus.slice(0, 3).map((item) => (
           <span class="inline-flex items-center px-2.5 py-1 text-caption font-medium rounded-md bg-accent/8 text-accent border border-accent/20">
             {item}

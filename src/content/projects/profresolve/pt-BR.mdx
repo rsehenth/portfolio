@@ -6,10 +6,19 @@ description: "Plataforma que transforma necessidades pedagógicas em materiais e
 tagline: "Construindo um produto de IA confiável para educadores."
 summary: "SaaS de IA para educadores que transforma tarefas recorrentes da rotina docente em materiais estruturados, editáveis e prontos para distribuição. O produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente."
 year: 2026
-role: Technical Product / Product + Hands-on Development
+role: Technical Product / Product + Desenvolvimento prático
 productType: SaaS · IA · Educação
-focus: Confiabilidade de IA · Economia de Produto · APIs · Pagamentos
+focus: Confiabilidade de IA · Economia de produto · APIs · Pagamentos
 stage: "Produto ativo · Em evolução"
+statusBadge: "Ativo"
+caseSummary:
+  problem: "Reduzir o trabalho repetitivo de preparar materiais pedagógicos sem tirar o controle do professor."
+  role: "Cofundador e responsável por discovery, produto, monetização e implementação técnica."
+  result: "SaaS público com mais de 1.200 professores cadastrados organicamente."
+  keyDecision: "Tratar confiabilidade e custo de IA como decisões de produto."
+statusEvidence:
+  stage: "Produto ativo, em evolução."
+  evidence: "O produto está público, ultrapassou 1.200 professores cadastrados organicamente e recebeu respostas de mais de 100 professores em um survey público."
 status: Active
 draft: false
 featured: true
@@ -18,16 +27,16 @@ externalUrlLabel: "Acessar ProfResolve ↗"
 snapshotMode: "product-technical"
 # cover: re-enable only with a real screenshot/image (public/projects/...)
 tags:
-  - AI Product
+  - Produto de IA
   - SaaS
   - APIs
-  - Payments
-  - Reliability
+  - Pagamentos
+  - Confiabilidade
 demonstrates:
-  - AI Product
-  - Reliability
-  - Product Economics
-  - Hands-on Execution
+  - Produto de IA
+  - Confiabilidade
+  - Economia de produto
+  - Execução na prática
 technologies:
   - TypeScript
   - Next.js
@@ -38,9 +47,8 @@ technologies:
   - DeepSeek
   - Asaas
   - Resend
-  - Sentry
 metrics:
-  - value: "1.2K+"
+  - value: "1.200+"
     label: Usuários cadastrados
     state: verified
   - value: "16"
@@ -51,7 +59,7 @@ metrics:
     state: verified
 snapshot:
   primary:
-    - value: "1.2K+"
+    - value: "1.200+"
       label: Usuários cadastrados
       state: verified
     - value: "16"
@@ -90,11 +98,11 @@ scaleMetrics:
     label: Tabelas de banco de dados
     state: verified
 productMetrics:
-  - value: "1.2K+"
+  - value: "1.200+"
     label: Usuários cadastrados
     state: verified
 seo:
-  title: "ProfResolve · AI Product & Technical Product Case | Lucas Sehnem"
+  title: "ProfResolve | Produto de IA e Technical Product | Lucas Sehnem"
   description: "Case do ProfResolve cobrindo discovery com mais de 100 professores, estratégia de produto, arquitetura de IA, monetização e operação de um SaaS educacional em produção."
 order: 10
 ---
@@ -103,41 +111,47 @@ order: 10
 
 O ProfResolve está disponível publicamente em profresolve.com.br e já ultrapassou 1.200 usuários cadastrados organicamente. A plataforma tem uso recorrente enquanto continua evoluindo com base no comportamento real dos professores que a utilizam.
 
-Com o produto em uso, as decisões deixam de depender só de hipótese. Passamos a observar quais fluxos os professores realmente utilizam, onde encontram dificuldade e quais recursos voltam a usar.
+Com o produto em uso, as decisões deixam de depender apenas de hipóteses. Passamos a observar quais fluxos os professores realmente usam, onde encontram dificuldades e a quais recursos retornam.
 
 ## O problema
 
 Professores produzem continuamente planos de aula, avaliações, atividades e adaptações. O ProfResolve nasceu para reduzir parte desse trabalho repetitivo, transformando uma necessidade pedagógica em material estruturado, editável e pronto para uso.
 
-Hoje essa hipótese existe além de um protótipo: o produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente.
+Hoje, a ideia já foi além do protótipo: o produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente.
 
-## Discovery: como validei o problema
+## Validação com professores
 
-Antes de construir, foi preciso entender se o problema era real e quais aspectos mereciam mais atenção.
+Antes de validar o MVP para venda, a plataforma foi testada em três escolas de Santiago (RS), com mais de 20 professores. O feedback recebido orientou ajustes até a primeira versão final.
 
-### Método
+<FlowDiagram
+  label="Validação e aquisição do ProfResolve"
+  steps={[
+    'Piloto em 3 escolas de Santiago (RS)',
+    '20+ professores testaram a plataforma',
+    'Feedback recebido e ajustes no produto',
+    'Primeira versão final',
+    'Survey público dentro do dashboard',
+    '100+ respostas orgânicas de professores',
+  ]}
+/>
 
-O processo começou com um survey aberto publicado no próprio site do produto. Mais de 100 professores responderam. Além do survey, professores enviaram feedback, sugestões e pedidos de melhoria ao longo do desenvolvimento, criando um canal contínuo de sinais além do momento inicial de pesquisa.
+Depois, o dashboard passou a oferecer um survey público de seis perguntas: quatro de múltipla escolha e duas abertas, incluindo familiaridade com IA e o que os professores gostariam que o ProfResolve tivesse. Mais de 100 professores responderam organicamente. As respostas eram enviadas por e-mail via Resend ao contato da plataforma.
 
-{/* PREENCHER: perguntas principais do survey — omitido até dados disponíveis */}
+{/* TODO [CONFIRMAR]: ao concluir o survey, as respostas eram enviadas por e-mail formatado pela API Resend ao contato da plataforma e o professor recebia 300 créditos de agradecimento. */}
 
-### O que os sinais ajudaram a orientar
+{/* TODO: acrescentar “O que aprendemos com os professores” quando os principais achados do survey e as mudanças resultantes estiverem disponíveis. */}
 
-O volume de respostas e a consistência de certos temas no feedback ajudaram a orientar prioridades iniciais de produto — quais tipos de material tinham mais demanda, onde estava a maior dificuldade na rotina docente e quais funcionalidades eram mencionadas com mais frequência.
+## Modelo de receita
 
-{/* PREENCHER: achados específicos com dados reais — omitido até dados disponíveis */}
+O ProfResolve combina assinaturas mensais e anuais com pacotes avulsos de créditos para quem prefere usar a plataforma sob demanda.
 
-{/* PREENCHER: exemplos Feedback → Decisão com dados reais — omitido até dados disponíveis */}
-
-{/* PREENCHER: citação real de professor, se disponível — seção a ser adicionada quando houver */}
-
-{/* PREENCHER: canais de aquisição iniciais — omitido até dados disponíveis */}
+{/* TODO [CONFIRMAR]: Google Analytics, Cloudflare Analytics, Microsoft Clarity e Sentry foram usados para acompanhar comportamento, tráfego e erros. */}
 
 ## Da hipótese ao produto em uso
 
 O projeto começou com uma hipótese simples: IA poderia reduzir parte do trabalho repetitivo de preparação de materiais sem tirar do professor o controle sobre o resultado.
 
-A plataforma evoluiu dessa hipótese para um produto com múltiplos geradores de conteúdo, edição, exportação, créditos, pagamentos, jogos educacionais e mecanismos de confiabilidade para operações com LLMs.
+A partir dessa hipótese, a plataforma evoluiu para um produto com múltiplos geradores de conteúdo, edição, exportação, créditos, pagamentos, jogos educacionais e mecanismos de confiabilidade para operações com LLMs.
 
 Com mais de 1.200 usuários cadastrados e uso recorrente da plataforma, a próxima etapa não é só construir mais funcionalidades. É entender comportamento, frequência de uso, retenção e quais fluxos entregam mais valor.
 
@@ -152,19 +166,19 @@ Na prática, isso significa trabalhar com funcionalidades, fluxos de geração, 
   blocks={[
     {
       title: 'Produto',
-      items: ['Discovery', 'Prioritização', 'Escopo', 'Monetização', 'Experiência', 'Métricas'],
+      items: ['Discovery', 'Priorização', 'Escopo', 'Monetização', 'Experiência', 'Métricas'],
     },
     {
-      title: 'AI Product',
-      items: ['Model routing', 'Prompt architecture', 'AI reliability', 'Fallback strategy', 'Cost awareness', 'Failure handling'],
+      title: 'Produto de IA',
+      items: ['Roteamento de modelos', 'Arquitetura de prompts', 'Confiabilidade da IA', 'Estratégia de fallback', 'Atenção a custos', 'Tratamento de falhas'],
     },
     {
       title: 'Technical Product',
-      items: ['APIs', 'Architecture', 'Credits', 'Payments', 'Storage', 'Observability', 'Security', 'Trade-offs'],
+      items: ['APIs', 'Arquitetura', 'Créditos', 'Pagamentos', 'Armazenamento', 'Observabilidade', 'Segurança', 'Trade-offs'],
     },
     {
-      title: 'Hands-on Execution',
-      items: ['Implementation', 'Prototyping', 'Testing', 'Debugging', 'Iteration'],
+      title: 'Execução prática',
+      items: ['Implementação', 'Prototipação', 'Testes', 'Depuração', 'Iteração'],
     },
   ]}
 />
@@ -213,7 +227,7 @@ Validação, débito de créditos, montagem de prompt e contexto, roteamento de 
 
 ## IA falha. O produto não pode falhar junto.
 
-Uma falha do provedor não poderia consumir os créditos do professor e encerrar a tarefa. Por isso, o fluxo trata falha como parte esperada da operação.
+Uma falha do provedor não deve consumir os créditos do professor nem encerrar a tarefa. Por isso, o fluxo trata a falha como parte esperada da operação.
 
 Confiabilidade foi tratada como requisito de produto, não como detalhe de implementação. Em nível conceitual, a estratégia inclui:
 
@@ -225,7 +239,7 @@ Confiabilidade foi tratada como requisito de produto, não como detalhe de imple
 - **Reembolso automático de créditos:** uma falha não custa crédito ao professor
 - **Kill switch e recuperação:** parada e retomada em nível operacional
 
-Estes mecanismos são descritos de forma conceitual intencionalmente. Parâmetros, limiares e configurações internas são parte da implementação e não são publicados. Nenhuma taxa de sucesso é afirmada aqui sem dado real para sustentá-la.
+Parâmetros, limiares e configurações internas permanecem na implementação; os mecanismos acima descrevem a estratégia em nível conceitual.
 
 ## Quando o custo de IA vira decisão de produto
 
@@ -243,7 +257,7 @@ O ProfResolve usa **créditos** como unidade de consumo. Cada tipo de geração 
 
 Os créditos são a interface entre custo computacional, valor percebido pelo professor e monetização. Quando o custo de um modelo muda, isso afeta diretamente o preço de uma geração e o comportamento esperado do usuário.
 
-Uma alteração documentada reclassificou um gerador de **100 créditos para 300 créditos**, junto com mudança na estratégia e no modelo utilizados. O objetivo é manter o custo de IA visível e administrável dentro do próprio produto.
+O custo de cada gerador precisa acompanhar a estratégia e o modelo utilizados para manter o consumo de IA visível e administrável dentro do produto.
 
 ## Nem toda evolução técnica deve permanecer no produto
 
@@ -276,7 +290,7 @@ O rollback foi tratado como parte normal do desenvolvimento. O que importa é qu
   ]}
 />
 
-O resultado final é descrito de forma qualitativa com base na documentação do projeto. Nenhuma porcentagem é afirmada aqui.
+Essa troca permitiu priorizar a experiência do professor e a qualidade do resultado.
 
 ## Arquitetura
 
@@ -297,7 +311,6 @@ Representação conceitual da arquitetura do produto, sem endpoints internos, sc
     'Gemini / DeepSeek',
     'Asaas',
     'Resend',
-    'Sentry',
   ]}
 />
 
@@ -305,16 +318,16 @@ Representação conceitual da arquitetura do produto, sem endpoints internos, sc
 
 Cobertura de testes e disciplina de engenharia fazem parte da experiência do produto, porque uma falha de geração atinge diretamente o professor.
 
-- **2.4K+ test cases**
+  - **2,4 mil+ casos de teste**
 - **277 arquivos de teste**
-- **Property-based testing**
+  - **Testes baseados em propriedades**
 - **Testes de regressão e caracterização**
 - **TypeScript estrito**
 - **Logging estruturado**
 - **Observabilidade**
 - **Créditos e pagamentos idempotentes**
 
-Esses números descrevem escala e disciplina técnica. Não substituem métricas de impacto do produto.
+Esses números mostram escala e disciplina técnica. Eles não substituem métricas de impacto do produto.
 
 ## Produto e escala técnica
 
@@ -323,8 +336,8 @@ Esses números descrevem escala e disciplina técnica. Não substituem métricas
 <StatsGrid
   label="Sinais de produto"
   stats={[
-    { value: '1.2K+', label: 'Usuários cadastrados' },
-    { value: 'Live', label: 'Produto público' },
+    { value: '1.200+', label: 'Usuários cadastrados' },
+    { value: 'Público', label: 'Produto público' },
     { value: 'Recorrente', label: 'Plataforma em uso' },
   ]}
 />
@@ -335,10 +348,8 @@ Esses números descrevem escala e disciplina técnica. Não substituem métricas
   label="Escala técnica"
   stats={[
     { value: '16', label: 'Geradores' },
-    { value: '94', label: 'API handlers' },
+    { value: '94', label: 'Rotas de API' },
     { value: '8', label: 'Integrações' },
-    { value: '2.4K+', label: 'Test cases' },
+    { value: '2,4 mil+', label: 'Casos de teste' },
   ]}
 />
-
-Já podemos medir estas metricas.

@@ -1,12 +1,14 @@
 ---
 // CaseLayout.astro - Layout for individual case study pages
-import type { AstroProps } from 'astro';
 import BaseLayout from './BaseLayout.astro';
 import CaseNavigation from '@/components/CaseNavigation.astro';
+import CaseSummary from '@/components/CaseSummary.astro';
+import StatusEvidence from '@/components/StatusEvidence.astro';
 import { ui, statusLabel, type Locale } from '@/i18n';
-import { caseUrl, projectsIndexUrl, verifiedOnly, type ProjectMetric } from '@/lib/projects';
+import { caseUrl, projectsIndexUrl, verifiedOnly } from '@/lib/projects';
+import type { ProjectMetric } from '@/content/config';
 
-interface Props extends AstroProps {
+interface Props {
   title: string;
   /** Case hero headline (localized in the content file) */
   tagline?: string;
@@ -24,8 +26,12 @@ interface Props extends AstroProps {
   stage?: string;
   /** Optional note rendered under the stage */
   stageNote?: string;
+  caseSummary?: { problem: string; role: string; result: string; keyDecision: string };
+  statusEvidence?: { stage: string; evidence: string; nextValidation?: string };
+  statusBadge?: string;
   /** Upstream/open-source attribution link for the "Base" row */
   openSourceUrl?: string;
+  openSourceLabel?: string;
   status: string;
   tags: string[];
   technologies: string[];
@@ -63,7 +69,11 @@ const {
   focus,
   stage,
   stageNote,
+  caseSummary,
+  statusEvidence,
+  statusBadge,
   openSourceUrl,
+  openSourceLabel,
   status,
   tags = [],
   technologies = [],
@@ -155,12 +165,12 @@ const hasResults = scale.length > 0 || productImpact.length > 0;
           <dt class="text-caption font-semibold uppercase tracking-wider text-muted-foreground">
             {stage ? caseStudy.stage : caseStudy.status}
           </dt>
-          <dd class="mt-1 text-body-md text-foreground">{stage ?? statusLabel(locale, status)}</dd>
+          <dd class="mt-1 text-body-md text-foreground">{statusBadge ?? stage ?? statusLabel(locale, status)}</dd>
           {stageNote && (
             <dd class="mt-1 text-body-sm text-muted-foreground">{stageNote}</dd>
           )}
         </div>
-        {productType && !openSourceUrl && (
+        {productType && (
           <div>
             <dt class="text-caption font-semibold uppercase tracking-wider text-muted-foreground">{caseStudy.product}</dt>
             <dd class="mt-1 text-body-md text-foreground">{productType}</dd>
@@ -176,7 +186,7 @@ const hasResults = scale.length > 0 || productImpact.length > 0;
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {productType ?? openSourceUrl}
+                {openSourceLabel ?? openSourceUrl}
               </a>
             </dd>
           </div>
@@ -197,6 +207,9 @@ const hasResults = scale.length > 0 || productImpact.length > 0;
         </ul>
       )}
     </header>
+
+    {caseSummary && <CaseSummary locale={locale} {...caseSummary} />}
+    {statusEvidence && <StatusEvidence locale={locale} {...statusEvidence} />}
 
     <!-- Technical scope snapshot (verified numbers only) -->
     {(snapshotPrimary.length > 0 || snapshotSecondary.length > 0) && (

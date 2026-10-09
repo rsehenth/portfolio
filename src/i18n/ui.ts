@@ -30,9 +30,9 @@ export const ui = {
 
     // Hero
     hero: {
-      badge: 'Technical Product Manager · AI Products · Product × Engineering',
-      tagline: 'Construo produtos na interseção entre IA, Produto e Engenharia.',
-      subheadline: 'Conecto estratégia de produto, decisões técnicas e execução hands-on para transformar problemas complexos em produtos simples, confiáveis e escaláveis.',
+      badge: 'Technical Product Manager · AI Products',
+      tagline: 'Descubro o problema, decido o que construir e implemento.',
+      subheadline: 'Cofundador do ProfResolve, SaaS de IA com mais de 1.200 professores cadastrados. Antes, 5+ anos em suporte, localização e comunidade no ecossistema Web3, em português, inglês e espanhol.',
       ctaPrimary: 'Ver cases',
       ctaSecondary: 'LinkedIn',
       ctaCV: 'Baixar CV (PDF)',
@@ -57,40 +57,44 @@ export const ui = {
       viewAll: 'Ver todos os projetos →',
       projects: {
         profresolve: {
-          category: 'AI Product · SaaS',
+          category: 'Produto de IA · SaaS',
+          statusBadge: 'Ativo',
           description: 'Plataforma de IA para a rotina docente, com geração de materiais, monetização por créditos e arquitetura de resiliência para LLMs.',
           highlights: [
             { value: '16', label: 'Geradores' },
-            { value: '2.4K+', label: 'Test cases' },
+            { value: '2.4K+', label: 'Casos de teste' },
           ],
-          focus: ['AI Product', 'Reliability', 'Product Economics'],
+          focus: ['Produto de IA', 'Confiabilidade', 'Economia de produto'],
         },
         'super-squad-ai': {
-          category: 'AI Product · Developer Tools',
+          category: 'Produto de IA · Ferramentas de desenvolvimento',
+          statusBadge: 'Ferramenta de uso próprio',
           description: 'Orquestrador multiagente para desenvolvimento de software, com execução isolada em Git e verificação determinística antes da integração.',
           highlights: [
-            { value: '1 + N', label: 'Agent architecture' },
-            { value: '2-stage', label: 'Verification' },
+            { value: '1 + N', label: 'Arquitetura de agentes' },
+            { value: '2 estágios', label: 'Verificação' },
           ],
-          focus: ['Agent Orchestration', 'Reliability', 'Technical Product'],
+          focus: ['Orquestração de agentes', 'Confiabilidade', 'Technical Product'],
         },
         'project-aurora': {
-          category: 'Product Leadership · Game Systems',
+          category: 'Liderança de produto · Sistemas de jogo',
+          statusBadge: 'Em desenvolvimento',
           description: "Beat 'em up 2D em produção no qual lidero visão de produto, sistemas, progressão e priorização em uma equipe de três pessoas.",
           highlights: [
             { value: '3', label: 'Pessoas na equipe' },
-            { value: 'Post-PoC', label: 'Early Production' },
+            { value: 'Pós-PoC', label: 'Produção inicial' },
           ],
-          focus: ['Product Leadership', 'Game Systems', 'MVP Scoping'],
+          focus: ['Liderança de produto', 'Sistemas de jogo', 'Escopo de MVP'],
         },
         cultos: {
-          category: 'Technical Product · Church Tech',
+          category: 'Technical Product · Tecnologia para igrejas',
+          statusBadge: 'Em desenvolvimento',
           description: 'MVP desktop adaptado para a operação de mídia em igrejas brasileiras, com experiência PT-BR, funcionamento offline e sincronização opcional com a nuvem.',
           highlights: [
             { value: '9 + mídia', label: 'Coleções sincronizadas' },
-            { value: 'Offline-first', label: 'Desktop product' },
+            { value: 'Offline-first', label: 'Produto desktop' },
           ],
-          focus: ['Product Adaptation', 'Technical Product', 'UX Simplification'],
+          focus: ['Adaptação de produto', 'Technical Product', 'Simplificação de UX'],
         },
       },
     },
@@ -102,81 +106,81 @@ export const ui = {
       featured: ['profresolve', 'super-squad-ai'],
       projects: {
         profresolve: {
-          category: 'AI Product · SaaS',
+          category: 'Produto de IA · SaaS',
           description: 'Plataforma de inteligência artificial para a rotina docente, com geração de materiais, monetização por créditos e arquitetura resiliente para uso com modelos de linguagem.',
           highlights: [
             { value: '16', label: 'Geradores' },
-            { value: '2.4K+', label: 'Test cases' },
+            { value: '2.4K+', label: 'Casos de teste' },
           ],
-          focus: ['AI Product', 'Reliability', 'Product Economics'],
+          focus: ['Produto de IA', 'Confiabilidade', 'Economia do produto'],
           stage: 'Produto ativo',
         },
         'super-squad-ai': {
-          category: 'AI Product · Developer Tools',
+          category: 'Produto de IA · Ferramentas de desenvolvimento',
           description: 'Sistema de orquestração de agentes de IA para desenvolvimento de software, com execução isolada em Git e verificação determinística antes de cada integração.',
           highlights: [
             { value: '1 + N', label: 'Arquitetura Leader + Workers' },
-            { value: '2-stage', label: 'Verification' },
+            { value: '2 estágios', label: 'Verificação' },
           ],
-          focus: ['AI Product', 'Agent Orchestration', 'Reliability'],
+          focus: ['Produto de IA', 'Orquestração de agentes', 'Confiabilidade'],
           stage: 'Em desenvolvimento',
         },
         'project-aurora': {
-          category: 'Product Leadership · Game Systems',
+          category: 'Liderança de produto · Sistemas de jogo',
           description: "Beat 'em up 2D em produção inicial, no qual lidero visão de produto, sistemas, progressão e priorização em uma equipe de três pessoas.",
           // Stage já comunica o estágio (Post-PoC · Early Production) — não repetir como highlight
           highlights: [
             { value: '3', label: 'Pessoas na equipe' },
           ],
-          focus: ['Product Leadership', 'Game Systems', 'MVP Scoping'],
-          stage: 'Post-PoC · Early Production',
+          focus: ['Liderança de produto', 'Sistemas de jogo', 'Escopo de MVP'],
+          stage: 'Pós-PoC · Produção inicial',
         },
         cultos: {
           category: 'Technical Product · Desktop',
           description: 'MVP desktop para operação de mídia em igrejas brasileiras, com UX simplificada, funcionamento offline e sincronização opcional com a nuvem.',
           highlights: [
             { value: '9 + mídia', label: 'Coleções sincronizadas' },
-            { value: 'Offline-first', label: 'Desktop product' },
+            { value: 'Offline-first', label: 'Produto desktop' },
           ],
-          focus: ['Product Adaptation', 'Local-first', 'UX Simplification'],
-          stage: 'MVP · Early Release',
+          focus: ['Adaptação de produto', 'Local-first', 'Simplificação de UX'],
+          stage: 'MVP · Primeira versão',
         },
         'universal-docs': {
-          category: 'Technical Product · Developer Experience',
+          category: 'Technical Product · Experiência do desenvolvedor',
           description: 'Starter reutilizável de documentação técnica com CSS isolado, branding configurável, busca, i18n e arquitetura pensada para integração dentro do produto.',
           highlights: [
             { value: '3', label: 'Idiomas' },
-            { value: '57', label: 'Test cases' },
+            { value: '57', label: 'Casos de teste' },
           ],
-          focus: ['Developer Experience', 'Reusable Architecture', 'Docs-as-Code'],
-          stage: 'Reusable Starter',
+          focus: ['Experiência do desenvolvedor', 'Arquitetura reutilizável', 'Docs-as-Code'],
+          stage: 'Starter reutilizável',
         },
         mosaic: {
-          category: 'Product Prototype · UX',
+          category: 'Protótipo de produto · UX',
           description: 'MVP de link-in-bio com editor visual que permite criar páginas pessoais usando blocos arrastáveis, redimensionáveis e editáveis, sem escrever código.',
           highlights: [
             { value: '6', label: 'Tipos de bloco' },
             { value: '5', label: 'Tamanhos de layout' },
           ],
-          focus: ['Product Prototyping', 'UX Systems', 'Interaction Design'],
-          stage: 'MVP · Demo',
+          focus: ['Prototipação de produto', 'Sistemas de UX', 'Design de interação'],
+          stage: 'MVP · Demonstração',
         },
         'project-stream': {
           category: 'Technical Product · Desktop Media',
           description: 'Arquitetura de um produto desktop de streaming que busca simplificar convidados, layouts e transmissão, com o processamento audiovisual principal no computador do host.',
           highlights: [],
-          focus: ['Product Architecture', 'Media Systems', 'Risk Reduction'],
+          focus: ['Arquitetura de produto', 'Sistemas de mídia', 'Redução de riscos'],
           stage: 'Discovery · Pre-PoC',
         },
         'cripto-host-decentralized-hosting': {
           category: 'Technical Product · Web3 Infrastructure',
           description: 'Discovery e arquitetura de uma proposta de hosting descentralizado que buscava oferecer uma experiência simples de deploy para frontends Web3 usando IPFS, Filecoin e Arweave.',
           highlights: [
-            { value: 'MVP scoped', label: 'Escopo definido' },
+            { value: 'MVP definido', label: 'Escopo definido' },
             { value: 'Arquitetura candidata', label: 'Planejamento técnico' },
           ],
-          focus: ['Product Discovery', 'Technical Architecture', 'MVP Scoping'],
-          stage: 'Discovery · Technical Architecture',
+          focus: ['Discovery de produto', 'Arquitetura técnica', 'Escopo de MVP'],
+          stage: 'Discovery · Arquitetura técnica',
         },
       },
     },
@@ -217,9 +221,9 @@ export const ui = {
       },
       // Home-specific skills — isolated from profile.ts (which is shared with /about)
       skills: {
-        product:    ['Discovery', 'Strategy', 'Prioritization'],
-        technology: ['AI', 'APIs', 'Architecture'],
-        execution:  ['Prototyping', 'Testing', 'Iteration'],
+        product:    ['Discovery', 'Estratégia', 'Priorização'],
+        technology: ['IA', 'APIs', 'Arquitetura'],
+        execution:  ['Prototipação', 'Testes', 'Iteração'],
       },
     },
 
@@ -249,10 +253,23 @@ export const ui = {
         p3: 'Hoje, como cofundador do ProfResolve, atuo em todo o ciclo do produto: discovery, visão, roadmap, UX, monetização e implementação técnica. Construí a plataforma de ponta a ponta, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade. Essa combinação entre entendimento do usuário, decisões de produto e execução técnica é o que levo para a próxima equipe.',
       },
 
+      transparency: 'Apresento apenas dados que consigo verificar; o status de cada projeto está indicado em cada case.',
+      timeline: {
+        title: 'Trajetória',
+        items: [
+          { period: '2026 – Presente', company: 'ProfResolve', role: 'COO & Co-founder | Product & Technical Lead', description: 'Cofundador e líder de produto de um SaaS de IA para professores.' },
+          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requisitos e pesquisa de infraestrutura junto à engenharia.' },
+          { period: '2019 – 2025 (5+ anos)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) e contratado direto TRON DAO (2023 – 2025).' },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Comunidade, conteúdo localizado e feedback do mercado brasileiro.' },
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'Feedback de usuários, discovery, backlog e projetos Web3.' },
+          { period: '2010 – Presente', company: 'YouTube / Independente', role: 'Content Creator across Multiple Channels', description: 'Estratégia de conteúdo, métricas e crescimento orgânico em múltiplos canais.' },
+        ],
+      },
+
       focus: {
         title: 'Onde Atuo',
         aiProducts: {
-          title: 'AI Products',
+          title: 'Produtos de IA',
           description: 'Trabalho com produtos que usam LLMs, agentes e fluxos de IA, pensando não apenas na geração, mas também em confiabilidade, comportamento, custo e experiência do usuário.',
         },
         technicalProduct: {
@@ -260,11 +277,11 @@ export const ui = {
           description: 'Conecto decisões de produto a arquitetura, APIs, integrações, dados e restrições técnicas para entender o que é viável, onde estão os riscos e quais trade-offs fazem sentido.',
         },
         productStrategy: {
-          title: 'Product Strategy',
+          title: 'Estratégia de produto',
           description: 'Trabalho na definição do problema, visão, escopo, prioridades e evolução do produto, buscando separar o que precisa ser construído agora do que ainda pode esperar.',
         },
         experimentation: {
-          title: 'Experimentation & Validation',
+          title: 'Experimentação e validação',
           description: 'Uso protótipos, PoCs e MVPs para reduzir incerteza antes de aumentar o investimento, definindo o que precisa ser comprovado e quais sinais devem orientar a próxima decisão.',
         },
       },
@@ -283,16 +300,16 @@ export const ui = {
         title: 'Ferramentas Técnicas',
         groups: [
           {
-            category: 'AI & APIs',
-            items: ['LLMs', 'APIs', 'Structured Outputs', 'AI Workflows'],
+            category: 'IA e APIs',
+            items: ['LLMs', 'APIs', 'Saídas estruturadas', 'Fluxos de IA'],
           },
           {
-            category: 'Product Engineering',
+            category: 'Engenharia de produto',
             items: ['TypeScript', 'Python', 'React / Next.js', 'SQL'],
           },
           {
-            category: 'Architecture & Delivery',
-            items: ['PostgreSQL', 'Redis', 'Git', 'Observability'],
+            category: 'Arquitetura e entrega',
+            items: ['PostgreSQL', 'Redis', 'Git', 'Observabilidade'],
           },
         ],
       },
@@ -365,7 +382,7 @@ export const ui = {
 
     // SEO / Meta
     meta: {
-      siteTitle: 'Lucas Sehnem — Technical Product Manager',
+      siteTitle: 'Lucas Sehnem — Technical Product Manager | Produtos de IA',
       siteDescription: 'Technical Product Manager na interseção de IA, Produto e Engenharia. Construindo produtos com IA, APIs e SaaS.',
     },
   },
@@ -391,9 +408,9 @@ export const ui = {
 
     // Hero
     hero: {
-      badge: 'Technical Product Manager · AI Products · Product × Engineering',
-      tagline: 'I build products at the intersection of AI, Product and Engineering.',
-      subheadline: 'I connect product strategy, technical decisions and hands-on execution to turn complex problems into simple, reliable and scalable products.',
+      badge: 'Technical Product Manager · AI Products',
+      tagline: 'I discover the problem, decide what to build and implement it.',
+      subheadline: 'Co-founder of ProfResolve, an AI SaaS with more than 1,200 registered teachers. Before that, 5+ years in support, localization and community in the Web3 ecosystem, in Portuguese, English and Spanish.',
       ctaPrimary: 'View cases',
       ctaSecondary: 'LinkedIn',
       ctaCV: 'Download CV (PDF)',
@@ -419,6 +436,7 @@ export const ui = {
       projects: {
         profresolve: {
           category: 'AI Product · SaaS',
+          statusBadge: 'Active',
           description: 'An AI platform for educators, combining content generation, credit-based monetization and a resilient LLM architecture.',
           highlights: [
             { value: '16', label: 'Generators' },
@@ -428,6 +446,7 @@ export const ui = {
         },
         'super-squad-ai': {
           category: 'AI Product · Developer Tools',
+          statusBadge: 'Own-use tool',
           description: 'A multi-agent software engineering orchestrator with isolated Git execution and deterministic verification before integration.',
           highlights: [
             { value: '1 + N', label: 'Agent architecture' },
@@ -437,6 +456,7 @@ export const ui = {
         },
         'project-aurora': {
           category: 'Product Leadership · Game Systems',
+          statusBadge: 'In development',
           description: "A 2D beat 'em up in production where I lead product vision, game systems, progression and prioritization within a three-person team.",
           highlights: [
             { value: '3', label: 'People on the team' },
@@ -446,6 +466,7 @@ export const ui = {
         },
         cultos: {
           category: 'Technical Product · Church Tech',
+          statusBadge: 'In development',
           description: 'A desktop MVP tailored for media operation in Brazilian churches, combining a native PT-BR experience, offline-first usage and optional cloud synchronization.',
           highlights: [
             { value: '9 + media', label: 'Synced collections' },
@@ -608,6 +629,19 @@ export const ui = {
         p1: 'My career in technology started close to users. I spent more than five years in the TRON DAO / DLive ecosystem working with support, onboarding, localization and feedback in Portuguese, English and Spanish. Later, at the Spanish exchange Bit2Me and in Play9/NineBlocks projects, I began connecting community, growth and product, bringing user signals into communication, discovery and backlog decisions.',
         p2: 'That experience led me to increasingly product-focused roles. At Cripto Host, I worked as a Product Owner, dealing with backlog, technical requirements, infrastructure research and prioritization alongside engineering.',
         p3: 'Today, as co-founder of ProfResolve, I work across the entire product cycle: discovery, vision, roadmap, UX, monetization and technical implementation. I built the platform end to end, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms. This combination of user understanding, product decisions and technical execution is what I bring to the next team.',
+      },
+
+      transparency: 'I present only data I can verify; each project’s status is indicated in its case study.',
+      timeline: {
+        title: 'Career path',
+        items: [
+          { period: '2026 – Present', company: 'ProfResolve', role: 'COO & Co-founder | Product & Technical Lead', description: 'Co-founder and product lead for an AI SaaS for teachers.' },
+          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requirements and infrastructure research alongside engineering.' },
+          { period: '2019 – 2025 (5+ years)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) and direct hire TRON DAO (2023 – 2025).' },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Community, localized content and feedback from the Brazilian market.' },
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'User feedback, discovery, backlog and Web3 projects.' },
+          { period: '2010 – Present', company: 'YouTube / Independent', role: 'Content Creator across Multiple Channels', description: 'Content strategy, metrics and organic growth across multiple channels.' },
+        ],
       },
 
       focus: {

@@ -10,23 +10,35 @@ order: 7
 role: "Product / Technical Product · colaboração direta com Engineering Lead"
 stage: "MVP · Primeira release"
 stageNote: "Produto funcional e instalável. A comercialização ainda não foi iniciada."
+statusBadge: "Em desenvolvimento"
+caseSummary:
+  problem: "Adaptar uma operação de mídia desktop para igrejas brasileiras, com simplicidade e continuidade durante o culto."
+  role: "Definição de produto, backlog, roadmap e colaboração com o Engineering Lead."
+  result: "Primeira release funcional e instalável para Windows."
+  keyDecision: "Adaptar uma base madura e concentrar o esforço no contexto de uso brasileiro."
+statusEvidence:
+  stage: "MVP, em desenvolvimento."
+  evidence: "Há uma primeira release funcional e instalável, baseada no FreeShow e adaptada ao contexto descrito no case."
+  nextValidation: "Validar a operação com igrejas antes da próxima etapa do produto."
 productType: Desktop MVP
+openSourceUrl: https://github.com/ChurchApps/FreeShow
+openSourceLabel: FreeShow (GPL-3.0)
 status: Active
 draft: false
-featured: false
+featured: true
 # cover: reativar somente com screenshot real (public/projects/...)
 tags:
   - Technical Product
   - Desktop
   - Electron
   - Local-first
-  - Cloud Sync
-  - Localization
+  - Sincronização na nuvem
+  - Localização
 demonstrates:
-  - Product Adaptation
+  - Adaptação de produto
   - Technical Product
   - Local-first
-  - UX Simplification
+  - Simplificação de UX
 technologies:
   - Electron
   - Svelte 3
@@ -67,7 +79,7 @@ snapshot:
 scaleMetrics: []
 productMetrics: []
 seo:
-  title: 'CultoOS | Technical Product & Product Adaptation Case | Lucas Sehnem'
+  title: 'CultoOS | Adaptação de produto | Lucas Sehnem'
   description: 'Case sobre a adaptação de um produto desktop para a operação de mídia em igrejas brasileiras, cobrindo simplificação de UX, localização, arquitetura local-first e sincronização opcional com a nuvem.'
 ---
 
@@ -95,13 +107,22 @@ Trabalhei diretamente com o Engineering Lead na definição, adaptação e entre
 
 ## Adaptar em vez de reconstruir
 
-Antes de qualquer decisão de produto, já existia uma base desktop madura para apresentações, com engine de apresentação, suporte a mídia e estrutura Electron funcionando.
+Antes de qualquer decisão de produto, já existia uma base desktop madura: [FreeShow](https://github.com/ChurchApps/FreeShow), software livre sob licença GPL-3.0, com engine de apresentação, suporte a mídia e estrutura Electron funcionando.
 
 Reconstruir essa infraestrutura do zero não faria sentido. O trabalho real estava em outro lugar: entender o que precisava mudar para que o produto funcionasse para igrejas brasileiras, e então concentrar o esforço nessas adaptações.
 
 O foco foi em localização, simplificação da experiência, operação offline, Bíblias em PT-BR, referências bíblicas no padrão brasileiro e sincronização com a nuvem. Essas não são apenas funcionalidades adicionadas. São decisões sobre o que o produto precisa ser para fazer sentido nesse contexto.
 
 O valor do CultoOS não está em reimplementar o que já funcionava. Está em decidir o que precisava mudar para que a experiência fizesse sentido para quem vai usar.
+
+## O que veio da base / O que é do CultoOS
+
+- **Da base FreeShow:** engine de apresentação, suporte a mídia e estrutura Electron.
+- **Do CultoOS:** localização PT-BR, terminologia de igreja, Bíblias PT-BR offline, simplificação de UX, ação rápida para limpar a saída, sincronização com a nuvem e release automatizada.
+
+## Licença e créditos
+
+A base usada pelo CultoOS é o FreeShow, sob GPL-3.0. O projeto reconhece e credita seus autores originais.
 
 ## Simplificar sem limitar
 
@@ -154,15 +175,13 @@ A primeira release foi empacotada para Windows, plataforma escolhida para o MVP.
 
 O build é automatizado via GitHub Actions e a publicação parte de uma tag. Isso tornou a release reproduzível: qualquer versão pode ser gerada de forma previsível, sem depender de passos manuais.
 
-Existe uma primeira release funcional e instalável. Velocidade de commit não é impacto de negócio e não tratamos isso como métrica.
+Existe uma primeira release funcional e instalável.
 
 ## Estado atual
 
 O CultoOS tem uma primeira release funcional e instalável. O produto está no estágio de MVP e a comercialização ainda não começou.
 
-Por isso, não apresento números de clientes, receita, retenção ou uso recorrente. Essas métricas ainda precisam existir antes de serem usadas como evidência de impacto.
-
-## O que quero validar a seguir
+## Próximas validações
 
 Com o MVP funcional, o que precisa ser validado agora é se essa adaptação realmente melhora a operação de mídia nas igrejas que queremos atender.
 
@@ -182,10 +201,10 @@ Os sinais que vão orientar as próximas decisões:
 
 <Callout variant="demonstrates" title="O que este projeto demonstra">
 
-- **Product Adaptation:** identificar o que realmente precisa mudar quando um produto é levado para um contexto específico.
+- **Adaptação de produto:** identificar o que realmente precisa mudar quando um produto é levado para um contexto específico.
 - **Technical Product:** transformar requisitos como offline-first e sincronização segura em decisões concretas de produto e arquitetura.
-- **UX Simplification:** reduzir complexidade visível sem retirar capacidades de usuários avançados.
-- **Local-first Product Thinking:** projetar a operação principal para continuar funcionando mesmo sem conectividade.
-- **Product × Engineering:** trabalhar próximo à engenharia para transformar decisões de produto em um MVP funcional e instalável.
+- **Simplificação de UX:** reduzir complexidade visível sem retirar capacidades de usuários avançados.
+- **Visão de produto local-first:** projetar a operação principal para continuar funcionando mesmo sem conectividade.
+- **Produto × Engenharia:** trabalhar próximo à engenharia para transformar decisões de produto em um MVP funcional e instalável.
 
 </Callout>

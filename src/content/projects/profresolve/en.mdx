@@ -10,6 +10,15 @@ role: Technical Product / Product + Hands-on Development
 productType: SaaS · AI · Education
 focus: AI Reliability · Product Economics · APIs · Payments
 stage: "Live Product · Active Development"
+statusBadge: "Active"
+caseSummary:
+  problem: "Reduce the repetitive work of preparing teaching materials without taking control away from educators."
+  role: "Co-founder responsible for discovery, product, monetization and technical implementation."
+  result: "A public SaaS with more than 1,200 educators registered organically."
+  keyDecision: "Treat AI reliability and cost as product decisions."
+statusEvidence:
+  stage: "Active product, continuing to evolve."
+  evidence: "The product is public, has surpassed 1,200 educators registered organically and received responses from 100+ educators in a public survey."
 status: Active
 draft: false
 featured: true
@@ -38,9 +47,8 @@ technologies:
   - DeepSeek
   - Asaas
   - Resend
-  - Sentry
 metrics:
-  - value: "1.2K+"
+  - value: "1,200+"
     label: Registered users
     state: verified
   - value: "16"
@@ -51,7 +59,7 @@ metrics:
     state: verified
 snapshot:
   primary:
-    - value: "1.2K+"
+    - value: "1,200+"
       label: Registered users
       state: verified
     - value: "16"
@@ -90,7 +98,7 @@ scaleMetrics:
     label: Database tables
     state: verified
 productMetrics:
-  - value: "1.2K+"
+  - value: "1,200+"
     label: Registered users
     state: verified
 seo:
@@ -111,27 +119,33 @@ Educators spend a significant part of their time creating lesson plans, assessme
 
 That hypothesis now exists beyond a prototype: the product is publicly available and has surpassed 1,200 registered users organically.
 
-## Discovery: How I Explored the Problem
+## Validation with educators
 
-Before building, I needed to understand whether the problem was real and which aspects deserved the most attention.
+Before validating the MVP for sale, the platform was tested in three schools in Santiago, Rio Grande do Sul, with more than 20 educators. The feedback received guided adjustments through the first final version.
 
-### Method
+<FlowDiagram
+  label="ProfResolve validation and acquisition"
+  steps={[
+    'Pilot in 3 schools in Santiago, Rio Grande do Sul',
+    '20+ educators tested the platform',
+    'Feedback received and product adjustments',
+    'First final version',
+    'Public survey inside the dashboard',
+    '100+ organic educator responses',
+  ]}
+/>
 
-The process started with an open survey published directly on the product's website. Over 100 educators responded. Beyond the survey, teachers continued sending feedback, suggestions and improvement requests throughout the development process — creating an ongoing signal channel rather than a single research moment.
+After that, the dashboard offered a public six-question survey: four multiple-choice and two open-ended questions, including AI familiarity and what educators would like ProfResolve to offer. More than 100 educators responded organically. Responses were emailed via Resend to the platform contact.
 
-{/* TO FILL: main survey questions — omitted until data is available */}
+{/* TODO [CONFIRM]: after submitting the survey, responses were sent as a formatted email through the Resend API to the platform contact and the educator received 300 thank-you credits. */}
 
-### What the Signals Helped Shape
+{/* TODO: add “What we learned from educators” when the main survey findings and resulting product changes are available. */}
 
-The volume of responses and the consistency of certain themes in the feedback helped orient early product priorities — which types of content had the most demand, where the biggest friction existed in teachers' routines and which features came up most often.
+## Revenue model
 
-{/* TO FILL: specific findings with real data — omitted until data is available */}
+ProfResolve combines monthly and annual subscriptions with one-off credit packs for people who prefer to use the platform on demand.
 
-{/* TO FILL: Feedback → Decision examples with real data — omitted until data is available */}
-
-{/* TO FILL: real teacher quote, if available — section to be added when available */}
-
-{/* TO FILL: initial acquisition channels — omitted until data is available */}
+{/* TODO [CONFIRM]: Google Analytics, Cloudflare Analytics, Microsoft Clarity and Sentry were used to follow behavior, traffic and errors. */}
 
 ## From Hypothesis to a Product in Use
 
@@ -225,7 +239,7 @@ Reliability was treated as a product requirement, not an implementation detail. 
 - **Automatic credit refund:** a failure never costs the educator credits
 - **Kill switch and recovery:** operational-level stop and restart
 
-These mechanisms are intentionally described at a conceptual level. Parameters, thresholds and internal configuration are part of the implementation and are not published. No success rate is claimed here without real data to back it up.
+Parameters, thresholds and internal configuration remain part of the implementation; the mechanisms above describe the strategy at a conceptual level.
 
 ## When AI Cost Becomes a Product Decision
 
@@ -243,7 +257,7 @@ ProfResolve uses **credits** as its consumption unit. Each generation type has a
 
 Credits sit at the intersection of computational cost, perceived value and monetization. When a model's cost changes, it directly affects the price of a generation and how users are likely to behave.
 
-A documented change reclassified one generator from **100 credits to 300 credits**, alongside a change in strategy and model. The goal is to keep AI cost visible and manageable inside the product itself.
+Each generator's cost needs to reflect its strategy and model so AI consumption stays visible and manageable within the product.
 
 ## Not Every Technical Experiment Should Stay in the Product
 
@@ -276,7 +290,7 @@ The rollback was treated as a normal part of development. What matters is that t
   ]}
 />
 
-The final result is described qualitatively based on project documentation. No percentage is claimed here.
+That change let us prioritize the educator's experience and the quality of the result.
 
 ## Architecture
 
@@ -297,7 +311,6 @@ Conceptual representation of the product architecture. No internal endpoints, da
     'Gemini / DeepSeek',
     'Asaas',
     'Resend',
-    'Sentry',
   ]}
 />
 
@@ -323,7 +336,7 @@ These numbers represent technical scale and engineering discipline. They are not
 <StatsGrid
   label="Product signals"
   stats={[
-    { value: '1.2K+', label: 'Registered users' },
+    { value: '1,200+', label: 'Registered users' },
     { value: 'Live', label: 'Public product' },
     { value: 'Recurring', label: 'Platform usage' },
   ]}
@@ -340,18 +353,3 @@ These numbers represent technical scale and engineering discipline. They are not
     { value: '2.4K+', label: 'Test cases' },
   ]}
 />
-
-## What I Want to Understand Next
-
-The product has enough real usage for future decisions to rely increasingly on observed behavior.
-
-- 7-day and 30-day active users
-- Generation frequency per user
-- Most-used generators
-- First-generation completion rate
-- Credit consumption over time
-- Freemium to paid conversion
-- Retention
-- Regeneration rate
-
-These are signals I want to measure. They are not metrics that are currently available.

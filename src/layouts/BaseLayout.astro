@@ -1,14 +1,13 @@
 ---
 // BaseLayout.astro - Base layout for all pages
-import type { AstroProps } from 'astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import '@/styles/global.css';
 import { siteConfig } from '@/data/profile';
 import { generateAlternateLinks, type Locale } from '@/i18n';
 
-interface Props extends AstroProps {
-  title: string;
+interface Props {
+  title?: string;
   /** Complete <title> override (used for per-case SEO titles) */
   fullTitle?: string;
   description?: string;
@@ -31,14 +30,14 @@ const {
   ...rest
 } = Astro.props;
 
-const siteUrl = siteConfig.url;
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? import.meta.env.SITE.replace(/\/$/, '');
 const pageUrl = canonical ? `${siteUrl}${canonical}` : `${siteUrl}${Astro.url.pathname}`;
 const pageTitle = fullTitle || (title ? `${title} — Lucas Sehnem` : siteConfig.title);
 const pageDescription = description || siteConfig.description;
 const pageOgImage = ogImage || siteConfig.ogImage;
 
 // Generate alternate links for SEO
-const alternateLinks = canonical ? generateAlternateLinks(canonical, siteUrl) : '';
+const alternateLinks = noIndex ? '' : generateAlternateLinks(canonical ?? Astro.url.pathname, siteUrl);
 ---
 
 <!doctype html>

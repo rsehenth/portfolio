@@ -8,10 +8,17 @@ import { profile } from '@/data/profile';
 import { ui, type Locale } from '@/i18n';
 import { getPublishedProjects, projectKey, caseUrl } from '@/lib/projects';
 
+interface Props {
+  locale?: Locale;
+}
+
 const { locale = 'pt-BR' } = Astro.props;
 
 const projects = await getPublishedProjects(locale);
-const featuredProjects = projects.filter((p) => p.data.featured);
+const featuredOrder = ['profresolve', 'super-squad-ai'];
+const featuredProjects = featuredOrder
+  .map((key) => projects.find((project) => projectKey(project) === key))
+  .filter((project): project is NonNullable<typeof project> => Boolean(project));
 
 const meta = ui[locale].meta;
 const work = ui[locale].work;
@@ -29,13 +36,6 @@ const topRow = featuredProjects.slice(0, 2).map((project, i) => {
   const href = caseUrl(locale, key);
   const homeData = homeProjectsData.projects[key as HomeProjectKey] ?? null;
   return { project, key, href, homeData, delay: i * 100 };
-});
-
-const bottomRow = featuredProjects.slice(2, 4).map((project, i) => {
-  const key = projectKey(project);
-  const href = caseUrl(locale, key);
-  const homeData = homeProjectsData.projects[key as HomeProjectKey] ?? null;
-  return { project, key, href, homeData, delay: (i + 2) * 100 };
 });
 
 const singleProject = featuredProjects.length === 1 ? (() => {
@@ -85,27 +85,6 @@ const singleProject = featuredProjects.length === 1 ? (() => {
             </div>
           )}
 
-          {/* Bottom row: remaining featured projects — default variant */}
-          {featuredProjects.length > 2 && (
-            <div class="grid gap-6 sm:gap-8 md:grid-cols-2 items-stretch">
-              {bottomRow.map(({ project, href, homeData, delay }) =>
-                homeData ? (
-                  <div class="h-full">
-                    <HomeProjectCard
-                      title={project.data.title}
-                      href={href}
-                      homeData={homeData}
-                      viewCaseLabel={homeProjectsData.viewCase}
-                      variant="default"
-                      locale={locale}
-                      revealDelay={delay}
-                    />
-                  </div>
-                ) : null
-              )}
-            </div>
-          )}
-
           {/* Fallback: single project */}
           {singleProject && singleProject.homeData && (
             <div class="grid-auto-fit items-stretch">
@@ -124,7 +103,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
           )}
 
           <div class="text-center mt-10" data-reveal>
-            <a href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'} class="btn-secondary">
+            <a href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'} class="btn-secondary home-projects-cta">
               {homeProjectsData.viewAll}
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -250,7 +229,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
             ariaLabel={contact.emailAriaLabel}
           />
           <a
-            href={locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas.cven.pdf'}
+            href={locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas-cven.pdf'}
             download
             aria-label={locale === 'pt-BR' ? 'Baixar currículo em PDF' : 'Download resume as PDF'}
             class="btn-secondary inline-flex items-center gap-2"
@@ -265,3 +244,25 @@ const singleProject = featuredProjects.length === 1 ? (() => {
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  @keyframes home-projects-cta-pulse {
+    0%, 72%, 100% {
+      box-shadow: 0 0 0 0 rgb(var(--color-accent-rgb) / 0);
+    }
+
+    84% {
+      box-shadow: 0 0 0 0.45rem rgb(var(--color-accent-rgb) / 0.14);
+    }
+  }
+
+  .home-projects-cta {
+    animation: home-projects-cta-pulse 5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-projects-cta {
+      animation: none;
+    }
+  }
+</style>

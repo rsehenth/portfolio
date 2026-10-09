@@ -29,6 +29,7 @@ const mdxComponents = {
   RoleBlocks: (await import('@/components/RoleBlocks.astro')).default,
   ComparisonBlock: (await import('@/components/ComparisonBlock.astro')).default,
   StatsGrid: (await import('@/components/StatsGrid.astro')).default,
+  CaseMedia: (await import('@/components/CaseMedia.astro')).default,
 };
 ---
 
@@ -46,6 +47,7 @@ const mdxComponents = {
   stage={d.stage}
   stageNote={d.stageNote}
   openSourceUrl={d.openSourceUrl}
+  openSourceLabel={d.openSourceLabel}
   status={d.status}
   tags={d.tags}
   technologies={d.technologies}
@@ -57,6 +59,9 @@ const mdxComponents = {
   externalUrl={d.externalUrl}
   externalUrlLabel={d.externalUrlLabel}
   snapshotMode={d.snapshotMode}
+  caseSummary={d.caseSummary}
+  statusEvidence={d.statusEvidence}
+  statusBadge={d.statusBadge}
   slug={projectKey(project)}
   locale="en"
 >

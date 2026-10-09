@@ -1,32 +1,42 @@
 ---
 title: Universal Technical Docs Starter
 locale: pt-BR
-subtitle: Technical Product · Developer Experience
+subtitle: Technical Product · Experiência do desenvolvedor
 description: "Starter reutilizável para integrar documentação técnica diretamente a um produto, com isolamento visual, configuração de branding, busca, i18n e conteúdo organizado como código."
 tagline: "Documentação que vive dentro do produto sem se transformar em um segundo produto."
 summary: "O projeto nasceu da necessidade de manter documentação e produto no mesmo ambiente sem transformar as docs em uma segunda aplicação. A solução separa conteúdo, navegação, branding e layout para tornar a integração previsível e reutilizável."
 year: 2025
-role: "Technical Product · Developer Experience · Hands-on Development"
+role: "Technical Product · Experiência do desenvolvedor · Desenvolvimento prático"
 stage: "Starter · Validado no projeto"
-stageNote: "Desenvolvido e validado no ambiente do Cripto Host. Ainda não comprovado em múltiplos produtos hospedeiros."
-productType: Technical Product · Developer Experience
-focus: Reusability · Docs-as-Code · i18n · CSS Isolation
-status: Active
+statusBadge: "Encerrado"
+caseSummary:
+  problem: "Integrar documentação técnica a um produto sem criar uma segunda aplicação."
+  role: "Definição de arquitetura, experiência de documentação e implementação prática."
+  result: "Starter validado no ambiente da Cripto Host para documentação de produto existente."
+  keyDecision: "Separar conteúdo, configuração e interface para facilitar integração e manutenção."
+statusEvidence:
+  stage: "Encerrado após validação no ambiente de origem."
+  evidence: "Starter construído para a documentação do produto existente da Cripto Host, com busca, i18n e isolamento visual."
+  nextValidation: "O aprendizado foi migrar a autoria para uma solução editável online."
+stageNote: "Validado no ambiente da Cripto Host; sem teste em outro produto hospedeiro. Parte do conteúdo nos três idiomas ainda era scaffold."
+productType: Technical Product · Experiência do desenvolvedor
+focus: Reutilização · Docs-as-Code · i18n · Isolamento de CSS
+status: Archived
 draft: false
 featured: false
 # cover: re-enable only with a real screenshot/image (public/projects/universal-docs-cover.jpg)
 tags:
   - Technical Product
-  - Developer Experience
+  - Experiência do desenvolvedor
   - Docs-as-Code
   - i18n
   - Meteor
   - Blaze
-  - Reusability
+  - Reutilização
 demonstrates:
   - Technical Product
-  - Developer Experience
-  - Reusable Architecture
+  - Experiência do desenvolvedor
+  - Arquitetura reutilizável
   - Docs-as-Code
 technologies:
   - Meteor
@@ -64,12 +74,14 @@ snapshot:
 scaleMetrics: []
 productMetrics: []
 seo:
-  title: "Universal Technical Docs Starter | Technical Product & Developer Experience | Lucas Sehnem"
-  description: "Case sobre um starter reutilizável de documentação técnica integrado ao produto, cobrindo Developer Experience, isolamento de CSS, i18n, Docs-as-Code e decisões de arquitetura."
+  title: "Universal Technical Docs Starter | Experiência do desenvolvedor | Lucas Sehnem"
+  description: "Case sobre um starter reutilizável de documentação técnica integrado ao produto, cobrindo Experiência do desenvolvedor, isolamento de CSS, i18n, Docs-as-Code e decisões de arquitetura."
 order: 3
 ---
 
 ## O problema
+
+Este starter foi construído para a documentação do produto já existente da Cripto Host, não para a proposta de hosting descentralizado apresentada em outro case.
 
 Documentação técnica costuma começar simples e, com o tempo, acaba virando uma aplicação paralela ao produto principal. Outro layout, outro conjunto de estilos, outra navegação, mais dependências e mais um contexto técnico para manter.
 
@@ -79,7 +91,7 @@ A pergunta que guiou este projeto foi diferente: seria possível tratar document
 
 ## Meu papel
 
-Atuei entre Technical Product, Developer Experience e implementação hands-on. Parte do trabalho foi decidir o que o starter precisava resolver, o que deveria permanecer configurável e onde valia a pena aceitar mais complexidade técnica para tornar a integração mais previsível.
+Atuei entre Technical Product, Experiência do desenvolvedor e implementação hands-on. Parte do trabalho foi decidir o que o starter precisava resolver, o que deveria permanecer configurável e onde valia a pena aceitar mais complexidade técnica para tornar a integração mais previsível.
 
 Trabalhei diretamente na implementação e na validação dessas decisões: isolamento de estilos, estrutura de conteúdo, busca client-side, i18n e o registry utilizado para resolver as páginas.
 
@@ -241,46 +253,30 @@ O modelo de reuso foi pensado em três etapas:
 
 A implementação atual foi criada e validada no ecossistema Meteor + Blaze. O fluxo de reuso é simples dentro desse contexto: copiar o módulo, configurar identidade e navegação e substituir o conteúdo.
 
-A distinção que importa é esta: a arquitetura foi preparada para reutilização. O que ainda precisa ser comprovado é quanto dessa promessa se sustenta quando o starter entra em um segundo produto real, com outro host, outros estilos globais e outro time de manutenção.
+A arquitetura foi preparada para reutilização. Uma eventual retomada teria de testá-la em outro produto, com estilos globais e equipe de manutenção diferentes.
 
-O padrão arquitetural, separação de config e conteúdo, CSS isolado por escopo e registry estático, pode inspirar adaptações em outras stacks. Mas essa portabilidade não foi validada e não é afirmada aqui como compatibilidade com React, Next.js, Vue ou outros frameworks.
+O padrão arquitetural — separação de configuração e conteúdo, CSS isolado por escopo e registro estático — pode orientar adaptações em outras stacks.
 
 ## Onde o starter está hoje
 
 O starter funciona no contexto para o qual foi criado. A implementação foi validada no ambiente do projeto de origem, com os testes automatizados cobrindo os fluxos principais.
 
-O que ainda não existe:
-- evidência de uso em um segundo produto hospedeiro real
-- métricas de uso ou adoção
-- validação do isolamento de CSS em outro host com estilos diferentes
-- conteúdo final nos três idiomas (parte ainda é scaffold)
+## Por que foi encerrado e o que aprendi
 
-Essa é a diferença entre uma arquitetura reutilizável e uma arquitetura já validada em vários ambientes. O primeiro está demonstrado. O segundo ainda não.
+A manutenção da documentação em três idiomas dependia sempre de um desenvolvedor. O líder da Cripto Host optou pelo Mintlify, uma ferramenta de documentação editável online que permite atualizar o conteúdo sem depender de desenvolvimento.
 
-## O que quero validar a seguir
+O aprendizado foi que o gargalo era autoria de conteúdo, não código: um caso de *build vs buy*.
 
-O próximo passo não é adicionar mais recursos. É entender até onde a promessa de reutilização se sustenta fora do projeto de origem.
-
-As perguntas que guiam essa validação:
-
-- Quanto esforço é necessário para integrar o starter em um segundo produto real?
-- Quantas alterações seriam necessárias fora de configuração e conteúdo?
-- O isolamento de CSS continua funcionando com outro conjunto de estilos globais no host?
-- Como a busca se comporta conforme a base de conteúdo cresce?
-- Qual é a experiência real de autoria e manutenção do conteúdo?
-- Em que ponto um search engine dedicado passa a fazer mais sentido do que a solução client-side?
-- Como o registry se comporta com um volume maior de páginas?
-
-Essas são hipóteses para validação futura, não métricas atuais.
+Uma eventual reutilização precisaria começar pela integração em um segundo produto e pela experiência real de autoria e manutenção do conteúdo.
 
 ## O que este projeto demonstra
 
 <Callout variant="demonstrates" title="O que este projeto demonstra">
 
 - **Technical Product:** identificar um problema recorrente de integração e transformá-lo em um módulo com escopo e trade-offs claros
-- **Developer Experience:** projetar o módulo pensando em quem vai copiar, configurar, navegar e manter as docs
-- **Reusable Architecture:** separar configuração, navegação, conteúdo e interface para reduzir acoplamento entre camadas
+- **Experiência do desenvolvedor:** projetar o módulo pensando em quem vai copiar, configurar, navegar e manter as docs
+- **Arquitetura reutilizável:** separar configuração, navegação, conteúdo e interface para reduzir acoplamento entre camadas
 - **Docs-as-Code:** tratar documentação como parte da arquitetura do produto, com estrutura versionável e previsível
-- **Product × Engineering:** escolher soluções técnicas com base em integração, manutenção e previsibilidade, não apenas elegância do código
+- **Produto × Engenharia:** escolher soluções técnicas com base em integração, manutenção e previsibilidade, não apenas elegância do código
 
 </Callout>

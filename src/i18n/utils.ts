@@ -90,7 +90,7 @@ export function formatNumber(num: number, locale: Locale): string {
 /**
  * Get localized URL for canonical/hreflang
  */
-export function getLocalizedUrl(pathname: string, locale: Locale, siteUrl: string = 'https://lucassehnem.com'): string {
+export function getLocalizedUrl(pathname: string, locale: Locale, siteUrl: string = import.meta.env.SITE): string {
   const localizedPath = getLocalizedPath(pathname, locale);
   return `${siteUrl}${localizedPath}`;
 }
@@ -98,7 +98,7 @@ export function getLocalizedUrl(pathname: string, locale: Locale, siteUrl: strin
 /**
  * Generate hreflang tags for SEO
  */
-export function generateHreflangTags(pathname: string, siteUrl: string = 'https://lucassehnem.com'): string {
+export function generateHreflangTags(pathname: string, siteUrl: string = import.meta.env.SITE): string {
   return locales
     .map((locale) => {
       const href = getLocalizedUrl(pathname, locale, siteUrl);
