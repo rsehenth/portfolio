@@ -8,6 +8,16 @@ summary: "The project started from a need to keep documentation and product in t
 year: 2025
 role: "Technical Product · Developer Experience · Hands-on Development"
 stage: "Starter · Validated in Project Environment"
+statusBadge: "Closed"
+caseSummary:
+  problem: "Embed technical documentation in a product without creating a second application."
+  role: "Architecture, documentation experience and hands-on implementation."
+  result: "A starter validated in the Cripto Host environment for an existing product’s documentation."
+  keyDecision: "Separate content, configuration and interface to make integration and maintenance easier."
+statusEvidence:
+  stage: "Closed after validation in its original environment."
+  evidence: "A starter built for documentation of Cripto Host’s existing product, with search, i18n and visual isolation."
+  nextValidation: "The learning moved content authorship to an online editable solution."
 stageNote: "Developed and validated in the Cripto Host environment. Not yet proven across multiple host products."
 productType: Technical Product · Developer Experience
 focus: Reusability · Docs-as-Code · i18n · CSS Isolation
@@ -70,6 +80,8 @@ order: 3
 ---
 
 ## The Problem
+
+This starter was built for the documentation of Cripto Host’s existing product, not for the decentralized hosting proposal covered in a separate case.
 
 Technical documentation tends to start simple and, over time, grow into a parallel application running alongside the main product. A separate framework, its own layout, styles that conflict with the host, duplicated branding and one more technical context to maintain.
 
@@ -257,7 +269,11 @@ What does not yet exist:
 
 That is the difference between a reusable architecture and an architecture validated across multiple environments. The first is demonstrated. The second is not.
 
-## What I Want to Validate Next
+## Why it was closed and what I learned
+
+Maintaining documentation in three languages always depended on a developer. The Cripto Host lead chose Mintlify, an online editable documentation tool that allows content updates without relying on development.
+
+The learning was that the bottleneck was content authorship, not code: a *build vs buy* case.
 
 The next step is not to add more features. It is to understand how far the reuse promise holds outside the original project.
 
