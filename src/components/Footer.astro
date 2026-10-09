@@ -1,10 +1,9 @@
 ---
 // Footer.astro - Site footer
-import type { AstroProps } from 'astro';
 import { footerLinks, profile } from '@/data/profile';
 import { ui, type Locale } from '@/i18n';
 
-interface Props extends AstroProps {
+interface Props {
   class?: string;
   locale?: Locale;
 }

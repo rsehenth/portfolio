@@ -27,8 +27,8 @@ interface HomeProjectData {
   category: string;
   statusBadge?: string;
   description: string;
-  highlights: HomeHighlight[];
-  focus: string[];
+  highlights: readonly HomeHighlight[];
+  focus: readonly string[];
 }
 
 interface Props {

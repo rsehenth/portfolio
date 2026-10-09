@@ -1,10 +1,9 @@
 ---
 // CaseNavigation.astro - Navigation between cases (same locale)
-import type { AstroProps } from 'astro';
 import { ui, type Locale } from '@/i18n';
 import { getPublishedProjects, projectKey, caseUrl, projectsIndexUrl } from '@/lib/projects';
 
-interface Props extends AstroProps {
+interface Props {
   currentSlug: string;
   class?: string;
   locale?: Locale;

@@ -5,7 +5,7 @@
 // We use a Proxy to lazily load components only when accessed
 const componentCache = new Map();
 
-function createComponentLoader(componentPath) {
+function createComponentLoader(componentPath: string) {
   return new Proxy({}, {
     get(target, prop) {
       if (prop === 'default' || prop === 'render' || prop === '$$render') {
