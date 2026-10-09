@@ -10,6 +10,16 @@ order: 7
 role: "Product / Technical Product · colaboração direta com Engineering Lead"
 stage: "MVP · Primeira release"
 stageNote: "Produto funcional e instalável. A comercialização ainda não foi iniciada."
+statusBadge: "Em desenvolvimento"
+caseSummary:
+  problem: "Adaptar uma operação de mídia desktop para igrejas brasileiras, com simplicidade e continuidade durante o culto."
+  role: "Definição de produto, backlog, roadmap e colaboração com o Engineering Lead."
+  result: "Primeira release funcional e instalável para Windows."
+  keyDecision: "Adaptar uma base madura e concentrar o esforço no contexto de uso brasileiro."
+statusEvidence:
+  stage: "MVP, em desenvolvimento."
+  evidence: "Há uma primeira release funcional e instalável, baseada no FreeShow e adaptada ao contexto descrito no case."
+  nextValidation: "Validar a operação com igrejas antes da próxima etapa do produto."
 productType: Desktop MVP
 status: Active
 draft: false
@@ -95,13 +105,22 @@ Trabalhei diretamente com o Engineering Lead na definição, adaptação e entre
 
 ## Adaptar em vez de reconstruir
 
-Antes de qualquer decisão de produto, já existia uma base desktop madura para apresentações, com engine de apresentação, suporte a mídia e estrutura Electron funcionando.
+Antes de qualquer decisão de produto, já existia uma base desktop madura: [FreeShow](https://github.com/ChurchApps/FreeShow), software livre sob licença GPL-3.0, com engine de apresentação, suporte a mídia e estrutura Electron funcionando.
 
 Reconstruir essa infraestrutura do zero não faria sentido. O trabalho real estava em outro lugar: entender o que precisava mudar para que o produto funcionasse para igrejas brasileiras, e então concentrar o esforço nessas adaptações.
 
 O foco foi em localização, simplificação da experiência, operação offline, Bíblias em PT-BR, referências bíblicas no padrão brasileiro e sincronização com a nuvem. Essas não são apenas funcionalidades adicionadas. São decisões sobre o que o produto precisa ser para fazer sentido nesse contexto.
 
 O valor do CultoOS não está em reimplementar o que já funcionava. Está em decidir o que precisava mudar para que a experiência fizesse sentido para quem vai usar.
+
+## O que veio da base / O que é do CultoOS
+
+- **Da base FreeShow:** engine de apresentação, suporte a mídia e estrutura Electron.
+- **Do CultoOS:** localização PT-BR, terminologia de igreja, Bíblias PT-BR offline, simplificação de UX, ação rápida para limpar a saída, sincronização com a nuvem e release automatizada.
+
+## Licença e créditos
+
+A base usada pelo CultoOS é o FreeShow, sob GPL-3.0. O projeto reconhece e credita seus autores originais.
 
 ## Simplificar sem limitar
 
