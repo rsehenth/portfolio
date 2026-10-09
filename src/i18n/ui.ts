@@ -67,7 +67,7 @@ export const ui = {
           focus: ['Produto de IA', 'Confiabilidade', 'Economia de produto'],
         },
         'super-squad-ai': {
-          category: 'Produto de IA · Ferramentas de desenvolvimento',
+          category: 'Produto de IA',
           statusBadge: 'Ferramenta de uso próprio',
           description: 'Orquestrador multiagente para desenvolvimento de software, com execução isolada em Git e verificação determinística antes da integração.',
           highlights: [
@@ -232,7 +232,7 @@ export const ui = {
       title: 'Sobre',
 
       // Hero tagline exclusive to About — not from profile.ts (which is shared globally)
-      heroTagline: 'Trabalho entre produto, IA e engenharia, aproximando decisão e implementação.',
+      heroTagline: 'Trabalho entre produto, IA e engenharia, aproximando decisões de negócio, necessidades dos usuários e implementação técnica.',
 
       // SEO meta exclusive to About — not the site-wide siteDescription
       meta: {
@@ -250,7 +250,9 @@ export const ui = {
       intro: {
         p1: 'Minha trajetória em tecnologia começou próxima dos usuários. Passei mais de cinco anos no ecossistema TRON DAO / DLive atuando com suporte, onboarding, localização e feedback em português, inglês e espanhol. Depois, na exchange espanhola Bit2Me e em projetos da Play9/NineBlocks, passei a conectar comunidade, growth e produto, levando sinais de usuários para decisões de comunicação, discovery e backlog.',
         p2: 'Essa experiência me levou a papéis cada vez mais próximos de produto. Na Cripto Host, atuei como Product Owner, trabalhando com backlog, requisitos técnicos, pesquisa de infraestrutura e priorização junto à engenharia.',
-        p3: 'Hoje, como cofundador do ProfResolve, atuo em todo o ciclo do produto: discovery, visão, roadmap, UX, monetização e implementação técnica. Construí a plataforma de ponta a ponta, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade. Essa combinação entre entendimento do usuário, decisões de produto e execução técnica é o que levo para a próxima equipe.',
+        p3: 'Hoje, como cofundador do ProfResolve, atuo em todo o ciclo do produto: discovery, estratégia, roadmap, UX, monetização e implementação técnica. Participei diretamente da construção da plataforma, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade.',
+        p4: 'O ProfResolve evoluiu para um SaaS público, com mais de 1.200 usuários cadastrados organicamente, permitindo que decisões de produto sejam orientadas também pelo comportamento e feedback de professores reais.',
+        p5: 'Essa combinação entre entendimento do usuário, visão de negócio, decisões de produto e execução técnica é o que levo para a próxima equipe.',
       },
 
       transparency: 'Apresento apenas dados que consigo verificar; o status de cada projeto está indicado em cada case.',
@@ -268,21 +270,21 @@ export const ui = {
 
       focus: {
         title: 'Onde Atuo',
+        productStrategy: {
+          title: 'Estratégia e gestão de produto',
+          description: 'Trabalho na identificação de problemas, discovery, definição de visão, roadmap, escopo e priorização. Busco equilibrar necessidades dos usuários, objetivos de negócio e viabilidade técnica para orientar a evolução do produto.',
+        },
         aiProducts: {
           title: 'Produtos de IA',
-          description: 'Trabalho com produtos que usam LLMs, agentes e fluxos de IA, pensando não apenas na geração, mas também em confiabilidade, comportamento, custo e experiência do usuário.',
+          description: 'Trabalho com produtos que utilizam LLMs, agentes e fluxos de IA, considerando comportamento dos modelos, confiabilidade, experiência do usuário, custos operacionais e qualidade dos resultados.',
         },
         technicalProduct: {
           title: 'Technical Product',
-          description: 'Conecto decisões de produto a arquitetura, APIs, integrações, dados e restrições técnicas para entender o que é viável, onde estão os riscos e quais trade-offs fazem sentido.',
-        },
-        productStrategy: {
-          title: 'Estratégia de produto',
-          description: 'Trabalho na definição do problema, visão, escopo, prioridades e evolução do produto, buscando separar o que precisa ser construído agora do que ainda pode esperar.',
+          description: 'Conecto decisões de produto a arquitetura, APIs, integrações, dados e restrições técnicas. Participo da avaliação de viabilidade, identificação de riscos, definição de trade-offs e implementação de soluções.',
         },
         experimentation: {
           title: 'Experimentação e validação',
-          description: 'Uso protótipos, PoCs e MVPs para reduzir incerteza antes de aumentar o investimento, definindo o que precisa ser comprovado e quais sinais devem orientar a próxima decisão.',
+          description: 'Utilizo protótipos, PoCs, MVPs e feedback de usuários para reduzir incertezas, validar hipóteses e orientar decisões antes de ampliar o investimento em desenvolvimento.',
         },
       },
 
@@ -301,15 +303,15 @@ export const ui = {
         groups: [
           {
             category: 'IA e APIs',
-            items: ['LLMs', 'APIs', 'Saídas estruturadas', 'Fluxos de IA'],
+            items: ['LLMs', 'APIs', 'Saídas estruturadas', 'Roteamento de modelos', 'Fallback entre provedores', 'Fluxos de IA', 'Orquestração de agentes'],
           },
           {
             category: 'Engenharia de produto',
-            items: ['TypeScript', 'Python', 'React / Next.js', 'SQL'],
+            items: ['TypeScript', 'Python', 'React / Next.js', 'SQL', 'Pydantic', 'Tailwind CSS'],
           },
           {
             category: 'Arquitetura e entrega',
-            items: ['PostgreSQL', 'Redis', 'Git', 'Observabilidade'],
+            items: ['PostgreSQL', 'Redis', 'Git', 'Observabilidade', 'Testes automatizados', 'Integrações e pagamentos'],
           },
         ],
       },
@@ -445,7 +447,7 @@ export const ui = {
           focus: ['AI Product', 'Reliability', 'Product Economics'],
         },
         'super-squad-ai': {
-          category: 'AI Product · Developer Tools',
+          category: 'AI Product',
           statusBadge: 'Own-use tool',
           description: 'A multi-agent software engineering orchestrator with isolated Git execution and deterministic verification before integration.',
           highlights: [
@@ -610,7 +612,7 @@ export const ui = {
       title: 'About',
 
       // Hero tagline exclusive to About — not from profile.ts (which is shared globally)
-      heroTagline: 'I work across product, AI and engineering, bringing decision-making closer to implementation.',
+      heroTagline: 'I work across product, AI and engineering, bringing business decisions, user needs and technical implementation closer together.',
 
       // SEO meta exclusive to About — not the site-wide siteDescription
       meta: {
@@ -628,7 +630,9 @@ export const ui = {
       intro: {
         p1: 'My career in technology started close to users. I spent more than five years in the TRON DAO / DLive ecosystem working with support, onboarding, localization and feedback in Portuguese, English and Spanish. Later, at the Spanish exchange Bit2Me and in Play9/NineBlocks projects, I began connecting community, growth and product, bringing user signals into communication, discovery and backlog decisions.',
         p2: 'That experience led me to increasingly product-focused roles. At Cripto Host, I worked as a Product Owner, dealing with backlog, technical requirements, infrastructure research and prioritization alongside engineering.',
-        p3: 'Today, as co-founder of ProfResolve, I work across the entire product cycle: discovery, vision, roadmap, UX, monetization and technical implementation. I built the platform end to end, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms. This combination of user understanding, product decisions and technical execution is what I bring to the next team.',
+        p3: 'Today, as co-founder of ProfResolve, I work across the entire product cycle: discovery, strategy, roadmap, UX, monetization and technical implementation. I was directly involved in building the platform, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms.',
+        p4: 'ProfResolve grew into a public SaaS with over 1,200 organically registered users, enabling product decisions to be guided by the real behavior and feedback of practicing teachers.',
+        p5: 'This combination of user understanding, business vision, product decisions and technical execution is what I bring to the next team.',
       },
 
       transparency: 'I present only data I can verify; each project’s status is indicated in its case study.',
@@ -646,21 +650,21 @@ export const ui = {
 
       focus: {
         title: 'Where I Work',
+        productStrategy: {
+          title: 'Product Strategy & Management',
+          description: 'I work on problem identification, discovery, vision definition, roadmap, scope and prioritization, balancing user needs, business goals and technical feasibility to guide product evolution.',
+        },
         aiProducts: {
           title: 'AI Products',
-          description: 'I work on products built around LLMs, agents and AI workflows, with attention to reliability, model behavior, cost and user experience.',
+          description: 'I work on products that use LLMs, agents and AI workflows, considering model behavior, reliability, user experience, operational costs and output quality.',
         },
         technicalProduct: {
           title: 'Technical Product',
-          description: 'I connect product decisions to architecture, APIs, integrations, data and technical constraints to understand what is feasible, where the risks are and which trade-offs make sense.',
-        },
-        productStrategy: {
-          title: 'Product Strategy',
-          description: 'I work on problem definition, vision, scope, prioritization and product evolution, separating what needs to be built now from what can wait.',
+          description: 'I connect product decisions to architecture, APIs, integrations, data and technical constraints. I participate in feasibility assessment, risk identification, trade-off definition and solution implementation.',
         },
         experimentation: {
           title: 'Experimentation & Validation',
-          description: 'I use prototypes, PoCs and MVPs to reduce uncertainty before increasing investment, defining what needs to be proven and which signals should guide the next decision.',
+          description: 'I use prototypes, PoCs, MVPs and user feedback to reduce uncertainty, validate hypotheses and guide decisions before scaling development investment.',
         },
       },
 
@@ -679,15 +683,15 @@ export const ui = {
         groups: [
           {
             category: 'AI & APIs',
-            items: ['LLMs', 'APIs', 'Structured Outputs', 'AI Workflows'],
+            items: ['LLMs', 'APIs', 'Structured Outputs', 'Model Routing', 'Provider Fallback', 'AI Workflows', 'Agent Orchestration'],
           },
           {
             category: 'Product Engineering',
-            items: ['TypeScript', 'Python', 'React / Next.js', 'SQL'],
+            items: ['TypeScript', 'Python', 'React / Next.js', 'SQL', 'Pydantic', 'Tailwind CSS'],
           },
           {
             category: 'Architecture & Delivery',
-            items: ['PostgreSQL', 'Redis', 'Git', 'Observability'],
+            items: ['PostgreSQL', 'Redis', 'Git', 'Observability', 'Automated Testing', 'Integrations & Payments'],
           },
         ],
       },

@@ -78,6 +78,8 @@ const singleProject = featuredProjects.length === 1 ? (() => {
                       variant="hero"
                       locale={locale}
                       revealDelay={delay}
+                      logo={project.data.logo}
+                      logoPosition={project.data.logoPosition}
                     />
                   </div>
                 ) : null
@@ -97,6 +99,8 @@ const singleProject = featuredProjects.length === 1 ? (() => {
                   variant="default"
                   locale={locale}
                   revealDelay={0}
+                  logo={singleProject.project.data.logo}
+                  logoPosition={singleProject.project.data.logoPosition}
                 />
               </div>
             </div>

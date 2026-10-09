@@ -16,41 +16,47 @@ const contact = ui['en'].contact;
   description={about.meta.description}
   locale="en"
 >
-  <section class="section pt-28 lg:pt-32" aria-labelledby="about-heading">
+  <section class="section pt-20 lg:pt-32" aria-labelledby="about-heading">
     <div class="container">
 
       <!-- Hero -->
-      <header class="max-w-3xl mx-auto text-center mb-16 lg:mb-20" data-reveal>
-        <h1 id="about-heading" class="text-display-xl lg:text-display-lg font-bold tracking-tight text-foreground mb-6">
+      <header class="max-w-3xl mx-auto text-center mb-10 lg:mb-20" data-reveal>
+        <h1 id="about-heading" class="text-display-lg font-bold tracking-tight text-foreground mb-4 lg:mb-6">
           {about.title}
         </h1>
-        <p class="text-body-lg lg:text-display-sm text-muted-foreground">
+        <p class="text-body-lg text-muted-foreground">
           {about.heroTagline}
         </p>
       </header>
 
       <!-- Intro -->
-      <div class="max-w-3xl mx-auto mb-16 lg:mb-20" data-reveal>
-        <p class="text-body-lg text-muted-foreground mb-6">
+      <div class="max-w-3xl mx-auto mb-10 lg:mb-20" data-reveal>
+        <p class="text-body-md lg:text-body-lg text-muted-foreground mb-5 lg:mb-6">
           {about.intro.p1}
         </p>
-        <p class="text-body-md text-muted-foreground mb-6">
+        <p class="text-body-md text-muted-foreground mb-5 lg:mb-6">
           {about.intro.p2}
         </p>
-        <p class="text-body-md text-muted-foreground">
+        <p class="text-body-md text-muted-foreground mb-5 lg:mb-6">
           {about.intro.p3}
         </p>
+        <p class="text-body-md text-muted-foreground mb-5 lg:mb-6">
+          {about.intro.p4}
+        </p>
+        <p class="text-body-md text-muted-foreground mb-5 lg:mb-6">
+          {about.intro.p5}
+        </p>
+        <p class="text-body-sm text-muted-foreground">{about.transparency}</p>
       </div>
 
-      <section class="max-w-3xl mx-auto mb-16 lg:mb-20" aria-labelledby="timeline-heading" data-reveal>
-        <p class="text-body-md text-muted-foreground mb-8">{about.transparency}</p>
-        <h2 id="timeline-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-8">{about.timeline.title}</h2>
-        <ol class="border-l border-border pl-6 space-y-8">
+      <section class="max-w-3xl mx-auto mb-10 lg:mb-20" aria-labelledby="timeline-heading" data-reveal>
+        <h2 id="timeline-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6 lg:mb-8">{about.timeline.title}</h2>
+        <ol class="border-l border-border pl-5 lg:pl-6 space-y-6 lg:space-y-8">
           {about.timeline.items.map((item) => (
             <li class="relative">
-              <span class="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-background bg-accent" aria-hidden="true"></span>
+              <span class="absolute -left-[29px] lg:-left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-background bg-accent" aria-hidden="true"></span>
               <p class="text-caption font-mono text-muted-foreground">{item.period}</p>
-              <h3 class="mt-1 text-heading-md font-semibold text-foreground">{item.company}</h3>
+              <h3 class="mt-1 text-heading-sm lg:text-heading-md font-semibold text-foreground">{item.company}</h3>
               <p class="mt-1 text-body-sm font-medium text-foreground">{item.role}</p>
               <p class="mt-1 text-body-sm text-muted-foreground">{item.description}</p>
             </li>
@@ -59,84 +65,84 @@ const contact = ui['en'].contact;
       </section>
 
       <!-- Where I Work -->
-      <div class="max-w-4xl mx-auto mb-16 lg:mb-20">
-        <h2 class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-10 text-center" data-reveal>
+      <div class="max-w-4xl mx-auto mb-10 lg:mb-20">
+        <h2 class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6 lg:mb-10 text-center" data-reveal>
           {about.focus.title}
         </h2>
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div class="card p-6" data-reveal data-reveal-delay="0">
-            <h3 class="text-heading-md font-semibold text-foreground mb-3">{about.focus.aiProducts.title}</h3>
-            <p class="text-body-md text-muted-foreground">{about.focus.aiProducts.description}</p>
+        <div class="grid sm:grid-cols-2 gap-4 lg:gap-6">
+          <div class="card p-5 lg:p-6" data-reveal data-reveal-delay="0">
+            <h3 class="text-heading-sm lg:text-heading-md font-semibold text-foreground mb-2 lg:mb-3">{about.focus.productStrategy.title}</h3>
+            <p class="text-body-sm lg:text-body-md text-muted-foreground">{about.focus.productStrategy.description}</p>
           </div>
-          <div class="card p-6" data-reveal data-reveal-delay="80">
-            <h3 class="text-heading-md font-semibold text-foreground mb-3">{about.focus.technicalProduct.title}</h3>
-            <p class="text-body-md text-muted-foreground">{about.focus.technicalProduct.description}</p>
+          <div class="card p-5 lg:p-6" data-reveal data-reveal-delay="80">
+            <h3 class="text-heading-sm lg:text-heading-md font-semibold text-foreground mb-2 lg:mb-3">{about.focus.aiProducts.title}</h3>
+            <p class="text-body-sm lg:text-body-md text-muted-foreground">{about.focus.aiProducts.description}</p>
           </div>
-          <div class="card p-6" data-reveal data-reveal-delay="160">
-            <h3 class="text-heading-md font-semibold text-foreground mb-3">{about.focus.productStrategy.title}</h3>
-            <p class="text-body-md text-muted-foreground">{about.focus.productStrategy.description}</p>
+          <div class="card p-5 lg:p-6" data-reveal data-reveal-delay="160">
+            <h3 class="text-heading-sm lg:text-heading-md font-semibold text-foreground mb-2 lg:mb-3">{about.focus.technicalProduct.title}</h3>
+            <p class="text-body-sm lg:text-body-md text-muted-foreground">{about.focus.technicalProduct.description}</p>
           </div>
-          <div class="card p-6" data-reveal data-reveal-delay="240">
-            <h3 class="text-heading-md font-semibold text-foreground mb-3">{about.focus.experimentation.title}</h3>
-            <p class="text-body-md text-muted-foreground">{about.focus.experimentation.description}</p>
+          <div class="card p-5 lg:p-6" data-reveal data-reveal-delay="240">
+            <h3 class="text-heading-sm lg:text-heading-md font-semibold text-foreground mb-2 lg:mb-3">{about.focus.experimentation.title}</h3>
+            <p class="text-body-sm lg:text-body-md text-muted-foreground">{about.focus.experimentation.description}</p>
           </div>
         </div>
       </div>
 
       <!-- How I Work -->
-      <div class="max-w-4xl mx-auto mb-16 lg:mb-20">
-        <h2 class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-10 text-center" data-reveal>
+      <div class="max-w-4xl mx-auto mb-10 lg:mb-20">
+        <h2 class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6 lg:mb-10 text-center" data-reveal>
           {howIWork.title}
         </h2>
-        <div class="grid sm:grid-cols-3 gap-6">
-          <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="0">
-            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="grid sm:grid-cols-3 gap-4 lg:gap-6">
+          <div class="card p-5 lg:p-8" data-reveal data-reveal-delay="0">
+            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 lg:mb-6 text-accent" aria-hidden="true">
+              <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
             </div>
-            <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.product.title}</h3>
-            <p class="text-body-md text-muted-foreground mb-6">{howIWork.product.description}</p>
+            <h3 class="text-heading-md font-semibold text-foreground mb-2">{howIWork.product.title}</h3>
+            <p class="text-body-sm lg:text-body-md text-muted-foreground mb-4 lg:mb-6">{howIWork.product.description}</p>
             <ul class="space-y-2" role="list">
               {howIWork.skills.product.map((skill) => (
-                <li class="flex items-center gap-2 text-body-md text-muted-foreground">
-                  <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                <li class="flex items-center gap-2 text-body-sm lg:text-body-md text-muted-foreground">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
                   {skill}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="100">
-            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="card p-5 lg:p-8" data-reveal data-reveal-delay="100">
+            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 lg:mb-6 text-accent" aria-hidden="true">
+              <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 16l4-16M6 16l-4-8m16 8l-4-8m0 0L8 4m8 8v12" />
               </svg>
             </div>
-            <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.technology.title}</h3>
-            <p class="text-body-md text-muted-foreground mb-6">{howIWork.technology.description}</p>
+            <h3 class="text-heading-md font-semibold text-foreground mb-2">{howIWork.technology.title}</h3>
+            <p class="text-body-sm lg:text-body-md text-muted-foreground mb-4 lg:mb-6">{howIWork.technology.description}</p>
             <ul class="space-y-2" role="list">
               {howIWork.skills.technology.map((skill) => (
-                <li class="flex items-center gap-2 text-body-md text-muted-foreground">
-                  <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                <li class="flex items-center gap-2 text-body-sm lg:text-body-md text-muted-foreground">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
                   {skill}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="200">
-            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="card p-5 lg:p-8" data-reveal data-reveal-delay="200">
+            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 lg:mb-6 text-accent" aria-hidden="true">
+              <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.execution.title}</h3>
-            <p class="text-body-md text-muted-foreground mb-6">{howIWork.execution.description}</p>
+            <h3 class="text-heading-md font-semibold text-foreground mb-2">{howIWork.execution.title}</h3>
+            <p class="text-body-sm lg:text-body-md text-muted-foreground mb-4 lg:mb-6">{howIWork.execution.description}</p>
             <ul class="space-y-2" role="list">
               {howIWork.skills.execution.map((skill) => (
-                <li class="flex items-center gap-2 text-body-md text-muted-foreground">
-                  <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+                <li class="flex items-center gap-2 text-body-sm lg:text-body-md text-muted-foreground">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
                   {skill}
                 </li>
               ))}
@@ -146,13 +152,13 @@ const contact = ui['en'].contact;
       </div>
 
       <!-- Technical Toolkit -->
-      <div class="max-w-4xl mx-auto mb-16 lg:mb-20" data-reveal>
-        <h2 class="text-display-sm font-bold tracking-tight text-foreground mb-8 text-center">
+      <div class="max-w-4xl mx-auto mb-10 lg:mb-20" data-reveal>
+        <h2 class="text-display-sm font-bold tracking-tight text-foreground mb-6 lg:mb-8 text-center">
           {about.toolkit.title}
         </h2>
-        <div class="grid sm:grid-cols-3 gap-4">
+        <div class="grid sm:grid-cols-3 gap-3 lg:gap-4">
           {about.toolkit.groups.map((group) => (
-            <div class="card p-5">
+            <div class="card p-4 lg:p-5">
               <h3 class="text-heading-sm font-semibold text-foreground mb-3">{group.category}</h3>
               <div class="flex flex-wrap gap-2">
                 {group.items.map((item) => (
@@ -165,16 +171,16 @@ const contact = ui['en'].contact;
       </div>
 
       <!-- CTA -->
-      <div class="max-w-2xl mx-auto" data-reveal="scale">
-        <div class="card p-8 lg:p-12 text-center">
-          <h2 class="text-display-sm font-bold tracking-tight text-foreground mb-4">
+      <div class="max-w-2xl mx-auto pb-8 lg:pb-0" data-reveal="scale">
+        <div class="card p-6 lg:p-12 text-center">
+          <h2 class="text-display-sm font-bold tracking-tight text-foreground mb-3 lg:mb-4">
             {contact.title}
           </h2>
-          <p class="text-body-lg text-muted-foreground mb-8">
+          <p class="text-body-md text-muted-foreground mb-6 lg:mb-8">
             {contact.subtitle}
           </p>
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
-            <a href={profile.linkedin} class="btn-primary" target="_blank" rel="noopener noreferrer">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4 flex-wrap">
+            <a href={profile.linkedin} class="btn-primary w-full sm:w-auto" target="_blank" rel="noopener noreferrer">
               {contact.ctaLinkedin}
             </a>
             <EmailReveal
@@ -187,7 +193,7 @@ const contact = ui['en'].contact;
               href="/lucas-cven.pdf"
               download
               aria-label="Download resume as PDF"
-              class="btn-secondary inline-flex items-center gap-2"
+              class="btn-secondary inline-flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

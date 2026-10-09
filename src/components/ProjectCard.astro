@@ -67,9 +67,9 @@ const cardMetrics = verifiedOnly(metrics).slice(0, 4);
           )}
         </div>
 
-        <!-- Logo square -->
-        <div class="project-card-logo shrink-0" aria-hidden="true">
-          {logo ? (
+        <!-- Logo square (only when a logo is defined) -->
+        {logo && (
+          <div class="project-card-logo shrink-0" aria-hidden="true">
             <img
               src={logo}
               alt=""
@@ -78,10 +78,8 @@ const cardMetrics = verifiedOnly(metrics).slice(0, 4);
               loading="lazy"
               draggable="false"
             />
-          ) : (
-            <span class="project-card-logo__placeholder" />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </header>
 
