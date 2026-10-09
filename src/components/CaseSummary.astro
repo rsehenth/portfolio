@@ -1,0 +1,29 @@
+---
+interface Props {
+  locale?: 'pt-BR' | 'en';
+  problem: string;
+  role: string;
+  result: string;
+  keyDecision: string;
+}
+
+const { locale = 'pt-BR', problem, role, result, keyDecision } = Astro.props;
+const labels = locale === 'pt-BR'
+  ? ['Problema', 'Meu papel', 'Resultado', 'Decisão-chave']
+  : ['Problem', 'My role', 'Result', 'Key decision'];
+const items = [problem, role, result, keyDecision];
+---
+
+<section class="mb-6 rounded-2xl border border-border bg-card p-6 lg:p-8" aria-labelledby="case-summary-heading" data-reveal="scale">
+  <h2 id="case-summary-heading" class="mb-5 text-caption font-semibold uppercase tracking-widest text-muted-foreground">
+    {locale === 'pt-BR' ? 'Resumo' : 'Summary'}
+  </h2>
+  <dl class="grid gap-5 sm:grid-cols-2">
+    {items.map((value, index) => (
+      <div>
+        <dt class="text-caption font-semibold uppercase tracking-wider text-muted-foreground">{labels[index]}</dt>
+        <dd class="mt-1 text-body-sm leading-relaxed text-foreground">{value}</dd>
+      </div>
+    ))}
+  </dl>
+</section>

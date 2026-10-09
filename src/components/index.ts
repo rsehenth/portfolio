@@ -34,6 +34,7 @@ export const Callout = createComponentLoader('@/components/Callout.astro');
 export const RoleBlocks = createComponentLoader('@/components/RoleBlocks.astro');
 export const ComparisonBlock = createComponentLoader('@/components/ComparisonBlock.astro');
 export const StatsGrid = createComponentLoader('@/components/StatsGrid.astro');
+export const CaseMedia = createComponentLoader('@/components/CaseMedia.astro');
 
 // For the mdx() integration config, we need a plain object
 // But we can't import .astro files there. So we export this for reference.
@@ -49,4 +50,5 @@ export default {
   RoleBlocks,
   ComparisonBlock,
   StatsGrid,
+  CaseMedia,
 };

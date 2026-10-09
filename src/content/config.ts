@@ -14,6 +14,19 @@ const metricSchema = z.object({
   project: z.string().optional(),
 });
 
+const caseSummarySchema = z.object({
+  problem: z.string(),
+  role: z.string(),
+  result: z.string(),
+  keyDecision: z.string(),
+});
+
+const statusEvidenceSchema = z.object({
+  stage: z.string(),
+  evidence: z.string(),
+  nextValidation: z.string(),
+});
+
 type Metric = z.infer<typeof metricSchema>;
 
 const projects = defineCollection({
@@ -39,6 +52,9 @@ const projects = defineCollection({
     stage: z.string().optional(),
     // Optional note rendered under the stage (e.g. commercial status)
     stageNote: z.string().optional(),
+    caseSummary: caseSummarySchema.optional(),
+    statusEvidence: statusEvidenceSchema.optional(),
+    statusBadge: z.string().optional(),
     // Upstream/open-source attribution link (rendered on the "Base" row)
     openSourceUrl: z.string().optional(),
     status: z.enum(['Active', 'Completed', 'Archived', 'On Hold']),
