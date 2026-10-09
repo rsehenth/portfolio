@@ -57,6 +57,7 @@ const projects = defineCollection({
     statusBadge: z.string().optional(),
     // Upstream/open-source attribution link (rendered on the "Base" row)
     openSourceUrl: z.string().optional(),
+    openSourceLabel: z.string().optional(),
     status: z.enum(['Active', 'Completed', 'Archived', 'On Hold']),
     // Draft entries are excluded from every route (used to hide unpublished cases)
     draft: z.boolean().default(false),
