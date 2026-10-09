@@ -30,6 +30,7 @@ const mdxComponents = {
   ComparisonBlock: (await import('@/components/ComparisonBlock.astro')).default,
   StatsGrid: (await import('@/components/StatsGrid.astro')).default,
   CaseMedia: (await import('@/components/CaseMedia.astro')).default,
+  CaseCarousel: (await import('@/components/CaseCarousel.astro')).default,
 };
 ---
 
@@ -56,6 +57,8 @@ const mdxComponents = {
   scaleMetrics={d.scaleMetrics}
   productMetrics={d.productMetrics}
   cover={d.cover}
+  logo={d.logo}
+  logoPosition={d.logoPosition}
   externalUrl={d.externalUrl}
   externalUrlLabel={d.externalUrlLabel}
   snapshotMode={d.snapshotMode}

@@ -63,6 +63,10 @@ const projects = defineCollection({
     draft: z.boolean().default(false),
     featured: z.boolean().default(false),
     cover: z.string().optional(),
+    // Small square logo/icon shown on project cards (ideal: 120×120 px, 1:1 ratio)
+    logo: z.string().optional(),
+    // CSS object-position for the logo image (e.g. 'center', 'top left') — defaults to 'center'
+    logoPosition: z.string().optional(),
     tags: z.array(z.string()).default([]),
     // Small capability hints shown on project cards (never visual-heavy)
     demonstrates: z.array(z.string()).default([]),
