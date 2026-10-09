@@ -30,9 +30,9 @@ export const ui = {
 
     // Hero
     hero: {
-      badge: 'Technical Product Manager · AI Products · Product × Engineering',
-      tagline: 'Construo produtos na interseção entre IA, Produto e Engenharia.',
-      subheadline: 'Conecto estratégia de produto, decisões técnicas e execução hands-on para transformar problemas complexos em produtos simples, confiáveis e escaláveis.',
+      badge: 'Technical Product Manager · AI Products',
+      tagline: 'Descubro o problema, decido o que construir e implemento.',
+      subheadline: 'Cofundador do ProfResolve, SaaS de IA com mais de 1.200 professores cadastrados. Antes, 5+ anos em suporte, localização e comunidade no ecossistema Web3, em português, inglês e espanhol.',
       ctaPrimary: 'Ver cases',
       ctaSecondary: 'LinkedIn',
       ctaCV: 'Baixar CV (PDF)',
@@ -58,6 +58,7 @@ export const ui = {
       projects: {
         profresolve: {
           category: 'AI Product · SaaS',
+          statusBadge: 'Ativo',
           description: 'Plataforma de IA para a rotina docente, com geração de materiais, monetização por créditos e arquitetura de resiliência para LLMs.',
           highlights: [
             { value: '16', label: 'Geradores' },
@@ -67,6 +68,7 @@ export const ui = {
         },
         'super-squad-ai': {
           category: 'AI Product · Developer Tools',
+          statusBadge: 'Ferramenta de uso próprio',
           description: 'Orquestrador multiagente para desenvolvimento de software, com execução isolada em Git e verificação determinística antes da integração.',
           highlights: [
             { value: '1 + N', label: 'Agent architecture' },
@@ -76,6 +78,7 @@ export const ui = {
         },
         'project-aurora': {
           category: 'Product Leadership · Game Systems',
+          statusBadge: 'Em desenvolvimento',
           description: "Beat 'em up 2D em produção no qual lidero visão de produto, sistemas, progressão e priorização em uma equipe de três pessoas.",
           highlights: [
             { value: '3', label: 'Pessoas na equipe' },
@@ -85,6 +88,7 @@ export const ui = {
         },
         cultos: {
           category: 'Technical Product · Church Tech',
+          statusBadge: 'Em desenvolvimento',
           description: 'MVP desktop adaptado para a operação de mídia em igrejas brasileiras, com experiência PT-BR, funcionamento offline e sincronização opcional com a nuvem.',
           highlights: [
             { value: '9 + mídia', label: 'Coleções sincronizadas' },
@@ -391,9 +395,9 @@ export const ui = {
 
     // Hero
     hero: {
-      badge: 'Technical Product Manager · AI Products · Product × Engineering',
-      tagline: 'I build products at the intersection of AI, Product and Engineering.',
-      subheadline: 'I connect product strategy, technical decisions and hands-on execution to turn complex problems into simple, reliable and scalable products.',
+      badge: 'Technical Product Manager · AI Products',
+      tagline: 'I discover the problem, decide what to build and implement it.',
+      subheadline: 'Co-founder of ProfResolve, an AI SaaS with more than 1,200 registered teachers. Before that, 5+ years in support, localization and community in the Web3 ecosystem, in Portuguese, English and Spanish.',
       ctaPrimary: 'View cases',
       ctaSecondary: 'LinkedIn',
       ctaCV: 'Download CV (PDF)',
@@ -419,6 +423,7 @@ export const ui = {
       projects: {
         profresolve: {
           category: 'AI Product · SaaS',
+          statusBadge: 'Active',
           description: 'An AI platform for educators, combining content generation, credit-based monetization and a resilient LLM architecture.',
           highlights: [
             { value: '16', label: 'Generators' },
@@ -428,6 +433,7 @@ export const ui = {
         },
         'super-squad-ai': {
           category: 'AI Product · Developer Tools',
+          statusBadge: 'Own-use tool',
           description: 'A multi-agent software engineering orchestrator with isolated Git execution and deterministic verification before integration.',
           highlights: [
             { value: '1 + N', label: 'Agent architecture' },
@@ -437,6 +443,7 @@ export const ui = {
         },
         'project-aurora': {
           category: 'Product Leadership · Game Systems',
+          statusBadge: 'In development',
           description: "A 2D beat 'em up in production where I lead product vision, game systems, progression and prioritization within a three-person team.",
           highlights: [
             { value: '3', label: 'People on the team' },
@@ -446,6 +453,7 @@ export const ui = {
         },
         cultos: {
           category: 'Technical Product · Church Tech',
+          statusBadge: 'In development',
           description: 'A desktop MVP tailored for media operation in Brazilian churches, combining a native PT-BR experience, offline-first usage and optional cloud synchronization.',
           highlights: [
             { value: '9 + media', label: 'Synced collections' },

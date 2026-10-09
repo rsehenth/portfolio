@@ -1,13 +1,8 @@
 ---
-// ProjectsIndex.astro — Projects listing page: editorial two-section layout
-// Section 1: Featured Work  — larger cards, 2-col (md+)
-// Section 2: More Projects  — compact cards, 2-col grid (md+)
-//
-// Editorial data source: ui[locale].projectsIndex (NOT MDX frontmatter directly)
-// MDX frontmatter is only used for: title, cover, href, and as fallback.
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
 import { ui, type Locale } from '@/i18n';
-import { getPublishedProjects, projectKey, caseUrl, type ProjectEntry } from '@/lib/projects';
+import { getPublishedProjects, projectKey, type ProjectEntry } from '@/lib/projects';
 
 interface Props {
   locale?: Locale;
@@ -15,306 +10,62 @@ interface Props {
 
 const { locale = 'pt-BR' } = Astro.props;
 const projects = await getPublishedProjects(locale);
-
 const page = ui[locale].projectsPage;
-const indexData = ui[locale].projectsIndex;
 
-// ── Featured vs More ─────────────────────────────────────────────────────────
-// Controlled by projectsIndex.featured in ui.ts — NOT by slice() or order.
-const featuredSlugs: readonly string[] = indexData.featured;
-const featuredProjects = projects.filter((p) => featuredSlugs.includes(projectKey(p)));
-const moreProjects     = projects.filter((p) => !featuredSlugs.includes(projectKey(p)));
-
-// ── Editorial card data helper ───────────────────────────────────────────────
-// Reads from projectsIndex layer; falls back to MDX only for unrecognised slugs.
-type Highlight = { value: string; label: string };
-
-interface CardData {
-  category: string;
+type ProjectGroup = {
+  id: string;
+  title: string;
   description: string;
-  highlights: Highlight[];
-  focus: string[];
-  stage: string | null;
-}
+  keys: string[];
+};
 
-function getCardData(project: ProjectEntry): CardData {
-  const key  = projectKey(project);
-  const pool = indexData.projects as Record<string, {
-    category: string;
-    description: string;
-    highlights: readonly { value: string; label: string }[];
-    focus: readonly string[];
-    stage?: string;
-  } | undefined>;
-  const ed   = pool[key];
+const groups: ProjectGroup[] = locale === 'pt-BR'
+  ? [
+      { id: 'active', title: 'Produtos ativos', description: 'Produtos disponíveis ou em uso no fluxo de trabalho.', keys: ['profresolve', 'super-squad-ai'] },
+      { id: 'development', title: 'Em desenvolvimento', description: 'Produtos e experiências em evolução, com próximas validações definidas.', keys: ['cultos', 'project-aurora', 'project-stream'] },
+      { id: 'closed', title: 'Concluídos, encerrados e experimentais', description: 'Projetos concluídos, encerrados ou usados para explorar uma hipótese.', keys: ['cripto-host-decentralized-hosting', 'universal-docs', 'mosaic'] },
+    ]
+  : [
+      { id: 'active', title: 'Active products', description: 'Products available publicly or used in the development workflow.', keys: ['profresolve', 'super-squad-ai'] },
+      { id: 'development', title: 'In development', description: 'Products and experiences still evolving, with defined next validations.', keys: ['cultos', 'project-aurora', 'project-stream'] },
+      { id: 'closed', title: 'Completed, closed and experimental', description: 'Projects completed, closed or used to explore a hypothesis.', keys: ['cripto-host-decentralized-hosting', 'universal-docs', 'mosaic'] },
+    ];
 
-  return {
-    category:   ed?.category   ?? project.data.subtitle ?? '',
-    description: ed?.description ?? project.data.description,
-    highlights: ed?.highlights
-      ? (ed.highlights as Highlight[])
-      : [],
-    focus:      ed?.focus
-      ? [...ed.focus].slice(0, 3)
-      : (project.data.demonstrates ?? []).slice(0, 3),
-    stage:      ed?.stage ?? null,
-  };
+function projectsForGroup(group: ProjectGroup): ProjectEntry[] {
+  return group.keys
+    .map((key) => projects.find((project) => projectKey(project) === key))
+    .filter((project): project is ProjectEntry => Boolean(project));
 }
 ---
 
-<BaseLayout
-  title={page.title}
-  description={page.description}
-  canonical={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
-  locale={locale}
->
-  <div class="pt-24 pb-20 lg:pt-28 lg:pb-28">
+<BaseLayout title={page.title} description={page.description} canonical={locale === 'pt-BR' ? '/projects/' : '/en/projects/'} locale={locale}>
+  <div class="pb-20 pt-24 lg:pb-28 lg:pt-28">
     <div class="container">
-
-      <!-- Page header -->
       <header class="mb-14 lg:mb-16" data-reveal>
-        <h1 class="text-display-xl lg:text-display-lg font-bold tracking-tight text-foreground mb-3">
-          {page.title}
-        </h1>
-        <p class="text-body-lg text-muted-foreground max-w-2xl">
-          {page.subtitle}
-        </p>
+        <h1 class="mb-3 text-display-xl font-bold tracking-tight text-foreground lg:text-display-lg">{page.title}</h1>
+        <p class="max-w-2xl text-body-lg text-muted-foreground">{page.subtitle}</p>
       </header>
 
-      <!-- ─── SECTION 1: Featured Work ──────────────────────────────────── -->
-      {featuredProjects.length > 0 && (
-        <section aria-labelledby="featured-heading" class="mb-16 lg:mb-20">
-          <h2
-            id="featured-heading"
-            class="text-caption font-semibold uppercase tracking-widest text-muted-foreground mb-6"
-          >
-            {page.featuredHeading}
-          </h2>
-
-          <div class="grid gap-6 md:gap-8 md:grid-cols-2 items-stretch">
-            {featuredProjects.map((project, i) => {
-              const key = projectKey(project);
-              const href = caseUrl(locale, key);
-              const { title, cover } = project.data;
-              const card = getCardData(project);
-
-              return (
-                <article
-                  class="card group relative flex flex-col h-full hover:border-accent/40 hover:shadow-xl transition-all duration-normal"
-                  aria-labelledby={`fi-${key}-title`}
-                  data-reveal
-                  data-reveal-delay={String(i * 120)}
-                >
-                  {/* Cover image */}
-                  {cover && (
-                    <div class="relative overflow-hidden aspect-[16/10] shrink-0">
-                      <img
-                        src={cover}
-                        alt=""
-                        class="w-full h-full object-cover transition-transform duration-slow group-hover:scale-[1.03]"
-                        loading="lazy"
-                      />
-                      <div class="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-normal" />
-                    </div>
-                  )}
-
-                  <div class="flex flex-col flex-1 p-7 lg:p-8">
-
-                    {/* Category + Stage */}
-                    <div class="mb-3">
-                      {card.category && (
-                        <p class="text-caption font-medium text-muted-foreground">
-                          {card.category}
-                        </p>
-                      )}
-                      {card.stage && (
-                        <p class="text-caption text-muted-foreground/60 mt-0.5">
-                          {card.stage}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      id={`fi-${key}-title`}
-                      class="text-display-sm font-bold tracking-tight text-foreground group-hover:text-accent transition-colors duration-fast mb-4"
-                    >
-                      {title}
-                    </h3>
-
-                    {/* Description — natural height, no aggressive clamp */}
-                    <p class="text-body-md text-muted-foreground leading-relaxed mb-5 flex-1">
-                      {card.description}
-                    </p>
-
-                    {/* Highlights — max 2; 1-col if single item */}
-                    {card.highlights.length > 0 && (
-                      <div
-                        class={`grid gap-4 mb-5 pt-4 border-t border-border ${card.highlights.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}
-                      >
-                        {card.highlights.map((h) => (
-                          <div class="min-w-0">
-                            <div class="text-heading-lg font-bold text-foreground">{h.value}</div>
-                            <div class="text-caption text-muted-foreground leading-tight">{h.label}</div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Focus chips — max 3, no label, no "+N" overflow */}
-                    {card.focus.length > 0 && (
-                      <div class="flex flex-wrap gap-2 mb-5">
-                        {card.focus.map((f) => (
-                          <span class="inline-flex items-center px-2.5 py-1 text-caption font-medium rounded-md bg-accent/8 text-accent border border-accent/20">
-                            {f}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* CTA */}
-                    <div class="mt-auto pt-4 border-t border-border">
-                      <a
-                        href={href}
-                        class="link-underline inline-flex items-center gap-1.5 text-body-sm font-medium text-accent hover:text-accent/80 transition-colors duration-fast"
-                      >
-                        {page.viewCase}
-                        <svg class="w-4 h-4 transition-transform duration-fast group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </a>
-                    </div>
+      <div class="space-y-16 lg:space-y-20">
+        {groups.map((group) => {
+          const entries = projectsForGroup(group);
+          return entries.length > 0 && (
+            <section aria-labelledby={`${group.id}-heading`}>
+              <header class="mb-6 max-w-2xl">
+                <h2 id={`${group.id}-heading`} class="text-display-sm font-bold tracking-tight text-foreground">{group.title}</h2>
+                <p class="mt-2 text-body-md text-muted-foreground">{group.description}</p>
+              </header>
+              <div class="grid gap-5 md:grid-cols-2 lg:gap-6">
+                {entries.map((project, index) => (
+                  <div data-reveal data-reveal-delay={String((index % 2) * 80)}>
+                    <ProjectCard project={project} locale={locale} headingLevel={3} />
                   </div>
-
-                  {/* Full-card accessible link overlay */}
-                  <a href={href} class="absolute inset-0 rounded-2xl" tabindex="-1" aria-hidden="true"></a>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      <!-- ─── SECTION 2: More Projects ──────────────────────────────────── -->
-      {moreProjects.length > 0 && (
-        <section aria-labelledby="more-heading">
-          <h2
-            id="more-heading"
-            class="text-caption font-semibold uppercase tracking-widest text-muted-foreground mb-6"
-          >
-            {page.moreHeading}
-          </h2>
-
-          <div class="grid gap-5 md:gap-6 md:grid-cols-2">
-            {moreProjects.map((project, i) => {
-              const key = projectKey(project);
-              const href = caseUrl(locale, key);
-              const { title, cover } = project.data;
-              const card = getCardData(project);
-
-              return (
-                <article
-                  class="card group relative flex flex-col h-full hover:border-accent/40 hover:shadow-lg transition-all duration-normal"
-                  aria-labelledby={`mp-${key}-title`}
-                  data-reveal
-                  data-reveal-delay={String((i % 2) * 80)}
-                >
-                  {/* Cover image — only when available */}
-                  {cover && (
-                    <div class="relative overflow-hidden aspect-[16/9] shrink-0">
-                      <img
-                        src={cover}
-                        alt=""
-                        class="w-full h-full object-cover transition-transform duration-slow group-hover:scale-[1.03]"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-
-                  <div class="flex flex-col flex-1 p-6">
-
-                    {/* Category + Stage */}
-                    <div class="mb-2">
-                      {card.category && (
-                        <p class="text-caption font-medium text-muted-foreground">
-                          {card.category}
-                        </p>
-                      )}
-                      {card.stage && (
-                        <p class="text-caption text-muted-foreground/60 mt-0.5">
-                          {card.stage}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      id={`mp-${key}-title`}
-                      class="text-heading-lg font-semibold text-foreground group-hover:text-accent transition-colors duration-fast mb-3"
-                    >
-                      {title}
-                    </h3>
-
-                    {/* Description — natural height, no aggressive clamp */}
-                    <p class="text-body-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-                      {card.description}
-                    </p>
-
-                    {/* Highlights — max 2; 1-col if single item */}
-                    {card.highlights.length > 0 && (
-                      <div
-                        class={`grid gap-3 mb-4 pt-3 border-t border-border ${card.highlights.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}
-                      >
-                        {card.highlights.map((h) => (
-                          <div class="min-w-0">
-                            <span class="text-heading-md font-bold text-foreground">{h.value}</span>
-                            <span class="ml-1.5 text-caption text-muted-foreground">{h.label}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Focus chips — max 3, no label, no "+N" overflow */}
-                    {card.focus.length > 0 && (
-                      <div class="flex flex-wrap gap-1.5 mb-4">
-                        {card.focus.map((f) => (
-                          <span class="inline-flex items-center px-2 py-0.5 text-caption font-medium rounded bg-accent/8 text-accent border border-accent/20">
-                            {f}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* CTA */}
-                    <div class="mt-auto pt-3 border-t border-border">
-                      <a
-                        href={href}
-                        class="link-underline inline-flex items-center gap-1.5 text-body-sm font-medium text-accent hover:text-accent/80 transition-colors duration-fast"
-                      >
-                        {page.viewCase}
-                        <svg class="w-3.5 h-3.5 transition-transform duration-fast group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Full-card accessible link overlay */}
-                  <a href={href} class="absolute inset-0 rounded-2xl" tabindex="-1" aria-hidden="true"></a>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      <!-- Empty state -->
-      {projects.length === 0 && (
-        <div class="text-center py-20">
-          <p class="text-body-lg text-muted-foreground">{page.empty}</p>
-        </div>
-      )}
-
+                ))}
+              </div>
+            </section>
+          );
+        })}
+      </div>
     </div>
   </div>
 </BaseLayout>

@@ -11,7 +11,10 @@ import { getPublishedProjects, projectKey, caseUrl } from '@/lib/projects';
 const { locale = 'pt-BR' } = Astro.props;
 
 const projects = await getPublishedProjects(locale);
-const featuredProjects = projects.filter((p) => p.data.featured);
+const featuredOrder = ['profresolve', 'super-squad-ai', 'project-aurora', 'cultos'];
+const featuredProjects = featuredOrder
+  .map((key) => projects.find((project) => projectKey(project) === key))
+  .filter((project): project is NonNullable<typeof project> => Boolean(project));
 
 const meta = ui[locale].meta;
 const work = ui[locale].work;

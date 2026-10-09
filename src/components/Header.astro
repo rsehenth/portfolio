@@ -1,11 +1,10 @@
 ---
 // Header.astro - Site header with navigation and language selector
-import type { AstroProps } from 'astro';
 import { navigation, ctaButtons } from '@/data/profile';
 import { ui, type Locale, t } from '@/i18n';
 import ThemeToggle from '@/components/ThemeToggle.astro';
 
-interface Props extends AstroProps {
+interface Props {
   class?: string;
   locale?: Locale;
 }
@@ -34,7 +33,7 @@ const altUrl = altLocale === 'pt-BR' ? (pathWithoutLocale || '/') : `/en${pathWi
       <!-- Navigation -->
       <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
         <a
-          href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+          href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
           class="link-underline text-body-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-fast"
         >
           {navItems.projects}
@@ -79,7 +78,7 @@ const altUrl = altLocale === 'pt-BR' ? (pathWithoutLocale || '/') : `/en${pathWi
           {headerCta.linkedin}
         </a>
         <a
-          href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+          href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
           class="btn-primary hidden sm:inline-flex"
         >
           {headerCta.viewWork}
@@ -104,7 +103,7 @@ const altUrl = altLocale === 'pt-BR' ? (pathWithoutLocale || '/') : `/en${pathWi
     <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-normal" role="navigation" aria-label="Mobile navigation">
       <div class="py-4 space-y-2 border-t border-border">
         <a
-          href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+          href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
           class="block px-2 py-3 text-body-md font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors duration-fast"
         >
           {navItems.projects}
@@ -144,7 +143,7 @@ const altUrl = altLocale === 'pt-BR' ? (pathWithoutLocale || '/') : `/en${pathWi
             {headerCta.linkedin}
           </a>
           <a
-            href={locale === 'pt-BR' ? '/#work' : '/en/#work'}
+            href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
             class="block px-2 py-3 text-body-md font-medium text-center btn-primary"
           >
             {headerCta.viewWork}
