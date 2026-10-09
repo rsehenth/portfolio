@@ -1,10 +1,10 @@
----
+﻿---
 title: ProfResolve
 locale: en
 subtitle: AI SaaS for educators
 description: "A platform that turns teaching needs into structured, editable and exportable materials, combining AI, credit-based monetization and workflows designed for educators."
 tagline: "Building a reliable AI product for educators."
-summary: "An AI SaaS for educators that turns recurring teaching tasks into structured, editable and distribution-ready materials. The product is publicly available and has surpassed 1,200 registered users organically."
+summary: "An AI SaaS for educators that turns repetitive teaching tasks into structured, editable and distribution-ready materials. The product is publicly available and has surpassed 1,200 registered users organically."
 year: 2026
 role: Technical Product / Product + Hands-on Development
 productType: SaaS · AI · Education
@@ -25,7 +25,10 @@ featured: true
 externalUrl: "https://www.profresolve.com.br"
 externalUrlLabel: "Visit ProfResolve ↗"
 snapshotMode: "product-technical"
-# cover: re-enable only with a real screenshot/image (public/projects/...)
+views: true
+readingTime:
+  basic: 2
+  full: 8
 logo: /projects/profresolve/logo-profresolve.webp
 logoPosition: "center"
 tags:
@@ -109,17 +112,118 @@ seo:
 order: 10
 ---
 
-## Product in Use
+<BasicView>
 
-ProfResolve is publicly available at profresolve.com.br and has surpassed 1,200 registered users organically. The platform sees recurring usage while continuing to evolve based on how teachers actually use it.
+## The Problem
 
-Having a product in active use changes how decisions get made. Instead of working from assumptions, we can observe which flows educators return to, where they run into friction and which features are worth building next.
+Educators rewrite lesson plans, activities and assessments constantly. The goal was to cut that repetitive work without taking control of the result away from the teacher.
+
+## How I Validated It
+
+<FlowDiagram
+  label="ProfResolve validation"
+  steps={[
+    'Pilot in 3 schools in Santiago, RS with 20+ educators',
+    'Adjustments through the first final version',
+    'Public survey in the dashboard (6 questions, 100+ organic responses)',
+  ]}
+/>
+
+{/* TODO: add "What we learned from educators" when the main survey findings are available. */}
+
+## Four Product Decisions
+
+### AI failure never costs the educator a credit
+
+A model chain with retry, cross-provider fallback and automatic credit refund. Trade-off: more mechanisms to maintain, in exchange for product trust.
+
+<SeeFull to="falha-de-ia" label="See details" />
+
+### AI cost became pricing
+
+Credits as the consumption unit, with cost per generation type, and monthly/annual subscriptions plus one-off packs. Trade-off: pricing now tracks model costs.
+
+<SeeFull to="custo-de-ia" label="See details" />
+
+### Predictability over fluidity
+
+SSE streaming was tested and rolled back to synchronous generation because parsing failures produced partial content. Trade-off: less sense of progressive response.
+
+<SeeFull to="previsibilidade" label="See details" />
+
+### Buy where it is not a differentiator
+
+A custom crossword engine placed 4 to 7 of 20 words; it was replaced with a specialized library and the effort went into the experience.
+
+<SeeFull to="build-vs-buy" label="See details" />
+
+## Result
+
+In production, with 1,200+ organically registered educators, 16 content generators and 7 educational games. Revenue combines subscriptions and one-off credit packs.
+
+<StatsGrid
+  label="Product metrics"
+  stats={[
+    { value: '1,200+', label: 'Registered educators' },
+    { value: '16', label: 'Content generators' },
+    { value: '7', label: 'Educational games' },
+    { value: '100+', label: 'Survey responses' },
+  ]}
+/>
+
+<CaseMedia
+  src="/projects/profresolve/dashboardprof.webp"
+  alt="ProfResolve dashboard showing the available content generators for educators"
+  width={1526}
+  height={1177}
+  caption="Main dashboard — overview of available generators for the educator"
+  protected={true}
+/>
+
+<div class="not-prose mt-8">
+  <button
+    type="button"
+    data-view-btn-cta="full"
+    class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-foreground px-5 py-3 text-body-sm font-semibold text-background shadow-sm transition-all duration-fast hover:opacity-90"
+  >
+    See the full case: flow, reliability and architecture
+    <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+    </svg>
+  </button>
+</div>
+
+</BasicView>
+
+<FullView>
+
+<nav aria-label="In this case" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">In this case:</span>
+  <a href="#produto-em-uso" class="link-underline hover:text-foreground">Product</a>
+  <span aria-hidden="true">·</span>
+  <a href="#falha-de-ia" class="link-underline hover:text-foreground">Decisions</a>
+  <span aria-hidden="true">·</span>
+  <a href="#engenharia" class="link-underline hover:text-foreground">Engineering</a>
+</nav>
+
+<h2 id="produto-em-uso">Product in Use</h2>
+
+ProfResolve is publicly available at profresolve.com.br. The platform continues to evolve based on how teachers actually use it.
+
+Having a product in active use by educators changes how decisions get made. Instead of working from assumptions, we can observe which flows educators return to, where they run into friction and which features are worth building next.
+
+<CaseMedia
+  src="/projects/profresolve/dashboardprof.webp"
+  alt="ProfResolve dashboard showing the available content generators for educators"
+  width={1526}
+  height={1177}
+  caption="Main dashboard — overview of available generators for the educator"
+  protected={true}
+/>
 
 ## The Problem
 
 Educators spend a significant part of their time creating lesson plans, assessments, activities and adaptations. ProfResolve was built to reduce that repetitive workload by turning a pedagogical need into structured, editable and ready-to-use content.
-
-That hypothesis now exists beyond a prototype: the product is publicly available and has surpassed 1,200 registered users organically.
 
 ## Validation with educators
 
@@ -141,7 +245,7 @@ After that, the dashboard offered a public six-question survey: four multiple-ch
 
 {/* TODO [CONFIRM]: after submitting the survey, responses were sent as a formatted email through the Resend API to the platform contact and the educator received 300 thank-you credits. */}
 
-{/* TODO: add “What we learned from educators” when the main survey findings and resulting product changes are available. */}
+{/* TODO: add "What we learned from educators" when the main survey findings and resulting product changes are available. */}
 
 ## Revenue model
 
@@ -155,35 +259,19 @@ The project started with a simple idea: AI could reduce the repetitive side of c
 
 The platform grew from that idea into a product with multiple content generators, editing, exports, credits, payments, educational games and reliability mechanisms built around LLM operations.
 
-With more than 1,200 registered users and recurring platform usage, the next step is not just building more features. It is about understanding behavior, usage patterns and which workflows genuinely deliver value.
+With the product in use by educators, the next step is not just building more features. Next validations: usage frequency, retention and which workflows deliver the most value.
+
+{/* TODO: add retention data when available. */}
 
 ## My Role
 
-I work across product and technology on ProfResolve. That means being part of the decisions on what to build, how to prioritize each change and how to turn those choices into something that actually ships.
+On ProfResolve, I decide what to build and in what order, how AI fits into the flow (models, fallback and cost per generation), how the product charges (credits, subscriptions and one-off packs) and what is worth buying instead of building. And I implement: from APIs and payments to tests and observability.
 
-In practice, my work spans feature scope, generation flows, credit economics, AI model behavior, integrations, reliability criteria, user experience and the implementation itself. The role is hands-on from decision to delivery.
-
-<RoleBlocks
-  label="Role breakdown on ProfResolve"
-  blocks={[
-    {
-      title: 'Product',
-      items: ['Discovery', 'Prioritization', 'Scope', 'Monetization', 'Experience', 'Metrics'],
-    },
-    {
-      title: 'AI Product',
-      items: ['Model routing', 'Prompt architecture', 'AI reliability', 'Fallback strategy', 'Cost awareness', 'Failure handling'],
-    },
-    {
-      title: 'Technical Product',
-      items: ['APIs', 'Architecture', 'Credits', 'Payments', 'Storage', 'Observability', 'Security', 'Trade-offs'],
-    },
-    {
-      title: 'Hands-on Execution',
-      items: ['Implementation', 'Prototyping', 'Testing', 'Debugging', 'Iteration'],
-    },
-  ]}
-/>
+<ul class="not-prose mt-4 flex flex-wrap gap-2" role="list">
+  {['Discovery', 'Prioritization', 'Monetization', 'AI Product', 'Model Routing', 'Fallback', 'APIs', 'Architecture', 'Credits', 'Payments', 'Observability', 'Testing', 'Trade-offs'].map(tag => (
+    <li class="tag">{tag}</li>
+  ))}
+</ul>
 
 ## Core Product Flow
 
@@ -200,6 +288,62 @@ The main flow was designed to fit an educator's daily routine: a few choices bef
     'PDF / DOCX / Print / WhatsApp',
   ]}
 />
+
+<CaseMedia
+  src="/projects/profresolve/gerador.webp"
+  alt="Generator setup screen — educator selecting subject, grade and topic before generation"
+  width={1019}
+  height={1002}
+  caption="Setup screen — the educator defines the parameters before generating the material"
+  protected={true}
+/>
+
+<CaseMedia
+  src="/projects/profresolve/gerando.webp"
+  alt="Generation in progress — credits being consumed and AI generation progress"
+  width={1241}
+  height={966}
+  caption="Generation in progress — the system consumes credits and processes the request with AI"
+  protected={true}
+/>
+
+## Beyond Text Generators
+
+ProfResolve includes AI-generated educational games — crossword puzzles, quizzes and other interactive formats. The material comes out of the platform ready to use in the classroom.
+
+<CaseMedia
+  src="/projects/profresolve/game1.webp"
+  alt="Crossword generator setup — educator defines subject, grade, topic and number of words"
+  width={1312}
+  height={971}
+  caption="Game setup — the educator defines the parameters before generating"
+  protected={true}
+/>
+
+<CaseMedia
+  src="/projects/profresolve/game2.webp"
+  alt="Crossword generated by ProfResolve — result ready to print or use in the classroom"
+  width={838}
+  height={1193}
+  caption="Generated result — crossword ready to use in the classroom"
+  protected={true}
+/>
+
+<h2 id="falha-de-ia">AI Fails. The Product Should Not Fail With It.</h2>
+
+A provider failure cannot consume the educator's credits and end their task. The generation flow treats failure as an expected part of the operation.
+
+Reliability was treated as a product requirement, not an implementation detail. At a conceptual level, the strategy includes:
+
+- **Model chain:** more than one model available for the same generation
+- **Retries with a time budget:** additional attempts within a defined time limit
+- **Cross-provider fallback:** switching providers when the primary one fails
+- **Circuit breaker:** temporarily pausing a problematic path
+- **Context fallback:** degraded generation instead of an error shown to the user
+- **Automatic credit refund:** a failure never costs the educator credits
+- **Kill switch and recovery:** operational-level stop and restart
+
+Parameters, thresholds and internal configuration remain part of the implementation; the mechanisms above describe the strategy at a conceptual level.
 
 ## Turning an AI Call into a Reliable Product
 
@@ -227,23 +371,18 @@ A generation is not just sending a prompt to an LLM. In ProfResolve, every gener
 
 Validation, credit debit, prompt and context assembly, model routing, retry, fallback, sanitization, persistence and automatic refund are all part of the flow. The educator's experience cannot depend on a single point of failure.
 
-## AI Fails. The Product Should Not Fail With It.
+<CaseCarousel
+  slides={[
+    { src: "/projects/profresolve/editor1.webp", alt: "ProfResolve editor — generated material with complete structure and editing options visible", width: 2495, height: 1281 },
+    { src: "/projects/profresolve/editor2.webp", alt: "ProfResolve editor — educator editing the AI-generated content in real time", width: 2499, height: 1262 },
+    { src: "/projects/profresolve/editor3.webp", alt: "ProfResolve editor — PDF, DOCX export and WhatsApp sharing options", width: 2513, height: 1312 },
+  ]}
+  ratio="16/9"
+  caption="Material editor — the educator can edit the generated content and export in different formats"
+  protected={true}
+/>
 
-A provider failure cannot consume the educator's credits and end their task. The generation flow treats failure as an expected part of the operation.
-
-Reliability was treated as a product requirement, not an implementation detail. At a conceptual level, the strategy includes:
-
-- **Model chain:** more than one model available for the same generation
-- **Retries with a time budget:** additional attempts within a defined time limit
-- **Cross-provider fallback:** switching providers when the primary one fails
-- **Circuit breaker:** temporarily pausing a problematic path
-- **Context fallback:** degraded generation instead of an error shown to the user
-- **Automatic credit refund:** a failure never costs the educator credits
-- **Kill switch and recovery:** operational-level stop and restart
-
-Parameters, thresholds and internal configuration remain part of the implementation; the mechanisms above describe the strategy at a conceptual level.
-
-## When AI Cost Becomes a Product Decision
+<h2 id="custo-de-ia">When AI Cost Becomes a Product Decision</h2>
 
 ProfResolve uses **credits** as its consumption unit. Each generation type has a different cost, and the price of a generation is a product decision, not just an infrastructure variable.
 
@@ -261,7 +400,7 @@ Credits sit at the intersection of computational cost, perceived value and monet
 
 Each generator's cost needs to reflect its strategy and model so AI consumption stays visible and manageable within the product.
 
-## Not Every Technical Experiment Should Stay in the Product
+<h2 id="previsibilidade">Not Every Technical Experiment Should Stay in the Product</h2>
 
 **Context:** SSE streaming was tested to improve the generation experience.
 
@@ -277,7 +416,7 @@ The rollback was treated as a normal part of development. What matters is that t
   Rollback is also a product decision.
 </Callout>
 
-## Build vs Buy: Where Engineering Effort Creates Value
+<h2 id="build-vs-buy">Build vs Buy: Where Engineering Effort Creates Value</h2>
 
 <Callout title="Build vs Buy">
   A custom crossword engine only placed part of the words. Rather than continuing to invest in the internal algorithm, the product moved to a specialized library and the effort was redirected toward experience and output quality.
@@ -294,7 +433,9 @@ The rollback was treated as a normal part of development. What matters is that t
 
 That change let us prioritize the educator's experience and the quality of the result.
 
-## Architecture
+<h2 id="engenharia">Engineering and Architecture</h2>
+
+### Architecture
 
 Conceptual representation of the product architecture. No internal endpoints, database schema, security thresholds or credentials.
 
@@ -316,42 +457,90 @@ Conceptual representation of the product architecture. No internal endpoints, da
   ]}
 />
 
-## Engineering as Part of Product Trust
+### Stack and Architecture Decisions
 
-Test coverage and engineering discipline are part of the product experience, because a generation failure hits the educator directly.
+ProfResolve was built with Next.js App Router as the unified base for frontend, API routes and business logic. The choice eliminated the need for a separate server and allows generation, authentication and credit logic to live in the same process, with API routes organized by domain.
 
-- **2.4K+ test cases**
-- **277 test files**
-- **Property-based testing**
-- **Regression and characterization testing**
-- **Strict TypeScript**
-- **Structured logging**
-- **Observability**
-- **Idempotent credits and payments**
-
-These numbers represent technical scale and engineering discipline. They are not substitutes for product impact metrics.
-
-## Product Signals & Technical Scale
-
-<p class="not-prose mb-2 text-caption font-semibold uppercase tracking-widest text-muted-foreground">Product</p>
-
-<StatsGrid
-  label="Product signals"
-  stats={[
-    { value: '1,200+', label: 'Registered users' },
-    { value: 'Live', label: 'Public product' },
-    { value: 'Recurring', label: 'Platform usage' },
+<ArchitectureDiagram
+  label="Stack by responsibility"
+  steps={[
+    { label: "Application and interface", detail: "Next.js (App Router) · React · TypeScript · Tailwind CSS · Radix UI · SWR" },
+    { label: "Backend and data", detail: "Next.js APIs · PostgreSQL (pg) · Upstash Redis · Better Auth · Cloudflare R2" },
+    { label: "AI and documents", detail: "Gemini · DeepSeek · PDF processing · DOCX generation · HTML→PDF export" },
+    { label: "Services and integrations", detail: "Asaas (payments) · Resend (email) · Google OAuth" },
+    { label: "Quality and observability", detail: "Vitest (unit + integration) · Playwright (e2e) · Sentry · ESLint · Strict TypeScript" },
   ]}
 />
 
-<p class="not-prose mb-2 text-caption font-semibold uppercase tracking-widest text-muted-foreground">Technical Scale</p>
+#### PostgreSQL for permanent state. Redis for temporary state.
 
-<StatsGrid
-  label="Technical scale"
-  stats={[
-    { value: '16', label: 'Generators' },
-    { value: '94', label: 'API handlers' },
-    { value: '8', label: 'Integrations' },
-    { value: '2.4K+', label: 'Test cases' },
-  ]}
-/>
+PostgreSQL stores everything that requires consistency: users, credits, materials, payments, generation history. Access is via raw SQL through `pg` — no ORM — making every query explicit and auditable.
+
+Redis (Upstash) solves three performance and resilience problems: session cache with a 30-second TTL to avoid hitting the database on every authenticated request; fixed-window rate limiting via `INCR/EXPIRE` in pipeline to protect generation endpoints; and credit balance invalidation after every debit or refund.
+
+The Redis client has a fallback layer: if Upstash is unavailable, the application automatically falls back to an in-memory provider with reduced limits without interrupting the service. The trade-off is accepting less precise rate limits in degraded mode rather than blocking requests.
+
+#### Cloudflare R2 for temporary generator attachments.
+
+Educators can upload PDFs as context for some generators. The flow uses a server-generated pre-signed URL: the browser uploads directly to R2 without going through the application server, reducing latency and bandwidth.
+
+R2 is accessed via an S3-compatible SDK (`@aws-sdk/client-s3`) pointed at the Cloudflare endpoint. This allows using the same AWS ecosystem abstractions without depending on AWS infrastructure. The bucket is temporary — files are read during generation and deleted afterwards. The feature has an independent activation flag.
+
+PDF export follows a different path: the server renders the material HTML with Playwright (headless Chromium) and returns the bytes directly — R2 is not involved in that flow.
+
+#### Better Auth with database provisioning hooks.
+
+Authentication uses Google OAuth only — no local password. The choice reduces the attack surface and eliminates password recovery flows. Session management uses HTTP-only cookies; a custom Redis cache replaces Better Auth's native mechanism to allow explicit control over TTL and invalidation.
+
+Better Auth's database hooks handle automatic provisioning: on user creation, the system assigns the freemium plan, inserts the initial credit record and registers the provider. This ensures every authenticated user has credits available from their first access, with no separate setup step.
+
+Role-based access control (`freemium`, `pro`, `admin`) is implemented manually in `rbac.ts` — no Better Auth RBAC plugins are in use. Middleware protects `/dashboard/*` and `/admin/*` via cookie verification, with full session validation as an optional second layer, controlled by feature flag.
+
+#### Vitest for API contracts. Playwright for critical product flows.
+
+Vitest tests cover two environments: `node` for API handlers, services and server utilities; and `dom` (happy-dom) for React hooks, client logic and stateful components. Property-based tests with `fast-check` validate payload validation endpoints against generated inputs — empty arrays, invalid IDs, wrong types — ensuring input boundaries are robust.
+
+Playwright tests cover the flows a real user goes through: authentication with redirect, generator modal, credit display, editor, materials and critical error scenarios. They follow the Page Object Model pattern. The Asaas checkout is explicitly excluded from e2e tests due to its dependency on an external service.
+
+The separation is intentional: Vitest validates contracts and business logic quickly in isolation; Playwright validates observable educator behavior with higher execution cost but end-to-end coverage.
+
+### Engineering as Part of Product Trust
+
+Test coverage and engineering discipline are not just technical concerns on ProfResolve. They are part of the strategy to keep the platform reliable as new features are developed.
+
+The combination of automated tests, strict TypeScript, structured logging and Sentry helps identify regressions, investigate failures and reduce risk during product evolution.
+
+For critical operations like credits and payments, idempotency prevents duplicate processing during repeated attempts at the same operation. These are engineering decisions that protect the educator's experience and contribute to business reliability.
+
+</FullView>
+
+<script>
+  {(function() {
+    document.querySelectorAll('[data-view-btn-cta]').forEach(function(btn) {
+      if (btn._ctaBound) return;
+      btn._ctaBound = true;
+      btn.addEventListener('click', function() {
+        var v = btn.getAttribute('data-view-btn-cta');
+        if (!v) return;
+        document.documentElement.setAttribute('data-case-view', v);
+        try { localStorage.setItem('caseView', v); } catch(_) {}
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set('v', v);
+          history.replaceState(null, '', url.toString());
+        } catch(_) {}
+        document.querySelectorAll('[data-view-btn]').forEach(function(b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-view-btn') === v ? 'true' : 'false');
+        });
+        var live = document.getElementById('case-view-live');
+        if (live) {
+          live.textContent = '';
+          setTimeout(function() {
+            live.textContent = live.getAttribute('data-announce-full') || '';
+          }, 50);
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  })()}
+</script>

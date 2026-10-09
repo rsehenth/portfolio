@@ -1,10 +1,10 @@
----
+﻿---
 title: ProfResolve
 locale: pt-BR
 subtitle: SaaS de IA para educadores
 description: "Plataforma que transforma necessidades pedagógicas em materiais estruturados, editáveis e exportáveis, combinando IA, monetização por créditos e fluxos pensados para a rotina docente."
 tagline: "Construindo um produto de IA confiável para educadores."
-summary: "SaaS de IA para educadores que transforma tarefas recorrentes da rotina docente em materiais estruturados, editáveis e prontos para distribuição. O produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente."
+summary: "SaaS de IA para educadores que transforma tarefas da rotina docente em materiais estruturados, editáveis e prontos para distribuição. O produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente."
 year: 2026
 role: Technical Product / Product + Desenvolvimento prático
 productType: SaaS · IA · Educação
@@ -25,7 +25,10 @@ featured: true
 externalUrl: "https://www.profresolve.com.br"
 externalUrlLabel: "Acessar ProfResolve ↗"
 snapshotMode: "product-technical"
-# cover: re-enable only with a real screenshot/image (public/projects/...)
+views: true
+readingTime:
+  basic: 2
+  full: 8
 logo: /projects/profresolve/logo-profresolve.webp
 logoPosition: "center"
 tags:
@@ -109,11 +112,105 @@ seo:
 order: 10
 ---
 
-## Produto em uso
+<BasicView>
 
-O ProfResolve está disponível publicamente em profresolve.com.br e já ultrapassou 1.200 usuários cadastrados organicamente. A plataforma tem uso recorrente enquanto continua evoluindo com base no comportamento real dos professores que a utilizam.
+## O problema
 
-Com o produto em uso, as decisões deixam de depender apenas de hipóteses. Passamos a observar quais fluxos os professores realmente usam, onde encontram dificuldades e a quais recursos retornam.
+Professores refazem planos de aula, atividades e avaliações o tempo todo. A meta era cortar esse trabalho repetitivo sem tirar do professor o controle sobre o resultado.
+
+## Como validei
+
+<FlowDiagram
+  label="Validação do ProfResolve"
+  steps={[
+    'Piloto em 3 escolas de Santiago (RS) com 20+ professores',
+    'Ajustes até a primeira versão final',
+    'Survey público no dashboard (6 perguntas, 100+ respostas orgânicas)',
+  ]}
+/>
+
+{/* TODO: acrescentar "O que aprendemos com os professores" quando os principais achados do survey estiverem disponíveis. */}
+
+## Quatro decisões de produto
+
+### Falha de IA não custa crédito ao professor
+
+Cadeia de modelos com retry, fallback entre provedores e reembolso automático de créditos. Trade-off: mais mecanismos para manter, em troca da confiança no produto.
+
+<SeeFull to="falha-de-ia" label="Ver detalhes" />
+
+### O custo de IA virou preço
+
+Créditos como unidade de consumo, com custo por tipo de geração, e assinaturas mensais/anuais mais pacotes avulsos. Trade-off: o preço passa a acompanhar o custo dos modelos.
+
+<SeeFull to="custo-de-ia" label="Ver detalhes" />
+
+### Previsibilidade antes de fluidez
+
+Streaming SSE foi testado e revertido para geração síncrona, porque falhas de parsing geravam conteúdo parcial. Trade-off: menos sensação de resposta progressiva.
+
+<SeeFull to="previsibilidade" label="Ver detalhes" />
+
+### Comprar onde não é diferencial
+
+O motor próprio de palavras cruzadas posicionava 4 a 7 de 20 palavras; foi trocado por uma biblioteca especializada, e o esforço foi para a experiência.
+
+<SeeFull to="build-vs-buy" label="Ver detalhes" />
+
+## Resultado
+
+Em produção, com 1.200+ professores cadastrados organicamente, 16 geradores de conteúdo e 7 jogos educativos. A receita combina assinaturas e pacotes avulsos de créditos.
+
+<StatsGrid
+  label="Métricas do produto"
+  stats={[
+    { value: '1.200+', label: 'Professores cadastrados' },
+    { value: '16', label: 'Geradores de conteúdo' },
+    { value: '7', label: 'Jogos educativos' },
+    { value: '100+', label: 'Respostas de survey' },
+  ]}
+/>
+
+<CaseMedia
+  src="/projects/profresolve/dashboardprof.webp"
+  alt="Dashboard do ProfResolve mostrando os geradores de conteúdo disponíveis para o professor"
+  width={1526}
+  height={1177}
+  caption="Dashboard principal — visão geral dos geradores disponíveis para o professor"
+  protected={true}
+/>
+
+<div class="not-prose mt-8">
+  <button
+    type="button"
+    data-view-btn-cta="full"
+    class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-foreground px-5 py-3 text-body-sm font-semibold text-background shadow-sm transition-all duration-fast hover:opacity-90"
+  >
+    Ver o case completo: fluxo, confiabilidade e arquitetura
+    <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+    </svg>
+  </button>
+</div>
+
+</BasicView>
+
+<FullView>
+
+<nav aria-label="Nesta página" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">Nesta página:</span>
+  <a href="#produto-em-uso" class="link-underline hover:text-foreground">Produto</a>
+  <span aria-hidden="true">·</span>
+  <a href="#falha-de-ia" class="link-underline hover:text-foreground">Decisões</a>
+  <span aria-hidden="true">·</span>
+  <a href="#engenharia" class="link-underline hover:text-foreground">Engenharia</a>
+</nav>
+
+<h2 id="produto-em-uso">Produto em uso</h2>
+
+O ProfResolve está disponível publicamente em profresolve.com.br. A plataforma evoluiu com base no comportamento real dos professores que a utilizam.
+
+Com o produto em uso por professores, as decisões deixam de depender apenas de hipóteses. Passamos a observar quais fluxos os professores realmente usam, onde encontram dificuldades e a quais recursos retornam.
 
 <CaseMedia
   src="/projects/profresolve/dashboardprof.webp"
@@ -127,8 +224,6 @@ Com o produto em uso, as decisões deixam de depender apenas de hipóteses. Pass
 ## O problema
 
 Professores produzem continuamente planos de aula, avaliações, atividades e adaptações. O ProfResolve nasceu para reduzir parte desse trabalho repetitivo, transformando uma necessidade pedagógica em material estruturado, editável e pronto para uso.
-
-Hoje, a ideia já foi além do protótipo: o produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente.
 
 ## Validação com professores
 
@@ -150,7 +245,7 @@ Depois, o dashboard passou a oferecer um survey público de seis perguntas: quat
 
 {/* TODO [CONFIRMAR]: ao concluir o survey, as respostas eram enviadas por e-mail formatado pela API Resend ao contato da plataforma e o professor recebia 300 créditos de agradecimento. */}
 
-{/* TODO: acrescentar “O que aprendemos com os professores” quando os principais achados do survey e as mudanças resultantes estiverem disponíveis. */}
+{/* TODO: acrescentar "O que aprendemos com os professores" quando os principais achados do survey e as mudanças resultantes estiverem disponíveis. */}
 
 ## Modelo de receita
 
@@ -164,35 +259,19 @@ O projeto começou com uma hipótese simples: IA poderia reduzir parte do trabal
 
 A partir dessa hipótese, a plataforma evoluiu para um produto com múltiplos geradores de conteúdo, edição, exportação, créditos, pagamentos, jogos educacionais e mecanismos de confiabilidade para operações com LLMs.
 
-Com mais de 1.200 usuários cadastrados e uso recorrente da plataforma, a próxima etapa não é só construir mais funcionalidades. É entender comportamento, frequência de uso, retenção e quais fluxos entregam mais valor.
+Com o produto em uso por professores, a próxima etapa não é só construir mais funcionalidades. Próximas validações: frequência de uso, retenção e quais fluxos entregam mais valor.
+
+{/* TODO: acrescentar dados de retenção quando disponíveis. */}
 
 ## Meu papel
 
-Atuo no ProfResolve entre produto e tecnologia. Participo diretamente das decisões sobre o que construir, como priorizar cada evolução e como transformar essas escolhas em algo tecnicamente viável.
+No ProfResolve, decido o que construir e em que ordem, como a IA entra no fluxo (modelos, fallback e custo por geração), como o produto cobra (créditos, assinaturas e pacotes avulsos) e o que vale comprar em vez de construir. E implemento: das APIs e pagamentos aos testes e à observabilidade.
 
-Na prática, isso significa trabalhar com funcionalidades, fluxos de geração, economia de créditos, comportamento dos modelos de IA, integrações, critérios de confiabilidade, experiência do usuário e a implementação em si. Não me limito à definição do que construir: estou presente também no como.
-
-<RoleBlocks
-  label="Frentes de trabalho no ProfResolve"
-  blocks={[
-    {
-      title: 'Produto',
-      items: ['Discovery', 'Priorização', 'Escopo', 'Monetização', 'Experiência', 'Métricas'],
-    },
-    {
-      title: 'Produto de IA',
-      items: ['Roteamento de modelos', 'Arquitetura de prompts', 'Confiabilidade da IA', 'Estratégia de fallback', 'Atenção a custos', 'Tratamento de falhas'],
-    },
-    {
-      title: 'Technical Product',
-      items: ['APIs', 'Arquitetura', 'Créditos', 'Pagamentos', 'Armazenamento', 'Observabilidade', 'Segurança', 'Trade-offs'],
-    },
-    {
-      title: 'Execução prática',
-      items: ['Implementação', 'Prototipação', 'Testes', 'Depuração', 'Iteração'],
-    },
-  ]}
-/>
+<ul class="not-prose mt-4 flex flex-wrap gap-2" role="list">
+  {['Discovery', 'Priorização', 'Monetização', 'Produto de IA', 'Roteamento de modelos', 'Fallback', 'APIs', 'Arquitetura', 'Créditos', 'Pagamentos', 'Observabilidade', 'Testes', 'Trade-offs'].map(tag => (
+    <li class="tag">{tag}</li>
+  ))}
+</ul>
 
 ## Fluxo do produto
 
@@ -227,6 +306,44 @@ O fluxo principal foi desenhado para caber na rotina docente: poucas escolhas an
   caption="Geração em andamento — o sistema consome créditos e processa o pedido com IA"
   protected={true}
 />
+
+## Além dos geradores de texto
+
+O ProfResolve inclui jogos educativos gerados por IA — palavras cruzadas, quiz e outros formatos interativos. O material sai da plataforma pronto para usar em sala de aula.
+
+<CaseMedia
+  src="/projects/profresolve/game1.webp"
+  alt="Configuração do gerador de palavras cruzadas — professor define disciplina, série, tema e quantidade de palavras"
+  width={1312}
+  height={971}
+  caption="Configuração do jogo — o professor define os parâmetros antes de gerar"
+  protected={true}
+/>
+
+<CaseMedia
+  src="/projects/profresolve/game2.webp"
+  alt="Palavras cruzadas geradas pelo ProfResolve — resultado pronto para imprimir ou usar em sala de aula"
+  width={838}
+  height={1193}
+  caption="Resultado gerado — palavras cruzadas prontas para usar em sala de aula"
+  protected={true}
+/>
+
+<h2 id="falha-de-ia">IA falha. O produto não pode falhar junto.</h2>
+
+Uma falha do provedor não deve consumir os créditos do professor nem encerrar a tarefa. Por isso, o fluxo trata a falha como parte esperada da operação.
+
+Confiabilidade foi tratada como requisito de produto, não como detalhe de implementação. Em nível conceitual, a estratégia inclui:
+
+- **Cadeia de modelos:** mais de um modelo disponível para a mesma geração
+- **Retries com orçamento de tempo:** tentativas adicionais dentro de um limite definido
+- **Fallback entre providers:** troca de provedor quando o primário falha
+- **Circuit breaker:** pausa temporária de um caminho problemático
+- **Fallback de contexto:** geração degradada em vez de erro exposto ao usuário
+- **Reembolso automático de créditos:** uma falha não custa crédito ao professor
+- **Kill switch e recuperação:** parada e retomada em nível operacional
+
+Parâmetros, limiares e configurações internas permanecem na implementação; os mecanismos acima descrevem a estratégia em nível conceitual.
 
 ## Transformando uma chamada de IA em um produto confiável
 
@@ -265,23 +382,7 @@ Validação, débito de créditos, montagem de prompt e contexto, roteamento de 
   protected={true}
 />
 
-## IA falha. O produto não pode falhar junto.
-
-Uma falha do provedor não deve consumir os créditos do professor nem encerrar a tarefa. Por isso, o fluxo trata a falha como parte esperada da operação.
-
-Confiabilidade foi tratada como requisito de produto, não como detalhe de implementação. Em nível conceitual, a estratégia inclui:
-
-- **Cadeia de modelos:** mais de um modelo disponível para a mesma geração
-- **Retries com orçamento de tempo:** tentativas adicionais dentro de um limite definido
-- **Fallback entre providers:** troca de provedor quando o primário falha
-- **Circuit breaker:** pausa temporária de um caminho problemático
-- **Fallback de contexto:** geração degradada em vez de erro exposto ao usuário
-- **Reembolso automático de créditos:** uma falha não custa crédito ao professor
-- **Kill switch e recuperação:** parada e retomada em nível operacional
-
-Parâmetros, limiares e configurações internas permanecem na implementação; os mecanismos acima descrevem a estratégia em nível conceitual.
-
-## Quando o custo de IA vira decisão de produto
+<h2 id="custo-de-ia">Quando o custo de IA vira decisão de produto</h2>
 
 O ProfResolve usa **créditos** como unidade de consumo. Cada tipo de geração tem um custo diferente, e o preço de cada geração é uma decisão de produto, não só uma variável de infraestrutura.
 
@@ -299,7 +400,7 @@ Os créditos são a interface entre custo computacional, valor percebido pelo pr
 
 O custo de cada gerador precisa acompanhar a estratégia e o modelo utilizados para manter o consumo de IA visível e administrável dentro do produto.
 
-## Nem toda evolução técnica deve permanecer no produto
+<h2 id="previsibilidade">Nem toda evolução técnica deve permanecer no produto</h2>
 
 **Contexto:** Streaming via SSE foi testado para melhorar a experiência de geração.
 
@@ -315,7 +416,7 @@ O rollback foi tratado como parte normal do desenvolvimento. O que importa é qu
   Rollback também é decisão de produto.
 </Callout>
 
-## Build vs Buy: onde vale a pena investir engenharia
+<h2 id="build-vs-buy">Build vs Buy: onde vale a pena investir engenharia</h2>
 
 <Callout title="Build vs Buy">
   Um motor próprio de palavras cruzadas posicionava apenas parte das palavras. Em vez de continuar investindo no algoritmo interno, o produto passou a usar uma biblioteca especializada e o esforço foi redirecionado para a experiência e a qualidade do resultado.
@@ -332,7 +433,9 @@ O rollback foi tratado como parte normal do desenvolvimento. O que importa é qu
 
 Essa troca permitiu priorizar a experiência do professor e a qualidade do resultado.
 
-## Arquitetura
+<h2 id="engenharia">Engenharia e arquitetura</h2>
+
+### Arquitetura
 
 Representação conceitual da arquitetura do produto, sem endpoints internos, schema de banco, limiares de segurança ou credenciais.
 
@@ -354,9 +457,9 @@ Representação conceitual da arquitetura do produto, sem endpoints internos, sc
   ]}
 />
 
-## Stack e decisões de arquitetura
+### Stack e decisões de arquitetura
 
-O ProfResolve foi construído com Next.js App Router como base unificada de frontend, rotas de API e regras de negócio. A escolha eliminou a necessidade de um servidor separado e permite colocar a lógica de geração, autenticação e créditos no mesmo processo — com 96 rotas de API organizadas por domínio.
+O ProfResolve foi construído com Next.js App Router como base unificada de frontend, rotas de API e regras de negócio. A escolha eliminou a necessidade de um servidor separado e permite colocar a lógica de geração, autenticação e créditos no mesmo processo, com as rotas de API organizadas por domínio.
 
 <ArchitectureDiagram
   label="Stack por responsabilidade"
@@ -369,7 +472,7 @@ O ProfResolve foi construído com Next.js App Router como base unificada de fron
   ]}
 />
 
-### PostgreSQL para estado permanente. Redis para estado temporário.
+#### PostgreSQL para estado permanente. Redis para estado temporário.
 
 O PostgreSQL armazena tudo que precisa de consistência: usuários, créditos, materiais, pagamentos, geração histórica. O acesso é feito com SQL direto via `pg` — sem ORM — o que torna cada query explícita e auditável.
 
@@ -377,7 +480,7 @@ O Redis (Upstash) resolve três problemas de desempenho e resiliência: cache de
 
 O cliente Redis usa uma camada de fallback: se o Upstash estiver indisponível, a aplicação cai automaticamente para um provider em memória com limites reduzidos, sem interromper o serviço. O trade-off é aceitar rate limits menos precisos em degradação em vez de bloquear requisições.
 
-### Cloudflare R2 para anexos temporários dos geradores.
+#### Cloudflare R2 para anexos temporários dos geradores.
 
 Professores podem enviar PDFs como contexto para alguns geradores. O fluxo usa uma URL pré-assinada gerada no servidor: o navegador faz o upload diretamente para o R2 sem passar pelo servidor da aplicação, reduzindo latência e consumo de banda.
 
@@ -385,7 +488,7 @@ O R2 é acessado via SDK compatível com S3 (`@aws-sdk/client-s3`) apontando par
 
 A exportação de materiais em PDF segue um caminho diferente: o servidor renderiza o HTML do material com Playwright (Chromium headless) e retorna os bytes diretamente — o R2 não está envolvido nesse fluxo.
 
-### Better Auth com hooks de provisionamento no banco.
+#### Better Auth com hooks de provisionamento no banco.
 
 A autenticação usa apenas Google OAuth — sem senha local. A escolha reduz a superfície de ataque e elimina fluxos de recuperação de senha. O gerenciamento de sessão é feito com cookies HTTP-only; o cache customizado no Redis substitui o mecanismo nativo do Better Auth para permitir controle explícito sobre TTL e invalidação.
 
@@ -393,7 +496,7 @@ Os hooks do Better Auth no banco fazem o provisionamento automático: na criaç�
 
 O controle de acesso por papel (`freemium`, `pro`, `admin`) é implementado manualmente em `rbac.ts` — o Better Auth não tem plugins de RBAC em uso. O middleware protege `/dashboard/*` e `/admin/*` via verificação de cookie, com validação completa de sessão como segunda camada opcional, controlada por feature flag.
 
-### Vitest para contratos de API. Playwright para fluxos críticos de produto.
+#### Vitest para contratos de API. Playwright para fluxos críticos de produto.
 
 Os testes Vitest cobrem dois ambientes: `node` para handlers de API, serviços e utilitários do servidor; e `dom` (happy-dom) para hooks React, lógica de cliente e componentes com estado. Testes de propriedade com `fast-check` validam os endpoints de validação de payload contra entradas geradas — arrays vazios, IDs inválidos, tipos errados — garantindo que as fronteiras de entrada sejam robustas.
 
@@ -401,7 +504,7 @@ Os testes Playwright cobrem os fluxos que um usuário real percorre: autenticaç
 
 A separação é intencional: Vitest valida contratos e lógica de negócio de forma rápida e isolada; Playwright valida comportamento observável pelo professor, com custo de execução maior mas cobertura de ponta a ponta.
 
-## Engenharia como parte da confiança do produto
+### Engenharia como parte da confiança do produto
 
 No ProfResolve, testes e observabilidade não são apenas preocupações técnicas. Fazem parte da estratégia para manter a plataforma confiável enquanto novas funcionalidades são desenvolvidas.
 
@@ -409,49 +512,35 @@ A combinação de testes automatizados, TypeScript estrito, logging estruturado 
 
 Em operações críticas, como créditos e pagamentos, a idempotência ajuda a evitar processamentos duplicados durante tentativas repetidas de uma mesma operação. São decisões de engenharia que protegem a experiência do professor e contribuem para a confiabilidade do negócio.
 
-## Produto e escala técnica
+</FullView>
 
-<p class="not-prose mb-2 text-caption font-semibold uppercase tracking-widest text-muted-foreground">Produto</p>
-
-<StatsGrid
-  label="Sinais de produto"
-  stats={[
-    { value: '1.200+', label: 'Usuários cadastrados' },
-    { value: 'Público', label: 'Produto público' },
-    { value: 'Recorrente', label: 'Plataforma em uso' },
-  ]}
-/>
-
-<p class="not-prose mb-2 text-caption font-semibold uppercase tracking-widest text-muted-foreground">Escala técnica</p>
-
-<StatsGrid
-  label="Escala técnica"
-  stats={[
-    { value: '16', label: 'Geradores' },
-    { value: '94', label: 'Rotas de API' },
-    { value: '8', label: 'Integrações' },
-    { value: '2,4 mil+', label: 'Casos de teste' },
-  ]}
-/>
-
-## Além dos geradores de texto
-
-O ProfResolve inclui jogos educativos gerados por IA — palavras cruzadas, quiz e outros formatos interativos. O material sai da plataforma pronto para usar em sala de aula.
-
-<CaseMedia
-  src="/projects/profresolve/game1.webp"
-  alt="Configuração do gerador de palavras cruzadas — professor define disciplina, série, tema e quantidade de palavras"
-  width={1312}
-  height={971}
-  caption="Configuração do jogo — o professor define os parâmetros antes de gerar"
-  protected={true}
-/>
-
-<CaseMedia
-  src="/projects/profresolve/game2.webp"
-  alt="Palavras cruzadas geradas pelo ProfResolve — resultado pronto para imprimir ou usar em sala de aula"
-  width={838}
-  height={1193}
-  caption="Resultado gerado — palavras cruzadas prontas para usar em sala de aula"
-  protected={true}
-/>
+<script>
+  {(function() {
+    document.querySelectorAll('[data-view-btn-cta]').forEach(function(btn) {
+      if (btn._ctaBound) return;
+      btn._ctaBound = true;
+      btn.addEventListener('click', function() {
+        var v = btn.getAttribute('data-view-btn-cta');
+        if (!v) return;
+        document.documentElement.setAttribute('data-case-view', v);
+        try { localStorage.setItem('caseView', v); } catch(_) {}
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set('v', v);
+          history.replaceState(null, '', url.toString());
+        } catch(_) {}
+        document.querySelectorAll('[data-view-btn]').forEach(function(b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-view-btn') === v ? 'true' : 'false');
+        });
+        var live = document.getElementById('case-view-live');
+        if (live) {
+          live.textContent = '';
+          setTimeout(function() {
+            live.textContent = live.getAttribute('data-announce-full') || '';
+          }, 50);
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  })()}
+</script>
