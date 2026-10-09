@@ -269,7 +269,7 @@ export const ui = {
       focus: {
         title: 'Onde Atuo',
         aiProducts: {
-          title: 'AI Products',
+          title: 'Produtos de IA',
           description: 'Trabalho com produtos que usam LLMs, agentes e fluxos de IA, pensando não apenas na geração, mas também em confiabilidade, comportamento, custo e experiência do usuário.',
         },
         technicalProduct: {
@@ -277,11 +277,11 @@ export const ui = {
           description: 'Conecto decisões de produto a arquitetura, APIs, integrações, dados e restrições técnicas para entender o que é viável, onde estão os riscos e quais trade-offs fazem sentido.',
         },
         productStrategy: {
-          title: 'Product Strategy',
+          title: 'Estratégia de produto',
           description: 'Trabalho na definição do problema, visão, escopo, prioridades e evolução do produto, buscando separar o que precisa ser construído agora do que ainda pode esperar.',
         },
         experimentation: {
-          title: 'Experimentation & Validation',
+          title: 'Experimentação e validação',
           description: 'Uso protótipos, PoCs e MVPs para reduzir incerteza antes de aumentar o investimento, definindo o que precisa ser comprovado e quais sinais devem orientar a próxima decisão.',
         },
       },
@@ -300,16 +300,16 @@ export const ui = {
         title: 'Ferramentas Técnicas',
         groups: [
           {
-            category: 'AI & APIs',
-            items: ['LLMs', 'APIs', 'Structured Outputs', 'AI Workflows'],
+            category: 'IA e APIs',
+            items: ['LLMs', 'APIs', 'Saídas estruturadas', 'Fluxos de IA'],
           },
           {
-            category: 'Product Engineering',
+            category: 'Engenharia de produto',
             items: ['TypeScript', 'Python', 'React / Next.js', 'SQL'],
           },
           {
-            category: 'Architecture & Delivery',
-            items: ['PostgreSQL', 'Redis', 'Git', 'Observability'],
+            category: 'Arquitetura e entrega',
+            items: ['PostgreSQL', 'Redis', 'Git', 'Observabilidade'],
           },
         ],
       },
