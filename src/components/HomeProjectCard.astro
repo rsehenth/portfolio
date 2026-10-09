@@ -53,6 +53,7 @@ const {
   homeData,
   viewCaseLabel,
   variant = 'default',
+  locale = 'pt-BR',
   revealDelay = 0,
 } = Astro.props;
 
@@ -88,7 +89,7 @@ const isHero = variant === 'hero';
 
     <!-- Focus chips (max 3, no label) -->
     {homeData.focus.length > 0 && (
-      <div class="flex flex-wrap gap-2 mb-5" aria-label="Focus areas">
+      <div class="flex flex-wrap gap-2 mb-5" aria-label={locale === 'pt-BR' ? 'Áreas de atuação' : 'Focus areas'}>
         {homeData.focus.slice(0, 3).map((item) => (
           <span class="inline-flex items-center px-2.5 py-1 text-caption font-medium rounded-md bg-accent/8 text-accent border border-accent/20">
             {item}

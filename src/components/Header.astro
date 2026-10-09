@@ -27,12 +27,12 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
   <div class="container">
     <div class="flex items-center justify-between h-16 lg:h-20">
       <!-- Logo / Name -->
-      <a href={locale === 'pt-BR' ? '/' : '/en/'} class="flex items-center gap-2 text-foreground font-medium text-body-lg hover:opacity-80 transition-opacity duration-fast" aria-label="LS — Go to homepage">
+      <a href={locale === 'pt-BR' ? '/' : '/en/'} class="flex items-center gap-2 text-foreground font-medium text-body-lg hover:opacity-80 transition-opacity duration-fast" aria-label={locale === 'pt-BR' ? 'LS — Ir para página inicial' : 'LS — Go to homepage'}>
         <span class="font-semibold tracking-tight">LS</span>
       </a>
 
       <!-- Navigation -->
-      <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+      <nav class="hidden lg:flex items-center gap-8" aria-label={locale === 'pt-BR' ? 'Navegação principal' : 'Main navigation'}>
         <a
           href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
           class="link-underline text-body-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-fast"
@@ -56,7 +56,7 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
       <!-- CTA Buttons + Language Selector -->
       <div class="flex items-center gap-2 sm:gap-3">
         <!-- Language Selector -->
-        <div class="hidden sm:block" aria-label="Language selection">
+        <div class="hidden sm:block" aria-label={locale === 'pt-BR' ? 'Seleção de idioma' : 'Language selection'}>
           <a
             href={altUrl}
             class="px-3 py-1.5 text-body-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-fast rounded-lg hover:bg-muted"
@@ -88,7 +88,7 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
         <!-- Mobile menu button -->
         <button
           class="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-fast"
-          aria-label="Toggle menu"
+          aria-label={locale === 'pt-BR' ? 'Alternar menu' : 'Toggle menu'}
           aria-expanded="false"
           aria-controls="mobile-menu"
           data-mobile-menu-toggle
@@ -101,7 +101,7 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-normal" role="navigation" aria-label="Mobile navigation">
+    <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-normal" role="navigation" aria-label={locale === 'pt-BR' ? 'Navegação móvel' : 'Mobile navigation'}>
       <div class="py-4 space-y-2 border-t border-border">
         <a
           href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
