@@ -103,7 +103,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
           )}
 
           <div class="text-center mt-10" data-reveal>
-            <a href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'} class="btn-secondary">
+            <a href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'} class="btn-secondary home-projects-cta">
               {homeProjectsData.viewAll}
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -244,3 +244,25 @@ const singleProject = featuredProjects.length === 1 ? (() => {
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  @keyframes home-projects-cta-pulse {
+    0%, 72%, 100% {
+      box-shadow: 0 0 0 0 rgb(var(--color-accent-rgb) / 0);
+    }
+
+    84% {
+      box-shadow: 0 0 0 0.45rem rgb(var(--color-accent-rgb) / 0.14);
+    }
+  }
+
+  .home-projects-cta {
+    animation: home-projects-cta-pulse 5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-projects-cta {
+      animation: none;
+    }
+  }
+</style>
