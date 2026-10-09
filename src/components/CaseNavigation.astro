@@ -19,14 +19,14 @@ const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
 const nextProject = currentIndex > -1 && currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
 ---
 
-<nav class={`flex items-center justify-between gap-4 border-t border-border pt-8 ${className}`} aria-label={caseStudy.allWork}>
+<nav class={`flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between ${className}`} aria-label={caseStudy.allWork}>
   {prevProject ? (
     <a
       href={caseUrl(locale, projectKey(prevProject))}
-      class="group flex flex-1 items-center gap-3 rounded-xl border border-border bg-muted/50 p-4 transition-all duration-normal hover:border-accent/50 hover:bg-muted"
+      class="group flex w-full min-w-0 items-center gap-3 rounded-xl border border-border bg-muted/50 p-4 transition-all duration-normal hover:border-accent/50 hover:bg-muted sm:w-auto sm:flex-1"
       aria-label={`${caseStudy.previous}: ${prevProject.data.title}`}
     >
-      <svg class="h-5 w-5 text-muted-foreground transition-colors duration-fast group-hover:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <svg class="h-5 w-5 shrink-0 text-muted-foreground transition-colors duration-fast group-hover:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
       <div class="min-w-0">
@@ -34,11 +34,11 @@ const nextProject = currentIndex > -1 && currentIndex < projects.length - 1 ? pr
         <span class="block truncate text-body-sm font-medium text-foreground">{prevProject.data.title}</span>
       </div>
     </a>
-  ) : <div class="flex-1" aria-hidden="true"></div>}
+  ) : <div class="hidden sm:block sm:flex-1" aria-hidden="true"></div>}
 
   <a
     href={projectsIndexUrl(locale)}
-    class="flex items-center gap-2 rounded-lg px-4 py-2 text-body-sm font-medium text-muted-foreground transition-colors duration-fast hover:bg-muted hover:text-foreground"
+    class="flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-body-sm font-medium text-muted-foreground transition-colors duration-fast hover:bg-muted hover:text-foreground sm:justify-start"
     aria-label={caseStudy.allWork}
   >
     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -50,16 +50,16 @@ const nextProject = currentIndex > -1 && currentIndex < projects.length - 1 ? pr
   {nextProject ? (
     <a
       href={caseUrl(locale, projectKey(nextProject))}
-      class="group flex flex-1 items-center justify-end gap-3 rounded-xl border border-border bg-muted/50 p-4 transition-all duration-normal hover:border-accent/50 hover:bg-muted"
+      class="group flex w-full min-w-0 items-center justify-end gap-3 rounded-xl border border-border bg-muted/50 p-4 transition-all duration-normal hover:border-accent/50 hover:bg-muted sm:w-auto sm:flex-1"
       aria-label={`${caseStudy.next}: ${nextProject.data.title}`}
     >
       <div class="min-w-0 text-right">
         <span class="mb-0.5 block text-caption text-muted-foreground">{caseStudy.next}</span>
         <span class="block truncate text-body-sm font-medium text-foreground">{nextProject.data.title}</span>
       </div>
-      <svg class="h-5 w-5 text-muted-foreground transition-colors duration-fast group-hover:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <svg class="h-5 w-5 shrink-0 text-muted-foreground transition-colors duration-fast group-hover:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
     </a>
-  ) : <div class="flex-1" aria-hidden="true"></div>}
+  ) : <div class="hidden sm:block sm:flex-1" aria-hidden="true"></div>}
 </nav>
