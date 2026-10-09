@@ -1,0 +1,8 @@
+---
+// FullView.astro — Wrapper visível apenas na visão "Case completo" (full).
+// Uso em MDX: <FullView> ... conteúdo completo ... </FullView>
+// CSS em global.css controla a visibilidade via html[data-case-view].
+---
+<div data-view="full">
+  <slot />
+</div>

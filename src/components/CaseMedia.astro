@@ -146,7 +146,7 @@ if (!Number.isFinite(width) || width <= 0 || !Number.isFinite(height) || height 
         btn._cmBound = true;
         btn.addEventListener('click', () => {
           if (window.openMediaLightbox) {
-            window.openMediaLightbox(btn.dataset.cmSrc, btn.dataset.cmAlt || '');
+            window.openMediaLightbox(btn.dataset.cmSrc, btn.dataset.cmAlt || '', btn);
           }
         });
         if (btn.classList.contains('cm-wrap--protected')) {

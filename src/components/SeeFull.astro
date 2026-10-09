@@ -1,0 +1,92 @@
+---
+// SeeFull.astro — Botão que alterna para a visão completa e rola até um ID específico.
+// Uso: <SeeFull to="falha-de-ia" label="Ver detalhes" />
+// Se não houver JS, o link de âncora ainda funciona (navega direto para o ID).
+
+interface Props {
+  /** ID do elemento destino na visão completa (sem #). */
+  to: string;
+  /** Texto visível do link. */
+  label?: string;
+  class?: string;
+}
+
+const { to, label, class: className = '' } = Astro.props;
+---
+
+<a
+  href={`#${to}`}
+  class:list={[
+    'see-full-link not-prose inline-flex items-center gap-1 text-body-sm font-medium',
+    'text-muted-foreground transition-colors duration-fast hover:text-foreground',
+    'focus-visible:outline-2 focus-visible:outline-offset-2',
+    className,
+  ]}
+  data-see-full={to}
+>
+  {label ?? <slot />}
+  <svg
+    class="h-3.5 w-3.5 shrink-0"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M13 7l5 5m0 0l-5 5m5-5H6"
+    />
+  </svg>
+</a>
+
+<script>
+  // Bind once per page — safe to call multiple times (guard via data attribute)
+  if (!(window as any).__seefullBound) {
+    (window as any).__seefullBound = true;
+
+    document.addEventListener('click', (e) => {
+      const el = (e.target as Element).closest('[data-see-full]') as HTMLElement | null;
+      if (!el) return;
+
+      const targetId = el.dataset.seeFull;
+      if (!targetId) return;
+
+      e.preventDefault();
+
+      // Switch to full view
+      document.documentElement.setAttribute('data-case-view', 'full');
+      try { localStorage.setItem('caseView', 'full'); } catch (_) { /* noop */ }
+
+      // Update URL
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('v', 'full');
+        history.replaceState(null, '', url.toString());
+      } catch (_) { /* noop */ }
+
+      // Announce to screen readers
+      const liveRegion = document.getElementById('case-view-live') as HTMLElement | null;
+      if (liveRegion) {
+        liveRegion.textContent = '';
+        setTimeout(() => {
+          liveRegion.textContent = liveRegion.dataset.announceFull ?? '';
+        }, 50);
+      }
+
+      // Sync toggle buttons
+      document.querySelectorAll<HTMLElement>('[data-view-btn]').forEach((btn) => {
+        btn.setAttribute('aria-pressed', btn.dataset.viewBtn === 'full' ? 'true' : 'false');
+      });
+
+      // Scroll to target
+      setTimeout(() => {
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 60);
+    });
+  }
+</script>

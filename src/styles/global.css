@@ -415,6 +415,32 @@
     text-wrap: balance;
   }
 
+  /* ── Case view toggle — show/hide views ──────────────────────────── */
+
+  /* No JS: always show full view, hide basic view and the toggle control */
+  html:not(.js) [data-view="basic"]       { display: none !important; }
+  html:not(.js) [data-case-view-toggle]   { display: none !important; }
+
+  /* JS present: hide the inactive view */
+  html.js[data-case-view="basic"] [data-view="full"]  { display: none !important; }
+  html.js[data-case-view="full"]  [data-view="basic"] { display: none !important; }
+
+  /* Safety fallback: if data-case-view is not yet set, default to full */
+  html.js:not([data-case-view]) [data-view="basic"] { display: none !important; }
+
+  /* Suppress data-reveal animations inside view wrappers
+     (content is always visible once its view is active, so no fade-in needed) */
+  [data-view] [data-reveal],
+  [data-view] [data-reveal="scale"],
+  [data-view] [data-reveal="left"],
+  [data-view] [data-reveal="right"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────── */
+
   /* Animated underline link — use on any nav/text link */
   .link-underline {
     position: relative;

@@ -317,7 +317,7 @@ const uid = `cc-${Math.random().toString(36).slice(2, 8)}`;
         if (e.target.closest('[data-cc-prev],[data-cc-next],[data-cc-dot]')) return;
         const img = slides[cur] && slides[cur].querySelector('.cc-img');
         if (img && window.openMediaLightbox) {
-          window.openMediaLightbox(img.src, img.alt);
+          window.openMediaLightbox(img.src, img.alt, root);
         }
       });
 

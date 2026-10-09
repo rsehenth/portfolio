@@ -99,6 +99,15 @@ const projects = defineCollection({
         description: z.string().optional(),
       })
       .optional(),
+    // Opt-in dual-view toggle (Resumo / Case completo)
+    views: z.boolean().default(false).optional(),
+    // Manual reading time overrides for the view toggle (in minutes, min 1)
+    readingTime: z
+      .object({
+        basic: z.number().int().min(1).optional(),
+        full: z.number().int().min(1).optional(),
+      })
+      .optional(),
     // Order in listings
     order: z.number().int().default(0),
   }),

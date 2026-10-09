@@ -1,0 +1,134 @@
+---
+// CaseViewToggle.astro — Seletor segmentado "Resumo / Case completo".
+// Inserido no hero do CaseLayout quando views: true.
+// Estado inicial é definido pelo script inline no <head> do BaseLayout.
+import { ui, type Locale } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+  basicMinutes?: number;
+  fullMinutes?: number;
+}
+
+const { locale, basicMinutes, fullMinutes } = Astro.props;
+const t = ui[locale].caseViewToggle;
+
+const basicLabel = basicMinutes ? `${t.basic} · ${basicMinutes} ${t.minuteSuffix}` : t.basic;
+const fullLabel  = fullMinutes  ? `${t.full} · ${fullMinutes} ${t.minuteSuffix}`  : t.full;
+---
+
+<div class="case-view-toggle not-prose mb-8" data-case-view-toggle>
+  {/* Aria-live region — anuncia mudança de visão a leitores de tela */}
+  <span
+    id="case-view-live"
+    role="region"
+    aria-live="polite"
+    aria-atomic="true"
+    data-announce-basic={t.announcingBasic}
+    data-announce-full={t.announcingFull}
+    class="sr-only"
+  ></span>
+
+  <div
+    role="group"
+    aria-label={t.groupLabel}
+    class="inline-flex w-full sm:w-auto rounded-xl border border-border bg-muted/40 p-1 gap-1"
+  >
+    <button
+      type="button"
+      data-view-btn="basic"
+      aria-pressed="true"
+      class="view-btn flex-1 sm:flex-none rounded-lg px-4 py-2 text-body-sm font-medium transition-colors duration-fast"
+    >
+      {basicLabel}
+    </button>
+    <button
+      type="button"
+      data-view-btn="full"
+      aria-pressed="false"
+      class="view-btn flex-1 sm:flex-none rounded-lg px-4 py-2 text-body-sm font-medium transition-colors duration-fast"
+    >
+      {fullLabel}
+    </button>
+  </div>
+</div>
+
+<style>
+  /* Ocultar o toggle quando não há JS */
+  html:not(.js) .case-view-toggle {
+    display: none;
+  }
+
+  .view-btn {
+    background: transparent;
+    color: rgb(var(--color-muted-foreground-rgb, 107 114 128));
+    border: none;
+    cursor: pointer;
+  }
+
+  .view-btn[aria-pressed="true"] {
+    background: rgb(var(--color-card-rgb, 255 255 255));
+    color: rgb(var(--color-foreground-rgb, 17 24 39));
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  }
+
+  .view-btn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .view-btn { transition: none !important; }
+  }
+</style>
+
+<script>
+  (function () {
+    const toggle = document.querySelector<HTMLElement>('[data-case-view-toggle]');
+    if (!toggle) return;
+
+    const buttons = Array.from(toggle.querySelectorAll<HTMLElement>('[data-view-btn]'));
+    const liveRegion = document.getElementById('case-view-live') as HTMLElement | null;
+
+    function setView(view: 'basic' | 'full', persist = true) {
+      document.documentElement.setAttribute('data-case-view', view);
+
+      if (persist) {
+        try { localStorage.setItem('caseView', view); } catch (_) { /* noop */ }
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set('v', view);
+          history.replaceState(null, '', url.toString());
+        } catch (_) { /* noop */ }
+      }
+
+      // Sync button states
+      buttons.forEach((btn) => {
+        btn.setAttribute('aria-pressed', btn.dataset.viewBtn === view ? 'true' : 'false');
+      });
+
+      // Announce to screen readers (clear then set for reliable announcement)
+      if (liveRegion) {
+        liveRegion.textContent = '';
+        setTimeout(() => {
+          liveRegion.textContent = view === 'basic'
+            ? (liveRegion.dataset.announceBasic ?? '')
+            : (liveRegion.dataset.announceFull ?? '');
+        }, 50);
+      }
+    }
+
+    // Sync UI to the current state set by the inline script
+    const current = (document.documentElement.getAttribute('data-case-view') as 'basic' | 'full') ?? 'basic';
+    setView(current, false);
+
+    // Handle toggle clicks
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const v = btn.dataset.viewBtn as 'basic' | 'full' | undefined;
+        if (v === 'basic' || v === 'full') setView(v, true);
+      });
+    });
+  })();
+</script>

@@ -5,6 +5,7 @@ import CaseNavigation from '@/components/CaseNavigation.astro';
 import CaseSummary from '@/components/CaseSummary.astro';
 import StatusEvidence from '@/components/StatusEvidence.astro';
 import MediaLightbox from '@/components/MediaLightbox.astro';
+import CaseViewToggle from '@/components/CaseViewToggle.astro';
 import { ui, statusLabel, type Locale } from '@/i18n';
 import { caseUrl, projectsIndexUrl, verifiedOnly } from '@/lib/projects';
 import type { ProjectMetric } from '@/content/config';
@@ -59,6 +60,10 @@ interface Props {
   /** Project key (same URL slug across locales) */
   slug: string;
   locale?: Locale;
+  /** Opt-in dual-view toggle (Resumo / Case completo) */
+  views?: boolean;
+  /** Manual reading time overrides for the view toggle (minutes) */
+  readingTime?: { basic?: number; full?: number };
 }
 
 const {
@@ -94,6 +99,8 @@ const {
   snapshotMode = 'default',
   slug,
   locale = 'pt-BR',
+  views = false,
+  readingTime,
   ...rest
 } = Astro.props;
 
@@ -103,8 +110,10 @@ const canonical = caseUrl(locale, slug);
 const scale = verifiedOnly(scaleMetrics);
 const productImpact = verifiedOnly(productMetrics);
 const snapshotPrimary = verifiedOnly(snapshot?.primary);
-const snapshotSecondary = verifiedOnly(snapshot?.secondary);
-const hasResults = scale.length > 0 || productImpact.length > 0;
+// When views: true, snapshotSecondary is hidden in "basic" and shown inside FullView in MDX.
+// For cases without views, it behaves as before.
+const snapshotSecondary = views ? [] : verifiedOnly(snapshot?.secondary);
+const hasResults = !views && (scale.length > 0 || productImpact.length > 0);
 ---
 
 <BaseLayout
@@ -227,6 +236,14 @@ const hasResults = scale.length > 0 || productImpact.length > 0;
             <li class="tag">{tag}</li>
           ))}
         </ul>
+      )}
+
+      {views && (
+        <CaseViewToggle
+          locale={locale}
+          basicMinutes={readingTime?.basic}
+          fullMinutes={readingTime?.full}
+        />
       )}
     </header>
 

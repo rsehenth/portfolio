@@ -1,0 +1,8 @@
+---
+// BasicView.astro — Wrapper visível apenas na visão "Resumo" (basic).
+// Uso em MDX: <BasicView> ... conteúdo do resumo ... </BasicView>
+// CSS em global.css controla a visibilidade via html[data-case-view].
+---
+<div data-view="basic">
+  <slot />
+</div>

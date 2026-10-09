@@ -130,8 +130,15 @@
       setTimeout(() => { if (img) img.src = ''; }, 300);
     }
 
-    /* Expose globally so CaseMedia / CaseCarousel can call it */
-    window.openMediaLightbox = open;
+    /* Expose globally so CaseMedia / CaseCarousel can call it.
+       Guard: skip if the trigger element lives inside a hidden view wrapper. */
+    window.openMediaLightbox = function(src, alt, triggerEl) {
+      if (triggerEl) {
+        var viewWrapper = triggerEl.closest('[data-view]');
+        if (viewWrapper && getComputedStyle(viewWrapper).display === 'none') return;
+      }
+      open(src, alt);
+    };
     window.closeMediaLightbox = closeLb;
 
     close && close.addEventListener('click', closeLb);

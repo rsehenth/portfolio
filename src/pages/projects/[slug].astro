@@ -31,6 +31,9 @@ const mdxComponents = {
   StatsGrid: (await import('@/components/StatsGrid.astro')).default,
   CaseMedia: (await import('@/components/CaseMedia.astro')).default,
   CaseCarousel: (await import('@/components/CaseCarousel.astro')).default,
+  BasicView: (await import('@/components/BasicView.astro')).default,
+  FullView: (await import('@/components/FullView.astro')).default,
+  SeeFull: (await import('@/components/SeeFull.astro')).default,
 };
 ---
 
@@ -67,6 +70,8 @@ const mdxComponents = {
   statusBadge={d.statusBadge}
   slug={projectKey(project)}
   locale="pt-BR"
+  views={d.views}
+  readingTime={d.readingTime}
 >
   <Content components={mdxComponents} />
 </CaseLayout>

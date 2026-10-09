@@ -366,6 +366,17 @@ export const ui = {
       productImpact: 'Impacto de Produto',
     },
 
+    // Case view toggle (Resumo / Case completo)
+    caseViewToggle: {
+      groupLabel: 'Modo de leitura',
+      basic: 'Resumo',
+      full: 'Case completo',
+      minuteSuffix: 'min',
+      announcingBasic: 'Mostrando o resumo',
+      announcingFull: 'Mostrando o case completo',
+      ctaSeeFull: 'Ver o case completo: fluxo, confiabilidade e arquitetura',
+    },
+
     // Status labels
     status: {
       Active: 'Ativo',
@@ -744,6 +755,17 @@ export const ui = {
       verifiedResults: 'Verified Results',
       technicalScale: 'Technical Scale',
       productImpact: 'Product Impact',
+    },
+
+    // Case view toggle (Summary / Full case)
+    caseViewToggle: {
+      groupLabel: 'Reading mode',
+      basic: 'Summary',
+      full: 'Full case',
+      minuteSuffix: 'min',
+      announcingBasic: 'Showing the summary',
+      announcingFull: 'Showing the full case',
+      ctaSeeFull: 'See the full case: flow, reliability and architecture',
     },
 
     // Status labels
