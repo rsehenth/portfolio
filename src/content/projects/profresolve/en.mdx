@@ -241,7 +241,7 @@ Reliability was treated as a product requirement, not an implementation detail. 
 - **Automatic credit refund:** a failure never costs the educator credits
 - **Kill switch and recovery:** operational-level stop and restart
 
-These mechanisms are intentionally described at a conceptual level. Parameters, thresholds and internal configuration are part of the implementation and are not published. No success rate is claimed here without real data to back it up.
+Parameters, thresholds and internal configuration remain part of the implementation; the mechanisms above describe the strategy at a conceptual level.
 
 ## When AI Cost Becomes a Product Decision
 
@@ -259,7 +259,7 @@ ProfResolve uses **credits** as its consumption unit. Each generation type has a
 
 Credits sit at the intersection of computational cost, perceived value and monetization. When a model's cost changes, it directly affects the price of a generation and how users are likely to behave.
 
-A documented change reclassified one generator from **100 credits to 300 credits**, alongside a change in strategy and model. The goal is to keep AI cost visible and manageable inside the product itself.
+Each generator's cost needs to reflect its strategy and model so AI consumption stays visible and manageable within the product.
 
 ## Not Every Technical Experiment Should Stay in the Product
 
@@ -292,7 +292,7 @@ The rollback was treated as a normal part of development. What matters is that t
   ]}
 />
 
-The final result is described qualitatively based on project documentation. No percentage is claimed here.
+That change let us prioritize the educator's experience and the quality of the result.
 
 ## Architecture
 

@@ -241,7 +241,7 @@ Confiabilidade foi tratada como requisito de produto, não como detalhe de imple
 - **Reembolso automático de créditos:** uma falha não custa crédito ao professor
 - **Kill switch e recuperação:** parada e retomada em nível operacional
 
-Estes mecanismos são descritos de forma conceitual intencionalmente. Parâmetros, limiares e configurações internas são parte da implementação e não são publicados. Nenhuma taxa de sucesso é afirmada aqui sem dado real para sustentá-la.
+Parâmetros, limiares e configurações internas permanecem na implementação; os mecanismos acima descrevem a estratégia em nível conceitual.
 
 ## Quando o custo de IA vira decisão de produto
 
@@ -259,7 +259,7 @@ O ProfResolve usa **créditos** como unidade de consumo. Cada tipo de geração 
 
 Os créditos são a interface entre custo computacional, valor percebido pelo professor e monetização. Quando o custo de um modelo muda, isso afeta diretamente o preço de uma geração e o comportamento esperado do usuário.
 
-Uma alteração documentada reclassificou um gerador de **100 créditos para 300 créditos**, junto com mudança na estratégia e no modelo utilizados. O objetivo é manter o custo de IA visível e administrável dentro do próprio produto.
+O custo de cada gerador precisa acompanhar a estratégia e o modelo utilizados para manter o consumo de IA visível e administrável dentro do produto.
 
 ## Nem toda evolução técnica deve permanecer no produto
 
@@ -292,7 +292,7 @@ O rollback foi tratado como parte normal do desenvolvimento. O que importa é qu
   ]}
 />
 
-O resultado final é descrito de forma qualitativa com base na documentação do projeto. Nenhuma porcentagem é afirmada aqui.
+Essa troca permitiu priorizar a experiência do professor e a qualidade do resultado.
 
 ## Arquitetura
 
