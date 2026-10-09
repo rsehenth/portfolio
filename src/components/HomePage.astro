@@ -15,7 +15,7 @@ interface Props {
 const { locale = 'pt-BR' } = Astro.props;
 
 const projects = await getPublishedProjects(locale);
-const featuredOrder = ['profresolve', 'super-squad-ai', 'project-aurora', 'cultos'];
+const featuredOrder = ['profresolve', 'super-squad-ai'];
 const featuredProjects = featuredOrder
   .map((key) => projects.find((project) => projectKey(project) === key))
   .filter((project): project is NonNullable<typeof project> => Boolean(project));
@@ -36,13 +36,6 @@ const topRow = featuredProjects.slice(0, 2).map((project, i) => {
   const href = caseUrl(locale, key);
   const homeData = homeProjectsData.projects[key as HomeProjectKey] ?? null;
   return { project, key, href, homeData, delay: i * 100 };
-});
-
-const bottomRow = featuredProjects.slice(2, 4).map((project, i) => {
-  const key = projectKey(project);
-  const href = caseUrl(locale, key);
-  const homeData = homeProjectsData.projects[key as HomeProjectKey] ?? null;
-  return { project, key, href, homeData, delay: (i + 2) * 100 };
 });
 
 const singleProject = featuredProjects.length === 1 ? (() => {
@@ -83,27 +76,6 @@ const singleProject = featuredProjects.length === 1 ? (() => {
                       homeData={homeData}
                       viewCaseLabel={homeProjectsData.viewCase}
                       variant="hero"
-                      locale={locale}
-                      revealDelay={delay}
-                    />
-                  </div>
-                ) : null
-              )}
-            </div>
-          )}
-
-          {/* Bottom row: remaining featured projects — default variant */}
-          {featuredProjects.length > 2 && (
-            <div class="grid gap-6 sm:gap-8 md:grid-cols-2 items-stretch">
-              {bottomRow.map(({ project, href, homeData, delay }) =>
-                homeData ? (
-                  <div class="h-full">
-                    <HomeProjectCard
-                      title={project.data.title}
-                      href={href}
-                      homeData={homeData}
-                      viewCaseLabel={homeProjectsData.viewCase}
-                      variant="default"
                       locale={locale}
                       revealDelay={delay}
                     />
