@@ -57,14 +57,14 @@ export const ui = {
       viewAll: 'Ver todos os projetos →',
       projects: {
         profresolve: {
-          category: 'AI Product · SaaS',
+          category: 'Produto de IA · SaaS',
           statusBadge: 'Ativo',
           description: 'Plataforma de IA para a rotina docente, com geração de materiais, monetização por créditos e arquitetura de resiliência para LLMs.',
           highlights: [
             { value: '16', label: 'Geradores' },
             { value: '2.4K+', label: 'Casos de teste' },
           ],
-          focus: ['AI Product', 'Confiabilidade', 'Economia de produto'],
+          focus: ['Produto de IA', 'Confiabilidade', 'Economia de produto'],
         },
         'super-squad-ai': {
           category: 'Produto de IA · Ferramentas de desenvolvimento',
@@ -87,7 +87,7 @@ export const ui = {
           focus: ['Liderança de produto', 'Sistemas de jogo', 'Escopo de MVP'],
         },
         cultos: {
-          category: 'Technical Product · Church Tech',
+          category: 'Technical Product · Tecnologia para igrejas',
           statusBadge: 'Em desenvolvimento',
           description: 'MVP desktop adaptado para a operação de mídia em igrejas brasileiras, com experiência PT-BR, funcionamento offline e sincronização opcional com a nuvem.',
           highlights: [
@@ -106,7 +106,7 @@ export const ui = {
       featured: ['profresolve', 'super-squad-ai'],
       projects: {
         profresolve: {
-          category: 'AI Product · SaaS',
+          category: 'Produto de IA · SaaS',
           description: 'Plataforma de inteligência artificial para a rotina docente, com geração de materiais, monetização por créditos e arquitetura resiliente para uso com modelos de linguagem.',
           highlights: [
             { value: '16', label: 'Geradores' },
