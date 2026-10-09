@@ -18,10 +18,10 @@ statusEvidence:
   stage: "Closed after validation in its original environment."
   evidence: "A starter built for documentation of Cripto Host’s existing product, with search, i18n and visual isolation."
   nextValidation: "The learning moved content authorship to an online editable solution."
-stageNote: "Developed and validated in the Cripto Host environment. Not yet proven across multiple host products."
+stageNote: "Validated in the Cripto Host environment; untested in another host product. Some content in the three languages remained scaffold."
 productType: Technical Product · Developer Experience
 focus: Reusability · Docs-as-Code · i18n · CSS Isolation
-status: Active
+status: Archived
 draft: false
 featured: false
 # cover: re-enable only with a real screenshot/image (public/projects/universal-docs-cover.jpg)
@@ -253,21 +253,13 @@ The reuse model was designed in three steps:
 
 The current implementation was built and validated in the Meteor + Blaze ecosystem. Within that context, the reuse flow is straightforward: copy the module, configure identity and navigation, replace the content.
 
-The distinction that matters is this: the architecture was designed for reuse. What still needs to be proven is how much of that promise holds when the starter moves into a second real product, with a different host, different global styles and a different team maintaining it.
+The architecture was designed for reuse. Any future restart would need to test it in another product with different global styles and a different maintenance team.
 
-The architectural pattern, config and content separation, CSS scoped by class and a static registry, can inform adaptations in other stacks. But that portability has not been validated and is not claimed here as compatibility with React, Next.js, Vue or any other framework.
+The architectural pattern — separate configuration and content, CSS scoped by class and a static registry — can inform adaptations in other stacks.
 
 ## Where the Starter Stands Today
 
 The starter works in the context it was built for. The implementation was validated in the project's environment, with automated tests covering the main flows.
-
-What does not yet exist:
-- evidence of use in a second real host product
-- usage or adoption metrics
-- validation of CSS isolation against a different host's global styles
-- final content in all three languages (part is still scaffold)
-
-That is the difference between a reusable architecture and an architecture validated across multiple environments. The first is demonstrated. The second is not.
 
 ## Why it was closed and what I learned
 
@@ -275,19 +267,7 @@ Maintaining documentation in three languages always depended on a developer. The
 
 The learning was that the bottleneck was content authorship, not code: a *build vs buy* case.
 
-The next step is not to add more features. It is to understand how far the reuse promise holds outside the original project.
-
-The questions driving that validation:
-
-- How much effort does it take to integrate the starter into a second real product?
-- How many changes would be needed outside of configuration and content?
-- Does the CSS isolation hold with a different set of global styles in the host?
-- How does search perform as the content base grows?
-- What is the actual experience of authoring and maintaining content over time?
-- At what point does a dedicated search engine make more sense than the client-side solution?
-- How does the registry scale with a larger number of pages?
-
-These are hypotheses for future validation, not current metrics.
+Any future reuse would need to start with integration into a second product and the real experience of authoring and maintaining content.
 
 ## What This Project Demonstrates
 

@@ -18,10 +18,10 @@ statusEvidence:
   stage: "Encerrado após validação no ambiente de origem."
   evidence: "Starter construído para a documentação do produto existente da Cripto Host, com busca, i18n e isolamento visual."
   nextValidation: "O aprendizado foi migrar a autoria para uma solução editável online."
-stageNote: "Desenvolvido e validado no ambiente do Cripto Host. Ainda não comprovado em múltiplos produtos hospedeiros."
+stageNote: "Validado no ambiente da Cripto Host; sem teste em outro produto hospedeiro. Parte do conteúdo nos três idiomas ainda era scaffold."
 productType: Technical Product · Developer Experience
 focus: Reutilização · Docs-as-Code · i18n · Isolamento de CSS
-status: Active
+status: Archived
 draft: false
 featured: false
 # cover: re-enable only with a real screenshot/image (public/projects/universal-docs-cover.jpg)
@@ -253,21 +253,13 @@ O modelo de reuso foi pensado em três etapas:
 
 A implementação atual foi criada e validada no ecossistema Meteor + Blaze. O fluxo de reuso é simples dentro desse contexto: copiar o módulo, configurar identidade e navegação e substituir o conteúdo.
 
-A distinção que importa é esta: a arquitetura foi preparada para reutilização. O que ainda precisa ser comprovado é quanto dessa promessa se sustenta quando o starter entra em um segundo produto real, com outro host, outros estilos globais e outro time de manutenção.
+A arquitetura foi preparada para reutilização. Uma eventual retomada teria de testá-la em outro produto, com estilos globais e equipe de manutenção diferentes.
 
-O padrão arquitetural, separação de config e conteúdo, CSS isolado por escopo e registry estático, pode inspirar adaptações em outras stacks. Mas essa portabilidade não foi validada e não é afirmada aqui como compatibilidade com React, Next.js, Vue ou outros frameworks.
+O padrão arquitetural — separação de configuração e conteúdo, CSS isolado por escopo e registro estático — pode orientar adaptações em outras stacks.
 
 ## Onde o starter está hoje
 
 O starter funciona no contexto para o qual foi criado. A implementação foi validada no ambiente do projeto de origem, com os testes automatizados cobrindo os fluxos principais.
-
-O que ainda não existe:
-- evidência de uso em um segundo produto hospedeiro real
-- métricas de uso ou adoção
-- validação do isolamento de CSS em outro host com estilos diferentes
-- conteúdo final nos três idiomas (parte ainda é scaffold)
-
-Essa é a diferença entre uma arquitetura reutilizável e uma arquitetura já validada em vários ambientes. O primeiro está demonstrado. O segundo ainda não.
 
 ## Por que foi encerrado e o que aprendi
 
@@ -275,19 +267,7 @@ A manutenção da documentação em três idiomas dependia sempre de um desenvol
 
 O aprendizado foi que o gargalo era autoria de conteúdo, não código: um caso de *build vs buy*.
 
-O próximo passo não é adicionar mais recursos. É entender até onde a promessa de reutilização se sustenta fora do projeto de origem.
-
-As perguntas que guiam essa validação:
-
-- Quanto esforço é necessário para integrar o starter em um segundo produto real?
-- Quantas alterações seriam necessárias fora de configuração e conteúdo?
-- O isolamento de CSS continua funcionando com outro conjunto de estilos globais no host?
-- Como a busca se comporta conforme a base de conteúdo cresce?
-- Qual é a experiência real de autoria e manutenção do conteúdo?
-- Em que ponto um search engine dedicado passa a fazer mais sentido do que a solução client-side?
-- Como o registry se comporta com um volume maior de páginas?
-
-Essas são hipóteses para validação futura, não métricas atuais.
+Uma eventual reutilização precisaria começar pela integração em um segundo produto e pela experiência real de autoria e manutenção do conteúdo.
 
 ## O que este projeto demonstra
 
