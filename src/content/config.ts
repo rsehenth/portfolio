@@ -24,7 +24,7 @@ const caseSummarySchema = z.object({
 const statusEvidenceSchema = z.object({
   stage: z.string(),
   evidence: z.string(),
-  nextValidation: z.string(),
+  nextValidation: z.string().optional(),
 });
 
 type Metric = z.infer<typeof metricSchema>;

@@ -19,7 +19,6 @@ caseSummary:
 statusEvidence:
   stage: "Produto ativo, em evolução."
   evidence: "O produto está público, ultrapassou 1.200 professores cadastrados organicamente e recebeu respostas de mais de 100 professores em um survey público."
-  nextValidation: "Medir frequência de uso, retenção, conclusão da primeira geração e conversão para planos pagos."
 status: Active
 draft: false
 featured: true
@@ -112,13 +111,13 @@ order: 10
 
 O ProfResolve está disponível publicamente em profresolve.com.br e já ultrapassou 1.200 usuários cadastrados organicamente. A plataforma tem uso recorrente enquanto continua evoluindo com base no comportamento real dos professores que a utilizam.
 
-Com o produto em uso, as decisões deixam de depender só de hipótese. Passamos a observar quais fluxos os professores realmente utilizam, onde encontram dificuldade e quais recursos voltam a usar.
+Com o produto em uso, as decisões deixam de depender apenas de hipóteses. Passamos a observar quais fluxos os professores realmente usam, onde encontram dificuldades e a quais recursos retornam.
 
 ## O problema
 
 Professores produzem continuamente planos de aula, avaliações, atividades e adaptações. O ProfResolve nasceu para reduzir parte desse trabalho repetitivo, transformando uma necessidade pedagógica em material estruturado, editável e pronto para uso.
 
-Hoje essa hipótese existe além de um protótipo: o produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente.
+Hoje, a ideia já foi além do protótipo: o produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente.
 
 ## Validação com professores
 
@@ -152,7 +151,7 @@ O ProfResolve combina assinaturas mensais e anuais com pacotes avulsos de crédi
 
 O projeto começou com uma hipótese simples: IA poderia reduzir parte do trabalho repetitivo de preparação de materiais sem tirar do professor o controle sobre o resultado.
 
-A plataforma evoluiu dessa hipótese para um produto com múltiplos geradores de conteúdo, edição, exportação, créditos, pagamentos, jogos educacionais e mecanismos de confiabilidade para operações com LLMs.
+A partir dessa hipótese, a plataforma evoluiu para um produto com múltiplos geradores de conteúdo, edição, exportação, créditos, pagamentos, jogos educacionais e mecanismos de confiabilidade para operações com LLMs.
 
 Com mais de 1.200 usuários cadastrados e uso recorrente da plataforma, a próxima etapa não é só construir mais funcionalidades. É entender comportamento, frequência de uso, retenção e quais fluxos entregam mais valor.
 
@@ -228,7 +227,7 @@ Validação, débito de créditos, montagem de prompt e contexto, roteamento de 
 
 ## IA falha. O produto não pode falhar junto.
 
-Uma falha do provedor não poderia consumir os créditos do professor e encerrar a tarefa. Por isso, o fluxo trata falha como parte esperada da operação.
+Uma falha do provedor não deve consumir os créditos do professor nem encerrar a tarefa. Por isso, o fluxo trata a falha como parte esperada da operação.
 
 Confiabilidade foi tratada como requisito de produto, não como detalhe de implementação. Em nível conceitual, a estratégia inclui:
 
@@ -319,16 +318,16 @@ Representação conceitual da arquitetura do produto, sem endpoints internos, sc
 
 Cobertura de testes e disciplina de engenharia fazem parte da experiência do produto, porque uma falha de geração atinge diretamente o professor.
 
-- **2.4K+ test cases**
+  - **2,4 mil+ casos de teste**
 - **277 arquivos de teste**
-- **Property-based testing**
+  - **Testes baseados em propriedades**
 - **Testes de regressão e caracterização**
 - **TypeScript estrito**
 - **Logging estruturado**
 - **Observabilidade**
 - **Créditos e pagamentos idempotentes**
 
-Esses números descrevem escala e disciplina técnica. Não substituem métricas de impacto do produto.
+Esses números mostram escala e disciplina técnica. Eles não substituem métricas de impacto do produto.
 
 ## Produto e escala técnica
 
@@ -338,7 +337,7 @@ Esses números descrevem escala e disciplina técnica. Não substituem métricas
   label="Sinais de produto"
   stats={[
     { value: '1.200+', label: 'Usuários cadastrados' },
-    { value: 'Live', label: 'Produto público' },
+    { value: 'Público', label: 'Produto público' },
     { value: 'Recorrente', label: 'Plataforma em uso' },
   ]}
 />
@@ -349,21 +348,8 @@ Esses números descrevem escala e disciplina técnica. Não substituem métricas
   label="Escala técnica"
   stats={[
     { value: '16', label: 'Geradores' },
-    { value: '94', label: 'API handlers' },
+    { value: '94', label: 'Rotas de API' },
     { value: '8', label: 'Integrações' },
-    { value: '2.4K+', label: 'Test cases' },
+    { value: '2,4 mil+', label: 'Casos de teste' },
   ]}
 />
-
-## Próximas validações
-
-As próximas decisões dependem de aprofundar a leitura do comportamento observado.
-
-- usuários ativos
-- frequência de geração por usuário
-- geradores mais usados
-- conclusão da primeira geração
-- consumo de créditos ao longo do tempo
-- conversão de freemium para pago
-- retenção
-- taxa de regeneração

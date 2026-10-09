@@ -27,7 +27,7 @@ interface Props {
   /** Optional note rendered under the stage */
   stageNote?: string;
   caseSummary?: { problem: string; role: string; result: string; keyDecision: string };
-  statusEvidence?: { stage: string; evidence: string; nextValidation: string };
+  statusEvidence?: { stage: string; evidence: string; nextValidation?: string };
   statusBadge?: string;
   /** Upstream/open-source attribution link for the "Base" row */
   openSourceUrl?: string;
