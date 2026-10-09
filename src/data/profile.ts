@@ -21,13 +21,13 @@ Foco em Technical Product Management, AI Products, APIs, SaaS, estratégia de pr
 };
 
 export const navigation = [
-  { label: 'Work', href: '/#work' },
+  { label: 'Projects', href: '/projects/' },
   { label: 'About', href: '/about/' },
   { label: 'Contact', href: '/#contact' },
 ];
 
 export const ctaButtons = {
-  primary: { label: 'View Selected Work', href: '/#work' },
+  primary: { label: 'View Projects', href: '/projects/' },
   secondary: { label: 'LinkedIn', href: 'https://www.linkedin.com/in/sehenth/', external: true },
 };
 
