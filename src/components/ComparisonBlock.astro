@@ -36,25 +36,25 @@ const aligned = arrows && itemsA.length === itemsB.length;
 >
   {aligned ? (
     <div class="divide-y divide-border">
-      <!-- Headers -->
-      <div class="grid grid-cols-[1fr_auto_1fr] bg-muted/60">
+      <!-- Headers: stack on mobile, side-by-side on sm+ -->
+      <div class="grid grid-cols-1 bg-muted/60 sm:grid-cols-[1fr_auto_1fr]">
         <div class="px-4 py-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground sm:px-6">
           {titleA}
         </div>
-        <div aria-hidden="true"></div>
-        <div class="px-4 py-3 text-caption font-semibold uppercase tracking-wider text-accent sm:px-6">
+        <div aria-hidden="true" class="hidden sm:block"></div>
+        <div class="border-t border-border px-4 py-3 text-caption font-semibold uppercase tracking-wider text-accent sm:border-t-0 sm:px-6">
           {titleB}
         </div>
       </div>
 
-      <!-- Aligned rows with mapping arrow -->
+      <!-- Aligned rows: stack on mobile, arrow layout on sm+ -->
       {Array.from({ length: rows }).map((_, i) => (
-        <div class="grid grid-cols-[1fr_auto_1fr] items-center">
+        <div class="grid grid-cols-1 items-center sm:grid-cols-[1fr_auto_1fr]">
           <div class="px-4 py-3 text-body-sm text-muted-foreground sm:px-6">
             {itemsA[i] ?? ''}
           </div>
-          <div class="px-2 text-muted-foreground/60" aria-hidden="true">→</div>
-          <div class="px-4 py-3 text-body-sm font-medium text-foreground sm:px-6">
+          <div class="hidden px-2 text-muted-foreground/60 sm:block" aria-hidden="true">→</div>
+          <div class="border-t border-dashed border-border px-4 pb-3 pt-2 text-body-sm font-medium text-foreground sm:border-t-0 sm:px-6 sm:py-3">
             {itemsB[i] ?? ''}
           </div>
         </div>

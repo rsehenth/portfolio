@@ -26,6 +26,8 @@ externalUrl: "https://www.profresolve.com.br"
 externalUrlLabel: "Acessar ProfResolve ↗"
 snapshotMode: "product-technical"
 # cover: re-enable only with a real screenshot/image (public/projects/...)
+logo: /projects/profresolve/logo-profresolve.webp
+logoPosition: "center"
 tags:
   - Produto de IA
   - SaaS
@@ -113,6 +115,15 @@ O ProfResolve está disponível publicamente em profresolve.com.br e já ultrapa
 
 Com o produto em uso, as decisões deixam de depender apenas de hipóteses. Passamos a observar quais fluxos os professores realmente usam, onde encontram dificuldades e a quais recursos retornam.
 
+<CaseMedia
+  src="/projects/profresolve/dashboardprof.webp"
+  alt="Dashboard do ProfResolve mostrando os geradores de conteúdo disponíveis para o professor"
+  width={1526}
+  height={1177}
+  caption="Dashboard principal — visão geral dos geradores disponíveis para o professor"
+  protected={true}
+/>
+
 ## O problema
 
 Professores produzem continuamente planos de aula, avaliações, atividades e adaptações. O ProfResolve nasceu para reduzir parte desse trabalho repetitivo, transformando uma necessidade pedagógica em material estruturado, editável e pronto para uso.
@@ -199,6 +210,24 @@ O fluxo principal foi desenhado para caber na rotina docente: poucas escolhas an
   ]}
 />
 
+<CaseMedia
+  src="/projects/profresolve/gerador.webp"
+  alt="Tela de configuração do gerador — professor selecionando disciplina, série e tema antes da geração"
+  width={1019}
+  height={1002}
+  caption="Tela de configuração — o professor define os parâmetros antes de gerar o material"
+  protected={true}
+/>
+
+<CaseMedia
+  src="/projects/profresolve/gerando.webp"
+  alt="Tela de geração em andamento — créditos sendo consumidos e progresso da geração com IA"
+  width={1241}
+  height={966}
+  caption="Geração em andamento — o sistema consome créditos e processa o pedido com IA"
+  protected={true}
+/>
+
 ## Transformando uma chamada de IA em um produto confiável
 
 Uma geração não é só enviar um prompt para um LLM. No ProfResolve, cada geração passa por uma cadeia de controle que transforma uma chamada de IA em um processo previsível:
@@ -224,6 +253,17 @@ Uma geração não é só enviar um prompt para um LLM. No ProfResolve, cada ger
 />
 
 Validação, débito de créditos, montagem de prompt e contexto, roteamento de modelo, retry, fallback, sanitização, persistência e reembolso automático fazem parte do fluxo. A experiência do professor não pode depender de um único ponto de falha.
+
+<CaseCarousel
+  slides={[
+    { src: "/projects/profresolve/editor1.webp", alt: "Editor do ProfResolve — material gerado com estrutura completa e opções de edição visíveis", width: 2495, height: 1281 },
+    { src: "/projects/profresolve/editor2.webp", alt: "Editor do ProfResolve — professor editando o conteúdo gerado pela IA em tempo real", width: 2499, height: 1262 },
+    { src: "/projects/profresolve/editor3.webp", alt: "Editor do ProfResolve — opções de exportação PDF, DOCX e compartilhamento via WhatsApp", width: 2513, height: 1312 },
+  ]}
+  ratio="16/9"
+  caption="Editor de materiais — o professor pode editar o conteúdo gerado e exportar em diferentes formatos"
+  protected={true}
+/>
 
 ## IA falha. O produto não pode falhar junto.
 
@@ -314,20 +354,60 @@ Representação conceitual da arquitetura do produto, sem endpoints internos, sc
   ]}
 />
 
+## Stack e decisões de arquitetura
+
+O ProfResolve foi construído com Next.js App Router como base unificada de frontend, rotas de API e regras de negócio. A escolha eliminou a necessidade de um servidor separado e permite colocar a lógica de geração, autenticação e créditos no mesmo processo — com 96 rotas de API organizadas por domínio.
+
+<ArchitectureDiagram
+  label="Stack por responsabilidade"
+  steps={[
+    { label: "Aplicação e interface", detail: "Next.js (App Router) · React · TypeScript · Tailwind CSS · Radix UI · SWR" },
+    { label: "Backend e dados", detail: "APIs Next.js · PostgreSQL (pg) · Upstash Redis · Better Auth · Cloudflare R2" },
+    { label: "IA e documentos", detail: "Gemini · DeepSeek · Processamento de PDF · Geração de DOCX · Exportação HTML→PDF" },
+    { label: "Serviços e integrações", detail: "Asaas (pagamentos) · Resend (e-mail) · Google OAuth" },
+    { label: "Qualidade e observabilidade", detail: "Vitest (unitários + integração) · Playwright (e2e) · Sentry · ESLint · TypeScript estrito" },
+  ]}
+/>
+
+### PostgreSQL para estado permanente. Redis para estado temporário.
+
+O PostgreSQL armazena tudo que precisa de consistência: usuários, créditos, materiais, pagamentos, geração histórica. O acesso é feito com SQL direto via `pg` — sem ORM — o que torna cada query explícita e auditável.
+
+O Redis (Upstash) resolve três problemas de desempenho e resiliência: cache de sessão com TTL de 30 segundos para evitar uma consulta ao banco a cada requisição autenticada; rate limiting por janela fixa via `INCR/EXPIRE` em pipeline para proteger os endpoints de geração; e invalidação do saldo de créditos após cada débito ou reembolso.
+
+O cliente Redis usa uma camada de fallback: se o Upstash estiver indisponível, a aplicação cai automaticamente para um provider em memória com limites reduzidos, sem interromper o serviço. O trade-off é aceitar rate limits menos precisos em degradação em vez de bloquear requisições.
+
+### Cloudflare R2 para anexos temporários dos geradores.
+
+Professores podem enviar PDFs como contexto para alguns geradores. O fluxo usa uma URL pré-assinada gerada no servidor: o navegador faz o upload diretamente para o R2 sem passar pelo servidor da aplicação, reduzindo latência e consumo de banda.
+
+O R2 é acessado via SDK compatível com S3 (`@aws-sdk/client-s3`) apontando para o endpoint Cloudflare. Isso permite usar as mesmas abstrações do ecossistema AWS sem depender da infraestrutura da AWS. O bucket é temporário — os arquivos são lidos durante a geração e deletados em seguida. A funcionalidade tem flag de ativação independente.
+
+A exportação de materiais em PDF segue um caminho diferente: o servidor renderiza o HTML do material com Playwright (Chromium headless) e retorna os bytes diretamente — o R2 não está envolvido nesse fluxo.
+
+### Better Auth com hooks de provisionamento no banco.
+
+A autenticação usa apenas Google OAuth — sem senha local. A escolha reduz a superfície de ataque e elimina fluxos de recuperação de senha. O gerenciamento de sessão é feito com cookies HTTP-only; o cache customizado no Redis substitui o mecanismo nativo do Better Auth para permitir controle explícito sobre TTL e invalidação.
+
+Os hooks do Better Auth no banco fazem o provisionamento automático: na criação de um usuário, o sistema atribui o plano freemium, insere o registro de créditos inicial e registra o provider. Isso garante que todo usuário autenticado tem créditos disponíveis desde o primeiro acesso, sem uma etapa de setup separada.
+
+O controle de acesso por papel (`freemium`, `pro`, `admin`) é implementado manualmente em `rbac.ts` — o Better Auth não tem plugins de RBAC em uso. O middleware protege `/dashboard/*` e `/admin/*` via verificação de cookie, com validação completa de sessão como segunda camada opcional, controlada por feature flag.
+
+### Vitest para contratos de API. Playwright para fluxos críticos de produto.
+
+Os testes Vitest cobrem dois ambientes: `node` para handlers de API, serviços e utilitários do servidor; e `dom` (happy-dom) para hooks React, lógica de cliente e componentes com estado. Testes de propriedade com `fast-check` validam os endpoints de validação de payload contra entradas geradas — arrays vazios, IDs inválidos, tipos errados — garantindo que as fronteiras de entrada sejam robustas.
+
+Os testes Playwright cobrem os fluxos que um usuário real percorre: autenticação com redirecionamento, modal de gerador, exibição de créditos, editor, materiais e cenários de erro crítico. Seguem o padrão Page Object Model. O checkout Asaas é explicitamente excluído dos testes e2e por depender de serviço externo.
+
+A separação é intencional: Vitest valida contratos e lógica de negócio de forma rápida e isolada; Playwright valida comportamento observável pelo professor, com custo de execução maior mas cobertura de ponta a ponta.
+
 ## Engenharia como parte da confiança do produto
 
-Cobertura de testes e disciplina de engenharia fazem parte da experiência do produto, porque uma falha de geração atinge diretamente o professor.
+No ProfResolve, testes e observabilidade não são apenas preocupações técnicas. Fazem parte da estratégia para manter a plataforma confiável enquanto novas funcionalidades são desenvolvidas.
 
-  - **2,4 mil+ casos de teste**
-- **277 arquivos de teste**
-  - **Testes baseados em propriedades**
-- **Testes de regressão e caracterização**
-- **TypeScript estrito**
-- **Logging estruturado**
-- **Observabilidade**
-- **Créditos e pagamentos idempotentes**
+A combinação de testes automatizados, TypeScript estrito, logging estruturado e Sentry ajuda a identificar regressões, investigar falhas e reduzir riscos durante a evolução do produto.
 
-Esses números mostram escala e disciplina técnica. Eles não substituem métricas de impacto do produto.
+Em operações críticas, como créditos e pagamentos, a idempotência ajuda a evitar processamentos duplicados durante tentativas repetidas de uma mesma operação. São decisões de engenharia que protegem a experiência do professor e contribuem para a confiabilidade do negócio.
 
 ## Produto e escala técnica
 
@@ -352,4 +432,26 @@ Esses números mostram escala e disciplina técnica. Eles não substituem métri
     { value: '8', label: 'Integrações' },
     { value: '2,4 mil+', label: 'Casos de teste' },
   ]}
+/>
+
+## Além dos geradores de texto
+
+O ProfResolve inclui jogos educativos gerados por IA — palavras cruzadas, quiz e outros formatos interativos. O material sai da plataforma pronto para usar em sala de aula.
+
+<CaseMedia
+  src="/projects/profresolve/game1.webp"
+  alt="Configuração do gerador de palavras cruzadas — professor define disciplina, série, tema e quantidade de palavras"
+  width={1312}
+  height={971}
+  caption="Configuração do jogo — o professor define os parâmetros antes de gerar"
+  protected={true}
+/>
+
+<CaseMedia
+  src="/projects/profresolve/game2.webp"
+  alt="Palavras cruzadas geradas pelo ProfResolve — resultado pronto para imprimir ou usar em sala de aula"
+  width={838}
+  height={1193}
+  caption="Resultado gerado — palavras cruzadas prontas para usar em sala de aula"
+  protected={true}
 />

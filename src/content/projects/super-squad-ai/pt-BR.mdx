@@ -24,6 +24,8 @@ status: Active
 draft: false
 featured: true
 # cover: /projects/super-squad-ai-cover.jpg
+logo: /projects/super-squad-ai/squadlogo.webp
+logoPosition: "center"
 tags:
   - Produto de IA
   - Multiagente
@@ -372,6 +374,104 @@ A decisão foi two-stage verification com estágios independentes. O trade-off �
     "Structured Outputs",
   ]}
 />
+
+<CaseMedia
+  src="/projects/super-squad-ai/squad.webp"
+  alt="Diagrama da arquitetura do Super Squad AI: fluxo completo do Usuário até a Persistência de Estado, passando por CLI, Leader, Scheduler, Workers e Verificação"
+  width={1673}
+  height={942}
+  caption="Arquitetura do Super Squad AI — visão geral do fluxo de orquestração"
+  protected={true}
+/>
+
+## Stack técnica
+
+Tecnologias e componentes da arquitetura completa do Super Squad AI, incorporados progressivamente ao longo do roadmap técnico.
+
+<div class="not-prose my-8 grid grid-cols-1 gap-4 sm:grid-cols-2" role="list" aria-label="Stack técnica do Super Squad AI">
+
+  <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Core & Runtime</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de core e runtime">
+      {["Python 3.12+", "Pydantic 2", "asyncio", "ThreadPoolExecutor", "threading"].map(t => (
+        <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Orquestração Multiagente</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de orquestração multiagente">
+      {["Leader + Workers", "Capability-Based Routing", "Task DAG", "State Machine", "Structured Outputs", "Scheduler"].map(t => (
+        <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Persistência & Estado</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de persistência e estado">
+      {["SQLite", "Custom Migrations", "Atomic Transactions", "Foreign Keys", "Execution Sessions", "Persistent Failure Latches"].map(t => (
+        <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Execução & Isolamento</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de execução e isolamento">
+      {["Git Worktrees", "Run/Task Branches", "Controlled Cherry-Pick", "Restricted Workspaces", "Command Registry"].map(t => (
+        <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Contexto</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de gerenciamento de contexto">
+      {["ContextPack", "ContextCache", "Content Hashing", "Policy & Config Fingerprints"].map(t => (
+        <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Segurança & Confiabilidade</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de segurança e confiabilidade">
+      {["HMAC-SHA256", "Authenticated Verification Evidence", "Anti-Replay", "Evidence Completeness", "Windows DPAPI", "Filesystem Boundary Enforcement", "Secret Sanitization"].map(t => (
+        <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Concorrência & Recovery</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de concorrência e recovery">
+      {["Cooperative Cancellation", "Project Execution Lock", "Fail-Fast", "Conservative Recovery", "Serialized Git Integration"].map(t => (
+        <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">IA & Providers</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Providers de IA">
+      {["Provider Abstraction Layer", "OpenAI", "Anthropic", "Google Gemini", "Deterministic FakeProvider"].map(t => (
+        <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="rounded-xl border border-border bg-card px-5 py-4 sm:col-span-2" role="listitem">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Qualidade & Distribuição</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de qualidade e distribuição">
+      {["pytest", "mypy strict", "Ruff", "setuptools", "pyproject.toml", "Wheel", "Isolated Package Validation"].map(t => (
+        <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
+      ))}
+    </ul>
+  </div>
+
+</div>
 
 ## Estado atual
 

@@ -163,7 +163,7 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
     function closeMenu() {
       if (!menu || !toggle) return;
       menu.classList.add('max-h-0', 'opacity-0');
-      menu.classList.remove('max-h-96', 'opacity-100');
+      menu.classList.remove('max-h-[32rem]', 'opacity-100');
       toggle.setAttribute('aria-expanded', 'false');
     }
 
@@ -172,7 +172,7 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
         const isOpen = menu.classList.contains('max-h-0');
         if (isOpen) {
           menu.classList.remove('max-h-0', 'opacity-0');
-          menu.classList.add('max-h-96', 'opacity-100');
+          menu.classList.add('max-h-[32rem]', 'opacity-100');
           toggle.setAttribute('aria-expanded', 'true');
         } else {
           closeMenu();
