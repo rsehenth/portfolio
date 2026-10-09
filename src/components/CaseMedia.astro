@@ -16,7 +16,7 @@ if (!alt.trim()) throw new Error('CaseMedia requires descriptive alt text.');
 
 <figure class="not-prose my-8">
   {kind === 'video' ? (
-    <video class="h-auto w-full rounded-2xl border border-border" width={width} height={height} muted loop playsinline autoplay controls preload="metadata" data-case-media-video aria-label={alt}>
+    <video class="h-auto w-full rounded-2xl border border-border" width={width} height={height} muted loop playsinline controls preload="none" data-case-media-video aria-label={alt}>
       <source src={src} />
     </video>
   ) : (
@@ -26,12 +26,28 @@ if (!alt.trim()) throw new Error('CaseMedia requires descriptive alt text.');
 </figure>
 
 <script is:inline>
-  function syncCaseMediaMotion() {
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.querySelectorAll('[data-case-media-video]').forEach(function (video) {
-      if (reduce) video.pause();
+  (() => {
+    if (document.documentElement.dataset.caseMediaReady) return;
+    document.documentElement.dataset.caseMediaReady = 'true';
+    const caseMediaMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const caseMediaObserver = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting && !caseMediaMotion.matches) {
+          target.play().catch(() => {});
+        } else {
+          target.pause();
+        }
+      });
     });
-  }
-  syncCaseMediaMotion();
-  document.addEventListener('astro:page-load', syncCaseMediaMotion);
+    function syncCaseMediaVideos() {
+      document.querySelectorAll('[data-case-media-video]').forEach((video) => {
+        caseMediaObserver.unobserve(video);
+        caseMediaObserver.observe(video);
+        if (caseMediaMotion.matches) video.pause();
+      });
+    }
+    caseMediaMotion.addEventListener('change', syncCaseMediaVideos);
+    document.addEventListener('astro:page-load', syncCaseMediaVideos);
+    syncCaseMediaVideos();
+  })();
 </script>
