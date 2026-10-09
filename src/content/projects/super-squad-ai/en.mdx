@@ -24,6 +24,10 @@ status: Active
 draft: false
 featured: true
 # cover: /projects/super-squad-ai-cover.jpg
+views: true
+readingTime:
+  basic: 2
+  full: 7
 logo: /projects/super-squad-ai/squadlogo.webp
 logoPosition: "center"
 tags:
@@ -102,13 +106,13 @@ Coding agents can execute tasks individually. When multiple agents work on the s
 
 The challenge in Super Squad AI is not generating code. It is governing agent execution over a repository with deterministic rules, clear boundaries and evidence-based verification rather than agent self-report.
 
-## Why I built it
+<h2 id="por-que-construi">Why I built it</h2>
 
 Super Squad AI is an own-use tool used in my development workflow. I built it to demonstrate an orchestration architecture and expand my execution capacity through specialized agents.
 
 Once it is mature, the tool may be evaluated as a commercial offering. Today, the focus is learning from own use and evolving its controls.
 
-## AI Proposes. The System Verifies.
+<h2 id="a-ia-propoe">AI Proposes. The System Verifies.</h2>
 
 This is the central principle of the project.
 
@@ -157,7 +161,7 @@ WorkerReport is a declaration. VERIFIED is a state that requires proof.
 
 Every step is deterministic. AI occupies the execution nodes. Control of the flow, boundaries and verification belongs to the system.
 
-## A Capability-Based Squad Instead of Fixed Agents
+<h2 id="capabilities">A Capability-Based Squad Instead of Fixed Agents</h2>
 
 The architecture does not define rigid positions like `worker_01`, `worker_02` or `security_worker`. Agents register capabilities. The scheduler selects those compatible with each task.
 
@@ -219,7 +223,7 @@ The human branch stays outside the automated cycle. Changes reach it only after 
 
 Conceptual benefits of this approach: isolation between concurrent agents, granular rollback per task, independent audit of each agent's work, controlled integration and lower risk of cross-task contamination.
 
-## Working in Isolation Does Not Mean Working After Integration
+<h2 id="verificacao-em-dois-estagios">Working in Isolation Does Not Mean Working After Integration</h2>
 
 Verification happens at two distinct moments for an architectural reason.
 
@@ -323,7 +327,7 @@ The goal is to ensure that public APIs, fabricated registries or invalid evidenc
 
 ## Product and Engineering Decisions
 
-**Decision 1 — Agent report is not real state**
+<h3 id="relato-nao-e-estado">Decision 1 — Agent report is not real state</h3>
 
 The problem was that a model can claim success without verifiable proof.
 
@@ -331,7 +335,7 @@ The decision was to treat WorkerReport as a declaration and require authorized e
 
 ---
 
-**Decision 2 — Git as the operational boundary**
+<h3 id="git-fronteira">Decision 2 — Git as the operational boundary</h3>
 
 The problem was that multiple agents modifying the same working tree made rollback and audit difficult to perform with confidence.
 
@@ -339,7 +343,7 @@ The decision was isolated worktrees per task with controlled integration. The tr
 
 ---
 
-**Decision 3 — Capabilities instead of fixed roles**
+<h3>Decision 3 — Capabilities instead of fixed roles</h3>
 
 The problem was that an architecture with fixed agent positions does not scale conceptually and requires core redesign to add specialists.
 
@@ -347,7 +351,7 @@ The decision was capability-based selection in the scheduler. The trade-off is a
 
 ---
 
-**Decision 4 — Verification before and after integration**
+<h3>Decision 4 — Verification before and after integration</h3>
 
 The problem was that code correct in isolation can break the system when integrated with other concurrent tasks.
 
@@ -473,7 +477,7 @@ Technologies and components of the complete Super Squad AI architecture, progres
 
 </div>
 
-## Current Stage
+<h2 id="estado-atual">Current Stage</h2>
 
 Super Squad AI is a functional product in active development. What exists today:
 

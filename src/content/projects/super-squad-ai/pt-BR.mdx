@@ -24,6 +24,10 @@ status: Active
 draft: false
 featured: true
 # cover: /projects/super-squad-ai-cover.jpg
+views: true
+readingTime:
+  basic: 2
+  full: 7
 logo: /projects/super-squad-ai/squadlogo.webp
 logoPosition: "center"
 tags:
@@ -102,13 +106,13 @@ Coding agents conseguem executar tarefas individualmente. Quando vários agentes
 
 O desafio do Super Squad AI não é gerar código. É governar a execução de agentes sobre um repositório com regras determinísticas, fronteiras claras e verificação baseada em evidência, não em declaração.
 
-## Por que construí
+<h2 id="por-que-construi">Por que construí</h2>
 
 O Super Squad AI é uma ferramenta de uso próprio, em uso no meu fluxo de desenvolvimento. Foi criado para demonstrar uma arquitetura de orquestração e ampliar minha capacidade de execução por meio de agentes especializados.
 
 Quando estiver madura, a ferramenta poderá ser avaliada como uma oferta comercial. Hoje, o foco é aprender com o uso próprio e evoluir seus controles.
 
-## A IA propõe. O sistema verifica.
+<h2 id="a-ia-propoe">A IA propõe. O sistema verifica.</h2>
 
 Este é o princípio central do projeto.
 
@@ -157,7 +161,7 @@ WorkerReport é uma declaração. VERIFIED é um estado que exige prova.
 
 Cada etapa é determinística. A IA ocupa os nós de execução. O controle do fluxo, das fronteiras e da verificação é do sistema.
 
-## Uma squad baseada em capabilities, não em agentes fixos
+<h2 id="capabilities">Uma squad baseada em capabilities, não em agentes fixos</h2>
 
 A arquitetura não define posições rígidas como `worker_01`, `worker_02` ou `security_worker`. Os agentes registram capabilities. O scheduler seleciona os compatíveis com cada tarefa.
 
@@ -219,7 +223,7 @@ A branch humana permanece fora do ciclo automático. Mudanças chegam a ela some
 
 Benefícios conceituais dessa abordagem: isolamento entre agentes concorrentes, rollback granular por tarefa, auditoria do que cada agente fez separadamente, integração controlada e menor risco de contaminação entre tarefas.
 
-## Funcionar isolado não significa funcionar integrado
+<h2 id="verificacao-em-dois-estagios">Funcionar isolado não significa funcionar integrado</h2>
 
 A verificação acontece em dois momentos distintos por razão arquitetural.
 
@@ -323,7 +327,7 @@ O objetivo é garantir que APIs públicas, registros fabricados ou evidências i
 
 ## Decisões de produto e engenharia
 
-**Decisão 1 — Relato do agente não é estado real**
+<h3 id="relato-nao-e-estado">Decisão 1 — Relato do agente não é estado real</h3>
 
 O problema era que um modelo pode afirmar sucesso sem prova verificável.
 
@@ -331,7 +335,7 @@ A decisão foi tratar WorkerReport como declaração e exigir evidência autoriz
 
 ---
 
-**Decisão 2 — Git como fronteira operacional**
+<h3 id="git-fronteira">Decisão 2 — Git como fronteira operacional</h3>
 
 O problema era que vários agentes alterando o mesmo working tree tornavam rollback e auditoria difíceis de realizar com confiança.
 
@@ -339,7 +343,7 @@ A decisão foi worktrees isolados por tarefa com integração controlada. O trad
 
 ---
 
-**Decisão 3 — Capabilities em vez de papéis fixos**
+<h3>Decisão 3 — Capabilities em vez de papéis fixos</h3>
 
 O problema era que uma arquitetura com posições fixas de agentes não escala conceitualmente e exige redesenho do core para adicionar especialistas.
 
@@ -347,7 +351,7 @@ A decisão foi seleção por capabilities no scheduler. O trade-off é um schedu
 
 ---
 
-**Decisão 4 — Verificação antes e depois da integração**
+<h3>Decisão 4 — Verificação antes e depois da integração</h3>
 
 O problema era que código correto isoladamente pode quebrar o sistema quando integrado com outras tarefas concorrentes.
 
@@ -473,7 +477,7 @@ Tecnologias e componentes da arquitetura completa do Super Squad AI, incorporado
 
 </div>
 
-## Estado atual
+<h2 id="estado-atual">Estado atual</h2>
 
 O Super Squad AI é um produto funcional em evolução ativa. O que existe hoje:
 
