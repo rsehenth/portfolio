@@ -67,6 +67,5 @@ export const footerLinks = [
 export const siteConfig = {
   title: 'Lucas Sehnem — Technical Product Manager',
   description: 'Technical Product Manager at the intersection of AI, Product & Engineering. Building AI-powered products, APIs, and SaaS.',
-  url: 'https://lucassehnem.com',
   ogImage: '/og-image.jpg',
 };

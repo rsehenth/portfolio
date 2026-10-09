@@ -253,6 +253,19 @@ export const ui = {
         p3: 'Hoje, como cofundador do ProfResolve, atuo em todo o ciclo do produto: discovery, visão, roadmap, UX, monetização e implementação técnica. Construí a plataforma de ponta a ponta, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade. Essa combinação entre entendimento do usuário, decisões de produto e execução técnica é o que levo para a próxima equipe.',
       },
 
+      transparency: 'Apresento apenas dados que consigo verificar; o status de cada projeto está indicado em cada case.',
+      timeline: {
+        title: 'Trajetória',
+        items: [
+          { period: '2026 – Presente', company: 'ProfResolve', role: 'COO & Co-founder | Product & Technical Lead', description: 'Cofundador e líder de produto de um SaaS de IA para professores.' },
+          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requisitos e pesquisa de infraestrutura junto à engenharia.' },
+          { period: '2019 – 2025 (5+ anos)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) e contratado direto TRON DAO (2023 – 2025).' },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Comunidade, conteúdo localizado e feedback do mercado brasileiro.' },
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'Feedback de usuários, discovery, backlog e projetos Web3.' },
+          { period: '2010 – Presente', company: 'YouTube / Independente', role: 'Content Creator across Multiple Channels', description: 'Estratégia de conteúdo, métricas e crescimento orgânico em múltiplos canais.' },
+        ],
+      },
+
       focus: {
         title: 'Onde Atuo',
         aiProducts: {
@@ -616,6 +629,19 @@ export const ui = {
         p1: 'My career in technology started close to users. I spent more than five years in the TRON DAO / DLive ecosystem working with support, onboarding, localization and feedback in Portuguese, English and Spanish. Later, at the Spanish exchange Bit2Me and in Play9/NineBlocks projects, I began connecting community, growth and product, bringing user signals into communication, discovery and backlog decisions.',
         p2: 'That experience led me to increasingly product-focused roles. At Cripto Host, I worked as a Product Owner, dealing with backlog, technical requirements, infrastructure research and prioritization alongside engineering.',
         p3: 'Today, as co-founder of ProfResolve, I work across the entire product cycle: discovery, vision, roadmap, UX, monetization and technical implementation. I built the platform end to end, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms. This combination of user understanding, product decisions and technical execution is what I bring to the next team.',
+      },
+
+      transparency: 'I present only data I can verify; each project’s status is indicated in its case study.',
+      timeline: {
+        title: 'Career path',
+        items: [
+          { period: '2026 – Present', company: 'ProfResolve', role: 'COO & Co-founder | Product & Technical Lead', description: 'Co-founder and product lead for an AI SaaS for teachers.' },
+          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requirements and infrastructure research alongside engineering.' },
+          { period: '2019 – 2025 (5+ years)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) and direct hire TRON DAO (2023 – 2025).' },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Community, localized content and feedback from the Brazilian market.' },
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'User feedback, discovery, backlog and Web3 projects.' },
+          { period: '2010 – Present', company: 'YouTube / Independent', role: 'Content Creator across Multiple Channels', description: 'Content strategy, metrics and organic growth across multiple channels.' },
+        ],
       },
 
       focus: {
