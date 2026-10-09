@@ -58,6 +58,17 @@ const hero = ui[locale].hero;
           </svg>
           {hero.ctaSecondary}
         </a>
+        <a
+          href={locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas.cven.pdf'}
+          download
+          aria-label={hero.ctaCVAriaLabel}
+          class="inline-flex items-center justify-center gap-2 px-4 py-2 text-body-sm font-medium text-muted-foreground border border-border rounded-lg hover:text-foreground hover:border-foreground/40 transition-colors duration-fast w-full sm:w-auto"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          {hero.ctaCV}
+        </a>
       </div>
 
       <!-- Scroll indicator -->

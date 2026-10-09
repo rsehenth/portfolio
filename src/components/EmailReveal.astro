@@ -1,0 +1,77 @@
+---
+// EmailReveal.astro
+// Reveals the contact email on user interaction via JS.
+// The full address is never present in static HTML — it is assembled client-side only.
+// Parts: data-ep (local part) + "@" + data-ed (domain) + "." + data-et (TLD)
+import type { AstroProps } from 'astro';
+import type { Locale } from '@/i18n';
+
+interface Props extends AstroProps {
+  locale?: Locale;
+  buttonLabel: string;
+  revealedLabel: string;
+  ariaLabel: string;
+}
+
+const { buttonLabel, ariaLabel } = Astro.props;
+
+// Unique ID so multiple instances on the same page don't conflict
+const uid = `er-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<span id={uid} aria-live="polite" class="inline-flex">
+  <button
+    type="button"
+    class="inline-flex items-center gap-2 px-4 py-2 text-body-sm font-medium text-muted-foreground border border-border rounded-lg hover:text-foreground hover:border-foreground/40 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+    aria-label={ariaLabel}
+    data-ep="lucas.sehnemb"
+    data-ed="gmail"
+    data-et="com"
+    data-uid={uid}
+  >
+    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+    {buttonLabel}
+  </button>
+</span>
+
+<script>
+  function initEmailReveal() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('button[data-ep][data-ed][data-et]');
+    buttons.forEach((btn) => {
+      // Avoid double-binding after view transitions
+      if (btn.dataset.erInit) return;
+      btn.dataset.erInit = '1';
+
+      btn.addEventListener('click', () => {
+        const ep = btn.dataset.ep ?? '';
+        const ed = btn.dataset.ed ?? '';
+        const et = btn.dataset.et ?? '';
+        const uid = btn.dataset.uid ?? '';
+        const address = `${ep}@${ed}.${et}`;
+
+        const wrapper = uid ? document.getElementById(uid) : btn.parentElement;
+        if (!wrapper) return;
+
+        const link = document.createElement('a');
+        link.href = `mailto:${address}`;
+        link.textContent = address;
+        link.className =
+          'inline-flex items-center gap-1.5 text-body-sm font-medium text-accent hover:text-accent/80 transition-colors duration-fast underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded';
+
+        wrapper.replaceChildren(link);
+        link.focus();
+      });
+    });
+  }
+
+  // Run on initial load and after view transitions
+  document.addEventListener('astro:page-load', initEmailReveal);
+  // Also run immediately if DOM is already ready (no view transitions on first paint)
+  if (document.readyState !== 'loading') {
+    initEmailReveal();
+  } else {
+    document.addEventListener('DOMContentLoaded', initEmailReveal);
+  }
+</script>

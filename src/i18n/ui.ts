@@ -35,6 +35,8 @@ export const ui = {
       subheadline: 'Conecto estratégia de produto, decisões técnicas e execução hands-on para transformar problemas complexos em produtos simples, confiáveis e escaláveis.',
       ctaPrimary: 'Ver cases',
       ctaSecondary: 'LinkedIn',
+      ctaCV: 'Baixar CV (PDF)',
+      ctaCVAriaLabel: 'Baixar currículo em PDF',
     },
 
     // Selected Work section
@@ -182,7 +184,7 @@ export const ui = {
     // Projects index page
     projectsPage: {
       title: 'Projetos',
-      subtitle: 'Uma seleção de produtos e sistemas que mostram como trabalho entre produto, inteligência artificial e tecnologia — da estratégia à execução.',
+      subtitle: 'Uma seleção de produtos e sistemas que mostram como trabalho entre produto, inteligência artificial e tecnologia da estratégia à execução.',
       description: 'Portfólio de produtos construídos e entregues por Lucas Sehnem, Technical Product Manager.',
       empty: 'Nenhum projeto publicado ainda. Volte em breve!',
       featuredHeading: 'Projetos em destaque',
@@ -231,7 +233,7 @@ export const ui = {
       // SEO meta exclusive to About — not the site-wide siteDescription
       meta: {
         title: 'Sobre | Lucas Sehnem · Technical Product Manager',
-        description: 'Como Lucas Sehnem trabalha entre produto e tecnologia, com foco em AI Products, Technical Product, estratégia, arquitetura e execução hands-on.',
+        description: 'Trajetória de Lucas Sehnem entre usuários, produto e tecnologia, com experiência em AI Products, Technical Product, discovery, estratégia e execução hands-on.',
       },
 
       // bio.* kept untouched — consumed by HomePage.astro for the Home About section
@@ -242,8 +244,9 @@ export const ui = {
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
-        p1: 'Trabalho de forma hands-on entre produto e tecnologia. Atuo diretamente com desenvolvimento, IA, APIs, arquitetura, automações e prototipação para transformar decisões de produto em soluções reais.',
-        p2: 'Meu trabalho não termina na definição do que construir. Busco entender as implicações técnicas, os trade-offs e o caminho mais eficiente entre uma decisão de produto e o valor entregue ao usuário.',
+        p1: 'Minha trajetória em tecnologia começou próxima dos usuários. Passei mais de cinco anos no ecossistema TRON DAO / DLive atuando com suporte, onboarding, localização e feedback em português, inglês e espanhol. Depois, na exchange espanhola Bit2Me e em projetos da Play9/NineBlocks, passei a conectar comunidade, growth e produto, levando sinais de usuários para decisões de comunicação, discovery e backlog.',
+        p2: 'Essa experiência me levou a papéis cada vez mais próximos de produto. Na Cripto Host, atuei como Product Owner, trabalhando com backlog, requisitos técnicos, pesquisa de infraestrutura e priorização junto à engenharia.',
+        p3: 'Hoje, como cofundador do ProfResolve, atuo em todo o ciclo do produto: discovery, visão, roadmap, UX, monetização e implementação técnica. Construí a plataforma de ponta a ponta, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade. Essa combinação entre entendimento do usuário, decisões de produto e execução técnica é o que levo para a próxima equipe.',
       },
 
       focus: {
@@ -307,6 +310,10 @@ export const ui = {
       subtitle: 'Estou aberto a conversar sobre oportunidades em Technical Product, AI Products e equipes construindo produtos tecnicamente complexos.',
       ctaLinkedin: 'LinkedIn',
       ctaEmail: 'Enviar e-mail',
+      ctaCV: 'Baixar CV (PDF)',
+      showEmail: 'Ver e-mail',
+      emailAriaLabel: 'Ver endereço de e-mail',
+      emailRevealedLabel: 'E-mail revelado',
     },
 
     // Footer
@@ -389,6 +396,8 @@ export const ui = {
       subheadline: 'I connect product strategy, technical decisions and hands-on execution to turn complex problems into simple, reliable and scalable products.',
       ctaPrimary: 'View cases',
       ctaSecondary: 'LinkedIn',
+      ctaCV: 'Download CV (PDF)',
+      ctaCVAriaLabel: 'Download resume as PDF',
     },
 
     // Selected Work section
@@ -536,7 +545,7 @@ export const ui = {
     // Projects index page
     projectsPage: {
       title: 'Projects',
-      subtitle: 'A selection of products and systems that show how I work across product, AI and technology — from strategy to execution.',
+      subtitle: 'A selection of products and systems that show how I work across product, AI and technology from strategy to execution.',
       description: 'Portfolio of products built and shipped by Lucas Sehnem, Technical Product Manager.',
       empty: 'No projects published yet. Check back soon!',
       featuredHeading: 'Featured Work',
@@ -585,7 +594,7 @@ export const ui = {
       // SEO meta exclusive to About — not the site-wide siteDescription
       meta: {
         title: 'About | Lucas Sehnem · Technical Product Manager',
-        description: 'How Lucas Sehnem works across product and technology, with a focus on AI Products, Technical Product, strategy, architecture and hands-on execution.',
+        description: "Lucas Sehnem's path across users, product and technology — with experience in AI Products, Technical Product, discovery, strategy and hands-on execution.",
       },
 
       // bio.* kept untouched — consumed by HomePage.astro for the Home About section
@@ -596,8 +605,9 @@ export const ui = {
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
-        p1: 'I work hands-on across product and technology, directly engaging with development, AI, APIs, architecture, automation and prototyping to turn product decisions into real solutions.',
-        p2: 'My work does not end with defining what to build. I focus on understanding the technical implications, trade-offs and the most efficient path from a product decision to the value delivered to the user.',
+        p1: 'My career in technology started close to users. I spent more than five years in the TRON DAO / DLive ecosystem working with support, onboarding, localization and feedback in Portuguese, English and Spanish. Later, at the Spanish exchange Bit2Me and in Play9/NineBlocks projects, I began connecting community, growth and product, bringing user signals into communication, discovery and backlog decisions.',
+        p2: 'That experience led me to increasingly product-focused roles. At Cripto Host, I worked as a Product Owner, dealing with backlog, technical requirements, infrastructure research and prioritization alongside engineering.',
+        p3: 'Today, as co-founder of ProfResolve, I work across the entire product cycle: discovery, vision, roadmap, UX, monetization and technical implementation. I built the platform end to end, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms. This combination of user understanding, product decisions and technical execution is what I bring to the next team.',
       },
 
       focus: {
@@ -661,6 +671,10 @@ export const ui = {
       subtitle: "I'm open to conversations about opportunities in Technical Product, AI Products and teams building technically complex products.",
       ctaLinkedin: 'LinkedIn',
       ctaEmail: 'Send email',
+      ctaCV: 'Download CV (PDF)',
+      showEmail: 'Show email',
+      emailAriaLabel: 'Show email address',
+      emailRevealedLabel: 'Email revealed',
     },
 
     // Footer
