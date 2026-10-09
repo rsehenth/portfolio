@@ -5,6 +5,7 @@
 // Parts: data-ep (local part) + "@" + data-ed (domain) + "." + data-et (TLD)
 import type { AstroProps } from 'astro';
 import type { Locale } from '@/i18n';
+import { profile } from '@/data/profile';
 
 interface Props extends AstroProps {
   locale?: Locale;
@@ -14,6 +15,10 @@ interface Props extends AstroProps {
 }
 
 const { buttonLabel, ariaLabel } = Astro.props;
+const [localPart = '', fullDomain = ''] = profile.email.split('@');
+const domainParts = fullDomain.split('.');
+const domain = domainParts.slice(0, -1).join('.');
+const tld = domainParts.at(-1) ?? '';
 
 // Unique ID so multiple instances on the same page don't conflict
 const uid = `er-${Math.random().toString(36).slice(2, 8)}`;
@@ -24,9 +29,9 @@ const uid = `er-${Math.random().toString(36).slice(2, 8)}`;
     type="button"
     class="inline-flex items-center gap-2 px-4 py-2 text-body-sm font-medium text-muted-foreground border border-border rounded-lg hover:text-foreground hover:border-foreground/40 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     aria-label={ariaLabel}
-    data-ep="lucas.sehnemb"
-    data-ed="gmail"
-    data-et="com"
+    data-ep={localPart}
+    data-ed={domain}
+    data-et={tld}
     data-uid={uid}
   >
     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
