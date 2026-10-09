@@ -64,7 +64,7 @@ export const ui = {
             { value: '16', label: 'Geradores' },
             { value: '2.4K+', label: 'Test cases' },
           ],
-          focus: ['AI Product', 'Reliability', 'Product Economics'],
+          focus: ['AI Product', 'Confiabilidade', 'Economia de produto'],
         },
         'super-squad-ai': {
           category: 'AI Product · Developer Tools',
@@ -74,17 +74,17 @@ export const ui = {
             { value: '1 + N', label: 'Agent architecture' },
             { value: '2-stage', label: 'Verification' },
           ],
-          focus: ['Agent Orchestration', 'Reliability', 'Technical Product'],
+          focus: ['Orquestração de agentes', 'Confiabilidade', 'Technical Product'],
         },
         'project-aurora': {
-          category: 'Product Leadership · Game Systems',
+          category: 'Liderança de produto · Sistemas de jogo',
           statusBadge: 'Em desenvolvimento',
           description: "Beat 'em up 2D em produção no qual lidero visão de produto, sistemas, progressão e priorização em uma equipe de três pessoas.",
           highlights: [
             { value: '3', label: 'Pessoas na equipe' },
             { value: 'Post-PoC', label: 'Early Production' },
           ],
-          focus: ['Product Leadership', 'Game Systems', 'MVP Scoping'],
+          focus: ['Liderança de produto', 'Sistemas de jogo', 'Escopo de MVP'],
         },
         cultos: {
           category: 'Technical Product · Church Tech',
@@ -94,7 +94,7 @@ export const ui = {
             { value: '9 + mídia', label: 'Coleções sincronizadas' },
             { value: 'Offline-first', label: 'Desktop product' },
           ],
-          focus: ['Product Adaptation', 'Technical Product', 'UX Simplification'],
+          focus: ['Adaptação de produto', 'Technical Product', 'Simplificação de UX'],
         },
       },
     },
