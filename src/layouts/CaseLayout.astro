@@ -1,4 +1,4 @@
----
+﻿---
 // CaseLayout.astro - Layout for individual case study pages
 import BaseLayout from './BaseLayout.astro';
 import CaseNavigation from '@/components/CaseNavigation.astro';
@@ -46,14 +46,14 @@ interface Props {
   logo?: string;
   /** CSS object-position for the logo (e.g. 'center', 'top left') */
   logoPosition?: string;
-  /** External product URL — renders a discrete CTA link near the hero */
+  /** External product URL â€” renders a discrete CTA link near the hero */
   externalUrl?: string;
   /** Localized label for the external CTA */
   externalUrlLabel?: string;
   /**
    * Controls how the snapshot section is rendered.
-   * 'default'           → original layout (no sub-headings)
-   * 'product-technical' → opt-in split: Product + Technical Scale headings
+   * 'default'           â†’ original layout (no sub-headings)
+   * 'product-technical' â†’ opt-in split: Product + Technical Scale headings
    * Other cases that do not set this field continue to render exactly as before.
    */
   snapshotMode?: 'default' | 'product-technical';
@@ -168,19 +168,29 @@ const hasResults = !views && (scale.length > 0 || productImpact.length > 0);
         </p>
       )}
 
-      {externalUrl && (
-        <div class="mt-6">
-          <a
-            href={externalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-foreground px-5 py-2.5 text-body-sm font-semibold text-background shadow-sm transition-all duration-fast hover:opacity-90 hover:shadow-md hover:-translate-y-px active:translate-y-0"
-          >
-            {externalUrlLabel ?? caseStudy.visitProduct}
-            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
+      {(externalUrl || views) && (
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap">
+          {externalUrl && (
+            <a
+              href={externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-foreground px-5 py-2.5 text-body-sm font-semibold text-background shadow-sm transition-all duration-fast hover:opacity-90 hover:shadow-md hover:-translate-y-px active:translate-y-0"
+            >
+              {externalUrlLabel ?? caseStudy.visitProduct}
+              <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          )}
+
+          {views && (
+            <CaseViewToggle
+              locale={locale}
+              basicMinutes={readingTime?.basic}
+              fullMinutes={readingTime?.full}
+            />
+          )}
         </div>
       )}
 
@@ -236,14 +246,6 @@ const hasResults = !views && (scale.length > 0 || productImpact.length > 0);
             <li class="tag">{tag}</li>
           ))}
         </ul>
-      )}
-
-      {views && (
-        <CaseViewToggle
-          locale={locale}
-          basicMinutes={readingTime?.basic}
-          fullMinutes={readingTime?.full}
-        />
       )}
     </header>
 
@@ -407,7 +409,7 @@ const hasResults = !views && (scale.length > 0 || productImpact.length > 0);
 <MediaLightbox />
 
 <style>
-  /* ── Case hero logo ── */
+  /* â”€â”€ Case hero logo â”€â”€ */
   .case-hero-logo {
     width: 3.5rem;      /* 56px on mobile */
     height: 3.5rem;
@@ -428,7 +430,7 @@ const hasResults = !views && (scale.length > 0 || productImpact.length > 0);
     user-select: none;
   }
 
-  /* ── Case hero title — responsive font size ── */
+  /* â”€â”€ Case hero title â€” responsive font size â”€â”€ */
   .case-hero-title {
     /* Mobile: smaller so it fits next to the logo */
     font-size: clamp(1.75rem, 7vw, 2.5rem);
@@ -459,7 +461,7 @@ const hasResults = !views && (scale.length > 0 || productImpact.length > 0);
     }
   }
 
-  /* ── Tagline — responsive ── */
+  /* â”€â”€ Tagline â€” responsive â”€â”€ */
   .case-hero-tagline {
     font-size: clamp(1.25rem, 4vw, 1.75rem);
     line-height: 1.3;

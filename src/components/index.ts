@@ -38,6 +38,7 @@ export const CaseMedia = createComponentLoader('@/components/CaseMedia.astro');
 export const BasicView = createComponentLoader('@/components/BasicView.astro');
 export const FullView = createComponentLoader('@/components/FullView.astro');
 export const SeeFull = createComponentLoader('@/components/SeeFull.astro');
+export const ViewCtaButton = createComponentLoader('@/components/ViewCtaButton.astro');
 
 // For the mdx() integration config, we need a plain object
 // But we can't import .astro files there. So we export this for reference.
@@ -57,4 +58,5 @@ export default {
   BasicView,
   FullView,
   SeeFull,
+  ViewCtaButton,
 };

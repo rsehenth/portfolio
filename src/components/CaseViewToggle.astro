@@ -1,7 +1,6 @@
 ---
 // CaseViewToggle.astro — Seletor segmentado "Resumo / Case completo".
-// Inserido no hero do CaseLayout quando views: true.
-// Estado inicial é definido pelo script inline no <head> do BaseLayout.
+// Renderizado inline ao lado do botão "Acessar produto" no hero.
 import { ui, type Locale } from '@/i18n';
 
 interface Props {
@@ -13,11 +12,11 @@ interface Props {
 const { locale, basicMinutes, fullMinutes } = Astro.props;
 const t = ui[locale].caseViewToggle;
 
-const basicLabel = basicMinutes ? `${t.basic} · ${basicMinutes} ${t.minuteSuffix}` : t.basic;
-const fullLabel  = fullMinutes  ? `${t.full} · ${fullMinutes} ${t.minuteSuffix}`  : t.full;
+const basicLabel  = basicMinutes  ? `${t.basic} · ${basicMinutes} ${t.minuteSuffix}`  : t.basic;
+const fullLabel   = fullMinutes   ? `${t.full} · ${fullMinutes} ${t.minuteSuffix}`    : t.full;
 ---
 
-<div class="case-view-toggle not-prose mb-8" data-case-view-toggle>
+<div class="case-view-toggle" data-case-view-toggle>
   {/* Aria-live region — anuncia mudança de visão a leitores de tela */}
   <span
     id="case-view-live"
@@ -32,54 +31,79 @@ const fullLabel  = fullMinutes  ? `${t.full} · ${fullMinutes} ${t.minuteSuffix}
   <div
     role="group"
     aria-label={t.groupLabel}
-    class="inline-flex w-full sm:w-auto rounded-xl border border-border bg-muted/40 p-1 gap-1"
+    class="cvt-group"
   >
-    <button
-      type="button"
-      data-view-btn="basic"
-      aria-pressed="true"
-      class="view-btn flex-1 sm:flex-none rounded-lg px-4 py-2 text-body-sm font-medium transition-colors duration-fast"
-    >
-      {basicLabel}
-    </button>
-    <button
-      type="button"
-      data-view-btn="full"
-      aria-pressed="false"
-      class="view-btn flex-1 sm:flex-none rounded-lg px-4 py-2 text-body-sm font-medium transition-colors duration-fast"
-    >
-      {fullLabel}
-    </button>
+    <button type="button" data-view-btn="basic" aria-pressed="true"  class="cvt-btn" id="cvt-btn-basic">{basicLabel}</button>
+    <button type="button" data-view-btn="full"  aria-pressed="false" class="cvt-btn" id="cvt-btn-full">{fullLabel}</button>
   </div>
 </div>
 
 <style>
-  /* Ocultar o toggle quando não há JS */
-  html:not(.js) .case-view-toggle {
-    display: none;
+  /* Hide when JS is absent */
+  html:not(.js) .case-view-toggle { display: none; }
+
+  .case-view-toggle {
+    display: inline-flex;
+    align-items: center;
   }
 
-  .view-btn {
-    background: transparent;
-    color: rgb(var(--color-muted-foreground-rgb, 107 114 128));
-    border: none;
+  .cvt-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    border-radius: 0.875rem;
+    border: 1px solid rgb(var(--color-border-rgb));
+    background: rgb(var(--color-muted-rgb) / 0.4);
+  }
+
+  .cvt-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.375rem 0.875rem;
+    border-radius: 0.625rem;
+    font-size: 0.8125rem;   /* ~13px, between caption and body-sm */
+    font-weight: 500;
+    line-height: 1.4;
+    white-space: nowrap;
     cursor: pointer;
+    border: none;
+    background: transparent;
+    color: rgb(var(--color-muted-foreground-rgb));
+    transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
   }
 
-  .view-btn[aria-pressed="true"] {
-    background: rgb(var(--color-card-rgb, 255 255 255));
-    color: rgb(var(--color-foreground-rgb, 17 24 39));
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  .cvt-btn[aria-pressed="true"] {
+    background: rgb(var(--color-card-rgb));
+    color: rgb(var(--color-foreground-rgb));
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.10), 0 0 0 1px rgb(var(--color-border-rgb) / 0.6);
+    /* Stop pulse when active */
+    animation: none;
   }
 
-  .view-btn:focus-visible {
-    outline: 2px solid currentColor;
+  .cvt-btn[aria-pressed="false"] {
+    /* Subtle pulse to draw attention without hover */
+    animation: cvt-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes cvt-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+
+  .cvt-btn:focus-visible {
+    outline: 2px solid rgb(var(--color-foreground-rgb));
     outline-offset: 2px;
     border-radius: 0.5rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .view-btn { transition: none !important; }
+    .cvt-btn { animation: none !important; transition: none !important; }
   }
 </style>
 
@@ -103,12 +127,10 @@ const fullLabel  = fullMinutes  ? `${t.full} · ${fullMinutes} ${t.minuteSuffix}
         } catch (_) { /* noop */ }
       }
 
-      // Sync button states
       buttons.forEach((btn) => {
         btn.setAttribute('aria-pressed', btn.dataset.viewBtn === view ? 'true' : 'false');
       });
 
-      // Announce to screen readers (clear then set for reliable announcement)
       if (liveRegion) {
         liveRegion.textContent = '';
         setTimeout(() => {
@@ -119,11 +141,10 @@ const fullLabel  = fullMinutes  ? `${t.full} · ${fullMinutes} ${t.minuteSuffix}
       }
     }
 
-    // Sync UI to the current state set by the inline script
+    // Sync to state set by inline <head> script
     const current = (document.documentElement.getAttribute('data-case-view') as 'basic' | 'full') ?? 'basic';
     setView(current, false);
 
-    // Handle toggle clicks
     buttons.forEach((btn) => {
       btn.addEventListener('click', () => {
         const v = btn.dataset.viewBtn as 'basic' | 'full' | undefined;

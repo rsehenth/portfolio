@@ -180,18 +180,7 @@ In production, with 1,200+ organically registered educators, 16 content generato
   protected={true}
 />
 
-<div class="not-prose mt-8">
-  <button
-    type="button"
-    data-view-btn-cta="full"
-    class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-foreground px-5 py-3 text-body-sm font-semibold text-background shadow-sm transition-all duration-fast hover:opacity-90"
-  >
-    See the full case: flow, reliability and architecture
-    <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-    </svg>
-  </button>
-</div>
+<ViewCtaButton label="See the full case: flow, reliability and architecture" />
 
 </BasicView>
 
@@ -514,33 +503,3 @@ For critical operations like credits and payments, idempotency prevents duplicat
 
 </FullView>
 
-<script>
-  {(function() {
-    document.querySelectorAll('[data-view-btn-cta]').forEach(function(btn) {
-      if (btn._ctaBound) return;
-      btn._ctaBound = true;
-      btn.addEventListener('click', function() {
-        var v = btn.getAttribute('data-view-btn-cta');
-        if (!v) return;
-        document.documentElement.setAttribute('data-case-view', v);
-        try { localStorage.setItem('caseView', v); } catch(_) {}
-        try {
-          var url = new URL(window.location.href);
-          url.searchParams.set('v', v);
-          history.replaceState(null, '', url.toString());
-        } catch(_) {}
-        document.querySelectorAll('[data-view-btn]').forEach(function(b) {
-          b.setAttribute('aria-pressed', b.getAttribute('data-view-btn') === v ? 'true' : 'false');
-        });
-        var live = document.getElementById('case-view-live');
-        if (live) {
-          live.textContent = '';
-          setTimeout(function() {
-            live.textContent = live.getAttribute('data-announce-full') || '';
-          }, 50);
-        }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-  })()}
-</script>
