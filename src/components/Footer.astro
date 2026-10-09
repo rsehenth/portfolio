@@ -15,8 +15,9 @@ const footer = ui[locale].footer;
 
 const currentPath = Astro.url.pathname;
 const pathWithoutLocale = currentPath.startsWith('/en/') ? currentPath.slice(3) : currentPath;
-const ptUrl = pathWithoutLocale || '/';
-const enUrl = `/en${pathWithoutLocale || '/'}`;
+const switchPath = pathWithoutLocale === '/404/' ? '/' : pathWithoutLocale || '/';
+const ptUrl = switchPath;
+const enUrl = `/en${switchPath}`;
 
 const isPt = locale === 'pt-BR';
 ---

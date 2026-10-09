@@ -382,7 +382,7 @@ export const ui = {
 
     // SEO / Meta
     meta: {
-      siteTitle: 'Lucas Sehnem — Technical Product Manager',
+      siteTitle: 'Lucas Sehnem — Technical Product Manager | Produtos de IA',
       siteDescription: 'Technical Product Manager na interseção de IA, Produto e Engenharia. Construindo produtos com IA, APIs e SaaS.',
     },
   },

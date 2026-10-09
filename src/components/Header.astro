@@ -19,7 +19,8 @@ const currentPath = Astro.url.pathname;
 
 // Generate alternate URL for language switch
 const pathWithoutLocale = currentPath.startsWith('/en/') ? currentPath.slice(3) : currentPath;
-const altUrl = altLocale === 'pt-BR' ? (pathWithoutLocale || '/') : `/en${pathWithoutLocale || '/'}`;
+const switchPath = pathWithoutLocale === '/404/' ? '/' : pathWithoutLocale || '/';
+const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
 ---
 
 <header class={`fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-md border-b border-border transition-colors duration-normal ${className}`}>

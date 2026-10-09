@@ -37,7 +37,7 @@ const pageDescription = description || siteConfig.description;
 const pageOgImage = ogImage || siteConfig.ogImage;
 
 // Generate alternate links for SEO
-const alternateLinks = canonical ? generateAlternateLinks(canonical, siteUrl) : '';
+const alternateLinks = noIndex ? '' : generateAlternateLinks(canonical ?? Astro.url.pathname, siteUrl);
 ---
 
 <!doctype html>
