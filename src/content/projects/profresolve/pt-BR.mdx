@@ -10,6 +10,16 @@ role: Technical Product / Product + Hands-on Development
 productType: SaaS · IA · Educação
 focus: Confiabilidade de IA · Economia de Produto · APIs · Pagamentos
 stage: "Produto ativo · Em evolução"
+statusBadge: "Ativo"
+caseSummary:
+  problem: "Reduzir o trabalho repetitivo de preparar materiais pedagógicos sem tirar o controle do professor."
+  role: "Cofundador e responsável por discovery, produto, monetização e implementação técnica."
+  result: "SaaS público com mais de 1.200 professores cadastrados organicamente."
+  keyDecision: "Tratar confiabilidade e custo de IA como decisões de produto."
+statusEvidence:
+  stage: "Produto ativo, em evolução."
+  evidence: "O produto está público, ultrapassou 1.200 professores cadastrados organicamente e recebeu respostas de mais de 100 professores em um survey público."
+  nextValidation: "Medir frequência de uso, retenção, conclusão da primeira geração e conversão para planos pagos."
 status: Active
 draft: false
 featured: true
@@ -111,27 +121,33 @@ Professores produzem continuamente planos de aula, avaliações, atividades e ad
 
 Hoje essa hipótese existe além de um protótipo: o produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente.
 
-## Discovery: como validei o problema
+## Validação com professores
 
-Antes de construir, foi preciso entender se o problema era real e quais aspectos mereciam mais atenção.
+Antes de validar o MVP para venda, a plataforma foi testada em três escolas de Santiago (RS), com mais de 20 professores. O feedback recebido orientou ajustes até a primeira versão final.
 
-### Método
+<FlowDiagram
+  label="Validação e aquisição do ProfResolve"
+  steps={[
+    'Piloto em 3 escolas de Santiago (RS)',
+    '20+ professores testaram a plataforma',
+    'Feedback recebido e ajustes no produto',
+    'Primeira versão final',
+    'Survey público dentro do dashboard',
+    '100+ respostas orgânicas de professores',
+  ]}
+/>
 
-O processo começou com um survey aberto publicado no próprio site do produto. Mais de 100 professores responderam. Além do survey, professores enviaram feedback, sugestões e pedidos de melhoria ao longo do desenvolvimento, criando um canal contínuo de sinais além do momento inicial de pesquisa.
+Depois, o dashboard passou a oferecer um survey público de seis perguntas: quatro de múltipla escolha e duas abertas, incluindo familiaridade com IA e o que os professores gostariam que o ProfResolve tivesse. Mais de 100 professores responderam organicamente.
 
-{/* PREENCHER: perguntas principais do survey — omitido até dados disponíveis */}
+{/* TODO [CONFIRMAR]: ao concluir o survey, as respostas eram enviadas por e-mail formatado pela API Resend ao contato da plataforma e o professor recebia 300 créditos de agradecimento. */}
 
-### O que os sinais ajudaram a orientar
+{/* TODO: acrescentar “O que aprendemos com os professores” quando os principais achados do survey e as mudanças resultantes estiverem disponíveis. */}
 
-O volume de respostas e a consistência de certos temas no feedback ajudaram a orientar prioridades iniciais de produto — quais tipos de material tinham mais demanda, onde estava a maior dificuldade na rotina docente e quais funcionalidades eram mencionadas com mais frequência.
+## Modelo de receita
 
-{/* PREENCHER: achados específicos com dados reais — omitido até dados disponíveis */}
+O ProfResolve combina assinaturas mensais e anuais com pacotes avulsos de créditos para quem prefere usar a plataforma sob demanda.
 
-{/* PREENCHER: exemplos Feedback → Decisão com dados reais — omitido até dados disponíveis */}
-
-{/* PREENCHER: citação real de professor, se disponível — seção a ser adicionada quando houver */}
-
-{/* PREENCHER: canais de aquisição iniciais — omitido até dados disponíveis */}
+{/* TODO [CONFIRMAR]: Google Analytics, Cloudflare Analytics, Microsoft Clarity e Sentry foram usados para acompanhar comportamento, tráfego e erros. */}
 
 ## Da hipótese ao produto em uso
 
@@ -342,3 +358,16 @@ Esses números descrevem escala e disciplina técnica. Não substituem métricas
 />
 
 Já podemos medir estas metricas.
+
+## Próximas validações
+
+Com os sinais atuais de produto e as ferramentas de medição pendentes de confirmação, as próximas decisões podem aprofundar a leitura de comportamento observado.
+
+- usuários ativos em 7 e 30 dias
+- frequência de geração por usuário
+- geradores mais usados
+- conclusão da primeira geração
+- consumo de créditos ao longo do tempo
+- conversão de freemium para pago
+- retenção
+- taxa de regeneração
