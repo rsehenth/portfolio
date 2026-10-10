@@ -35,7 +35,6 @@ const { label, class: className = '' } = Astro.props;
           if (!v) return;
 
           document.documentElement.setAttribute('data-case-view', v);
-          try { localStorage.setItem('caseView', v); } catch (_) {}
           try {
             var url = new URL(window.location.href);
             url.searchParams.set('v', v);

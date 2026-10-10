@@ -128,7 +128,8 @@ const fullLabel   = fullMinutes   ? `${t.full} · ${fullMinutes} ${t.minuteSuffi
       document.documentElement.setAttribute('data-case-view', view);
 
       if (persist) {
-        try { localStorage.setItem('caseView', view); } catch (_) { /* noop */ }
+        // Persist via ?v= in the URL only (replaceState keeps the chosen view on
+        // reload without leaking the preference to other project pages).
         try {
           const url = new URL(window.location.href);
           url.searchParams.set('v', view);

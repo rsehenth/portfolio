@@ -108,6 +108,9 @@ const projects = defineCollection({
         full: z.number().int().min(1).optional(),
       })
       .optional(),
+    // When true, the card CTA ("Ver Case") is rendered as a disabled label instead of a link.
+    // Use for projects that don't have a case page yet.
+    noCase: z.boolean().default(false).optional(),
     // Order in listings
     order: z.number().int().default(0),
   }),

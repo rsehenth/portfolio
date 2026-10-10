@@ -57,7 +57,6 @@ const { to, label, class: className = '' } = Astro.props;
 
       // Switch to full view
       document.documentElement.setAttribute('data-case-view', 'full');
-      try { localStorage.setItem('caseView', 'full'); } catch (_) { /* noop */ }
 
       // Update URL
       try {

@@ -70,15 +70,15 @@ const alternateLinks = noIndex ? '' : generateAlternateLinks(canonical ?? Astro.
       })();
 
       // Set initial case view BEFORE paint — prevents flash of wrong view
-      // Priority: URL param ?v= > localStorage > default 'basic'
+      // Priority: URL param ?v= > default 'basic'
+      // localStorage is intentionally NOT used here: it would carry the last
+      // chosen view across different project pages and open recruiters straight
+      // into the full/advanced view. The ?v= param is set via replaceState when
+      // the user interacts with the toggle, so reloading the same page restores
+      // their choice without polluting other project pages.
       (function () {
-        var paramMap = { resumo: 'basic', completo: 'full', summary: 'basic', full: 'full' };
+        var paramMap = { resumo: 'basic', completo: 'full', summary: 'basic', full: 'full', basic: 'basic' };
         var view = 'basic';
-
-        try {
-          var stored = localStorage.getItem('caseView');
-          if (stored === 'basic' || stored === 'full') view = stored;
-        } catch (_) { /* noop */ }
 
         try {
           var params = new URLSearchParams(window.location.search);

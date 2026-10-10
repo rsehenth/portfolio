@@ -21,13 +21,15 @@ type ProjectGroup = {
 
 const groups: ProjectGroup[] = locale === 'pt-BR'
   ? [
-      { id: 'active', title: 'Produtos ativos', description: 'Produtos disponíveis ou em uso no fluxo de trabalho.', keys: ['profresolve', 'super-squad-ai'] },
-      { id: 'development', title: 'Em desenvolvimento', description: 'Produtos e experiências em evolução, com próximas validações definidas.', keys: ['cultos', 'project-aurora', 'project-stream'] },
+      { id: 'active', title: 'Produtos ativos', description: 'Produtos disponíveis ou em uso no fluxo de trabalho.', keys: ['profresolve'] },
+      { id: 'development', title: 'Em desenvolvimento', description: 'Produtos e experiências em evolução, com próximas validações definidas.', keys: ['super-squad-ai', 'cultos', 'project-aurora'] },
+      { id: 'discovery', title: 'On Hold · Em Discovery', description: 'Projetos com pesquisa inicial concluída e hipótese definida, aguardando alinhamento de validações antes de entrar em desenvolvimento.', keys: ['project-stream', 'project-relay'] },
       { id: 'closed', title: 'Concluídos, encerrados e experimentais', description: 'Projetos concluídos, encerrados ou usados para explorar uma hipótese.', keys: ['cripto-host-decentralized-hosting', 'universal-docs', 'mosaic'] },
     ]
   : [
-      { id: 'active', title: 'Active products', description: 'Products available publicly or used in the development workflow.', keys: ['profresolve', 'super-squad-ai'] },
-      { id: 'development', title: 'In development', description: 'Products and experiences still evolving, with defined next validations.', keys: ['cultos', 'project-aurora', 'project-stream'] },
+      { id: 'active', title: 'Active products', description: 'Products available publicly or used in the development workflow.', keys: ['profresolve'] },
+      { id: 'development', title: 'In development', description: 'Products and experiences still evolving, with defined next validations.', keys: ['super-squad-ai', 'cultos', 'project-aurora'] },
+      { id: 'discovery', title: 'On Hold · Discovery', description: 'Projects with initial research done and hypothesis defined, pending validation alignment before entering development.', keys: ['project-stream'] },
       { id: 'closed', title: 'Completed, closed and experimental', description: 'Projects completed, closed or used to explore a hypothesis.', keys: ['cripto-host-decentralized-hosting', 'universal-docs', 'mosaic'] },
     ];
 
