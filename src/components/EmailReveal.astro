@@ -3,11 +3,10 @@
 // Reveals the contact email on user interaction via JS.
 // The full address is never present in static HTML — it is assembled client-side only.
 // Parts: data-ep (local part) + "@" + data-ed (domain) + "." + data-et (TLD)
-import type { AstroProps } from 'astro';
 import type { Locale } from '@/i18n';
 import { profile } from '@/data/profile';
 
-interface Props extends AstroProps {
+interface Props {
   locale?: Locale;
   buttonLabel: string;
   revealedLabel: string;
