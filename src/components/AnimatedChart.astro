@@ -1,8 +1,7 @@
 ---
 // AnimatedChart.astro - Reusable Chart.js component with accessibility
-import type { AstroProps } from 'astro';
 
-interface Props extends AstroProps {
+interface Props {
   type: 'bar' | 'line' | 'doughnut';
   title: string;
   labels: string[];
@@ -31,7 +30,7 @@ const {
   description,
 } = Astro.props;
 
-const chartId = `chart-${Math.random().toString(36).substr(2, 9)}`;
+const chartId = `chart-${Math.random().toString(36).substring(2, 11)}`;
 
 // Custom colors remain available, otherwise the browser resolves the active theme accent.
 const chartColors = colors?.length ? colors : [];
@@ -107,16 +106,36 @@ const suffixJson = JSON.stringify(suffix);
 <script>
 import Chart from 'chart.js/auto';
 
-const themeToken = (name) => `rgb(${getComputedStyle(document.documentElement).getPropertyValue(name).trim()})`;
+// Shape of the dataset object built below: common props always set, plus the
+// optional ones assigned afterwards for line and doughnut charts.
+interface ChartDatasetConfig {
+  label: string;
+  data: number[];
+  backgroundColor: string[];
+  borderColor: string[];
+  borderWidth: number;
+  borderRadius: number;
+  borderSkipped: boolean;
+  fill?: boolean;
+  tension?: number;
+  pointBackgroundColor?: string;
+  pointBorderColor?: string;
+  pointBorderWidth?: number;
+  pointRadius?: number;
+  pointHoverRadius?: number;
+  cutout?: string;
+}
 
-const accentPalette = (customColors) => customColors.length ? customColors : [
+const themeToken = (name: string) => `rgb(${getComputedStyle(document.documentElement).getPropertyValue(name).trim()})`;
+
+const accentPalette = (customColors: string[]) => customColors.length ? customColors : [
   themeToken('--color-accent-rgb'),
   `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--color-accent-rgb').trim()} / 0.7)`,
   `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--color-accent-rgb').trim()} / 0.5)`,
   `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--color-accent-rgb').trim()} / 0.3)`,
 ];
 
-const applyThemeColors = (chart, canvas) => {
+const applyThemeColors = (chart, canvas: HTMLCanvasElement) => {
   const customColors = JSON.parse(canvas.dataset.colors || '[]');
   const colors = accentPalette(customColors);
   const dataset = chart.data.datasets[0];
@@ -142,15 +161,16 @@ const applyThemeColors = (chart, canvas) => {
   }
 };
 
-const charts = [];
+const charts: Array<{ chart: Chart; canvas: HTMLCanvasElement }> = [];
 
-document.querySelectorAll('canvas[data-type]').forEach((canvas) => {
+document.querySelectorAll<HTMLCanvasElement>('canvas[data-type]').forEach((canvas) => {
   if (Chart.getChart(canvas)) return;
 
   const context = canvas.getContext('2d');
   if (!context) return;
 
-  const type = canvas.dataset.type;
+  // data-type is written by this component, limited to the three supported types.
+  const type = canvas.dataset.type as 'bar' | 'line' | 'doughnut';
   const labels = JSON.parse(canvas.dataset.labels || '[]');
   const values = JSON.parse(canvas.dataset.values || '[]');
   const customColors = JSON.parse(canvas.dataset.colors || '[]');
@@ -160,7 +180,7 @@ document.querySelectorAll('canvas[data-type]').forEach((canvas) => {
   const colors = accentPalette(customColors);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const dataset = {
+  const dataset: ChartDatasetConfig = {
     label: datasetLabel,
     data: values,
     backgroundColor: colors,
