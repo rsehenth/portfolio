@@ -1,8 +1,7 @@
 ---
 // DataTable.astro - Accessible data table component for MDX
-import type { AstroProps } from 'astro';
 
-interface Props extends AstroProps {
+interface Props {
   columns: string[];
   rows: (string | number)[][];
   caption?: string;
@@ -28,7 +27,7 @@ const {
     )}
     <thead>
       <tr class="border-b border-border">
-        {columns.map((col, i) => (
+        {columns.map((col) => (
           <th
             scope="col"
             class="px-4 py-3 text-left text-caption font-semibold text-muted-foreground uppercase tracking-wider bg-muted/50"
@@ -43,7 +42,7 @@ const {
         <tr
           class={`${striped && rowIndex % 2 === 1 ? 'bg-muted/30' : ''} ${hoverable ? 'hover:bg-muted/50 transition-colors duration-fast' : ''}`}
         >
-          {row.map((cell, cellIndex) => (
+          {row.map((cell) => (
             <td
               class="px-4 py-3 text-body-sm text-foreground"
             >
