@@ -1,8 +1,6 @@
 ---
 // FlowDiagram.astro — Reusable vertical flow diagram for case studies.
 // Static, responsive, accessible; no JS. Optional failure branch offset.
-import type { AstroProps } from 'astro';
-
 interface FlowBranch {
   /** Index of the step the branch falls out of (0-based). */
   at: number;
@@ -10,7 +8,7 @@ interface FlowBranch {
   steps: string[];
 }
 
-interface Props extends AstroProps {
+interface Props {
   steps: string[];
   branch?: FlowBranch;
   label?: string;
