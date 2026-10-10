@@ -86,6 +86,70 @@ seo:
 order: 8
 ---
 
+<BasicView>
+
+<h2 id="r-oportunidade">A oportunidade</h2>
+
+O Project Aurora nasceu da chance de criar um beat 'em up contemporâneo em que a identidade brasileira participa do jogo de verdade: não só no cenário, mas nos personagens, regiões, estilos de combate, progressão e narrativa. O desafio é transformar essa identidade em sistemas, não só em referências visuais.
+
+<h2 id="r-meu-papel">Meu papel</h2>
+
+Em uma equipe de três pessoas, sou Product Lead e Game Design Lead: concentro as decisões de visão, sistemas, escopo e priorização. Os dois desenvolvedores cuidam da engenharia e da implementação, e decidimos juntos viabilidade, arquitetura e trade-offs.
+
+<h2 id="r-decisoes">Quatro decisões de produto</h2>
+
+<h3 id="r-brasil-como-sistema">Brasil como sistema, não só estética</h3>
+
+Personagens com estilos de combate regionais, regiões com características próprias e progressão e narrativa ligadas ao universo: a diferenciação está nas regras do jogo, não só na arte.
+
+<SeeFull to="brasil-como-sistema" label="Ver detalhes" />
+
+<h3 id="r-hub-diegetico">Menus viram parte do mundo</h3>
+
+Seleção de região, upgrades, NPCs e preparação concentrados em um hub subterrâneo que pertence ao universo, em vez de menus separados. Trade-off: mais arte, conteúdo e implementação, em troca de coerência entre navegação, narrativa e progressão.
+
+<SeeFull to="hub-diegetico" label="Ver detalhes" />
+
+<h3 id="r-ritmo-arcade">Profundidade sem perder o ritmo arcade</h3>
+
+Controles simples e comuns a todos os personagens; a profundidade vem de timing, posicionamento, combos e estilos de combate. Risco a evitar: progressão complexa que transforme o beat 'em up em um RPG pesado de menus.
+
+<SeeFull to="ritmo-arcade" label="Ver detalhes" />
+
+<h3 id="r-validar-core">Validar o core antes de escalar conteúdo</h3>
+
+Uma PoC confirmou movimentação, base de combate, inimigos base, câmera, HUD, mini-boss e a direção técnica antes de investir em personagens, regiões, inimigos e campanha. Trade-off: começar menor para reduzir risco técnico e de gameplay.
+
+<SeeFull to="validar-core" label="Ver detalhes" />
+
+<p class="not-prose mt-8 text-body-sm text-muted-foreground">Core loop (visão de produto, em definição):</p>
+
+<FlowDiagram
+  label="Core loop do Project Aurora, visão de produto em definição"
+  steps={[
+    "Hub subterrâneo",
+    "Entrar na região",
+    "Combate",
+    "Boss ou objetivo",
+    "Retornar ao hub",
+    "Upgrade e preparação",
+  ]}
+/>
+
+{/* TODO: imagem do jogo para o resumo */}
+
+<h2 id="r-estado-atual">Onde estamos</h2>
+
+Pós-PoC, em produção inicial: core de movimentação, base de combate e direção técnica confirmados; consolidação da arquitetura e primeiro conteúdo completo em andamento.
+
+Visão de produto (planejada): 7 personagens jogáveis, múltiplas regiões brasileiras, progressão de personagem, hub subterrâneo completo, 30+ tipos de inimigos, 8 bosses e campanha completa.
+
+Próxima validação: playtesting do primeiro conteúdo completo, avaliando a sensação do combate, o pacing, a dificuldade e a clareza dos objetivos.
+
+<ViewCtaButton label="Ver o case completo: sistemas, loop e decisões" />
+
+</BasicView>
+
 <h2 id="oportunidade">A oportunidade</h2>
 
 Project Aurora nasceu da oportunidade de criar um beat 'em up contemporâneo em que a identidade brasileira participa do jogo de verdade. Não apenas no cenário ou na estética, mas também nos personagens, regiões, estilos de combate, progressão e narrativa.
