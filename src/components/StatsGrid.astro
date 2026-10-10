@@ -1,14 +1,12 @@
 ---
 // StatsGrid.astro — Small verified-stats row for case study sections.
 // Only pass values that are already verified in the content frontmatter.
-import type { AstroProps } from 'astro';
-
 interface Stat {
   value: string;
   label: string;
 }
 
-interface Props extends AstroProps {
+interface Props {
   stats: Stat[];
   /** Accessible label for the grid. */
   label?: string;
