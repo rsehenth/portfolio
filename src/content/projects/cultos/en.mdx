@@ -89,6 +89,65 @@ seo:
   description: 'A case study on adapting a desktop product for media operations in Brazilian churches, covering UX simplification, localization, local-first architecture and optional cloud synchronization.'
 ---
 
+<BasicView>
+
+<h2 id="r-problema">The operational problem</h2>
+
+Running media during a church service is different from presenting slides in any room. The operator is usually a volunteer, without technical training, and needs to switch content fast, react to last-minute changes and keep going even without internet. A visible failure during a service has a real cost.
+
+<h2 id="r-base">Where it came from</h2>
+
+CultoOS is a fork of [FreeShow](https://github.com/ChurchApps/FreeShow), free presentation software under the GPL-3.0 license. The foundation brought the presentation engine, media support and the Electron structure. The CultoOS work was deciding what needed to change for Brazilian churches.
+
+<SeeFull to="base-freeshow" label="See license and credits" />
+
+<h2 id="r-meu-papel">My role</h2>
+
+I worked between product and technology: I defined the adaptations for the Brazilian context, the experience simplification and the MVP prioritization, and worked directly with the Engineering Lead through the first release.
+
+<h2 id="r-decisoes">Four decisions</h2>
+
+<h3 id="r-adaptar">Adapt instead of rebuild</h3>
+
+Rebuilding the presentation engine, media support and the desktop structure would not have made sense against a mature foundation. The effort went into localization, simplification, offline operation, PT-BR Bibles and synchronization. Trade-off: part of the architecture is inherited from the foundation.
+
+<SeeFull to="base-freeshow" label="See details" />
+
+<h3 id="r-simplificar">Simplify without limiting</h3>
+
+A simple experience by default, with advanced options for those who turn them on, and a quick action that clears the video output and shows the church identity. Trade-off: hidden options require the advanced user to enable them.
+
+<SeeFull to="simplificar-sem-limitar" label="See details" />
+
+<h3 id="r-localizacao-produto">Localization as a product decision</h3>
+
+PT-BR from the first run, church terminology (Culto, Música, Retorno), 2 PT-BR Bibles offline and Brazilian-style scripture references. Trade-off: more adaptation scope than just translating.
+
+<SeeFull to="localizacao" label="See details" />
+
+<h3 id="r-nuvem">The cloud extends the product, live operation does not depend on it</h3>
+
+Data lives on the device and differential sync only runs in a safe state, never during a presentation. Trade-off: more complex synchronization and conflicts, in exchange for operation that does not depend on the internet.
+
+<SeeFull to="local-first" label="See details" />
+
+<CaseMedia
+  src="/projects/cultos/culto1.webp"
+  alt="CultoOS main screen in simplified mode, with the essential controls for running media during a church service"
+  width={1506}
+  height={1223}
+  caption="CultoOS in operation — simplified layout for the media operator"
+  protected={true}
+/>
+
+<h2 id="r-estado-atual">Current stage</h2>
+
+A first functional, installable release for Windows, with an automated GitHub Actions build from a tag. Next validations: active installations, services operated with the software and use of the simplified mode.
+
+<ViewCtaButton label="See the full case: decisions, sync and architecture" />
+
+</BasicView>
+
 <h2 id="problema">The Operational Problem</h2>
 
 Running media during a church service is different from using presentation software in a typical setting. The person at the computer needs to switch content quickly, react to last-minute changes and keep working even when the internet connection drops.

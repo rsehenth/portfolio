@@ -89,6 +89,65 @@ seo:
   description: 'Case sobre a adaptação de um produto desktop para a operação de mídia em igrejas brasileiras, cobrindo simplificação de UX, localização, arquitetura local-first e sincronização opcional com a nuvem.'
 ---
 
+<BasicView>
+
+<h2 id="r-problema">O problema de operação</h2>
+
+Operar mídia em um culto é diferente de apresentar slides em qualquer sala. Quem opera costuma ser voluntário, sem formação técnica, e precisa trocar conteúdo rápido, reagir a mudanças de última hora e continuar mesmo sem internet. Uma falha visível durante o culto tem custo real.
+
+<h2 id="r-base">De onde veio</h2>
+
+O CultoOS é um fork do [FreeShow](https://github.com/ChurchApps/FreeShow), software livre de apresentação sob licença GPL-3.0. Da base vieram o engine de apresentação, o suporte a mídia e a estrutura Electron. O trabalho do CultoOS foi decidir o que precisava mudar para igrejas brasileiras.
+
+<SeeFull to="base-freeshow" label="Ver licença e créditos" />
+
+<h2 id="r-meu-papel">Meu papel</h2>
+
+Atuei entre produto e tecnologia: defini as adaptações para o contexto brasileiro, a simplificação da experiência e a priorização do MVP, e trabalhei direto com o líder de engenharia até a primeira release.
+
+<h2 id="r-decisoes">Quatro decisões</h2>
+
+<h3 id="r-adaptar">Adaptar em vez de reconstruir</h3>
+
+Reconstruir o engine de apresentação, o suporte a mídia e a estrutura desktop não faria sentido diante de uma base madura. O esforço foi para localização, simplificação, operação offline, Bíblias PT-BR e sincronização. Trade-off: parte da arquitetura vem herdada da base.
+
+<SeeFull to="base-freeshow" label="Ver detalhes" />
+
+<h3 id="r-simplificar">Simplificar sem limitar</h3>
+
+Experiência simples por padrão, com opções avançadas para quem as ativa, e uma ação rápida que limpa a saída de vídeo e mostra a identidade da igreja. Trade-off: opções escondidas exigem que o usuário avançado as ative.
+
+<SeeFull to="simplificar-sem-limitar" label="Ver detalhes" />
+
+<h3 id="r-localizacao-produto">Localização como decisão de produto</h3>
+
+PT-BR desde a primeira execução, terminologia de igreja (Culto, Música, Retorno), 2 Bíblias PT-BR offline e referências bíblicas no padrão brasileiro. Trade-off: mais escopo de adaptação do que apenas traduzir.
+
+<SeeFull to="localizacao" label="Ver detalhes" />
+
+<h3 id="r-nuvem">A nuvem amplia o produto, o culto não depende dela</h3>
+
+Os dados vivem no dispositivo e a sincronização por diferença só acontece em estado seguro, nunca durante uma apresentação. Trade-off: sincronização e conflitos mais complexos, em troca de operação independente da internet.
+
+<SeeFull to="local-first" label="Ver detalhes" />
+
+<CaseMedia
+  src="/projects/cultos/culto1.webp"
+  alt="Tela principal do CultoOS em modo simplificado, com os controles essenciais para a operação de mídia durante o culto"
+  width={1506}
+  height={1223}
+  caption="CultoOS em operação — layout simplificado para o operador de mídia"
+  protected={true}
+/>
+
+<h2 id="r-estado-atual">Estado atual</h2>
+
+Primeira release funcional e instalável para Windows, com build automatizado via GitHub Actions a partir de uma tag. Próximas validações: instalações ativas, cultos operados com o software e uso do modo simplificado.
+
+<ViewCtaButton label="Ver o case completo: decisões, sincronização e arquitetura" />
+
+</BasicView>
+
 <h2 id="problema">O problema de operação</h2>
 
 Operar mídia durante um culto é diferente de usar um software de apresentações em um ambiente comum. Quem está no computador precisa trocar conteúdos rapidamente, reagir a mudanças de última hora e continuar trabalhando mesmo quando a internet falha.
