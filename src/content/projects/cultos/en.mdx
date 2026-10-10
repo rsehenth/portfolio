@@ -17,9 +17,9 @@ caseSummary:
   result: "A first functional, installable Windows release."
   keyDecision: "Adapt a mature foundation and focus effort on the Brazilian operating context."
 statusEvidence:
-  stage: "MVP, in development."
+  stage: "MVP, first functional installable release."
   evidence: "There is a first functional, installable release based on FreeShow and adapted to the context described in this case."
-  nextValidation: "Validate operation with churches before the next product stage."
+  nextValidation: "Active installations, services operated with the software and usage frequency."
 productType: Desktop MVP
 openSourceUrl: https://github.com/ChurchApps/FreeShow
 openSourceLabel: FreeShow (GPL-3.0)
@@ -148,6 +148,17 @@ A first functional, installable release for Windows, with an automated GitHub Ac
 
 </BasicView>
 
+<FullView>
+
+<nav aria-label="On this page" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">On this page:</span>
+  <a href="#problema" class="link-underline hover:text-foreground">Product</a>
+  <span aria-hidden="true">·</span>
+  <a href="#base-freeshow" class="link-underline hover:text-foreground">Decisions</a>
+  <span aria-hidden="true">·</span>
+  <a href="#engenharia" class="link-underline hover:text-foreground">Engineering</a>
+</nav>
+
 <h2 id="problema">The Operational Problem</h2>
 
 Running media during a church service is different from using presentation software in a typical setting. The person at the computer needs to switch content quickly, react to last-minute changes and keep working even when the internet connection drops.
@@ -243,13 +254,23 @@ The local-first model adds synchronization complexity and requires care around c
 
 </Callout>
 
-## From Adaptation to First Release
+<h2 id="engenharia">Engineering and architecture</h2>
+
+<h3>From Adaptation to First Release</h3>
 
 The first release was packaged for Windows, the platform chosen for the MVP.
 
 The build is automated via GitHub Actions and publishing starts from a tag. That made the release reproducible: any version can be generated predictably, without relying on manual steps.
 
 A first functional, installable release exists.
+
+<StatsGrid
+  label="Technical metrics"
+  stats={[
+    { value: '9 + media', label: 'sync scope' },
+    { value: '3', label: 'test suites' },
+  ]}
+/>
 
 <h2 id="estado-atual">Current Stage</h2>
 
@@ -261,17 +282,12 @@ With a functional MVP in place, what needs to be validated now is whether this a
 
 The signals that will guide the next decisions:
 
-- active installations
-- churches using the product on a recurring basis
-- weekly usage frequency
-- services operated with the software
-- which features are used most
-- how often the simplified mode is kept on
+- active installations and services operated with the software
+- churches using the product on a recurring basis, with weekly usage frequency
+- which features are used most and how often the simplified mode is kept on
 - whether cloud sync is used and how often
 - friction or errors during live operation
 - trial to payment conversion
-
-## What This Project Demonstrates
 
 <Callout variant="demonstrates" title="What this project demonstrates">
 
@@ -282,3 +298,5 @@ The signals that will guide the next decisions:
 - **Product × Engineering:** working closely with engineering to turn product decisions into a functional, installable MVP.
 
 </Callout>
+
+</FullView>

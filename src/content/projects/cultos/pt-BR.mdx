@@ -7,19 +7,19 @@ tagline: "Adaptando uma base desktop madura para a realidade de igrejas brasilei
 summary: "O CultoOS adapta uma base desktop madura para um contexto em que simplicidade, operação offline e segurança durante o culto têm prioridade. Minha atuação esteve entre produto, adaptação da experiência e colaboração direta com engenharia."
 year: 2026
 order: 7
-role: "Product / Technical Product · colaboração direta com Engineering Lead"
+role: "Product / Technical Product · colaboração direta com o líder de engenharia"
 stage: "MVP · Primeira release"
 stageNote: "Produto funcional e instalável. A comercialização ainda não foi iniciada."
 statusBadge: "Em desenvolvimento"
 caseSummary:
   problem: "Adaptar uma operação de mídia desktop para igrejas brasileiras, com simplicidade e continuidade durante o culto."
-  role: "Definição de produto, backlog, roadmap e colaboração com o Engineering Lead."
+  role: "Definição de produto, backlog, roadmap e colaboração com o líder de engenharia."
   result: "Primeira release funcional e instalável para Windows."
   keyDecision: "Adaptar uma base madura e concentrar o esforço no contexto de uso brasileiro."
 statusEvidence:
-  stage: "MVP, em desenvolvimento."
+  stage: "MVP, primeira release funcional e instalável."
   evidence: "Há uma primeira release funcional e instalável, baseada no FreeShow e adaptada ao contexto descrito no case."
-  nextValidation: "Validar a operação com igrejas antes da próxima etapa do produto."
+  nextValidation: "Instalações ativas, cultos operados com o software e frequência de uso."
 productType: Desktop MVP
 openSourceUrl: https://github.com/ChurchApps/FreeShow
 openSourceLabel: FreeShow (GPL-3.0)
@@ -148,6 +148,17 @@ Primeira release funcional e instalável para Windows, com build automatizado vi
 
 </BasicView>
 
+<FullView>
+
+<nav aria-label="Nesta página" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">Nesta página:</span>
+  <a href="#problema" class="link-underline hover:text-foreground">Produto</a>
+  <span aria-hidden="true">·</span>
+  <a href="#base-freeshow" class="link-underline hover:text-foreground">Decisões</a>
+  <span aria-hidden="true">·</span>
+  <a href="#engenharia" class="link-underline hover:text-foreground">Engenharia</a>
+</nav>
+
 <h2 id="problema">O problema de operação</h2>
 
 Operar mídia durante um culto é diferente de usar um software de apresentações em um ambiente comum. Quem está no computador precisa trocar conteúdos rapidamente, reagir a mudanças de última hora e continuar trabalhando mesmo quando a internet falha.
@@ -168,7 +179,7 @@ Minha atuação no CultoOS ficou entre Product e Technical Product. Trabalhei na
 
 Isso incluiu discutir quais recursos deveriam ficar visíveis por padrão, como o produto deveria se comportar sem internet, quais dados precisavam sincronizar e quais adaptações realmente mudavam a experiência do operador.
 
-Trabalhei diretamente com o Engineering Lead na definição, adaptação e entrega da primeira release.
+Trabalhei diretamente com o líder de engenharia na definição, adaptação e entrega da primeira release.
 
 <h2 id="base-freeshow">Adaptar em vez de reconstruir</h2>
 
@@ -243,13 +254,23 @@ O modelo local-first aumenta a complexidade de sincronização e exige cuidado c
 
 </Callout>
 
-## Da adaptação à primeira release
+<h2 id="engenharia">Engenharia e arquitetura</h2>
+
+<h3>Da adaptação à primeira release</h3>
 
 A primeira release foi empacotada para Windows, plataforma escolhida para o MVP.
 
 O build é automatizado via GitHub Actions e a publicação parte de uma tag. Isso tornou a release reproduzível: qualquer versão pode ser gerada de forma previsível, sem depender de passos manuais.
 
 Existe uma primeira release funcional e instalável.
+
+<StatsGrid
+  label="Métricas técnicas"
+  stats={[
+    { value: '9 + mídia', label: 'escopo de sincronização' },
+    { value: '3', label: 'suítes de teste' },
+  ]}
+/>
 
 <h2 id="estado-atual">Estado atual</h2>
 
@@ -261,17 +282,12 @@ Com o MVP funcional, o que precisa ser validado agora é se essa adaptação rea
 
 Os sinais que vão orientar as próximas decisões:
 
-- instalações ativas
-- igrejas usando o produto de forma recorrente
-- frequência de uso semanal
-- cultos operados com o software
-- quais recursos são mais utilizados
-- com que frequência o modo simplificado é mantido
+- instalações ativas e cultos operados com o software
+- igrejas usando o produto de forma recorrente, com frequência de uso semanal
+- quais recursos são mais utilizados e com que frequência o modo simplificado é mantido
 - se a sincronização com a nuvem é usada e com qual frequência
 - fricções ou erros durante a operação ao vivo
 - conversão de trial para pagamento
-
-## O que este projeto demonstra
 
 <Callout variant="demonstrates" title="O que este projeto demonstra">
 
@@ -282,3 +298,5 @@ Os sinais que vão orientar as próximas decisões:
 - **Produto × Engenharia:** trabalhar próximo à engenharia para transformar decisões de produto em um MVP funcional e instalável.
 
 </Callout>
+
+</FullView>
