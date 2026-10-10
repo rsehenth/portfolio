@@ -26,6 +26,10 @@ openSourceLabel: FreeShow (GPL-3.0)
 status: Active
 draft: false
 featured: true
+views: true
+readingTime:
+  basic: 2
+  full: 7
 # cover: reativar somente com screenshot real (public/projects/...)
 logo: /projects/cultos/CultoOS-logo.webp
 logoPosition: "center"
@@ -65,18 +69,18 @@ snapshot:
     - value: "Offline-first"
       label: operação local
       state: verified
-    - value: "9 + mídia"
-      label: escopo de sincronização
-      state: verified
     - value: "2"
       label: Bíblias PT-BR offline
       state: verified
-  secondary:
-    - value: "3"
-      label: suítes de teste
-      state: verified
     - value: Windows
       label: release automatizada
+      state: verified
+  secondary:
+    - value: "9 + mídia"
+      label: escopo de sincronização
+      state: verified
+    - value: "3"
+      label: suítes de teste
       state: verified
 scaleMetrics: []
 productMetrics: []
@@ -85,7 +89,7 @@ seo:
   description: 'Case sobre a adaptação de um produto desktop para a operação de mídia em igrejas brasileiras, cobrindo simplificação de UX, localização, arquitetura local-first e sincronização opcional com a nuvem.'
 ---
 
-## O problema de operação
+<h2 id="problema">O problema de operação</h2>
 
 Operar mídia durante um culto é diferente de usar um software de apresentações em um ambiente comum. Quem está no computador precisa trocar conteúdos rapidamente, reagir a mudanças de última hora e continuar trabalhando mesmo quando a internet falha.
 
@@ -99,7 +103,7 @@ As necessidades que orientaram as decisões:
 - ações rápidas em situações de pressão
 - sincronização que não crie dependência da nuvem
 
-## Meu papel
+<h2 id="meu-papel">Meu papel</h2>
 
 Minha atuação no CultoOS ficou entre Product e Technical Product. Trabalhei na definição das adaptações necessárias para o contexto brasileiro, na simplificação da experiência, na priorização do MVP e na tradução dessas decisões para uma implementação viável junto à engenharia.
 
@@ -107,7 +111,7 @@ Isso incluiu discutir quais recursos deveriam ficar visíveis por padrão, como 
 
 Trabalhei diretamente com o Engineering Lead na definição, adaptação e entrega da primeira release.
 
-## Adaptar em vez de reconstruir
+<h2 id="base-freeshow">Adaptar em vez de reconstruir</h2>
 
 Antes de qualquer decisão de produto, já existia uma base desktop madura: [FreeShow](https://github.com/ChurchApps/FreeShow), software livre sob licença GPL-3.0, com engine de apresentação, suporte a mídia e estrutura Electron funcionando.
 
@@ -126,7 +130,7 @@ O valor do CultoOS não está em reimplementar o que já funcionava. Está em de
 
 A base usada pelo CultoOS é o FreeShow, sob GPL-3.0. O projeto reconhece e credita seus autores originais.
 
-## Simplificar sem limitar
+<h2 id="simplificar-sem-limitar">Simplificar sem limitar</h2>
 
 Durante um culto, complexidade visível atrapalha. O operador precisa agir rápido, muitas vezes sob pressão, sem tempo para procurar opções em menus que não vai usar.
 
@@ -143,7 +147,7 @@ Também existe uma ação rápida pensada para momentos de pressão: limpar imed
   protected={true}
 />
 
-## Localização como decisão de produto
+<h2 id="localizacao">Localização como decisão de produto</h2>
 
 Localizar um produto para um contexto específico vai além de traduzir a interface. Significa que o produto precisa entender o contexto em que vai ser usado.
 
@@ -154,7 +158,7 @@ Localizar um produto para um contexto específico vai além de traduzir a interf
 
 Cada uma dessas decisões foi tomada pensando no operador que vai usar o produto, não no desenvolvedor que vai construí-lo.
 
-## A nuvem amplia o produto. O culto não depende dela.
+<h2 id="local-first">A nuvem amplia o produto. O culto não depende dela.</h2>
 
 Durante um culto, perda de conexão não pode interromper a apresentação. Por isso, os dados necessários para a operação vivem localmente e a nuvem funciona como uma extensão do produto, não como condição para ele funcionar.
 
@@ -188,7 +192,7 @@ O build é automatizado via GitHub Actions e a publicação parte de uma tag. Is
 
 Existe uma primeira release funcional e instalável.
 
-## Estado atual
+<h2 id="estado-atual">Estado atual</h2>
 
 O CultoOS tem uma primeira release funcional e instalável. O produto está no estágio de MVP e a comercialização ainda não começou.
 

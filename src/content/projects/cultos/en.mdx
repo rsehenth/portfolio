@@ -26,6 +26,10 @@ openSourceLabel: FreeShow (GPL-3.0)
 status: Active
 draft: false
 featured: true
+views: true
+readingTime:
+  basic: 2
+  full: 7
 # cover: re-enable only with a real screenshot/image (public/projects/...)
 logo: /projects/cultos/CultoOS-logo.webp
 logoPosition: "center"
@@ -65,18 +69,18 @@ snapshot:
     - value: "Offline-first"
       label: local operation
       state: verified
-    - value: "9 + media"
-      label: sync scope
-      state: verified
     - value: "2"
       label: PT-BR Bible translations offline
       state: verified
-  secondary:
-    - value: "3"
-      label: test suites
-      state: verified
     - value: Windows
       label: automated release pipeline
+      state: verified
+  secondary:
+    - value: "9 + media"
+      label: sync scope
+      state: verified
+    - value: "3"
+      label: test suites
       state: verified
 scaleMetrics: []
 productMetrics: []
@@ -85,7 +89,7 @@ seo:
   description: 'A case study on adapting a desktop product for media operations in Brazilian churches, covering UX simplification, localization, local-first architecture and optional cloud synchronization.'
 ---
 
-## The Operational Problem
+<h2 id="problema">The Operational Problem</h2>
 
 Running media during a church service is different from using presentation software in a typical setting. The person at the computer needs to switch content quickly, react to last-minute changes and keep working even when the internet connection drops.
 
@@ -99,7 +103,7 @@ The needs that shaped the product decisions:
 - fast actions for high-pressure moments
 - synchronization that does not create a dependency on the cloud
 
-## My Role
+<h2 id="meu-papel">My Role</h2>
 
 My work on CultoOS sat between Product and Technical Product. I defined what adaptations were needed for the Brazilian context, worked on simplifying the experience, helped prioritize the MVP scope and translated those decisions into a viable implementation alongside engineering.
 
@@ -107,7 +111,7 @@ That meant deciding which controls should be visible by default, how the product
 
 I worked directly with the Engineering Lead through definition, adaptation and delivery of the first release.
 
-## Adapt Instead of Rebuild
+<h2 id="base-freeshow">Adapt Instead of Rebuild</h2>
 
 Before any product decision, there was already a mature desktop foundation: [FreeShow](https://github.com/ChurchApps/FreeShow), free software under GPL-3.0, with a working presentation engine, media support and Electron structure.
 
@@ -126,7 +130,7 @@ The value of CultoOS is not in reimplementing what already worked. It is in deci
 
 CultoOS uses FreeShow as its foundation, under GPL-3.0. The project recognizes and credits its original authors.
 
-## Simplify Without Limiting
+<h2 id="simplificar-sem-limitar">Simplify Without Limiting</h2>
 
 During a service, visible complexity gets in the way. The operator needs to act fast, often under pressure, with no time to search through menus for options they will not use.
 
@@ -143,7 +147,7 @@ There is also a fast action built for high-pressure moments: clear the video out
   protected={true}
 />
 
-## Localization as a Product Decision
+<h2 id="localizacao">Localization as a Product Decision</h2>
 
 Localizing a product for a specific context is more than translating the interface. It means the product has to understand the situation it will be used in.
 
@@ -154,7 +158,7 @@ Localizing a product for a specific context is more than translating the interfa
 
 Each of these decisions was made thinking about the operator using the product, not the developer building it.
 
-## The cloud extends the product. Live operation does not depend on it.
+<h2 id="local-first">The cloud extends the product. Live operation does not depend on it.</h2>
 
 During a service, losing the connection cannot interrupt the presentation. So the data needed for live operation lives locally, and the cloud works as an extension of the product rather than a condition for it to run.
 
@@ -188,7 +192,7 @@ The build is automated via GitHub Actions and publishing starts from a tag. That
 
 A first functional, installable release exists.
 
-## Current Stage
+<h2 id="estado-atual">Current Stage</h2>
 
 CultoOS has a first functional, installable release. The product is at the MVP stage and commercial rollout has not started.
 
