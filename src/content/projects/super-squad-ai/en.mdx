@@ -164,6 +164,17 @@ Functional and in active evolution: dynamic Leader and workers, state in SQLite,
 
 </BasicView>
 
+<FullView>
+
+<nav aria-label="On this page" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">On this page:</span>
+  <a href="#a-ia-propoe" class="link-underline hover:text-foreground">Product</a>
+  <span aria-hidden="true">·</span>
+  <a href="#relato-nao-e-estado" class="link-underline hover:text-foreground">Decisions</a>
+  <span aria-hidden="true">·</span>
+  <a href="#engenharia" class="link-underline hover:text-foreground">Engineering</a>
+</nav>
+
 ## The Problem
 
 Coordinating one AI agent is straightforward. Coordinating several safely is not.
@@ -171,12 +182,6 @@ Coordinating one AI agent is straightforward. Coordinating several safely is not
 Coding agents can execute tasks individually. When multiple agents work on the same repository simultaneously, a different set of problems emerges: conflicting changes, modifications outside each task's scope, lost context between agents, incompatible states, accumulated cost, unrecoverable failures and a real difficulty auditing what each agent actually did.
 
 The challenge in Super Squad AI is not generating code. It is governing agent execution over a repository with deterministic rules, clear boundaries and evidence-based verification rather than agent self-report.
-
-<h2 id="por-que-construi">Why I built it</h2>
-
-Super Squad AI is an own-use tool used in my development workflow. I built it to demonstrate an orchestration architecture and expand my execution capacity through specialized agents.
-
-Once it is mature, the tool may be evaluated as a commercial offering. Today, the focus is learning from own use and evolving its controls.
 
 <h2 id="a-ia-propoe">AI Proposes. The System Verifies.</h2>
 
@@ -204,6 +209,69 @@ This is the central principle of the project.
 An agent can claim it is done. That claim alone does not change the actual task state. A task advances only when authorized evidence produced by the system exists, not when the agent says so.
 
 WorkerReport is a declaration. VERIFIED is a state that requires proof.
+
+<h2 id="por-que-construi">Why I built it</h2>
+
+Super Squad AI is an own-use tool used in my development workflow. I built it to demonstrate an orchestration architecture and expand my execution capacity through specialized agents.
+
+Once it is mature, the tool may be evaluated as a commercial offering. Today, the focus is learning from own use and evolving its controls.
+
+## Product and Engineering Decisions
+
+<h3 id="relato-nao-e-estado">Decision 1 — Agent report is not real state</h3>
+
+The problem was that a model can claim success without verifiable proof.
+
+The decision was to treat WorkerReport as a declaration and require authorized evidence for any state advancement. The trade-off is a more complex lifecycle in exchange for greater operational confidence about what the system actually executed.
+
+---
+
+<h3 id="git-fronteira">Decision 2 — Git as the operational boundary</h3>
+
+The problem was that multiple agents modifying the same working tree made rollback and audit difficult to perform with confidence.
+
+The decision was isolated worktrees per task with controlled integration. The trade-off is more Git management in exchange for real isolation between concurrent agents.
+
+---
+
+<h3>Decision 3 — Capabilities instead of fixed roles</h3>
+
+The problem was that an architecture with fixed agent positions does not scale conceptually and requires core redesign to add specialists.
+
+The decision was capability-based selection in the scheduler. The trade-off is a more sophisticated scheduler in exchange for real modularity.
+
+---
+
+<h3>Decision 4 — Verification before and after integration</h3>
+
+The problem was that code correct in isolation can break the system when integrated with other concurrent tasks.
+
+The decision was two-stage verification with independent stages. The trade-off is more execution time and cost in exchange for greater reliability of the integrated state.
+
+## It's Not a Multi-Model Wrapper
+
+<ComparisonBlock
+  titleA="What it is not"
+  titleB="What it is"
+  arrows={false}
+  label="Super Squad AI positioning"
+  itemsA={[
+    "A wrapper that calls multiple LLMs",
+    "An interface for multiple providers",
+    "A chained-prompt framework",
+    "A task automation tool",
+  ]}
+  itemsB={[
+    "Orchestration with state management",
+    "Git isolation per task",
+    "Two-stage deterministic verification",
+    "Per-agent context management",
+    "Policy-based security boundaries",
+    "Failure recovery by design",
+  ]}
+/>
+
+<h2 id="engenharia">Engineering and architecture</h2>
 
 ## How It Works
 
@@ -368,61 +436,6 @@ Super Squad AI uses adversarial regressions as part of the development process.
 
 The goal is to ensure that public APIs, fabricated registries or invalid evidence cannot artificially promote the state of a run. Implementation details of these controls are not published.
 
-## It's Not a Multi-Model Wrapper
-
-<ComparisonBlock
-  titleA="What it is not"
-  titleB="What it is"
-  arrows={false}
-  label="Super Squad AI positioning"
-  itemsA={[
-    "A wrapper that calls multiple LLMs",
-    "An interface for multiple providers",
-    "A chained-prompt framework",
-    "A task automation tool",
-  ]}
-  itemsB={[
-    "Orchestration with state management",
-    "Git isolation per task",
-    "Two-stage deterministic verification",
-    "Per-agent context management",
-    "Policy-based security boundaries",
-    "Failure recovery by design",
-  ]}
-/>
-
-## Product and Engineering Decisions
-
-<h3 id="relato-nao-e-estado">Decision 1 — Agent report is not real state</h3>
-
-The problem was that a model can claim success without verifiable proof.
-
-The decision was to treat WorkerReport as a declaration and require authorized evidence for any state advancement. The trade-off is a more complex lifecycle in exchange for greater operational confidence about what the system actually executed.
-
----
-
-<h3 id="git-fronteira">Decision 2 — Git as the operational boundary</h3>
-
-The problem was that multiple agents modifying the same working tree made rollback and audit difficult to perform with confidence.
-
-The decision was isolated worktrees per task with controlled integration. The trade-off is more Git management in exchange for real isolation between concurrent agents.
-
----
-
-<h3>Decision 3 — Capabilities instead of fixed roles</h3>
-
-The problem was that an architecture with fixed agent positions does not scale conceptually and requires core redesign to add specialists.
-
-The decision was capability-based selection in the scheduler. The trade-off is a more sophisticated scheduler in exchange for real modularity.
-
----
-
-<h3>Decision 4 — Verification before and after integration</h3>
-
-The problem was that code correct in isolation can break the system when integrated with other concurrent tasks.
-
-The decision was two-stage verification with independent stages. The trade-off is more execution time and cost in exchange for greater reliability of the integrated state.
-
 ## Architecture
 
 <ArchitectureDiagram
@@ -436,7 +449,7 @@ The decision was two-stage verification with independent stages. The trade-off i
     { label: "Verification", detail: "Task (isolated) · Run (integrated)" },
     { label: "State Persistence", detail: "SQLite · Evidence · Run history" },
   ]}
-  servicesLabel="All local. No external backend, no remote database, no external orchestration service."
+  servicesLabel="The orchestrator, state (SQLite) and verification run locally. The AI models are accessed through the providers' APIs."
   services={[
     "Git / Worktrees",
     "SQLite",
@@ -450,9 +463,38 @@ The decision was two-stage verification with independent stages. The trade-off i
   alt="Super Squad AI architecture diagram: complete flow from User to State Persistence, through CLI, Leader, Scheduler, Workers and Verification"
   width={1673}
   height={942}
-  caption="Super Squad AI architecture — orchestration flow overview"
+  caption="Super Squad AI architecture — orchestration flow overview. Diagram in Portuguese."
   protected={true}
 />
+
+<h2 id="estado-atual">Current Stage</h2>
+
+Super Squad AI is a functional product in active development. What exists today:
+
+- controlled execution with Leader and dynamic Workers
+- state persistence in SQLite
+- Git isolation per task with worktrees
+- multi-agent orchestration with structured planning
+- two-stage verification
+- interrupted run recovery
+- automated tests covering the main contracts
+
+The current stage is an own-use tool. The next validations focus on maturing the workflow before evaluating external use or a commercial offering.
+
+The project also served as an environment for experimenting with multi-agent-assisted development under human review and validation throughout the process.
+
+<Callout variant="demonstrates" title="What this project demonstrates">
+
+- **AI Product:** agent orchestration with real product controls, not just API calls
+- **Technical Product:** architectural decisions with explicit and verifiable trade-offs
+- **Multi-Agent Architecture:** planning, capabilities, isolation and coordinated integration
+- **AI Reliability:** deterministic verification, two stages, evidence before state
+- **Developer Experience:** local CLI, persistence, recovery and auditability
+- **System Design:** separation between what AI proposes and what the system validates
+- **Security Thinking:** tool policies, secret filtering and adversarial validation
+- **Hands-on Execution:** from problem to functional system with deliberate architecture
+
+</Callout>
 
 ## Technical Stack
 
@@ -543,33 +585,4 @@ Technologies and components of the complete Super Squad AI architecture, progres
 
 </div>
 
-<h2 id="estado-atual">Current Stage</h2>
-
-Super Squad AI is a functional product in active development. What exists today:
-
-- controlled execution with Leader and dynamic Workers
-- state persistence in SQLite
-- Git isolation per task with worktrees
-- multi-agent orchestration with structured planning
-- two-stage verification
-- interrupted run recovery
-- automated tests covering the main contracts
-
-The current stage is an own-use tool. The next validations focus on maturing the workflow before evaluating external use or a commercial offering.
-
-The project also served as an environment for experimenting with multi-agent-assisted development under human review and validation throughout the process.
-
-## What This Project Demonstrates
-
-<Callout variant="demonstrates" title="What this project demonstrates">
-
-- **AI Product:** agent orchestration with real product controls, not just API calls
-- **Technical Product:** architectural decisions with explicit and verifiable trade-offs
-- **Multi-Agent Architecture:** planning, capabilities, isolation and coordinated integration
-- **AI Reliability:** deterministic verification, two stages, evidence before state
-- **Developer Experience:** local CLI, persistence, recovery and auditability
-- **System Design:** separation between what AI proposes and what the system validates
-- **Security Thinking:** tool policies, secret filtering and adversarial validation
-- **Hands-on Execution:** from problem to functional system with deliberate architecture
-
-</Callout>
+</FullView>

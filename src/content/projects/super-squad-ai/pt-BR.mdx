@@ -164,6 +164,17 @@ Funcional e em evolução ativa: Leader e workers dinâmicos, estado em SQLite, 
 
 </BasicView>
 
+<FullView>
+
+<nav aria-label="Nesta página" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">Nesta página:</span>
+  <a href="#a-ia-propoe" class="link-underline hover:text-foreground">Produto</a>
+  <span aria-hidden="true">·</span>
+  <a href="#relato-nao-e-estado" class="link-underline hover:text-foreground">Decisões</a>
+  <span aria-hidden="true">·</span>
+  <a href="#engenharia" class="link-underline hover:text-foreground">Engenharia</a>
+</nav>
+
 ## O problema
 
 Coordenar uma IA é simples. Coordenar várias com segurança não é.
@@ -171,12 +182,6 @@ Coordenar uma IA é simples. Coordenar várias com segurança não é.
 Coding agents conseguem executar tarefas individualmente. Quando vários agentes trabalham sobre um mesmo repositório ao mesmo tempo, surgem outros problemas: conflitos entre mudanças, alterações fora do escopo de cada tarefa, perda de contexto entre agentes, estados incompatíveis, custo acumulado, falhas sem recuperação e uma dificuldade real de auditoria sobre o que cada agente fez.
 
 O desafio do Super Squad AI não é gerar código. É governar a execução de agentes sobre um repositório com regras determinísticas, fronteiras claras e verificação baseada em evidência, não em declaração.
-
-<h2 id="por-que-construi">Por que construí</h2>
-
-O Super Squad AI é uma ferramenta de uso próprio, em uso no meu fluxo de desenvolvimento. Foi criado para demonstrar uma arquitetura de orquestração e ampliar minha capacidade de execução por meio de agentes especializados.
-
-Quando estiver madura, a ferramenta poderá ser avaliada como uma oferta comercial. Hoje, o foco é aprender com o uso próprio e evoluir seus controles.
 
 <h2 id="a-ia-propoe">A IA propõe. O sistema verifica.</h2>
 
@@ -204,6 +209,69 @@ Este é o princípio central do projeto.
 Um agente pode afirmar que terminou. Isso não modifica o estado real da tarefa. A tarefa somente avança quando existe evidência autorizada produzida pelo sistema, não pelo agente.
 
 WorkerReport é uma declaração. VERIFIED é um estado que exige prova.
+
+<h2 id="por-que-construi">Por que construí</h2>
+
+O Super Squad AI é uma ferramenta de uso próprio, em uso no meu fluxo de desenvolvimento. Foi criado para demonstrar uma arquitetura de orquestração e ampliar minha capacidade de execução por meio de agentes especializados.
+
+Quando estiver madura, a ferramenta poderá ser avaliada como uma oferta comercial. Hoje, o foco é aprender com o uso próprio e evoluir seus controles.
+
+## Decisões de produto e engenharia
+
+<h3 id="relato-nao-e-estado">Decisão 1 — Relato do agente não é estado real</h3>
+
+O problema era que um modelo pode afirmar sucesso sem prova verificável.
+
+A decisão foi tratar WorkerReport como declaração e exigir evidência autorizada para qualquer avanço de estado. O trade-off é um lifecycle mais complexo em troca de maior confiança operacional sobre o que o sistema realmente executou.
+
+---
+
+<h3 id="git-fronteira">Decisão 2 — Git como fronteira operacional</h3>
+
+O problema era que vários agentes alterando o mesmo working tree tornavam rollback e auditoria difíceis de realizar com confiança.
+
+A decisão foi worktrees isolados por tarefa com integração controlada. O trade-off é mais gerenciamento Git em troca de isolamento real entre agentes concorrentes.
+
+---
+
+<h3>Decisão 3 — Capabilities em vez de papéis fixos</h3>
+
+O problema era que uma arquitetura com posições fixas de agentes não escala conceitualmente e exige redesenho do core para adicionar especialistas.
+
+A decisão foi seleção por capabilities no scheduler. O trade-off é um scheduler mais sofisticado em troca de modularidade real.
+
+---
+
+<h3>Decisão 4 — Verificação antes e depois da integração</h3>
+
+O problema era que código correto isoladamente pode quebrar o sistema quando integrado com outras tarefas concorrentes.
+
+A decisão foi two-stage verification com estágios independentes. O trade-off é mais tempo e custo de execução em troca de maior confiabilidade do estado integrado.
+
+## Não é um wrapper de múltiplos modelos
+
+<ComparisonBlock
+  titleA="O que não é"
+  titleB="O que é"
+  arrows={false}
+  label="Posicionamento do Super Squad AI"
+  itemsA={[
+    "Um wrapper que chama vários LLMs",
+    "Uma interface para múltiplos provedores",
+    "Um framework de prompts encadeados",
+    "Uma ferramenta de automação de tarefas",
+  ]}
+  itemsB={[
+    "Orquestração com controle de estado",
+    "Git isolation por tarefa",
+    "Verificação determinística em dois estágios",
+    "Gerenciamento de contexto por agente",
+    "Fronteiras de segurança por política",
+    "Recuperação de falhas por design",
+  ]}
+/>
+
+<h2 id="engenharia">Engenharia e arquitetura</h2>
 
 ## Como funciona
 
@@ -235,7 +303,7 @@ A arquitetura não define posições rígidas como `worker_01`, `worker_02` ou `
   label="Roteamento por capability"
   steps={[
     { label: "Leader" },
-    { label: "Agent Registry" },
+    { label: "Registro de agentes" },
     { label: "Scheduler", detail: "Seleciona agentes compatíveis com as capabilities da tarefa" },
   ]}
   servicesLabel="Workers disponíveis"
@@ -368,61 +436,6 @@ O Super Squad AI utiliza regressões adversariais como parte do processo de dese
 
 O objetivo é garantir que APIs públicas, registros fabricados ou evidências inválidas não consigam promover artificialmente o estado de uma execução. Detalhes de implementação desses controles não são publicados.
 
-## Não é um wrapper de múltiplos modelos
-
-<ComparisonBlock
-  titleA="O que não é"
-  titleB="O que é"
-  arrows={false}
-  label="Posicionamento do Super Squad AI"
-  itemsA={[
-    "Um wrapper que chama vários LLMs",
-    "Uma interface para múltiplos provedores",
-    "Um framework de prompts encadeados",
-    "Uma ferramenta de automação de tarefas",
-  ]}
-  itemsB={[
-    "Orquestração com controle de estado",
-    "Git isolation por tarefa",
-    "Verificação determinística em dois estágios",
-    "Gerenciamento de contexto por agente",
-    "Fronteiras de segurança por política",
-    "Recuperação de falhas por design",
-  ]}
-/>
-
-## Decisões de produto e engenharia
-
-<h3 id="relato-nao-e-estado">Decisão 1 — Relato do agente não é estado real</h3>
-
-O problema era que um modelo pode afirmar sucesso sem prova verificável.
-
-A decisão foi tratar WorkerReport como declaração e exigir evidência autorizada para qualquer avanço de estado. O trade-off é um lifecycle mais complexo em troca de maior confiança operacional sobre o que o sistema realmente executou.
-
----
-
-<h3 id="git-fronteira">Decisão 2 — Git como fronteira operacional</h3>
-
-O problema era que vários agentes alterando o mesmo working tree tornavam rollback e auditoria difíceis de realizar com confiança.
-
-A decisão foi worktrees isolados por tarefa com integração controlada. O trade-off é mais gerenciamento Git em troca de isolamento real entre agentes concorrentes.
-
----
-
-<h3>Decisão 3 — Capabilities em vez de papéis fixos</h3>
-
-O problema era que uma arquitetura com posições fixas de agentes não escala conceitualmente e exige redesenho do core para adicionar especialistas.
-
-A decisão foi seleção por capabilities no scheduler. O trade-off é um scheduler mais sofisticado em troca de modularidade real.
-
----
-
-<h3>Decisão 4 — Verificação antes e depois da integração</h3>
-
-O problema era que código correto isoladamente pode quebrar o sistema quando integrado com outras tarefas concorrentes.
-
-A decisão foi two-stage verification com estágios independentes. O trade-off é mais tempo e custo de execução em troca de maior confiabilidade do estado integrado.
-
 ## Arquitetura
 
 <ArchitectureDiagram
@@ -434,9 +447,9 @@ A decisão foi two-stage verification com estágios independentes. O trade-off �
     { label: "Scheduler", detail: "Seleção por capability · ContextPack" },
     { label: "Worker", detail: "Execução · Ferramentas restritas · Git Worktree" },
     { label: "Verificação", detail: "Tarefa (isolada) · Run (integrada)" },
-    { label: "State Persistence", detail: "SQLite · Evidências · Histórico de runs" },
+    { label: "Persistência de estado", detail: "SQLite · Evidências · Histórico de runs" },
   ]}
-  servicesLabel="Tudo local. Sem backend externo, sem banco de dados remoto, sem serviço de orquestração externo."
+  servicesLabel="O orquestrador, o estado (SQLite) e a verificação rodam localmente. Os modelos de IA são acessados pelos provedores por API."
   services={[
     "Git / Worktrees",
     "SQLite",
@@ -454,6 +467,35 @@ A decisão foi two-stage verification com estágios independentes. O trade-off �
   protected={true}
 />
 
+<h2 id="estado-atual">Estado atual</h2>
+
+O Super Squad AI é um produto funcional em evolução ativa. O que existe hoje:
+
+- execução controlada com Leader e Workers dinâmicos
+- persistência de estado em SQLite
+- Git isolation por tarefa com worktrees
+- orquestração multiagente com planejamento estruturado
+- verificação em dois estágios
+- recuperação de runs interrompidas
+- testes automatizados cobrindo os contratos principais
+
+O estágio atual é de ferramenta de uso próprio. As próximas validações concentram-se em amadurecer o fluxo antes de qualquer avaliação de uso externo ou oferta comercial.
+
+O projeto também serviu como ambiente para experimentação com desenvolvimento assistido por múltiplos agentes, com revisão e validação humana ao longo do processo.
+
+<Callout variant="demonstrates" title="O que este projeto demonstra">
+
+- **Produto de IA:** orquestração de agentes com controles de produto reais, não só chamadas de API
+- **Technical Product:** decisões arquiteturais com trade-offs explícitos e verificáveis
+- **Arquitetura multiagente:** planejamento, capacidades, isolamento e integração coordenada
+- **Confiabilidade em IA:** verificação determinística, dois estágios, evidência antes de estado
+- **Experiência do desenvolvedor:** CLI local, persistência, recuperação e auditabilidade
+- **Design de sistemas:** separação entre o que a IA propõe e o que o sistema valida
+- **Segurança:** políticas de ferramentas, filtragem de segredos e validação adversarial
+- **Execução prática:** do problema ao sistema funcional com arquitetura deliberada
+
+</Callout>
+
 ## Stack técnica
 
 Tecnologias e componentes da arquitetura completa do Super Squad AI, incorporados progressivamente ao longo do roadmap técnico.
@@ -461,7 +503,7 @@ Tecnologias e componentes da arquitetura completa do Super Squad AI, incorporado
 <div class="not-prose my-8 grid grid-cols-1 gap-4 sm:grid-cols-2" role="list" aria-label="Stack técnica do Super Squad AI">
 
   <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
-    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Core & Runtime</p>
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Core e runtime</p>
     <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de core e runtime">
       {["Python 3.12+", "Pydantic 2", "asyncio", "ThreadPoolExecutor", "threading"].map(t => (
         <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
@@ -515,8 +557,8 @@ Tecnologias e componentes da arquitetura completa do Super Squad AI, incorporado
   </div>
 
   <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
-    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Concorrência & Recovery</p>
-    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de concorrência e recovery">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">Concorrência e recuperação</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Tecnologias de concorrência e recuperação">
       {["Cooperative Cancellation", "Project Execution Lock", "Fail-Fast", "Conservative Recovery", "Serialized Git Integration"].map(t => (
         <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
       ))}
@@ -524,8 +566,8 @@ Tecnologias e componentes da arquitetura completa do Super Squad AI, incorporado
   </div>
 
   <div class="rounded-xl border border-border bg-card px-5 py-4" role="listitem">
-    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">IA & Providers</p>
-    <ul class="flex flex-wrap gap-2" aria-label="Providers de IA">
+    <p class="mb-3 text-caption font-semibold uppercase tracking-wider text-muted-foreground">IA e provedores</p>
+    <ul class="flex flex-wrap gap-2" aria-label="Provedores de IA">
       {["Provider Abstraction Layer", "OpenAI", "Anthropic", "Google Gemini", "Deterministic FakeProvider"].map(t => (
         <li class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-body-sm text-foreground">{t}</li>
       ))}
@@ -543,33 +585,4 @@ Tecnologias e componentes da arquitetura completa do Super Squad AI, incorporado
 
 </div>
 
-<h2 id="estado-atual">Estado atual</h2>
-
-O Super Squad AI é um produto funcional em evolução ativa. O que existe hoje:
-
-- execução controlada com Leader e Workers dinâmicos
-- persistência de estado em SQLite
-- Git isolation por tarefa com worktrees
-- orquestração multiagente com planejamento estruturado
-- verificação em dois estágios
-- recuperação de runs interrompidas
-- testes automatizados cobrindo os contratos principais
-
-O estágio atual é de ferramenta de uso próprio. As próximas validações concentram-se em amadurecer o fluxo antes de qualquer avaliação de uso externo ou oferta comercial.
-
-O projeto também serviu como ambiente para experimentação com desenvolvimento assistido por múltiplos agentes, com revisão e validação humana ao longo do processo.
-
-## O que este projeto demonstra
-
-<Callout variant="demonstrates" title="O que este projeto demonstra">
-
-- **Produto de IA:** orquestração de agentes com controles de produto reais, não só chamadas de API
-- **Technical Product:** decisões arquiteturais com trade-offs explícitos e verificáveis
-- **Arquitetura multiagente:** planejamento, capacidades, isolamento e integração coordenada
-- **Confiabilidade em IA:** verificação determinística, dois estágios, evidência antes de estado
-- **Experiência do desenvolvedor:** CLI local, persistência, recuperação e auditabilidade
-- **Design de sistemas:** separação entre o que a IA propõe e o que o sistema valida
-- **Segurança:** políticas de ferramentas, filtragem de segredos e validação adversarial
-- **Execução prática:** do problema ao sistema funcional com arquitetura deliberada
-
-</Callout>
+</FullView>
