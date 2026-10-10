@@ -1,14 +1,12 @@
 ---
 // ArchitectureDiagram.astro — Reusable conceptual architecture diagram.
 // Static, responsive, accessible, light/dark aware. No heavy dependencies.
-import type { AstroProps } from 'astro';
-
 interface ArchStep {
   label: string;
   detail?: string;
 }
 
-interface Props extends AstroProps {
+interface Props {
   steps: ArchStep[];
   services?: string[];
   servicesLabel?: string;
