@@ -1,14 +1,12 @@
 ---
 // RoleBlocks.astro — Four-block role breakdown for case studies
 // (Product / AI Product / Technical Product / Hands-on Execution).
-import type { AstroProps } from 'astro';
-
 interface RoleBlock {
   title: string;
   items: string[];
 }
 
-interface Props extends AstroProps {
+interface Props {
   blocks: RoleBlock[];
   label?: string;
   class?: string;
