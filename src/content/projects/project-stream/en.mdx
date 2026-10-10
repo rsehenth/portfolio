@@ -8,7 +8,7 @@ summary: "Project Stream explores a simpler live production experience without m
 year: 2026
 role: Technical Product · Product Architecture
 stage: Discovery · Pre-PoC
-stageNote: "Product vision, candidate architecture and risks are mapped. The first PoC has not been completed."
+stageNote: "Product vision, candidate architecture and risks are mapped. Next step: complete the first PoC."
 statusBadge: "In development"
 caseSummary:
   problem: "Simplify streaming production without moving core audiovisual processing to a proprietary cloud platform."
@@ -24,6 +24,10 @@ focus: Product Architecture · Media Systems · Risk Reduction
 status: Active
 draft: false
 featured: false
+views: true
+readingTime:
+  basic: 1
+  full: 5
 logo: /projects/project-stream/ps-logo.webp
 logoPosition: "center"
 tags:
@@ -48,33 +52,110 @@ seo:
 order: 1
 ---
 
-## The Problem
+<BasicView>
+
+<h2 id="r-problema">The Problem</h2>
+
+Professional streaming tools offer control, but that control requires extensive setup. Simpler experiences often push that complexity into proprietary services for coordination, composition and transmission. Project Stream asks how much of that simplicity is possible while keeping core audiovisual processing on the computer of whoever produces the stream, without proprietary cloud video infrastructure.
+
+<h2 id="r-meu-papel">My Role</h2>
+
+I work on product vision, candidate architecture, PoC scope and risk reduction. Before building an MVP, I define which decisions need evidence.
+
+<h2 id="r-decisoes">Four decisions under validation</h2>
+
+<h3 id="r-processamento-central">Core processing on the host computer</h3>
+
+Capture, composition, rendering, encoding, recording and transmission stay close to whoever produces the stream. This does not eliminate external services. Trade-off: performance comes to depend on the host's hardware.
+
+<SeeFull to="controle-local" label="See details" />
+
+<h3 id="r-conectividade-risco">Connectivity is the biggest risk</h3>
+
+Remote guests may require signaling, STUN, TURN or relay; NAT, CGNAT and firewalls make the connection the main uncertainty. Scenarios under study: local network, direct connection and assisted connectivity.
+
+<SeeFull to="conectividade" label="See details" />
+
+<h3 id="r-libobs">libobs instead of a custom engine</h3>
+
+A mature foundation for capture, composition, encoding, recording and transmission; the intention is not to rebuild a media engine. The choice will be assessed alongside the distribution model, including GPL licensing implications.
+
+<SeeFull to="arquitetura" label="See details" />
+
+<h3 id="r-tauri-qt">Tauri + Rust, with Qt + C++ as an alternative</h3>
+
+Tauri + Rust is the candidate for the desktop layer; Qt + C++ remains an alternative if the PoC shows too high a cost in preview, native integration or source control.
+
+<SeeFull to="arquitetura" label="See details" />
+
+<p class="not-prose mt-8 text-body-sm text-muted-foreground">Current plan:</p>
+
+<FlowDiagram
+  label="Project Stream high-level roadmap, current plan"
+  steps={[
+    "Discovery / Pre-PoC",
+    "Audiovisual PoC",
+    "MVP",
+    "Advanced Capabilities",
+    "Commercial Readiness",
+  ]}
+/>
+
+<h2 id="r-poc">What the first PoC will prove</h2>
+
+- libobs integration works reliably within the desktop application, and Tauri + Rust + C++ is sustainable for preview and source control;
+- One WebRTC guest can be received and composed in a controlled environment;
+- The composition can be recorded or streamed over RTMP with enough stability to justify further investment;
+- What the actual CPU and GPU cost is and which network conditions require auxiliary infrastructure.
+
+<SeeFull to="poc" label="See the full PoC questions" />
+
+<h2 id="r-estado-atual">Where we are</h2>
+
+In Discovery / Pre-PoC: product vision, candidate architecture, flows, risks and high-level roadmap mapped. Next validation: completing the first PoC to test audiovisual integration and connectivity.
+
+<ViewCtaButton label="See the full case: candidate architecture, risks and PoC" />
+
+</BasicView>
+
+<FullView>
+
+<nav aria-label="On this page" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">On this page:</span>
+  <a href="#problema" class="link-underline hover:text-foreground">Problem</a>
+  <span aria-hidden="true">·</span>
+  <a href="#arquitetura" class="link-underline hover:text-foreground">Architecture</a>
+  <span aria-hidden="true">·</span>
+  <a href="#poc" class="link-underline hover:text-foreground">PoC</a>
+</nav>
+
+<h2 id="problema">The Problem</h2>
 
 Professional streaming tools offer control, but that control often comes with extensive setup. Simpler experiences can move much of that complexity into proprietary services for coordination, composition and distribution.
 
 Project Stream asks how much of that simplicity can be explored while keeping core audiovisual processing on the host computer. The goal is to keep capture, composition, rendering, encoding, recording and transmission close to the person producing the stream, avoiding proprietary cloud video infrastructure.
 
-## My Role
+<h2 id="meu-papel">My Role</h2>
 
-At this stage, my work focuses on product vision, candidate architecture, PoC scope, trade-offs and risk reduction. Before building an MVP, I am defining which decisions need evidence and which promises cannot yet be made.
+At this stage, my work focuses on product vision, candidate architecture, PoC scope, trade-offs and risk reduction. Before building an MVP, I define which decisions need evidence.
 
 That includes the intended experience for hosts and guests, the limits of local hardware, connectivity, stack alternatives and distribution implications.
 
-## Local Control, Simpler Experience
+<h2 id="controle-local">Local Control, Simpler Experience</h2>
 
 The proposal is to give the host control over a streaming studio without exposing the full complexity of an audiovisual pipeline in the product experience. Layouts, templates and automation are planned possibilities, subject to what the PoC confirms about integration, performance and operation.
 
-The core processing principle is local-first. It does not imply an absence of external services.
+The core processing principle is local-first.
 
-## The Biggest Risk Is Connectivity
+<h2 id="conectividade">The Biggest Risk Is Connectivity</h2>
 
-Remote guests may require signaling, STUN, TURN, relay or other auxiliary services. NAT, CGNAT, firewalls and changing network conditions make connectivity one of the project’s main uncertainties.
+Local processing does not mean an absence of external services: remote guests may require signaling, STUN, TURN, relay or other auxiliary services. NAT, CGNAT, firewalls and changing network conditions make connectivity one of the project’s main uncertainties.
 
-No cloud video processing does not mean no external services. The candidate architecture needs to show when a direct connection is viable and when assisted connectivity becomes necessary.
+The candidate architecture needs to show when a direct connection is viable and when assisted connectivity becomes necessary.
 
-The scenarios under consideration are local network, direct internet connection and assisted connectivity. They are architecture hypotheses, not implemented modes.
+The scenarios under consideration are local network, direct internet connection and assisted connectivity. They are architecture hypotheses to be validated in the PoC.
 
-## Candidate Architecture
+<h2 id="arquitetura">Candidate Architecture</h2>
 
 Technical hypothesis to be validated through the PoC.
 
@@ -94,7 +175,11 @@ Tauri + Rust is the candidate for the desktop layer. Qt + C++ remains an alterna
 
 libobs is a candidate because it provides a mature foundation for capture, composition, encoding, recording and streaming. The intention is not to rebuild a media engine from scratch. The choice needs assessment alongside the distribution model before a commercial launch, including GPL licensing implications.
 
-## What the PoC Needs to Prove
+<h2 id="riscos">Key Risks</h2>
+
+The first PoC is guided by the integration of libobs and WebRTC, connectivity in real networks, CPU and GPU load, audio and video synchronization, technology distribution implications and development complexity. Each one affects the product experience and needs testing before the scope expands.
+
+<h2 id="poc">What the PoC Needs to Prove</h2>
 
 The next step is not to add features. It is to reduce the uncertainties that determine whether the architecture is worth pursuing.
 
@@ -105,30 +190,26 @@ The next step is not to add features. It is to reduce the uncertainties that det
 5. What is the actual CPU and GPU cost before setting guest or resolution limits?
 6. Which network conditions require auxiliary infrastructure?
 
-These are risk questions, not a list of delivered capabilities. The PoC succeeds when it provides enough evidence to decide whether the technical direction deserves the next investment.
+These are risk questions. The PoC fulfills its purpose when there is enough evidence to decide whether the technical direction deserves the next investment.
 
-## Key Risks
-
-The first PoC is guided by the integration of libobs and WebRTC, connectivity in real networks, CPU and GPU load, audio and video synchronization, and technology distribution implications. Each one affects the product experience and needs testing before the scope expands.
-
-## High-Level Roadmap
+<h2 id="roadmap">High-Level Roadmap</h2>
 
 Discovery / Pre-PoC → Audiovisual PoC → MVP → Advanced Capabilities → Commercial Readiness
 
-This is the current plan, not a delivery commitment. Progress depends on what the PoC reveals about feasibility, development cost and the user experience.
+Current plan; progress depends on what the PoC reveals about feasibility, development cost and the user experience.
 
-## Where Project Stream Stands Today
+<h2 id="estado-atual">Where Project Stream Stands Today</h2>
 
-Project Stream is in Discovery / Pre-PoC. The product vision, candidate architecture, main flows and technical risks are mapped. There is no functional MVP yet, and the central decisions around audiovisual integration and connectivity still need to be proven in the first PoC.
+In Discovery / Pre-PoC: the product vision, the candidate architecture, the main flows and the technical risks are mapped. The central decisions around audiovisual integration and connectivity will be tested in the first PoC.
 
-## Next Validations
-
-I want to learn whether native integration, hardware cost, guest connectivity, audiovisual stability, development complexity and distribution constraints can support a sustainable product foundation.
-
-## What This Project Demonstrates
+<Callout variant="demonstrates" title="What this project demonstrates">
 
 - **Technical Product:** translating a product vision into technical decisions and testable questions.
 - **Product Architecture:** defining boundaries between interface, control, media, connectivity and persistence.
 - **Risk Reduction:** identifying technical uncertainty before investing in an MVP.
 - **PoC Scoping:** defining the smallest experiment that can test the riskiest decisions.
 - **Product × Engineering:** connecting the desired experience to technical limits and implementation trade-offs.
+
+</Callout>
+
+</FullView>
