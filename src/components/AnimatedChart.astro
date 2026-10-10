@@ -126,6 +126,14 @@ interface ChartDatasetConfig {
   cutout?: string;
 }
 
+// Minimal structural type covering only the dataset fields applyThemeColors writes.
+interface ChartDatasetEntry {
+  backgroundColor: string[];
+  borderColor: string[];
+  pointBackgroundColor?: string;
+  pointBorderColor?: string;
+}
+
 const themeToken = (name: string) => `rgb(${getComputedStyle(document.documentElement).getPropertyValue(name).trim()})`;
 
 const accentPalette = (customColors: string[]) => customColors.length ? customColors : [
@@ -135,29 +143,32 @@ const accentPalette = (customColors: string[]) => customColors.length ? customCo
   `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--color-accent-rgb').trim()} / 0.3)`,
 ];
 
-const applyThemeColors = (chart, canvas: HTMLCanvasElement) => {
+const applyThemeColors = (chart: Chart, canvas: HTMLCanvasElement) => {
   const customColors = JSON.parse(canvas.dataset.colors || '[]');
   const colors = accentPalette(customColors);
-  const dataset = chart.data.datasets[0];
 
-  dataset.backgroundColor = colors;
-  dataset.borderColor = colors;
-
+  // Object.assign avoids type-assertion issues with Chart.js's wide union types
+  // for dataset properties (backgroundColor, borderColor, etc.).
+  const datasetPatch: ChartDatasetEntry = {
+    backgroundColor: colors,
+    borderColor: colors,
+  };
   if (canvas.dataset.type === 'line') {
-    dataset.pointBackgroundColor = colors[0];
-    dataset.pointBorderColor = themeToken('--color-card-rgb');
+    datasetPatch.pointBackgroundColor = colors[0];
+    datasetPatch.pointBorderColor = themeToken('--color-card-rgb');
   }
+  Object.assign(chart.data.datasets[0], datasetPatch);
 
-  const tooltip = chart.options.plugins.tooltip;
+  const tooltip = chart.options.plugins!.tooltip!;
   tooltip.backgroundColor = themeToken('--color-card-rgb');
   tooltip.titleColor = themeToken('--color-foreground-rgb');
   tooltip.bodyColor = themeToken('--color-muted-foreground-rgb');
   tooltip.borderColor = themeToken('--color-border-rgb');
 
   if (canvas.dataset.type !== 'doughnut') {
-    chart.options.scales.x.ticks.color = themeToken('--color-muted-foreground-rgb');
-    chart.options.scales.y.grid.color = themeToken('--color-border-rgb');
-    chart.options.scales.y.ticks.color = themeToken('--color-muted-foreground-rgb');
+    chart.options.scales!.x!.ticks!.color = themeToken('--color-muted-foreground-rgb');
+    chart.options.scales!.y!.grid!.color = themeToken('--color-border-rgb');
+    chart.options.scales!.y!.ticks!.color = themeToken('--color-muted-foreground-rgb');
   }
 };
 
