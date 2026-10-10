@@ -1,8 +1,7 @@
 ---
 // Callout.astro — Reusable editorial callout for MDX case studies.
-import type { AstroProps } from 'astro';
 
-interface Props extends AstroProps {
+interface Props {
   variant?: 'info' | 'warning' | 'success' | 'error' | 'attribution' | 'demonstrates';
   title?: string;
   class?: string;
