@@ -100,15 +100,15 @@ order: 9
 
 <BasicView>
 
-## O problema
+<h2 id="r-o-problema">O problema</h2>
 
 Coding agents executam tarefas bem sozinhos. O problema começa quando vários trabalham no mesmo repositório: mudanças que se atropelam, contexto perdido, custo acumulado, falhas sem recuperação e pouca clareza sobre o que cada agente fez. O desafio não é gerar código, é governar a execução.
 
-## A IA propõe. O sistema verifica.
+<h2 id="r-a-ia-propoe">A IA propõe. O sistema verifica.</h2>
 
 Um agente pode dizer que terminou e que os testes passaram. Isso não muda o estado da tarefa: ela só avança quando o sistema produz evidência autorizada. O relato do agente é uma declaração; VERIFIED exige prova.
 
-## Como funciona
+<h2 id="r-como-funciona">Como funciona</h2>
 
 <FlowDiagram
   label="Fluxo resumido do Super Squad AI"
@@ -124,39 +124,39 @@ Um agente pode dizer que terminou e que os testes passaram. Isso não muda o est
 
 {/* TODO: imagem simples do fluxo para o resumo */}
 
-## Quatro decisões
+<h2 id="r-quatro-decisoes">Quatro decisões</h2>
 
-### Relato do agente não é estado real
+<h3 id="r-relato-nao-e-estado">Relato do agente não é estado real</h3>
 
 WorkerReport é uma declaração; o estado só avança com evidência autorizada produzida pelo sistema. Trade-off: um lifecycle mais complexo em troca de maior confiança operacional sobre o que o sistema realmente executou.
 
 <SeeFull to="relato-nao-e-estado" label="Ver detalhes" />
 
-### Git como fronteira operacional
+<h3 id="r-git-fronteira">Git como fronteira operacional</h3>
 
 Cada tarefa roda em um worktree Git isolado, criado a partir da Run Branch. Trade-off: mais gerenciamento Git em troca de isolamento real entre agentes concorrentes.
 
 <SeeFull to="git-fronteira" label="Ver detalhes" />
 
-### Capabilities em vez de papéis fixos
+<h3 id="r-capabilities">Capabilities em vez de papéis fixos</h3>
 
 Os agentes registram capabilities e o scheduler seleciona os compatíveis com cada tarefa; novos especialistas entram sem redesenhar o core. Trade-off: um scheduler mais sofisticado em troca de modularidade real.
 
 <SeeFull to="capabilities" label="Ver detalhes" />
 
-### Verificação antes e depois da integração
+<h3 id="r-verificacao-integracao">Verificação antes e depois da integração</h3>
 
 A tarefa é verificada isolada e verificada de novo depois de integrada. Trade-off: mais tempo e custo de execução em troca de maior confiabilidade do estado integrado, porque código correto isolado pode quebrar integrado.
 
 <SeeFull to="verificacao-em-dois-estagios" label="Ver detalhes" />
 
-## Por que construí
+<h2 id="r-por-que-construi">Por que construí</h2>
 
 O Super Squad AI é uma ferramenta de uso próprio, em uso no meu fluxo de desenvolvimento. Foi criado para demonstrar uma arquitetura de orquestração e ampliar minha capacidade de execução por meio de agentes especializados.
 
 Quando estiver madura, a ferramenta poderá ser avaliada como uma oferta comercial. Hoje, o foco é aprender com o uso próprio e evoluir seus controles.
 
-## Estado atual
+<h2 id="r-estado-atual">Estado atual</h2>
 
 Funcional e em evolução ativa: Leader e workers dinâmicos, estado em SQLite, isolamento Git por tarefa, verificação em dois estágios e recuperação de runs interrompidas. Próxima validação: estabilizar para uso externo e medir o ganho de produtividade.
 
