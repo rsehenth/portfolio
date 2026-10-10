@@ -18,7 +18,7 @@ caseSummary:
 statusEvidence:
   stage: "In development, post-PoC and in early production."
   evidence: "The vision, systems, PoC and next-phase planning have been structured."
-  nextValidation: "Evolve the validated core into early-production systems and content."
+  nextValidation: "Playtesting of the first complete content, evaluating how combat feels, the pacing, the difficulty and the clarity of objectives."
 productType: Independent Game · 2D Beat 'em Up
 focus: Product Strategy · Game Systems · Combat · Progression
 status: Active
@@ -150,6 +150,17 @@ Next validation: playtesting of the first complete content, evaluating how comba
 
 </BasicView>
 
+<FullView>
+
+<nav aria-label="On this page" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">On this page:</span>
+  <a href="#oportunidade" class="link-underline hover:text-foreground">Vision</a>
+  <span aria-hidden="true">·</span>
+  <a href="#decisoes" class="link-underline hover:text-foreground">Decisions</a>
+  <span aria-hidden="true">·</span>
+  <a href="#sistemas" class="link-underline hover:text-foreground">Systems</a>
+</nav>
+
 <h2 id="oportunidade">The Opportunity</h2>
 
 Project Aurora started from the opportunity to build a contemporary beat 'em up where Brazilian identity is part of the game itself. Not just in the setting or the art, but in the characters, regions, combat styles, progression and narrative.
@@ -164,23 +175,20 @@ My work is to turn the creative direction into a product the team can discuss, p
 
 The two developers own engineering decisions and implementation. We work together on feasibility discussions, architecture and technical trade-offs.
 
-<RoleBlocks
-  label="Work areas in Project Aurora"
-  blocks={[
-    {
-      title: 'Product',
-      items: ['Vision', 'Positioning', 'Scope', 'Prioritization', 'Roadmap'],
-    },
-    {
-      title: 'Game Systems',
-      items: ['Core loop', 'Combat', 'Characters', 'Progression', 'Campaign', 'Economy'],
-    },
-    {
-      title: 'Engineering Collaboration',
-      items: ['Technical feasibility', 'Requirements', 'Risk reduction', 'Scope alignment', 'Validation'],
-    },
-  ]}
-/>
+<div class="not-prose my-6 flex flex-wrap items-center gap-x-2 gap-y-2 text-body-sm" role="group" aria-label="Work areas in Project Aurora">
+  <span class="font-semibold text-foreground">Product</span>
+  {['Vision', 'Positioning', 'Scope', 'Prioritization', 'Roadmap'].map((t) => (
+    <span class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-foreground">{t}</span>
+  ))}
+  <span class="font-semibold text-foreground">Game Systems</span>
+  {['Core loop', 'Combat', 'Characters', 'Progression', 'Campaign', 'Economy'].map((t) => (
+    <span class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-foreground">{t}</span>
+  ))}
+  <span class="font-semibold text-foreground">Engineering Collaboration</span>
+  {['Technical feasibility', 'Requirements', 'Risk reduction', 'Scope alignment', 'Validation'].map((t) => (
+    <span class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-foreground">{t}</span>
+  ))}
+</div>
 
 The team works collaboratively, with clear ownership by area. Product and game systems sit under my lead. Engineering and implementation belong to the two developers.
 
@@ -209,44 +217,6 @@ Brazilian identity directly shapes product design decisions:
 />
 
 The differentiation does not rely solely on art or setting. It is built into the game's own rules and systems.
-
-## From Vision to System
-
-<FlowDiagram
-  label="Product flow: from vision to execution"
-  steps={[
-    "Product vision",
-    "Game pillars",
-    "Core loop",
-    "Game systems",
-    "Technical requirements",
-    "PoC",
-    "Early Production",
-  ]}
-/>
-
-A game idea is not yet a buildable product. Part of my work is breaking the vision into systems, behaviors, priorities and risks that the team can discuss and work through.
-
-## Core Game Loop
-
-The diagram below represents the target product loop, including systems still in definition such as the full hub and progression.
-
-<FlowDiagram
-  label="Project Aurora target product loop"
-  steps={[
-    "Underground hub",
-    "Prepare and choose destination",
-    "Enter region",
-    "Combat",
-    "Progress",
-    "Boss / Objective",
-    "Return to hub",
-    "Upgrade / Prepare",
-    "Next region",
-  ]}
-/>
-
-The loop is designed so that every departure from the hub has a clear objective and every return offers a progression decision.
 
 <h2 id="decisoes">Three Decisions That Shape the Experience</h2>
 
@@ -348,6 +318,83 @@ Before producing characters, levels and enemies at scale, we needed to know whet
 
 The PoC was used to reduce technical and gameplay risk before investing in character, region, enemy and campaign production. Content production begins with the foundations confirmed.
 
+<h2 id="sistemas">Systems and process</h2>
+
+<h3>From Vision to System</h3>
+
+<FlowDiagram
+  label="Product flow: from vision to execution"
+  steps={[
+    "Product vision",
+    "Game pillars",
+    "Core loop",
+    "Game systems",
+    "Technical requirements",
+    "PoC",
+    "Early Production",
+  ]}
+/>
+
+A game idea is not yet a buildable product. Part of my work is breaking the vision into systems, behaviors, priorities and risks that the team can discuss and work through.
+
+<h3>Core Game Loop</h3>
+
+The diagram below represents the target product loop, including systems still in definition such as the full hub and progression.
+
+<FlowDiagram
+  label="Project Aurora target product loop"
+  steps={[
+    "Underground hub",
+    "Prepare and choose destination",
+    "Enter region",
+    "Combat",
+    "Progress",
+    "Boss / Objective",
+    "Return to hub",
+    "Upgrade / Prepare",
+    "Next region",
+  ]}
+/>
+
+The loop is designed so that every departure from the hub has a clear objective and every return offers a progression decision.
+
+<h3>Product System Map</h3>
+
+These systems were designed as parts of a single experience. Characters shape combat styles. Combat feeds into progression. Progression and preparation run through the hub. Regions organize the campaign and the narrative.
+
+The map below represents the full product vision, not the current state of implementation.
+
+<FlowDiagram
+  label="Project Aurora product vision map"
+  steps={[
+    "Characters",
+    "Combat",
+    "Progression",
+    "Hub",
+    "Regions",
+    "Campaign",
+    "Narrative",
+  ]}
+/>
+
+<h3>From Product Decision to Implementation</h3>
+
+My role does not end when a mechanic is defined in a document. It needs to become a system behavior the team can discuss technically.
+
+<FlowDiagram
+  label="Technical translation flow"
+  steps={[
+    "Game concept",
+    "Product requirements",
+    "System behaviors",
+    "Technical discussion",
+    "Implementation",
+    "Validation",
+  ]}
+/>
+
+That shows up in decisions about animation, controls, camera, character states, enemy behavior, HUD and system integration. Implementation and engineering decisions belong to the developers. My responsibility is the product intent, the expected behavior and the prioritization.
+
 <h2 id="estado-atual">Current Stage and Product Vision</h2>
 
 <ComparisonBlock
@@ -374,45 +421,6 @@ The PoC was used to reduce technical and gameplay risk before investing in chara
   ]}
 />
 
-Everything in the product vision column is defined and planned. None of those items are presented here as delivered or implemented.
-
-## Product System Map
-
-These systems were designed as parts of a single experience. Characters shape combat styles. Combat feeds into progression. Progression and preparation run through the hub. Regions organize the campaign and the narrative.
-
-The map below represents the full product vision, not the current state of implementation.
-
-<FlowDiagram
-  label="Project Aurora product vision map"
-  steps={[
-    "Characters",
-    "Combat",
-    "Progression",
-    "Hub",
-    "Regions",
-    "Campaign",
-    "Narrative",
-  ]}
-/>
-
-## From Product Decision to Implementation
-
-My role does not end when a mechanic is defined in a document. It needs to become a system behavior the team can discuss technically.
-
-<FlowDiagram
-  label="Technical translation flow"
-  steps={[
-    "Game concept",
-    "Product requirements",
-    "System behaviors",
-    "Technical discussion",
-    "Implementation",
-    "Validation",
-  ]}
-/>
-
-That shows up in decisions about animation, controls, camera, character states, enemy behavior, HUD and system integration. Implementation and engineering decisions belong to the developers. My responsibility is the product intent, the expected behavior and the prioritization.
-
 ## Next Phase
 
 With the technical core confirmed, the focus now is turning that foundation into a first complete slice of the experience.
@@ -427,17 +435,13 @@ What is in progress or defined for this phase:
 - progression systems begin
 - hub systems begin
 
-These items represent the Early Production path, not delivery commitments.
+## Next Validations
 
-## What Still Needs Validation
-
-Some product hypotheses still depend on playtesting to be answered. These are not identified problems. They are questions only a playable build can resolve.
+Some product hypotheses still depend on playtesting to be answered. They are questions only a playable build resolves.
 
 Once the first complete content is playable, it will be possible to evaluate how combat feels in longer sessions, the overall pacing, difficulty, objective clarity and how the first complete slice holds up as an experience.
 
 As character, progression and hub systems come online, a second set of questions will follow: whether character variety reads clearly in combat, whether progression adds depth without pulling focus from the action, whether the balance between arcade rhythm and deeper systems lands in the right place, and whether the hub fulfills its role with clarity.
-
-## What This Project Demonstrates
 
 <Callout variant="demonstrates" title="What this project demonstrates">
 
@@ -448,3 +452,5 @@ As character, progression and hub systems come online, a second set of questions
 - **Product × Engineering:** translating product intent into behaviors and requirements the engineering team can discuss and build
 
 </Callout>
+
+</FullView>

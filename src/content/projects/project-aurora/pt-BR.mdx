@@ -6,7 +6,7 @@ description: "Beat 'em up 2D independente ambientado em um Brasil futurista, com
 tagline: "Transformando uma visão de game em sistemas, prioridades e decisões que a equipe pode construir."
 summary: "Em uma equipe de três pessoas, lidero visão de produto, sistemas de jogo, escopo e priorização. Depois de validar o core técnico e de gameplay na PoC, o projeto entrou em produção inicial."
 year: 2026
-role: Product Lead & Game Design Lead
+role: Product Lead e Game Design Lead
 stage: Pós-PoC · Produção inicial
 stageNote: "O core do produto e seus principais sistemas foram definidos. A PoC confirmou movimentação, base de combate e direção técnica; o projeto agora está na consolidação da arquitetura, refinamento dos sistemas e produção do primeiro conteúdo completo."
 statusBadge: "Em desenvolvimento"
@@ -18,7 +18,7 @@ caseSummary:
 statusEvidence:
   stage: "Em desenvolvimento, pós-PoC e em produção inicial."
   evidence: "A visão, os sistemas, a PoC e o planejamento da próxima fase foram estruturados."
-  nextValidation: "Evoluir o núcleo validado para os sistemas e conteúdos da produção inicial."
+  nextValidation: "Playtesting do primeiro conteúdo completo, avaliando a sensação do combate, o pacing, a dificuldade e a clareza dos objetivos."
 productType: Jogo Independente · 2D Beat 'em Up
 focus: Estratégia de produto · Sistemas de jogo · Combate · Progressão
 status: Active
@@ -82,7 +82,7 @@ scaleMetrics: []
 productMetrics: []
 seo:
   title: "Project Aurora | Liderança de produto e sistemas de jogo | Lucas Sehnem"
-  description: "Case sobre a liderança de produto de um beat 'em up 2D independente, cobrindo visão de produto, game systems, escopo de PoC, priorização e colaboração com engenharia."
+  description: "Case sobre a liderança de produto de um beat 'em up 2D independente, cobrindo visão de produto, sistemas de jogo, escopo de PoC, priorização e colaboração com engenharia."
 order: 8
 ---
 
@@ -150,6 +150,17 @@ Próxima validação: playtesting do primeiro conteúdo completo, avaliando a se
 
 </BasicView>
 
+<FullView>
+
+<nav aria-label="Nesta página" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">Nesta página:</span>
+  <a href="#oportunidade" class="link-underline hover:text-foreground">Visão</a>
+  <span aria-hidden="true">·</span>
+  <a href="#decisoes" class="link-underline hover:text-foreground">Decisões</a>
+  <span aria-hidden="true">·</span>
+  <a href="#sistemas" class="link-underline hover:text-foreground">Sistemas</a>
+</nav>
+
 <h2 id="oportunidade">A oportunidade</h2>
 
 Project Aurora nasceu da oportunidade de criar um beat 'em up contemporâneo em que a identidade brasileira participa do jogo de verdade. Não apenas no cenário ou na estética, mas também nos personagens, regiões, estilos de combate, progressão e narrativa.
@@ -158,31 +169,28 @@ O desafio passou a ser transformar essa identidade em sistemas, sem depender ape
 
 <h2 id="meu-papel">Meu papel e equipe</h2>
 
-Project Aurora é desenvolvido por uma equipe de três pessoas. Atuo como Product Lead & Game Design Lead e concentro as principais decisões sobre visão, sistemas, escopo e priorização.
+Project Aurora é desenvolvido por uma equipe de três pessoas. Atuo como Product Lead e Game Design Lead e concentro as principais decisões sobre visão, sistemas, escopo e priorização.
 
 Meu trabalho é transformar a direção criativa em um produto que a equipe consiga discutir, priorizar e construir. Isso cobre gameplay loop, personagens, combate, progressão, economia, campanha, hub e a definição do que precisa ser confirmado primeiro.
 
 Os dois desenvolvedores são responsáveis pelas decisões de engenharia e pela implementação. Trabalhamos juntos nas discussões de viabilidade, arquitetura e trade-offs técnicos.
 
-<RoleBlocks
-  label="Frentes de trabalho no Project Aurora"
-  blocks={[
-    {
-      title: 'Product',
-      items: ['Visão', 'Posicionamento', 'Escopo', 'Priorização', 'Roadmap'],
-    },
-    {
-      title: 'Sistemas de jogo',
-      items: ['Core loop', 'Combate', 'Personagens', 'Progressão', 'Campanha', 'Economia'],
-    },
-    {
-      title: 'Engineering Collaboration',
-      items: ['Viabilidade técnica', 'Requisitos', 'Redução de risco', 'Alinhamento de escopo', 'Validação'],
-    },
-  ]}
-/>
+<div class="not-prose my-6 flex flex-wrap items-center gap-x-2 gap-y-2 text-body-sm" role="group" aria-label="Frentes de trabalho no Project Aurora">
+  <span class="font-semibold text-foreground">Produto</span>
+  {['Visão', 'Posicionamento', 'Escopo', 'Priorização', 'Roadmap'].map((t) => (
+    <span class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-foreground">{t}</span>
+  ))}
+  <span class="font-semibold text-foreground">Sistemas de jogo</span>
+  {['Core loop', 'Combate', 'Personagens', 'Progressão', 'Campanha', 'Economia'].map((t) => (
+    <span class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-foreground">{t}</span>
+  ))}
+  <span class="font-semibold text-foreground">Colaboração com engenharia</span>
+  {['Viabilidade técnica', 'Requisitos', 'Redução de risco', 'Alinhamento de escopo', 'Validação'].map((t) => (
+    <span class="rounded-md border border-border bg-muted/60 px-2.5 py-1 text-foreground">{t}</span>
+  ))}
+</div>
 
-A equipe trabalha de forma colaborativa, com ownership dividido por área. Produto e game systems ficam sob minha liderança. Engenharia e implementação ficam com os dois desenvolvedores.
+A equipe trabalha de forma colaborativa, com ownership dividido por área. Produto e sistemas de jogo ficam sob minha liderança. Engenharia e implementação ficam com os dois desenvolvedores.
 
 <h2 id="brasil-como-sistema">Brasil como sistema</h2>
 
@@ -209,44 +217,6 @@ A identidade brasileira influencia diretamente as decisões de design do produto
 />
 
 A diferenciação não depende apenas de arte ou cenário. Ela está conectada às próprias regras e sistemas do jogo.
-
-## De visão a sistema
-
-<FlowDiagram
-  label="Fluxo de produto: da visão à execução"
-  steps={[
-    "Visão de produto",
-    "Pilares do jogo",
-    "Core loop",
-    "Sistemas de jogo",
-    "Requisitos técnicos",
-    "PoC",
-    "Produção inicial",
-  ]}
-/>
-
-Uma ideia de jogo ainda não é um produto implementável. Parte do meu trabalho é quebrar a visão em sistemas, comportamentos, prioridades e riscos que a equipe consiga discutir e construir.
-
-## Core game loop
-
-O diagrama abaixo representa o target loop da visão de produto, incluindo sistemas ainda em definição como o hub completo e a progressão.
-
-<FlowDiagram
-  label="Target loop do Project Aurora, visão de produto"
-  steps={[
-    "Hub subterrâneo",
-    "Preparar e escolher destino",
-    "Entrar na região",
-    "Combate",
-    "Progredir",
-    "Boss / Objetivo",
-    "Retornar ao hub",
-    "Upgrade / Preparação",
-    "Próxima região",
-  ]}
-/>
-
-O loop foi desenhado para que cada saída do hub tenha um objetivo claro e cada retorno ofereça uma decisão de progressão.
 
 <h2 id="decisoes">Três decisões que definem a experiência</h2>
 
@@ -348,6 +318,83 @@ Antes de produzir personagens, fases e inimigos em escala, precisávamos saber s
 
 A PoC foi usada para reduzir risco técnico e de gameplay antes de investir na produção de personagens, regiões, inimigos e campanha. A produção de conteúdo começa com as bases confirmadas.
 
+<h2 id="sistemas">Sistemas e processo</h2>
+
+<h3>De visão a sistema</h3>
+
+<FlowDiagram
+  label="Fluxo de produto: da visão à execução"
+  steps={[
+    "Visão de produto",
+    "Pilares do jogo",
+    "Core loop",
+    "Sistemas de jogo",
+    "Requisitos técnicos",
+    "PoC",
+    "Produção inicial",
+  ]}
+/>
+
+Uma ideia de jogo ainda não é um produto implementável. Parte do meu trabalho é quebrar a visão em sistemas, comportamentos, prioridades e riscos que a equipe consiga discutir e construir.
+
+<h3>Core game loop</h3>
+
+O diagrama abaixo representa o loop-alvo da visão de produto, incluindo sistemas ainda em definição como o hub completo e a progressão.
+
+<FlowDiagram
+  label="Loop-alvo do Project Aurora, visão de produto"
+  steps={[
+    "Hub subterrâneo",
+    "Preparar e escolher destino",
+    "Entrar na região",
+    "Combate",
+    "Progredir",
+    "Boss / Objetivo",
+    "Retornar ao hub",
+    "Upgrade / Preparação",
+    "Próxima região",
+  ]}
+/>
+
+O loop foi desenhado para que cada saída do hub tenha um objetivo claro e cada retorno ofereça uma decisão de progressão.
+
+<h3>Mapa de sistemas de produto</h3>
+
+Esses sistemas foram pensados como partes de uma mesma experiência. Personagens influenciam combate. O combate alimenta progressão. Progressão e preparação passam pelo hub. Regiões organizam a campanha e a narrativa.
+
+O mapa abaixo representa a visão completa de produto, não o estado atual de implementação.
+
+<FlowDiagram
+  label="Mapa da visão de produto, Project Aurora"
+  steps={[
+    "Personagens",
+    "Combate",
+    "Progressão",
+    "Hub",
+    "Regiões",
+    "Campanha",
+    "Narrativa",
+  ]}
+/>
+
+<h3>Da decisão de produto à implementação</h3>
+
+Meu papel não termina quando uma mecânica é definida no documento. Ela precisa virar comportamento de sistema que a equipe consiga discutir tecnicamente.
+
+<FlowDiagram
+  label="Fluxo de tradução técnica"
+  steps={[
+    "Conceito de game",
+    "Requisitos de produto",
+    "Comportamentos de sistema",
+    "Discussão técnica",
+    "Implementação",
+    "Validação",
+  ]}
+/>
+
+Isso aparece em decisões sobre animação, controles, câmera, estados do personagem, inimigos, HUD e integração entre sistemas. A implementação e as decisões de engenharia pertencem aos desenvolvedores. Minha responsabilidade está na intenção do produto, no comportamento esperado e na priorização.
+
 <h2 id="estado-atual">Onde estamos e onde queremos chegar</h2>
 
 <ComparisonBlock
@@ -374,45 +421,6 @@ A PoC foi usada para reduzir risco técnico e de gameplay antes de investir na p
   ]}
 />
 
-Tudo na coluna de visão de produto está definido e planejado. Nenhum desses itens é apresentado aqui como entregue ou implementado.
-
-## Mapa de sistemas de produto
-
-Esses sistemas foram pensados como partes de uma mesma experiência. Personagens influenciam combate. O combate alimenta progressão. Progressão e preparação passam pelo hub. Regiões organizam a campanha e a narrativa.
-
-O mapa abaixo representa a visão completa de produto, não o estado atual de implementação.
-
-<FlowDiagram
-  label="Mapa da visão de produto, Project Aurora"
-  steps={[
-    "Personagens",
-    "Combate",
-    "Progressão",
-    "Hub",
-    "Regiões",
-    "Campanha",
-    "Narrativa",
-  ]}
-/>
-
-## Da decisão de produto à implementação
-
-Meu papel não termina quando uma mecânica é definida no documento. Ela precisa virar comportamento de sistema que a equipe consiga discutir tecnicamente.
-
-<FlowDiagram
-  label="Fluxo de tradução técnica"
-  steps={[
-    "Conceito de game",
-    "Requisitos de produto",
-    "Comportamentos de sistema",
-    "Discussão técnica",
-    "Implementação",
-    "Validação",
-  ]}
-/>
-
-Isso aparece em decisões sobre animação, controles, câmera, estados do personagem, inimigos, HUD e integração entre sistemas. A implementação e as decisões de engenharia pertencem aos desenvolvedores. Minha responsabilidade está na intenção do produto, no comportamento esperado e na priorização.
-
 ## Próxima fase
 
 Com o core técnico confirmado, o foco agora é transformar essa base em um primeiro recorte completo da experiência.
@@ -427,17 +435,13 @@ O que está em andamento ou definido para essa fase:
 - início dos sistemas de progressão
 - início dos sistemas de hub
 
-Esses itens representam o caminho de Produção inicial, não promessas de entrega.
+## Próximas validações
 
-## O que ainda precisa ser validado
-
-Algumas hipóteses de produto ainda dependem de playtesting para serem confirmadas. Não são problemas identificados, são perguntas que só o jogo jogável consegue responder.
+Algumas hipóteses de produto ainda dependem de playtesting para serem confirmadas. São perguntas que só o jogo jogável responde.
 
 Quando o primeiro conteúdo completo estiver jogável, será possível avaliar a sensação do combate em sessões mais longas, o pacing geral, a dificuldade, a clareza dos objetivos e como fica a experiência do primeiro recorte completo.
 
 À medida que os sistemas de personagens, progressão e hub entrarem no produto, outras perguntas vão surgir: a variedade entre personagens está legível no combate, a progressão adiciona profundidade sem tirar o foco da ação, o equilíbrio entre arcade e sistemas mais profundos está no lugar certo, e o hub cumpre sua função com clareza.
-
-## O que este projeto demonstra
 
 <Callout variant="demonstrates" title="O que este projeto demonstra">
 
@@ -448,3 +452,5 @@ Quando o primeiro conteúdo completo estiver jogável, será possível avaliar a
 - **Produto × Engenharia:** traduzir intenção de produto em comportamentos e requisitos que a equipe de engenharia pode discutir e construir
 
 </Callout>
+
+</FullView>
