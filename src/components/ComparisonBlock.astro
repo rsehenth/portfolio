@@ -1,9 +1,8 @@
 ---
 // ComparisonBlock.astro — Editorial two-column comparison for case studies.
 // Renders an aligned A → B mapping (arrows) or two independent lists.
-import type { AstroProps } from 'astro';
 
-interface Props extends AstroProps {
+interface Props {
   titleA: string;
   titleB: string;
   itemsA?: string[];
