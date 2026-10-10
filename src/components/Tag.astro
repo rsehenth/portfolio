@@ -1,8 +1,7 @@
 ---
 // Tag.astro - Reusable tag component
-import type { AstroProps } from 'astro';
 
-interface Props extends AstroProps {
+interface Props {
   children: string;
   variant?: 'default' | 'primary' | 'outline' | 'subtle';
   size?: 'sm' | 'md' | 'lg';
@@ -11,7 +10,6 @@ interface Props extends AstroProps {
 }
 
 const {
-  children,
   variant = 'default',
   size = 'md',
   href,
