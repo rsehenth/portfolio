@@ -3,18 +3,17 @@
 // during config evaluation. Components are loaded at runtime.
 
 // We use a Proxy to lazily load components only when accessed
-const componentCache = new Map();
 
-function createComponentLoader(componentPath: string) {
+function createComponentLoader(_componentPath: string) {
   return new Proxy({}, {
-    get(target, prop) {
+    get(_target, prop) {
       if (prop === 'default' || prop === 'render' || prop === '$$render') {
         // This will be replaced at runtime
         return undefined;
       }
       return undefined;
     },
-    apply(target, thisArg, args) {
+    apply(_target, _thisArg, _args) {
       // This allows the proxy to be called as a component
       return undefined;
     }
