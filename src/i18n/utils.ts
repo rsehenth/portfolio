@@ -113,7 +113,7 @@ export function generateHreflangTags(pathname: string, siteUrl: string = import.
  * Translate a key using the UI translations
  * This is a simple version - in practice you'd use the t() function from ui.ts
  */
-export function translate(key: string, locale: Locale, params?: Record<string, string>): string {
+export function translate(key: string, _locale: Locale, _params?: Record<string, string>): string {
   // This is a placeholder - actual translations are in ui.ts
   // The t() function from ui.ts should be used instead
   return key;
