@@ -1,0 +1,97 @@
+---
+# docs/project-template.mdx
+# Copie para src/content/projects/<slug>/pt-BR.mdx e en.mdx. Este arquivo NÃO é lido pelo build.
+# Mesmos campos estruturais nos dois idiomas; só os textos mudam. Apague os comentários ao usar.
+# Regras e armadilhas: AGENTS.md.
+
+# ── OBRIGATÓRIO ───────────────────────────────────────────────
+title: Nome do Projeto
+locale: pt-BR                  # igual ao nome do arquivo: pt-BR.mdx → pt-BR | en.mdx → en
+description: "1–2 frases. Também é o meta description de fallback."
+year: 2026                     # inteiro entre 2000 e 2100
+role: Technical Product / Produto + Desenvolvimento
+status: Active                 # Active | Completed | Archived | Discovery
+section: products              # featured | products | tools | discovery | archived
+cardBadge:                     # badge do card no /projects
+  label: "Em desenvolvimento"  # texto livre; traduza no outro idioma (vocabulário: AGENTS.md §4)
+  tone: development            # active | development | functional | discovery | archived
+
+# ── CARD DO /PROJECTS ─────────────────────────────────────────
+subtitle: Categoria curta exibida sob o título
+metrics:                       # só state: verified aparece; máx. 3 números no card
+  - value: "1.200+"
+    label: Usuários cadastrados
+    state: verified            # verified | needs_confirmation | hidden
+  # - value: "Offline-first"
+  #   label: operação local
+  #   state: verified
+  #   display: text            # não vira número grande: duplique em cardHighlights
+cardHighlights:                # linha "Destaques" do card (sem filtro de verified)
+  - "Offline-first"
+demonstrates:                  # 3 visíveis no card
+  - Produto de IA
+  - Confiabilidade
+tags:                          # 3 visíveis no card; todas aparecem no case
+  - SaaS
+  - APIs
+# logo: /projects/<slug>/logo.webp   # só se o arquivo existir em public/ (proporção 1:1)
+# logoPosition: center
+
+# ── PÁGINA DE CASE ────────────────────────────────────────────
+# Projeto sem case? Apague este bloco inteiro e use noCase: true no fim do frontmatter.
+tagline: "Headline editorial do hero."
+summary: "Parágrafo do hero (2 linhas)."
+stage: "Produto ativo · Em evolução"    # rótulo livre na linha de status do case
+# stageNote: "Nota opcional sob o stage."
+statusBadge: "Ativo"                     # valor da linha de status do case (precede stage)
+statusEvidence:                          # bloco "Status e evidências"
+  stage: "Produto ativo, em evolução."
+  evidence: "O que existe de fato e foi validado."
+  # nextValidation: "Próxima validação."
+caseSummary:
+  problem: "..."
+  role: "..."
+  result: "..."
+  keyDecision: "..."
+snapshot:                                # "Technical Scope" no hero do case
+  primary:
+    - value: "1.200+"
+      label: Usuários cadastrados
+      state: verified
+  secondary:
+    - value: "94"
+      label: Handlers de API
+      state: verified
+# snapshotMode: default                  # default | product-technical
+scaleMetrics:                            # "Escala técnica" em Resultados Verificados
+  - value: "94"
+    label: Handlers de API
+    state: verified
+productMetrics: []                       # mantenha [] até haver resultado real de produto
+technologies:
+  - TypeScript
+seo:
+  title: "Nome do Projeto — Technical Product & AI | Lucas Sehnem"
+  description: "Meta description localizada."
+# views: true                            # seletor Resumo/Case completo: ver docs/case-views.md
+# readingTime: { basic: 2, full: 8 }     # minutos, mínimo 1
+# externalUrl: "https://..."
+# externalUrlLabel: "Visitar projeto ↗"  # obrigatório se externalUrl existir
+# cover: /projects/<slug>/cover.jpg      # 16:9; só se o arquivo existir
+# openSourceUrl: "https://..."
+# openSourceLabel: "Fork de ..."
+
+# ── LISTAGEM ──────────────────────────────────────────────────
+order: 5                       # maior = primeiro DENTRO da seção; use o mesmo valor nos 2 idiomas
+draft: false                   # true: some de todas as rotas (nos 2 idiomas)
+noCase: false                  # true: card sem link de case; então remova o bloco de case acima
+---
+
+## O problema
+
+Texto do case. Componentes disponíveis no corpo: veja o mapa de componentes em
+`src/pages/projects/[slug].astro`. Se usar `views: true`, veja `docs/case-views.md`.
+
+## Resultado
+
+Texto do case.
