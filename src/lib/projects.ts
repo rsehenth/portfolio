@@ -23,8 +23,8 @@ export type ProjectEntry = CollectionEntry<'projects'>;
 export const SECTION_ORDER: ProjectSection[] = [
   'featured',
   'products',
-  'tools',
   'discovery',
+  'tools',
   'archived',
 ];
 

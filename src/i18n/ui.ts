@@ -211,14 +211,14 @@ export const ui = {
           subtitle: 'Produtos construídos ou em construção, em diferentes estágios de maturidade.',
         },
         {
-          id: 'tools',
-          title: 'Ferramentas e protótipos funcionais',
-          subtitle: 'Funcionam e estão disponíveis para uso, mas não estão em uso ativo no momento.',
-        },
-        {
           id: 'discovery',
           title: 'Em discovery',
           subtitle: 'Pesquisa inicial e hipótese definidas; o desenvolvimento ainda não começou.',
+        },
+        {
+          id: 'tools',
+          title: 'Ferramentas e protótipos funcionais',
+          subtitle: 'Funcionam e estão disponíveis para uso, mas não estão em uso ativo no momento.',
         },
         {
           id: 'archived',
@@ -633,14 +633,14 @@ export const ui = {
           subtitle: 'Products built or under construction, at different stages of maturity.',
         },
         {
-          id: 'tools',
-          title: 'Working tools & prototypes',
-          subtitle: 'They work and are available for use, but are not in active use at the moment.',
-        },
-        {
           id: 'discovery',
           title: 'In discovery',
           subtitle: 'Initial research and a defined hypothesis; development has not started yet.',
+        },
+        {
+          id: 'tools',
+          title: 'Working tools & prototypes',
+          subtitle: 'They work and are available for use, but are not in active use at the moment.',
         },
         {
           id: 'archived',
