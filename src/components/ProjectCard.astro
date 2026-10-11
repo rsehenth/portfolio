@@ -74,6 +74,11 @@ const cardTags = tags
   })
   .slice(0, 3);
 
+// Whether to clamp the description: only when there are metrics or highlights
+// (those push content down and need a fixed text height to keep footers aligned).
+// Without them the extra space is better used by the description itself.
+const clampDescription = cardMetrics.length > 0 || highlights.length > 0;
+
 // Logo fallback: an initials tile keeps the fixed logo slot aligned until the
 // real logo files arrive through the same `logo` prop.
 const words = title.trim().split(/\s+/);
@@ -175,7 +180,7 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
           {subtitle && <p class="project-card__subtitle">{subtitle}</p>}
         </header>
 
-        <p class:list={['project-card__description', variant !== 'featured' && 'line-clamp-3']}>
+        <p class:list={['project-card__description', variant !== 'featured' && clampDescription && 'line-clamp-3']}>
           {description}
         </p>
 
@@ -187,7 +192,10 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
         )}
 
         {cardMetrics.length > 0 && (
-          <div class="project-card__metrics">
+          <div
+            class="project-card__metrics"
+            style={`--metrics-n: ${cardMetrics.length}`}
+          >
             {cardMetrics.map((metric) => (
               <div class="project-card__metric">
                 <div class="project-card__metric-value">{metric.value}</div>
@@ -294,6 +302,8 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
     border: 1px solid rgb(var(--color-border-rgb));
     border-radius: 999px;
     --pc-tone: 78 93 108;
+    white-space: nowrap; /* badge text never wraps inside the pill */
+    flex-shrink: 0;      /* pill never shrinks; year wraps to next line instead */
   }
 
   .project-card__badge[data-tone='active'] {
@@ -439,6 +449,13 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
     font-size: 0.875rem;
     line-height: 1.6;
     color: rgb(var(--color-muted-foreground-rgb));
+    /* Reserve exactly 2 lines so cards in the same row start descriptions
+       at the same vertical position regardless of subtitle length */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: calc(2 * 0.875rem * 1.6); /* 2 lines × font-size × line-height */
   }
 
   /* ── Description / demonstrates / highlights ───────────────────── */
@@ -474,10 +491,11 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
     margin-right: 0.25rem;
   }
 
-  /* ── Metrics: max 3, always one row ────────────────────────────── */
+  /* ── Metrics: dynamic columns (1–3), value never wraps ───────────── */
   .project-card__metrics {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    /* Columns = number of metrics (1, 2 or 3) set via --metrics-n */
+    grid-template-columns: repeat(var(--metrics-n, 3), minmax(0, 1fr));
     gap: 0.75rem 1rem;
     margin-bottom: 1rem;
     padding-top: 1rem;
@@ -485,20 +503,24 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
   }
 
   .project-card__metric-value {
-    font-size: 1.25rem;
+    /* clamp: shrinks at 320px with 3 metrics, keeps full size on wider cards */
+    font-size: clamp(0.9rem, 1.5vw + 0.35rem, 1.25rem);
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.01em;
     color: rgb(var(--color-foreground-rgb));
+    white-space: nowrap; /* value must never wrap to a second line */
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .project-card--featured .project-card__metric-value {
-    font-size: 1.375rem;
+    font-size: clamp(1rem, 1.8vw + 0.35rem, 1.375rem);
   }
 
   @media (min-width: 768px) {
     .project-card--featured .project-card__metric-value {
-      font-size: 1.75rem;
+      font-size: clamp(1.25rem, 2vw + 0.25rem, 1.75rem);
     }
   }
 
@@ -558,18 +580,40 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
 
   /* ── Compact variant (archived) ────────────────────────────────── */
   .project-card__body--compact {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.625rem 1rem;
+    /* Mobile-first: stack vertically so description has full width */
+    flex-direction: column;
+    gap: 0.5rem;
     padding: 1rem 1.25rem;
   }
 
+  .project-card__body--compact .project-card__meta {
+    /* badge + year on one row */
+    flex-shrink: 0;
+  }
+
   .project-card__body--compact .project-card__title {
-    margin-right: auto;
+    margin-right: 0;
+  }
+
+  .project-card__body--compact .project-card__description--compact {
+    flex: unset;
   }
 
   .project-card__body--compact .project-card__cta-row {
     flex-shrink: 0;
+  }
+
+  /* At 1024px+: switch to the original horizontal layout */
+  @media (min-width: 1024px) {
+    .project-card__body--compact {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.625rem 1rem;
+    }
+
+    .project-card__body--compact .project-card__title {
+      margin-right: auto;
+    }
   }
 </style>
