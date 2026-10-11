@@ -6,10 +6,12 @@ import { getPublishedProjects, projectKey } from '@/lib/projects';
 
 export async function getStaticPaths() {
   const projects = await getPublishedProjects('en');
-  return projects.map((project) => ({
-    params: { slug: projectKey(project) },
-    props: { project },
-  }));
+  return projects
+    .filter((project) => !project.data.noCase)
+    .map((project) => ({
+      params: { slug: projectKey(project) },
+      props: { project },
+    }));
 }
 
 const { project } = Astro.props;
