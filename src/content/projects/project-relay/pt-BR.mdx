@@ -1,78 +1,251 @@
 ---
 title: Project Relay
 locale: pt-BR
-subtitle: Technical Product · Arquitetura de Software · Automação
-description: "Plataforma de automação de ofertas e afiliados, concebida para integrar marketplaces, aplicar regras de seleção e distribuir promoções em comunidades digitais. O projeto investiga uma arquitetura modular de baixo custo, com processamento assíncrono, controle de duplicações e integrações multicanal."
-tagline: "Automação de ofertas e afiliados, do marketplace à comunidade."
-summary: "O Project Relay investiga uma plataforma modular para captação, seleção e distribuição de promoções em canais digitais. Está em Discovery: hipótese definida, fontes e canais em avaliação, arquitetura e escopo do MVP em definição."
+subtitle: Product Management · Technical Product · Automação
+description: "Plataforma privada que centraliza catálogo, links afiliados, campanhas e distribuição de ofertas, com automação rastreável e arquitetura preparada para evoluir por integrações autorizadas."
+tagline: "Da curadoria à distribuição, com controle sobre a operação de ofertas."
+summary: "Produto funcional de uso privado que organiza produtos, links afiliados, campanhas e canais de divulgação em uma única operação. O foco foi substituir tarefas repetitivas por fluxos agendáveis e rastreáveis, sem tornar o operador dependente de integrações externas."
 year: 2026
-role: Technical Product · Arquitetura de Software
-productType: Plataforma de automação de ofertas e afiliados
-focus: Arquitetura de sistemas · Integrações via API · Automação de workflows
-stage: Discovery
-stageNote: "Hipótese definida, fontes de dados e canais em avaliação. Próximo passo: alinhar validações iniciais antes de entrar em desenvolvimento."
-statusBadge: "Em discovery"
+role: Product Management · Technical Product · Implementação prática
+productType: Plataforma privada de automação para ofertas afiliadas
+focus: Estratégia de produto · Arquitetura de sistemas · Automação confiável
+stage: Produto funcional · Uso privado
+stageNote: "Catálogo, campanhas e automações funcionam em ambiente privado. Integrações com marketplaces evoluem conforme permissões e APIs oficiais."
+statusBadge: "Produto funcional"
 caseSummary:
-  problem: "Captar promoções de múltiplos marketplaces, aplicar regras de seleção e distribuir nas comunidades certas, sem custo operacional alto."
-  role: "Technical Product em discovery: arquitetura candidata, escopo de MVP e mapeamento de integrações."
-  result: "Hipótese de produto definida, fontes de dados e canais de distribuição em avaliação."
-  keyDecision: "Arquitetura modular e assíncrona para desacoplar captação, seleção e distribuição."
+  problem: "Operar ofertas afiliadas em vários marketplaces e comunidades exige reunir dados, organizar links, preparar mensagens e acompanhar publicações manualmente."
+  role: "Responsável pela visão, escopo, priorização, arquitetura, experiência operacional e implementação do produto."
+  result: "Uma operação centralizada para organizar ofertas, configurar campanhas, agendar distribuição e acompanhar cada entrega."
+  keyDecision: "Fazer o produto funcionar por cadastro e importação desde o início, sem depender da disponibilidade das APIs externas."
 statusEvidence:
-  stage: "Em discovery, antes do início do desenvolvimento."
-  evidence: "Hipótese de produto, fontes de dados candidatas e canais de distribuição mapeados."
-  nextValidation: "Alinhar validações iniciais de integração e definir escopo do MVP."
-status: On Hold
+  stage: "Produto funcional em uso privado."
+  evidence: "Gerenciamento de catálogo, perfis afiliados, coleções, campanhas, templates, agendamentos e acompanhamento de entregas."
+  nextValidation: "Ampliar conectores autorizados e avaliar a operação com dados reais antes de publicar indicadores de impacto."
+status: Active
 draft: false
 featured: false
-noCase: true
+views: true
+readingTime:
+  basic: 2
+  full: 8
 tags:
+  - Product Management
   - Technical Product
-  - Arquitetura de Software
-  - Automação
+  - Automação de workflows
   - Integrações via API
-  - Product Discovery
-  - System Architecture
-  - Workflow Automation
-  - MVP Scoping
+  - Arquitetura de sistemas
 demonstrates:
-  - Product Discovery
-  - Arquitetura de Sistemas
-  - Integrações via API
-  - Automação de Workflows
-  - Definição de MVP
-technologies: []
-metrics:
-  - value: "3"
-    label: Fontes de dados em avaliação
-    state: verified
-  - value: "2"
-    label: Canais de distribuição previstos
-    state: verified
-  - value: Discovery
-    label: Estágio atual
-    state: verified
-  - value: MVP
-    label: Arquitetura e escopo em definição
-    state: verified
+  - Estratégia de produto
+  - Priorização de MVP
+  - Produto × Engenharia
+  - Automação confiável
+  - Arquitetura modular
+technologies:
+  - TypeScript
+  - React
+  - Node.js
+  - SQLite
+  - Drizzle ORM
+metrics: []
 snapshot:
-  primary:
-    - value: "3"
-      label: Fontes de dados em avaliação
-      state: verified
-    - value: "2"
-      label: Canais de distribuição previstos
-      state: verified
-    - value: Discovery
-      label: Estágio atual
-      state: verified
-    - value: MVP
-      label: Arquitetura e escopo em definição
-      state: verified
+  primary: []
   secondary: []
 scaleMetrics: []
 productMetrics: []
 seo:
-  title: "Project Relay | Automação de ofertas e afiliados | Lucas Sehnem"
-  description: "Project Relay é uma plataforma em discovery para automação de ofertas e afiliados, investigando arquitetura modular, processamento assíncrono e integrações multicanal."
-order: 0
+  title: "Project Relay | Product Management e Technical Product | Lucas Sehnem"
+  description: "Case do Project Relay: produto privado para organizar ofertas afiliadas, campanhas e distribuição automatizada, cobrindo estratégia, priorização, arquitetura e confiabilidade operacional."
+order: 4
 ---
+
+<BasicView>
+
+## O problema
+
+Operar ofertas afiliadas costuma exigir alternar entre marketplaces, planilhas, links, mensagens e comunidades. Selecionar produtos, conferir informações comerciais, preparar conteúdo e confirmar cada publicação repetia um trabalho que não estava conectado em um único fluxo.
+
+O objetivo do Project Relay foi transformar essas etapas em uma operação organizada, sem tirar do operador as decisões comerciais.
+
+## Meu papel
+
+Conduzi o produto de ponta a ponta: definição do problema e da proposta de valor, escopo do MVP, priorização do roadmap, experiência operacional, decisões de arquitetura e implementação. O trabalho exigiu traduzir regras comerciais em fluxos, dados e critérios de segurança para publicação.
+
+## A solução
+
+O Relay centraliza catálogo de produtos, perfis afiliados, coleções, campanhas e templates de mensagem. A partir daí, o operador configura destinos e horários; o motor de automação processa a distribuição e registra o resultado de cada entrega.
+
+<FlowDiagram
+  label="Fluxo operacional do Project Relay"
+  steps={[
+    'Cadastrar ou importar produtos',
+    'Revisar dados comerciais e links afiliados',
+    'Organizar ofertas em coleções',
+    'Configurar campanha, mensagem, destino e horário',
+    'Executar publicação',
+    'Acompanhar entrega, falhas e itens que exigem revisão',
+  ]}
+/>
+
+## Decisões que definiram o produto
+
+### Valor antes de dependências externas
+
+O produto aceita cadastro manual e importação de dados. Conectores autorizados podem ser adicionados depois, sem impedir a operação central de gerar valor.
+
+<SeeFull to="integracoes" label="Ver decisão e trade-off" />
+
+### Catálogo separado de campanhas
+
+Uma mesma oferta pode entrar em campanhas, destinos e horários diferentes. Separar esses domínios evita recadastro e torna o catálogo reutilizável.
+
+<SeeFull to="catalogo-campanhas" label="Ver decisão e trade-off" />
+
+### Segurança antes de volume
+
+Quando uma confirmação de publicação é incerta, o sistema preserva o histórico e sinaliza revisão. Reenviar sem evidência poderia duplicar mensagens nas comunidades.
+
+<SeeFull to="confiabilidade" label="Ver decisão e trade-off" />
+
+## Resultado atual
+
+O Relay reúne atividades antes dispersas em uma operação centralizada e rastreável. O produto funciona em uso privado; indicadores de eficiência e impacto serão publicados apenas após coleta com uso real.
+
+<ViewCtaButton label="Ver o case completo: decisões, arquitetura e evolução do produto" />
+
+</BasicView>
+
+<FullView>
+
+<nav aria-label="Nesta página" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">Nesta página:</span>
+  <a href="#problema" class="link-underline hover:text-foreground">Problema</a>
+  <span aria-hidden="true">·</span>
+  <a href="#decisoes" class="link-underline hover:text-foreground">Decisões</a>
+  <span aria-hidden="true">·</span>
+  <a href="#arquitetura" class="link-underline hover:text-foreground">Arquitetura</a>
+  <span aria-hidden="true">·</span>
+  <a href="#evolucao" class="link-underline hover:text-foreground">Evolução</a>
+</nav>
+
+<h2 id="problema">O problema operacional</h2>
+
+Marketing de afiliados envolve múltiplos marketplaces, contas e comunidades. Em uma rotina comum, alguém seleciona produtos, confere preço e disponibilidade, recupera links, escreve mensagens, organiza ofertas e acompanha publicações em cada canal.
+
+Quando essas atividades acontecem em ferramentas separadas, informações se repetem e fica difícil responder o que foi publicado, em qual destino, em que momento e com qual link. O problema não era somente automatizar mensagens; era conectar a operação de ponta a ponta.
+
+## Meu papel
+
+Atuei na concepção e construção do Project Relay, conectando decisão de produto e execução técnica. Defini proposta de valor, requisitos, escopo do MVP, roadmap e experiência do operador; também conduzi modelagem de dados, regras de publicação, arquitetura e implementação.
+
+O critério para cada decisão foi equilibrar valor prático, viabilidade de entrega e capacidade de evolução. Isso significou tratar integrações, filas e estados de falha como decisões de produto, pois afetam diretamente a confiança de quem opera campanhas.
+
+<h2 id="solucao">A solução</h2>
+
+O Project Relay organiza a operação em seis capacidades conectadas:
+
+1. **Catálogo unificado:** produtos de diversas origens, com informações comerciais, categorias, links e origem dos dados.
+2. **Perfis afiliados:** links associados ao perfil correto para preservar a atribuição de cada oferta.
+3. **Coleções e campanhas:** ofertas reutilizáveis, agrupadas por campanha com destinos, frequência e horário.
+4. **Templates de mensagem:** conteúdo adaptável a título, descrição, preço, cupom e chamada para ação.
+5. **Distribuição automatizada:** execução persistente, agendamento, controle de duplicações e histórico de entrega.
+6. **Dashboard operacional:** visão de produtos, campanhas, publicações agendadas, entregas e situações que exigem atenção.
+
+<FlowDiagram
+  label="Da curadoria à distribuição"
+  steps={[
+    'Selecionar oferta',
+    'Organizar no catálogo',
+    'Vincular à campanha',
+    'Definir mensagem e destino',
+    'Agendar ou publicar',
+    'Registrar e acompanhar o resultado',
+  ]}
+/>
+
+<h2 id="decisoes">Cinco decisões que moldaram o produto</h2>
+
+<h3 id="integracoes">1. Resolver a operação antes de depender das APIs</h3>
+
+A hipótese inicial incluía sincronizar produtos e links de marketplaces. O risco era estruturar o produto sobre recursos que poderiam não estar disponíveis ou autorizados em cada API. Por isso, priorizei cadastro manual, importação e integrações autorizadas como caminhos independentes.
+
+**Trade-off:** a primeira experiência não depende de automação total, mas a operação permanece útil enquanto conectores externos são avaliados.
+
+<h3 id="catalogo-campanhas">2. Separar catálogo de campanhas</h3>
+
+Um mesmo produto pode aparecer em campanhas diferentes, com canais, mensagens e horários distintos. O catálogo armazena a oferta reutilizável; a campanha define as regras de distribuição. Essa separação reduz duplicação e permite reutilizar informações sem perder contexto.
+
+**Trade-off:** a modelagem inicial exige mais cuidado, em troca de flexibilidade operacional futura.
+
+<h3 id="confiabilidade">3. Priorizar segurança antes de volume de publicação</h3>
+
+Uma automação pode enviar uma mensagem e falhar antes de receber a confirmação externa. Repetir automaticamente esse envio poderia gerar duplicações e prejudicar a comunidade. O Relay diferencia entregas confirmadas, falhas recuperáveis e resultados incertos.
+
+**Trade-off:** em situações ambíguas, a operação privilegia rastreabilidade e revisão antes de maximizar a quantidade de envios.
+
+<h3 id="motor-independente">4. Manter o motor de automação independente dos canais</h3>
+
+Campanhas, agendamento e execução não ficam presos a um canal específico. A lógica central foi separada das integrações de distribuição para permitir adicionar ou alterar canais sem reconstruir as regras de negócio.
+
+**Trade-off:** uma base modular exige investimento inicial, mas evita tanto acoplamento excessivo quanto a complexidade prematura de microsserviços.
+
+<h3 id="operacao-enxuta">5. Dimensionar a infraestrutura para a operação inicial</h3>
+
+A arquitetura usa Node.js, TypeScript e SQLite, com tarefas persistentes e preparação para uma VPS Linux. A escolha buscou conter custo e manutenção, preservando recuperação de falhas, integridade dos dados e acompanhamento operacional.
+
+**Trade-off:** a solução atende o estágio atual; volumes maiores poderão exigir revisão de infraestrutura baseada em evidência de uso.
+
+<h2 id="arquitetura">Arquitetura orientada à operação</h2>
+
+<ArchitectureDiagram
+  label="Arquitetura do Project Relay"
+  steps={[
+    { label: 'Interface administrativa', detail: 'React e TypeScript para gerenciar catálogo, perfis, coleções, campanhas, templates e acompanhamento.' },
+    { label: 'Regras de negócio', detail: 'Node.js e TypeScript para validar dados, aplicar regras de campanha e criar tarefas de publicação.' },
+    { label: 'Persistência', detail: 'SQLite e Drizzle ORM para produtos, links, campanhas, agendamentos e histórico de entregas.' },
+    { label: 'Execução de automações', detail: 'Jobs, workers e scheduler para processar tarefas, controlar concorrência e recuperar falhas quando for seguro.' },
+  ]}
+  services={['Discord como canal integrado', 'Conectores futuros condicionados às permissões e capacidades oficiais de cada serviço']}
+  servicesLabel="Distribuição por canal"
+/>
+
+A fronteira principal está entre o núcleo operacional e os serviços externos. Marketplaces fornecem dados quando a integração é viável; canais recebem publicações por adaptadores específicos. O catálogo e a campanha continuam funcionando quando um conector ainda não existe.
+
+## Desafios de produto e engenharia
+
+### Dependência de plataformas externas
+
+Marketplaces e canais têm permissões, limites e regras próprias. A estratégia foi concentrar o valor no gerenciamento de catálogo e distribuição, mantendo conectores como extensões avaliadas caso a caso.
+
+### Integridade comercial
+
+Preço, disponibilidade e links mudam. O produto precisa manter origem e momento de atualização, evitar publicações com dados inadequados e preservar o histórico necessário para análise operacional.
+
+### Confiabilidade da automação
+
+Conectividade, limites de canal e quedas de processo fazem parte do cenário. A automação deve recuperar somente tarefas seguras, impedir duplicação e preservar evidência quando o resultado externo for incerto.
+
+### Simplicidade para o operador
+
+Filas, agendadores e estados de execução não devem virar complexidade de interface. O fluxo foi organizado em ações compreensíveis: importar, revisar, organizar, programar e acompanhar.
+
+<h2 id="evolucao">Evolução e avaliação de impacto</h2>
+
+O desenvolvimento foi organizado em etapas: fundação e primeira publicação, persistência e automação confiável, catálogo operacional, campanhas, conectores externos e experiência administrativa contínua. Essa sequência reduziu dependências prematuras e manteve o valor incremental.
+
+O impacto será avaliado com dados reais de operação, incluindo tempo de preparação de campanhas, taxa de entregas concluídas, necessidade de intervenção manual, falhas de distribuição e custo operacional. Não há ganhos quantitativos publicados enquanto essas medições não existirem.
+
+<Callout variant="demonstrates" title="O que este projeto demonstra">
+
+- **Product Strategy:** transformar uma rotina operacional fragmentada em uma proposta clara de produto.
+- **Priorização e discovery:** definir um MVP útil sem depender de hipóteses externas ainda não validadas.
+- **Technical Product Management:** relacionar capacidades do produto, arquitetura, riscos e trade-offs de confiabilidade.
+- **Ownership de ponta a ponta:** conduzir visão, requisitos, roadmap, experiência e implementação.
+- **Produto × Engenharia:** traduzir decisões comerciais em modelos de dados, regras, contratos e estados operacionais.
+
+</Callout>
+
+## Aprendizado central
+
+Automatizar não é remover o operador da operação. É decidir quais tarefas podem seguir sozinhas, quais exigem validação e quais evidências o sistema precisa preservar para que alguém mantenha o controle.
+
+</FullView>

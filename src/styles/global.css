@@ -328,11 +328,11 @@
 
   /* Skip link for accessibility */
   .skip-link {
-    @apply absolute -top-10 left-4 z-50 px-4 py-2 bg-accent text-accent-foreground rounded-lg transition-all duration-fast;
+    @apply absolute top-0 left-4 z-50 -translate-y-full px-4 py-2 bg-accent text-accent-foreground rounded-lg transition-all duration-fast;
   }
 
   .skip-link:focus {
-    @apply top-4;
+    @apply translate-y-4;
   }
 
   /* Reduced motion */

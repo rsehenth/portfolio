@@ -1,0 +1,251 @@
+---
+title: Project Relay
+locale: en
+subtitle: Product Management · Technical Product · Automation
+description: "A private platform that centralizes product catalogues, affiliate links, campaigns and offer distribution, with traceable automation and an architecture designed to evolve through authorized integrations."
+tagline: "From curation to distribution, with control over the offer operation."
+summary: "A functional private product that brings products, affiliate links, campaigns and distribution channels into one operation. It replaces repetitive work with schedulable, traceable flows without making the operator dependent on external integrations."
+year: 2026
+role: Product Management · Technical Product · Hands-on Implementation
+productType: Private affiliate-offer automation platform
+focus: Product Strategy · Systems Architecture · Reliable Automation
+stage: Functional Product · Private Use
+stageNote: "Catalogue, campaigns and automations work in a private environment. Marketplace integrations evolve according to official permissions and APIs."
+statusBadge: "Functional product"
+caseSummary:
+  problem: "Running affiliate offers across marketplaces and communities means manually gathering data, organizing links, preparing messages and tracking each publication."
+  role: "Owned the vision, scope, prioritization, architecture, operational experience and implementation of the product."
+  result: "A centralized operation for organizing offers, configuring campaigns, scheduling distribution and tracking each delivery."
+  keyDecision: "Make the product work through manual entry and imports from the start, without relying on external API availability."
+statusEvidence:
+  stage: "Functional product in private use."
+  evidence: "Catalogue, affiliate-profile, collection, campaign, template, scheduling and delivery-tracking management are implemented."
+  nextValidation: "Expand authorized connectors and assess the operation with real data before publishing impact indicators."
+status: Active
+draft: false
+featured: false
+views: true
+readingTime:
+  basic: 2
+  full: 8
+tags:
+  - Product Management
+  - Technical Product
+  - Workflow Automation
+  - API Integrations
+  - Systems Architecture
+demonstrates:
+  - Product Strategy
+  - MVP Prioritization
+  - Product × Engineering
+  - Reliable Automation
+  - Modular Architecture
+technologies:
+  - TypeScript
+  - React
+  - Node.js
+  - SQLite
+  - Drizzle ORM
+metrics: []
+snapshot:
+  primary: []
+  secondary: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "Project Relay | Product Management & Technical Product | Lucas Sehnem"
+  description: "Project Relay case study: a private product for affiliate-offer catalogues, campaigns and automated distribution, covering strategy, prioritization, architecture and operational reliability."
+order: 4
+---
+
+<BasicView>
+
+## The problem
+
+Running affiliate offers often means switching between marketplaces, spreadsheets, links, messages and communities. Selecting products, checking commercial information, preparing content and confirming each publication repeats work that is not connected in one flow.
+
+Project Relay was designed to turn these steps into an organized operation while keeping commercial decisions with the operator.
+
+## My role
+
+I led the product end to end: defining the problem and value proposition, MVP scope, roadmap prioritization, operational experience, architecture decisions and implementation. The work involved translating commercial rules into flows, data and publication-safety criteria.
+
+## The solution
+
+Relay centralizes the product catalogue, affiliate profiles, collections, campaigns and message templates. The operator configures destinations and schedules; the automation engine processes distribution and records the outcome of every delivery.
+
+<FlowDiagram
+  label="Project Relay operational flow"
+  steps={[
+    'Enter or import products',
+    'Review commercial data and affiliate links',
+    'Organize offers into collections',
+    'Configure campaign, message, destination and schedule',
+    'Execute publication',
+    'Track delivery, failures and items that need review',
+  ]}
+/>
+
+## Decisions that shaped the product
+
+### Value before external dependencies
+
+The product accepts manual entry and data imports. Authorized connectors can be added later without preventing the central operation from creating value.
+
+<SeeFull to="integrations" label="See the decision and trade-off" />
+
+### Catalogue separate from campaigns
+
+The same offer can be used in different campaigns, destinations and schedules. Separating these domains prevents re-entry and keeps the catalogue reusable.
+
+<SeeFull to="catalogue-campaigns" label="See the decision and trade-off" />
+
+### Safety before publication volume
+
+When publication confirmation is uncertain, the system preserves history and flags the item for review. Resending without evidence could duplicate messages in communities.
+
+<SeeFull to="reliability" label="See the decision and trade-off" />
+
+## Current result
+
+Relay brings previously scattered activities into a centralized, traceable operation. The product works in private use; efficiency and impact indicators will only be published after collecting real usage data.
+
+<ViewCtaButton label="Read the full case: decisions, architecture and product evolution" />
+
+</BasicView>
+
+<FullView>
+
+<nav aria-label="On this page" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">On this page:</span>
+  <a href="#problem" class="link-underline hover:text-foreground">Problem</a>
+  <span aria-hidden="true">·</span>
+  <a href="#decisions" class="link-underline hover:text-foreground">Decisions</a>
+  <span aria-hidden="true">·</span>
+  <a href="#architecture" class="link-underline hover:text-foreground">Architecture</a>
+  <span aria-hidden="true">·</span>
+  <a href="#evolution" class="link-underline hover:text-foreground">Evolution</a>
+</nav>
+
+<h2 id="problem">The operational problem</h2>
+
+Affiliate marketing involves multiple marketplaces, accounts and communities. In a typical workflow, someone selects products, checks price and availability, retrieves links, writes messages, organizes offers and tracks publications in each channel.
+
+When these activities happen in separate tools, information is repeated and it becomes difficult to answer what was published, to which destination, when and with which link. The problem was not simply automating messages; it was connecting the operation end to end.
+
+## My role
+
+I worked on the conception and construction of Project Relay, connecting product decisions to technical execution. I defined the value proposition, requirements, MVP scope, roadmap and operator experience, and also led data modelling, publication rules, architecture and implementation.
+
+The criterion for each decision was to balance practical value, delivery feasibility and room to evolve. This made integrations, queues and failure states product decisions, since they directly affect the trust of someone running campaigns.
+
+<h2 id="solution">The solution</h2>
+
+Project Relay organizes the operation into six connected capabilities:
+
+1. **Unified catalogue:** products from different sources with commercial information, categories, links and data origin.
+2. **Affiliate profiles:** links tied to the correct profile to preserve attribution for every offer.
+3. **Collections and campaigns:** reusable offers grouped into campaigns with destinations, frequency and schedule.
+4. **Message templates:** content adaptable to titles, descriptions, prices, coupons and calls to action.
+5. **Automated distribution:** persistent execution, scheduling, duplicate control and delivery history.
+6. **Operational dashboard:** a view of products, campaigns, scheduled publications, deliveries and items needing attention.
+
+<FlowDiagram
+  label="From curation to distribution"
+  steps={[
+    'Select an offer',
+    'Organize it in the catalogue',
+    'Attach it to a campaign',
+    'Set message and destination',
+    'Schedule or publish',
+    'Record and track the outcome',
+  ]}
+/>
+
+<h2 id="decisions">Five decisions that shaped the product</h2>
+
+<h3 id="integrations">1. Solve the operation before relying on APIs</h3>
+
+The initial hypothesis included syncing products and links from marketplaces. The risk was structuring the product around capabilities that might not be available or authorized in each API. I therefore prioritized manual entry, imports and authorized integrations as independent paths.
+
+**Trade-off:** the first experience does not depend on complete automation, while the operation remains useful as external connectors are evaluated.
+
+<h3 id="catalogue-campaigns">2. Separate the catalogue from campaigns</h3>
+
+The same product can appear in different campaigns with different channels, messages and schedules. The catalogue stores the reusable offer; a campaign defines distribution rules. This separation reduces duplication and allows information to be reused without losing context.
+
+**Trade-off:** the initial model requires more care in exchange for future operational flexibility.
+
+<h3 id="reliability">3. Prioritize safety before publication volume</h3>
+
+An automation can send a message and fail before receiving external confirmation. Automatically repeating that send could create duplicates and harm the community experience. Relay distinguishes confirmed deliveries, recoverable failures and uncertain outcomes.
+
+**Trade-off:** in ambiguous situations, the operation favors traceability and review before maximizing sends.
+
+<h3 id="channel-independent-engine">4. Keep the automation engine independent from channels</h3>
+
+Campaigns, scheduling and execution are not tied to a specific channel. The core logic is separated from distribution integrations so channels can be added or changed without rebuilding business rules.
+
+**Trade-off:** a modular base takes an initial investment, but avoids both excessive coupling and premature microservice complexity.
+
+<h3 id="lean-operations">5. Size infrastructure for the initial operation</h3>
+
+The architecture uses Node.js, TypeScript and SQLite, with persistent tasks and preparation for a Linux VPS. This choice contains cost and maintenance while preserving failure recovery, data integrity and operational tracking.
+
+**Trade-off:** the solution meets the current stage; higher volumes may require infrastructure review based on usage evidence.
+
+<h2 id="architecture">Architecture designed for operations</h2>
+
+<ArchitectureDiagram
+  label="Project Relay architecture"
+  steps={[
+    { label: 'Administrative interface', detail: 'React and TypeScript for catalogue, profile, collection, campaign, template and tracking management.' },
+    { label: 'Business rules', detail: 'Node.js and TypeScript to validate data, apply campaign rules and create publication tasks.' },
+    { label: 'Persistence', detail: 'SQLite and Drizzle ORM for products, links, campaigns, schedules and delivery history.' },
+    { label: 'Automation execution', detail: 'Jobs, workers and a scheduler to process tasks, control concurrency and recover failures when safe.' },
+  ]}
+  services={['Discord as an integrated channel', 'Future connectors subject to each service’s official permissions and capabilities']}
+  servicesLabel="Channel distribution"
+/>
+
+The key boundary is between the operational core and external services. Marketplaces provide data when integration is feasible; channels receive publications through dedicated adapters. The catalogue and campaign continue working when a connector does not yet exist.
+
+## Product and engineering challenges
+
+### External platform dependencies
+
+Marketplaces and channels each have their own permissions, limits and rules. The strategy was to center value in catalogue and distribution management, treating connectors as extensions evaluated one by one.
+
+### Commercial-data integrity
+
+Prices, availability and links change. The product must retain the source and update time, prevent publication with unsuitable data and retain the history needed for operational analysis.
+
+### Automation reliability
+
+Connectivity, channel limits and process failures are part of the environment. Automation should recover only safe tasks, prevent duplication and preserve evidence when an external result is uncertain.
+
+### Simplicity for the operator
+
+Queues, schedulers and execution states should not become interface complexity. The flow is organized around understandable actions: import, review, organize, schedule and track.
+
+<h2 id="evolution">Evolution and impact assessment</h2>
+
+Development was organized in stages: foundation and first publication, persistent and reliable automation, operational catalogue, campaigns, external connectors and continuous administrative experience. This sequence reduced premature dependencies and retained incremental value.
+
+Impact will be assessed with real operational data, including campaign-preparation time, completed-delivery rate, manual intervention, distribution failures and operational cost. No quantitative gains are published until those measurements exist.
+
+<Callout variant="demonstrates" title="What this project demonstrates">
+
+- **Product Strategy:** turning a fragmented operational routine into a clear product proposition.
+- **Prioritization and discovery:** defining a useful MVP without relying on external hypotheses that have not been validated.
+- **Technical Product Management:** connecting product capabilities, architecture, risks and reliability trade-offs.
+- **End-to-end ownership:** leading vision, requirements, roadmap, experience and implementation.
+- **Product × Engineering:** translating commercial decisions into data models, rules, contracts and operational states.
+
+</Callout>
+
+## Core learning
+
+Automation is not about removing the operator from the operation. It is about deciding which tasks can run independently, which require validation and which evidence the system must preserve so that people retain control.
+
+</FullView>
