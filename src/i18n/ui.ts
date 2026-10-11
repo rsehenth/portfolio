@@ -48,6 +48,7 @@ export const ui = {
       empty: 'Novos cases serão publicados em breve.',
       demonstrates: 'Demonstra',
       highlights: 'Destaques',
+      caseSoon: 'Case em breve',
     },
 
     // Home-specific project presentation layer
@@ -189,13 +190,42 @@ export const ui = {
     // Projects index page
     projectsPage: {
       title: 'Projetos',
-      subtitle: 'Uma seleção de produtos e sistemas que mostram como trabalho entre produto, inteligência artificial e tecnologia da estratégia à execução.',
+      subtitle: 'Produtos de IA e sistemas técnicos, do discovery à execução. Comece pelos dois destaques.',
       description: 'Portfólio de produtos construídos e entregues por Lucas Sehnem, Technical Product Manager.',
       empty: 'Nenhum projeto publicado ainda. Volte em breve!',
       featuredHeading: 'Projetos em destaque',
       moreHeading: 'Outros projetos',
       viewCase: 'Ver case →',
       focus: 'Foco',
+      // Sections shown on /projects, in display order.
+      // Membership comes from each project's frontmatter `section` field.
+      sections: [
+        {
+          id: 'featured',
+          title: 'Em destaque',
+          subtitle: 'Os dois projetos que melhor mostram como trabalho com produto de IA.',
+        },
+        {
+          id: 'products',
+          title: 'Produtos e MVPs',
+          subtitle: 'Produtos construídos ou em construção, em diferentes estágios de maturidade.',
+        },
+        {
+          id: 'tools',
+          title: 'Ferramentas e protótipos funcionais',
+          subtitle: 'Funcionam e estão disponíveis para uso, mas não estão em uso ativo no momento.',
+        },
+        {
+          id: 'discovery',
+          title: 'Em discovery',
+          subtitle: 'Pesquisa inicial e hipótese definidas; o desenvolvimento ainda não começou.',
+        },
+        {
+          id: 'archived',
+          title: 'Arquivados',
+          subtitle: 'Explorações encerradas antes de chegar à produção.',
+        },
+      ],
     },
 
     // Product Impact section
@@ -440,6 +470,7 @@ export const ui = {
       empty: 'New case studies coming soon.',
       demonstrates: 'Demonstrates',
       highlights: 'Highlights',
+      caseSoon: 'Case coming soon',
     },
 
     // Home-specific project presentation layer
@@ -581,13 +612,42 @@ export const ui = {
     // Projects index page
     projectsPage: {
       title: 'Projects',
-      subtitle: 'A selection of products and systems that show how I work across product, AI and technology from strategy to execution.',
+      subtitle: 'AI products and technical systems, from discovery to execution. Start with the two featured projects.',
       description: 'Portfolio of products built and shipped by Lucas Sehnem, Technical Product Manager.',
       empty: 'No projects published yet. Check back soon!',
       featuredHeading: 'Featured Work',
       moreHeading: 'More Projects',
       viewCase: 'View case →',
       focus: 'Focus',
+      // Sections shown on /projects, in display order.
+      // Membership comes from each project's frontmatter `section` field.
+      sections: [
+        {
+          id: 'featured',
+          title: 'Featured',
+          subtitle: 'The two projects that best show how I work with AI products.',
+        },
+        {
+          id: 'products',
+          title: 'Products & MVPs',
+          subtitle: 'Products built or under construction, at different stages of maturity.',
+        },
+        {
+          id: 'tools',
+          title: 'Working tools & prototypes',
+          subtitle: 'They work and are available for use, but are not in active use at the moment.',
+        },
+        {
+          id: 'discovery',
+          title: 'In discovery',
+          subtitle: 'Initial research and a defined hypothesis; development has not started yet.',
+        },
+        {
+          id: 'archived',
+          title: 'Archived',
+          subtitle: 'Explorations closed before reaching production.',
+        },
+      ],
     },
 
     // Product Impact section
