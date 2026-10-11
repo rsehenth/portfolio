@@ -1,11 +1,15 @@
 ---
-// ProjectCard.astro - Reusable project card component
+// ProjectCard.astro - Project card used by the /projects listing (PT + EN).
+// Case pages never render this component (only the MDX registry exposes it),
+// so every field below marked "listing-only" stays out of the case studies.
 import { ui, statusLabel, type Locale } from '@/i18n';
 import { caseUrl, projectKey, verifiedOnly, type ProjectEntry } from '@/lib/projects';
 
+type BadgeTone = 'active' | 'development' | 'functional' | 'discovery' | 'archived';
+
 interface Props {
   project: ProjectEntry;
-  variant?: 'default' | 'featured' | 'hero' | 'compact';
+  variant?: 'default' | 'featured' | 'compact';
   class?: string;
   locale?: Locale;
   /** Heading level for the card title (2 under a page h1, 3 under a section h2) */
@@ -14,144 +18,352 @@ interface Props {
 
 const { project, variant = 'default', class: className = '', locale = 'pt-BR', headingLevel = 3 } = Astro.props;
 const { data } = project;
-const { title, subtitle, description, year, status, statusBadge, featured, cover, logo, logoPosition, tags, metrics, demonstrates } = data;
+const {
+  title,
+  subtitle,
+  description,
+  year,
+  status,
+  statusBadge,
+  cardBadge,
+  cardHighlights,
+  logo,
+  logoPosition,
+  tags,
+  metrics,
+  demonstrates,
+} = data;
 const work = ui[locale].work;
 
 const key = projectKey(project);
 const href = caseUrl(locale, key);
 const noCase = data.noCase ?? false;
+const isCompact = variant === 'compact';
+const TitleTag = headingLevel === 2 ? 'h2' : 'h3';
 
-// Only verified metrics may be rendered publicly (max 4, 2-column grid)
-// Hero variant shows up to 4; others max 4 too but visually smaller
-const cardMetrics = verifiedOnly(metrics).slice(0, 4);
+// Status badge — colored dot + text, never color alone. Falls back to the
+// frontmatter badge / localized status when a project has no listing badge.
+const toneFallback: Record<string, BadgeTone> = {
+  Active: 'active',
+  Completed: 'archived',
+  Archived: 'archived',
+  'On Hold': 'discovery',
+};
+const badgeLabel = cardBadge?.label ?? statusBadge ?? statusLabel(locale, status);
+const badgeTone: BadgeTone = cardBadge?.tone ?? toneFallback[status] ?? 'archived';
+
+// Metrics: max 3 numeric/short values in ONE row (3-column grid).
+// `display: 'text'` values are words — they go to the highlights line instead,
+// so they never render with the big-number treatment.
+const cardMetrics = verifiedOnly(metrics).filter((metric) => metric.display !== 'text').slice(0, 3);
+const highlights = cardHighlights ?? [];
+
+// "Demonstrates" list: max 3 items
+const demonstratesItems = demonstrates.slice(0, 3);
+
+// Tags: max 3 visible. Drop tags that repeat the subtitle category or a
+// "Demonstrates" item (no "+N" chips).
+const demonstratesSet = new Set(demonstrates.map((item) => item.toLowerCase()));
+const subtitleLower = (subtitle ?? '').toLowerCase();
+const cardTags = tags
+  .filter((tag) => {
+    const lower = tag.toLowerCase();
+    if (demonstratesSet.has(lower)) return false;
+    if (lower === 'technical product' && subtitleLower.includes('technical product')) return false;
+    return true;
+  })
+  .slice(0, 3);
+
+// Logo fallback: an initials tile keeps the fixed logo slot aligned until the
+// real logo files arrive through the same `logo` prop.
+const words = title.trim().split(/\s+/);
+const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : [words[0]?.[0] ?? ''])
+  .join('')
+  .toUpperCase();
 ---
 
-<article class={`card group h-full flex flex-col ${variant === 'featured' ? 'lg:col-span-2' : ''} ${className}`} aria-labelledby={`project-${key}-title`}>
-  {cover && (
-    <div class={`relative overflow-hidden ${variant === 'hero' ? 'aspect-[16/7]' : 'aspect-video'}`}>
-      <img
-        src={cover}
-        alt=""
-        class="w-full h-full object-cover transition-transform duration-slow group-hover:scale-105"
-        loading="lazy"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-normal" />
-      {featured && (
-        <span class="absolute left-4 top-4 tag tag-primary">{locale === 'pt-BR' ? 'Destaque' : 'Featured'}</span>
-      )}
-    </div>
-  )}
+<article
+  class:list={[
+    'card',
+    'project-card',
+    `project-card--${variant}`,
+    noCase && 'project-card--disabled',
+    className,
+  ]}
+  aria-labelledby={`project-${key}-title`}
+>
+  {
+    isCompact ? (
+      <div class="project-card__body project-card__body--compact">
+        <span class="project-card__meta">
+          <span class="project-card__badge" data-tone={badgeTone}>
+            <span class="project-card__dot" aria-hidden="true" />
+            {badgeLabel}
+          </span>
+          <time class="project-card__year" datetime={year.toString()}>
+            {year}
+          </time>
+        </span>
 
-  <div class={`flex flex-col flex-1 ${variant === 'hero' ? 'p-7 lg:p-8' : 'p-6'}`}>
-    <header class="mb-4">
-      <div class="flex items-start justify-between gap-4">
-        <!-- Title + meta -->
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center gap-2 mb-2">
-            <time class="text-caption text-muted-foreground font-mono" datetime={year.toString()}>
-              {year}
-            </time>
-            <span class="text-caption text-muted-foreground" aria-hidden="true">·</span>
-            <span class="text-caption text-muted-foreground">{statusBadge ?? statusLabel(locale, status)}</span>
-          </div>
-          {headingLevel === 2 ? (
-            <h2 id={`project-${key}-title`} class={`font-semibold text-foreground group-hover:text-accent transition-colors duration-fast ${variant === 'hero' ? 'text-display-sm' : 'text-heading-lg'}`}>
-              {title}
-            </h2>
+        <TitleTag id={`project-${key}-title`} class="project-card__title project-card__title--compact">
+          {noCase ? (
+            <span>{title}</span>
           ) : (
-            <h3 id={`project-${key}-title`} class={`font-semibold text-foreground group-hover:text-accent transition-colors duration-fast ${variant === 'hero' ? 'text-display-sm' : 'text-heading-lg'}`}>
+            <a class="project-card__link" href={href}>
               {title}
-            </h3>
+            </a>
           )}
-          {subtitle && (
-            <p class="text-body-sm text-muted-foreground mt-1">{subtitle}</p>
+        </TitleTag>
+
+        <p class="project-card__description project-card__description--compact line-clamp-2">{description}</p>
+
+        <div class="project-card__cta-row">
+          {noCase ? (
+            <span class="project-card__cta project-card__cta--disabled" aria-disabled="true">
+              {work.caseSoon}
+            </span>
+          ) : (
+            <span class="project-card__cta">
+              {work.viewCase}
+              <svg class="project-card__cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
           )}
         </div>
+      </div>
+    ) : (
+      <div class="project-card__body">
+        <header class="project-card__header">
+          <div class="project-card__top">
+            <span class="project-card__meta">
+              <span class="project-card__badge" data-tone={badgeTone}>
+                <span class="project-card__dot" aria-hidden="true" />
+                {badgeLabel}
+              </span>
+              <time class="project-card__year" datetime={year.toString()}>
+                {year}
+              </time>
+            </span>
 
-        <!-- Logo square (only when a logo is defined) -->
-        {logo && (
-          <div class="project-card-logo shrink-0" aria-hidden="true">
-            <img
-              src={logo}
-              alt=""
-              class="project-card-logo__img"
-              style={logoPosition ? `object-position: ${logoPosition}` : undefined}
-              loading="lazy"
-              draggable="false"
-            />
+            <div class="project-card__logo" aria-hidden="true">
+              {logo ? (
+                <img
+                  src={logo}
+                  alt=""
+                  class="project-card__logo-img"
+                  style={logoPosition ? `object-position: ${logoPosition}` : undefined}
+                  loading="lazy"
+                  draggable="false"
+                />
+              ) : (
+                <span class="project-card__logo-initials">{initials}</span>
+              )}
+            </div>
+          </div>
+
+          <TitleTag id={`project-${key}-title`} class="project-card__title">
+            {noCase ? (
+              <span>{title}</span>
+            ) : (
+              <a class="project-card__link" href={href}>
+                {title}
+              </a>
+            )}
+          </TitleTag>
+
+          {subtitle && <p class="project-card__subtitle">{subtitle}</p>}
+        </header>
+
+        <p class:list={['project-card__description', variant !== 'featured' && 'line-clamp-3']}>
+          {description}
+        </p>
+
+        {demonstratesItems.length > 0 && (
+          <p class="project-card__demonstrates">
+            <span class="project-card__label">{work.demonstrates}:</span>
+            {demonstratesItems.join(' · ')}
+          </p>
+        )}
+
+        {cardMetrics.length > 0 && (
+          <div class="project-card__metrics">
+            {cardMetrics.map((metric) => (
+              <div class="project-card__metric">
+                <div class="project-card__metric-value">{metric.value}</div>
+                <div class="project-card__metric-label">{metric.label}</div>
+              </div>
+            ))}
           </div>
         )}
-      </div>
-    </header>
 
-    <p class={`text-muted-foreground mb-4 line-clamp-3 flex-1 ${variant === 'hero' ? 'text-body-lg' : 'text-body-md'}`}>
-      {description}
-    </p>
+        {highlights.length > 0 && (
+          <p class="project-card__highlights">
+            <span class="project-card__label">{work.highlights}:</span>
+            {highlights.join(' · ')}
+          </p>
+        )}
 
-    {demonstrates.length > 0 && (
-      <p class="mb-4 text-caption text-muted-foreground/80">
-        <span class="font-semibold uppercase tracking-wider">{work.demonstrates}:</span>
-        {demonstrates.join(' · ')}
-      </p>
-    )}
+        <footer class="project-card__footer">
+          {cardTags.length > 0 && (
+            <div class="project-card__tags">
+              {cardTags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
 
-    {variant !== 'compact' && cardMetrics.length > 0 && (
-      <div class="grid grid-cols-2 gap-4 mb-4 pt-4 border-t border-border">
-        {cardMetrics.map((metric) => (
-          <div class="min-w-0">
-            <div class="text-display-sm font-bold text-foreground">{metric.value}</div>
-            <div class="text-caption text-muted-foreground">{metric.label}</div>
+          <div class="project-card__cta-row">
+            {noCase ? (
+              <span class="project-card__cta project-card__cta--disabled" aria-disabled="true">
+                {work.caseSoon}
+              </span>
+            ) : (
+              <span class="project-card__cta">
+                {work.viewCase}
+                <svg class="project-card__cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            )}
           </div>
-        ))}
+        </footer>
       </div>
-    )}
-
-    <footer class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-border">
-      {tags.slice(0, 5).map((tag: string) => (
-        <span class="tag text-caption">{tag}</span>
-      ))}
-      {tags.length > 5 && (
-        <span class="tag text-caption text-muted-foreground/60">+{tags.length - 5}</span>
-      )}
-    </footer>
-
-    <!-- CTA -->
-    <div class="mt-4 pt-4 border-t border-border">
-      {noCase ? (
-        <span class="inline-flex items-center gap-1.5 text-body-sm font-medium text-muted-foreground/50 cursor-default select-none" aria-label={locale === 'pt-BR' ? 'Case em breve' : 'Case coming soon'}>
-          {work.viewCase}
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </span>
-      ) : (
-        <a
-          href={href}
-          class="link-underline inline-flex items-center gap-1.5 text-body-sm font-medium text-accent hover:text-accent/80 transition-colors duration-fast group"
-        >
-          {work.viewCase}
-          <svg class="w-4 h-4 transition-transform duration-fast group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </a>
-      )}
-    </div>
-  </div>
+    )
+  }
 </article>
 
 <style>
-  /* ── Project logo square ── */
-  .project-card-logo {
-    width: 4rem;        /* 64px */
-    height: 4rem;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    border: 1px solid rgb(var(--color-border-rgb));
+  /* ── Card shell ────────────────────────────────────────────────── */
+  .project-card {
+    position: relative; /* anchors the stretched title link */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .project-card--disabled:hover {
+    border-color: rgb(var(--color-border-rgb));
+    box-shadow: none;
+  }
+
+  .project-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 1.5rem;
+  }
+
+  .project-card--featured .project-card__body {
+    padding: 1.75rem;
+  }
+
+  @media (min-width: 1024px) {
+    .project-card--featured .project-card__body {
+      padding: 2rem;
+    }
+  }
+
+  /* ── Meta row: status badge + year … logo ──────────────────────── */
+  .project-card__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .project-card__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .project-card__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem; /* 12px minimum */
+    line-height: 1.5;
+    font-weight: 500;
+    color: rgb(var(--color-muted-foreground-rgb));
     background-color: rgb(var(--color-muted-rgb));
+    border: 1px solid rgb(var(--color-border-rgb));
+    border-radius: 999px;
+    --pc-tone: 78 93 108;
+  }
+
+  .project-card__badge[data-tone='active'] {
+    --pc-tone: 22 101 52;
+  }
+  .project-card__badge[data-tone='development'] {
+    --pc-tone: 29 78 216;
+  }
+  .project-card__badge[data-tone='functional'] {
+    --pc-tone: 15 118 110;
+  }
+  .project-card__badge[data-tone='discovery'] {
+    --pc-tone: 146 64 14;
+  }
+  .project-card__badge[data-tone='archived'] {
+    --pc-tone: 78 93 108;
+  }
+
+  :global(.dark) .project-card__badge[data-tone='active'] {
+    --pc-tone: 74 222 128;
+  }
+  :global(.dark) .project-card__badge[data-tone='development'] {
+    --pc-tone: 96 165 250;
+  }
+  :global(.dark) .project-card__badge[data-tone='functional'] {
+    --pc-tone: 45 212 191;
+  }
+  :global(.dark) .project-card__badge[data-tone='discovery'] {
+    --pc-tone: 251 191 36;
+  }
+  :global(.dark) .project-card__badge[data-tone='archived'] {
+    --pc-tone: 174 184 196;
+  }
+
+  .project-card__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background-color: rgb(var(--pc-tone));
     flex-shrink: 0;
   }
 
-  .project-card-logo__img {
+  .project-card__year {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  /* ── Logo slot (fixed) + initials fallback ─────────────────────── */
+  .project-card__logo {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgb(var(--color-border-rgb));
+    border-radius: 0.75rem;
+    background-color: rgb(var(--color-muted-rgb));
+  }
+
+  .project-card--featured .project-card__logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 0.875rem;
+  }
+
+  .project-card__logo-img {
     display: block;
     width: 100%;
     height: 100%;
@@ -160,22 +372,204 @@ const cardMetrics = verifiedOnly(metrics).slice(0, 4);
     transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  :global(.group:hover) .project-card-logo__img {
+  .project-card:hover .project-card__logo-img {
     transform: scale(1.06);
   }
 
-  /* Placeholder when no logo is provided — subtle dashed border */
-  .project-card-logo__placeholder {
-    display: block;
-    width: 100%;
-    height: 100%;
+  .project-card__logo-initials {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  .project-card--featured .project-card__logo-initials {
+    font-size: 1.125rem;
+  }
+
+  /* ── Title (stretched link) ────────────────────────────────────── */
+  .project-card__title {
+    font-size: 1.375rem;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    overflow-wrap: break-word;
+  }
+
+  .project-card--featured .project-card__title {
+    font-size: clamp(1.5rem, 2.2vw, 1.875rem);
+    line-height: 1.25;
+  }
+
+  .project-card__title--compact {
+    font-size: 1.125rem;
+  }
+
+  .project-card__title :global(a) {
+    color: inherit;
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .project-card:hover .project-card__title :global(a) {
+    color: rgb(var(--color-accent-rgb));
+  }
+
+  /* Whole card clickable: the title link is stretched over the card */
+  .project-card__title :global(a)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
     border-radius: inherit;
-    background-image: repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 4px,
-      rgb(var(--color-border-rgb) / 0.4) 4px,
-      rgb(var(--color-border-rgb) / 0.4) 5px
-    );
+  }
+
+  .project-card__title :global(a):focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .project-card__title :global(a):focus-visible::after {
+    outline: 2px solid rgb(var(--color-accent-rgb));
+    outline-offset: -3px;
+  }
+
+  .project-card__subtitle {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  /* ── Description / demonstrates / highlights ───────────────────── */
+  .project-card__description {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  .project-card__description--compact {
+    flex: 1 1 14rem;
+    min-width: 0;
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .project-card__demonstrates,
+  .project-card__highlights {
+    font-size: 0.75rem; /* 12px */
+    line-height: 1.6;
+    color: rgb(var(--color-muted-foreground-rgb));
+    margin-bottom: 1rem;
+  }
+
+  .project-card__label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgb(var(--color-foreground-rgb));
+    margin-right: 0.25rem;
+  }
+
+  /* ── Metrics: max 3, always one row ────────────────────────────── */
+  .project-card__metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(var(--color-border-rgb));
+  }
+
+  .project-card__metric-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: rgb(var(--color-foreground-rgb));
+  }
+
+  .project-card--featured .project-card__metric-value {
+    font-size: 1.375rem;
+  }
+
+  @media (min-width: 768px) {
+    .project-card--featured .project-card__metric-value {
+      font-size: 1.75rem;
+    }
+  }
+
+  .project-card__metric-label {
+    margin-top: 0.125rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  /* ── Footer: tags + CTA, pushed to the bottom as one block ─────── */
+  .project-card__footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(var(--color-border-rgb));
+  }
+
+  .project-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .project-card__cta-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .project-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(var(--color-accent-rgb));
+    transition: color 150ms ease;
+  }
+
+  .project-card__cta--disabled {
+    color: rgb(var(--color-muted-foreground-rgb));
+    cursor: default;
+    user-select: none;
+  }
+
+  .project-card__cta-arrow {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 150ms ease;
+  }
+
+  .project-card:not(.project-card--disabled):hover .project-card__cta-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ── Compact variant (archived) ────────────────────────────────── */
+  .project-card__body--compact {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem 1rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .project-card__body--compact .project-card__title {
+    margin-right: auto;
+  }
+
+  .project-card__body--compact .project-card__cta-row {
+    flex-shrink: 0;
   }
 </style>
