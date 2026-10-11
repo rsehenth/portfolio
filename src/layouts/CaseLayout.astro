@@ -37,7 +37,6 @@ interface Props {
   status: string;
   tags: string[];
   technologies: string[];
-  metrics?: ProjectMetric[];
   snapshot?: { primary: ProjectMetric[]; secondary: ProjectMetric[] };
   scaleMetrics?: ProjectMetric[];
   productMetrics?: ProjectMetric[];
@@ -87,7 +86,6 @@ const {
   status,
   tags = [],
   technologies = [],
-  metrics = [],
   snapshot,
   scaleMetrics = [],
   productMetrics = [],
