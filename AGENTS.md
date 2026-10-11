@@ -39,7 +39,7 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 3. `logo`/`cover` só se o arquivo existir em `public/projects/<slug>/` (nos dois arquivos).
 4. Rode o build e confira `/projects/`, `/projects/<slug>/` e `/en/projects/<slug>/`.
 
-**b) Projeto sem case:** como (a), com `noCase: true` e sem os campos de case (`views`, `readingTime`, `caseSummary`, `statusEvidence`, `snapshot`, `scaleMetrics`, `productMetrics`, `externalUrl`). Nunca ponha um projeto `noCase` em `featuredOrder` (o card da Home sempre linka).
+**b) Projeto sem case:** `noCase: true` e o bloco "PÁGINA DE CASE" inteiro apagado do template. Exemplo real: `project-chat` — entre os campos de case, só mantém `scaleMetrics: []` e `productMetrics: []`. Nunca ponha um projeto `noCase` em `featuredOrder` (o card da Home sempre linka).
 
 **c) Mudar status:** veja §4. Altere todos os campos relevantes, nos dois idiomas.
 
@@ -98,6 +98,7 @@ Fallbacks: card = `cardBadge.label` → `statusBadge` → tradução de `status`
 7. **Registro de componentes MDX em 3 lugares** (veja §2). Componente novo vai nos três.
 8. **Não há CI e `astro check` não roda no build:** erro de tipo vai para produção se ninguém rodar.
 9. **`display: text` não é automático** e `needs_confirmation` some do card sem aviso.
+10. **Pastas com prefixo `_` dentro de `src/content/` são ignoradas pelo Astro** (o build passa sem ler o conteúdo). Para teste temporário use outro nome (ex.: `zz-test`) e confira a contagem de páginas do build. Remova ao terminar.
 
 ## 6. Não fazer
 
