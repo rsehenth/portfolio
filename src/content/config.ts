@@ -29,6 +29,7 @@ const cardBadgeSchema = z.object({
 
 /** Project grouping on the /projects listing — independent from `status`. */
 const projectSection = z.enum(['featured', 'products', 'tools', 'discovery', 'archived']);
+export type ProjectSection = z.infer<typeof projectSection>;
 
 const caseSummarySchema = z.object({
   problem: z.string(),
