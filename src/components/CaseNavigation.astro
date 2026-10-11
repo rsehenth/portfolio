@@ -12,7 +12,7 @@ interface Props {
 const { currentSlug, class: className = '', locale = 'pt-BR' } = Astro.props;
 const caseStudy = ui[locale].caseStudy;
 
-const projects = await getPublishedProjects(locale);
+const projects = (await getPublishedProjects(locale)).filter((p) => !p.data.noCase);
 const currentIndex = projects.findIndex((p) => projectKey(p) === currentSlug);
 const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
 const nextProject = currentIndex > -1 && currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
