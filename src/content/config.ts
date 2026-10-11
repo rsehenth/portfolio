@@ -84,7 +84,6 @@ const projects = defineCollection({
     cardHighlights: z.array(z.string()).default([]),
     // Draft entries are excluded from every route (used to hide unpublished cases)
     draft: z.boolean().default(false),
-    featured: z.boolean().default(false),
     cover: z.string().optional(),
     // Small square logo/icon shown on project cards (ideal: 120×120 px, 1:1 ratio)
     logo: z.string().optional(),
