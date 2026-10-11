@@ -11,8 +11,22 @@
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { Locale } from '@/i18n';
+import type { ProjectSection } from '@/content/config';
 
 export type ProjectEntry = CollectionEntry<'projects'>;
+
+/**
+ * Canonical section order for listings and case navigation.
+ * Must match the `section` enum in src/content/config.ts.
+ * NOT derived from ui translations (stable across locales).
+ */
+export const SECTION_ORDER: ProjectSection[] = [
+  'featured',
+  'products',
+  'discovery',
+  'tools',
+  'archived',
+];
 
 /** Stable per-project key used as the URL slug in both locales. */
 export function projectKey(entry: ProjectEntry): string {
@@ -41,9 +55,14 @@ export function verifiedOnly<T extends { state?: string }>(metrics: T[] | undefi
 }
 
 function sortProjects(entries: ProjectEntry[]): ProjectEntry[] {
-  return [...entries].sort(
-    (a, b) => b.data.order - a.data.order || b.data.year - a.data.year,
-  );
+  return [...entries].sort((a, b) => {
+    const rankA = SECTION_ORDER.indexOf(a.data.section);
+    const rankB = SECTION_ORDER.indexOf(b.data.section);
+    const sectionDiff = rankA - rankB;
+    if (sectionDiff !== 0) return sectionDiff;
+    // Within the same section: higher order first, then more recent year first
+    return b.data.order - a.data.order || b.data.year - a.data.year;
+  });
 }
 
 /** Published (non-draft) projects for a locale, sorted for display. */

@@ -37,7 +37,7 @@ const isPt = locale === 'pt-BR';
         <p class="text-body-md text-muted-foreground max-w-xs mb-2">
           {profile.headline}
         </p>
-        <p class="text-body-sm text-muted-foreground/60">
+        <p class="text-body-sm text-muted-foreground">
           {footer.copyright.replace('{year}', currentYear.toString())}
         </p>
       </div>
@@ -101,7 +101,7 @@ const isPt = locale === 'pt-BR';
     </div>
 
     <!-- Built by — always at the very bottom -->
-    <p class="text-body-sm text-muted-foreground/50 mt-8">
+    <p class="text-body-sm text-muted-foreground mt-8">
       {footer.builtBy}
     </p>
   </div>

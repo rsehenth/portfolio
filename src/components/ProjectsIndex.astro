@@ -1,8 +1,11 @@
 ---
+// ProjectsIndex.astro - /projects listing (PT + EN).
+// Section membership comes from each project's frontmatter `section` field;
+// only the localized titles/subtitles live here in i18n.
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { ui, type Locale } from '@/i18n';
-import { getPublishedProjects, projectKey, type ProjectEntry } from '@/lib/projects';
+import { getPublishedProjects, type ProjectEntry } from '@/lib/projects';
 
 interface Props {
   locale?: Locale;
@@ -12,35 +15,54 @@ const { locale = 'pt-BR' } = Astro.props;
 const projects = await getPublishedProjects(locale);
 const page = ui[locale].projectsPage;
 
-type ProjectGroup = {
-  id: string;
+type SectionId = (typeof page.sections)[number]['id'];
+type CardVariant = 'default' | 'featured' | 'compact';
+
+/** Card variant follows the section — never hardcoded per project. */
+function variantFor(id: SectionId): CardVariant {
+  if (id === 'featured') return 'featured';
+  if (id === 'archived') return 'compact';
+  return 'default';
+}
+
+/**
+ * Column count = number of items in the section (max 3), so a section never
+ * leaves an orphan card or a half-empty row.
+ *   2 items → 1 col below 768px, 2 cols from 768px
+ *   3 items → 1 col below 1200px, 3 cols from 1200px (raised from 1024px to
+ *              avoid cramped cards with long titles/subtitles at narrow 1024)
+ */
+function gridClass(count: number): string {
+  if (count >= 3) return 'grid grid-cols-1 gap-5 projects-grid-3col lg:gap-6';
+  if (count === 2) return 'grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6';
+  return 'grid grid-cols-1 gap-5 lg:gap-6';
+}
+
+type SectionView = {
+  id: SectionId;
   title: string;
-  description: string;
-  keys: string[];
+  subtitle: string;
+  variant: CardVariant;
+  entries: ProjectEntry[];
 };
 
-const groups: ProjectGroup[] = locale === 'pt-BR'
-  ? [
-      { id: 'active', title: 'Produtos ativos', description: 'Produtos disponíveis ou em uso no fluxo de trabalho.', keys: ['profresolve'] },
-      { id: 'development', title: 'Em desenvolvimento', description: 'Produtos e experiências em evolução, com próximas validações definidas.', keys: ['super-squad-ai', 'cultos', 'project-aurora', 'project-relay'] },
-      { id: 'discovery', title: 'On Hold · Em Discovery', description: 'Projetos com pesquisa inicial concluída e hipótese definida, aguardando alinhamento de validações antes de entrar em desenvolvimento.', keys: ['project-stream', 'project-chat'] },
-      { id: 'closed', title: 'Concluídos, encerrados e experimentais', description: 'Projetos concluídos, encerrados ou usados para explorar uma hipótese.', keys: ['cripto-host-decentralized-hosting', 'universal-docs', 'mosaic'] },
-    ]
-  : [
-      { id: 'active', title: 'Active products', description: 'Products available publicly or used in the development workflow.', keys: ['profresolve'] },
-      { id: 'development', title: 'In development', description: 'Products and experiences still evolving, with defined next validations.', keys: ['super-squad-ai', 'cultos', 'project-aurora', 'project-relay'] },
-      { id: 'discovery', title: 'On Hold · Discovery', description: 'Projects with initial research done and hypothesis defined, pending validation alignment before entering development.', keys: ['project-stream', 'project-chat'] },
-      { id: 'closed', title: 'Completed, closed and experimental', description: 'Projects completed, closed or used to explore a hypothesis.', keys: ['cripto-host-decentralized-hosting', 'universal-docs', 'mosaic'] },
-    ];
-
-function projectsForGroup(group: ProjectGroup): ProjectEntry[] {
-  return group.keys
-    .map((key) => projects.find((project) => projectKey(project) === key))
-    .filter((project): project is ProjectEntry => Boolean(project));
-}
+const sections: SectionView[] = page.sections
+  .map((section) => ({
+    id: section.id,
+    title: section.title,
+    subtitle: section.subtitle,
+    variant: variantFor(section.id),
+    entries: projects.filter((project) => project.data.section === section.id),
+  }))
+  .filter((section) => section.entries.length > 0);
 ---
 
-<BaseLayout title={page.title} description={page.description} canonical={locale === 'pt-BR' ? '/projects/' : '/en/projects/'} locale={locale}>
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  canonical={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
+  locale={locale}
+>
   <div class="pb-20 pt-24 lg:pb-28 lg:pt-28">
     <div class="container">
       <header class="mb-14 lg:mb-16" data-reveal>
@@ -48,26 +70,125 @@ function projectsForGroup(group: ProjectGroup): ProjectEntry[] {
         <p class="max-w-2xl text-body-lg text-muted-foreground">{page.subtitle}</p>
       </header>
 
-      <div class="space-y-16 lg:space-y-20">
-        {groups.map((group) => {
-          const entries = projectsForGroup(group);
-          return entries.length > 0 && (
-            <section aria-labelledby={`${group.id}-heading`}>
-              <header class="mb-6 max-w-2xl">
-                <h2 id={`${group.id}-heading`} class="text-display-sm font-bold tracking-tight text-foreground">{group.title}</h2>
-                <p class="mt-2 text-body-md text-muted-foreground">{group.description}</p>
+      {
+        sections.length === 0 ? (
+          <p class="text-body-md text-muted-foreground">{page.empty}</p>
+        ) : (
+          sections.map((section, index) => (
+            <section
+              aria-labelledby={`${section.id}-heading`}
+              class:list={['projects-section', index === 0 && 'projects-section--first']}
+            >
+              <header class="projects-section__header">
+                <div class="projects-section__title-row">
+                  <h2 id={`${section.id}-heading`} class="projects-section__title">
+                    {section.title}
+                  </h2>
+                  <span class="projects-section__count" aria-hidden="true">
+                    {section.entries.length}
+                  </span>
+                </div>
+                <p class="projects-section__subtitle">{section.subtitle}</p>
               </header>
-              <div class="grid gap-5 md:grid-cols-2 lg:gap-6">
-                {entries.map((project, index) => (
-                  <div data-reveal data-reveal-delay={String((index % 2) * 80)}>
-                    <ProjectCard project={project} locale={locale} headingLevel={3} />
-                  </div>
-                ))}
-              </div>
+
+              {section.variant === 'compact' ? (
+                <div class="projects-section__list">
+                  {section.entries.map((project, itemIndex) => (
+                    <div data-reveal data-reveal-delay={String((itemIndex % 3) * 60)}>
+                      <ProjectCard project={project} locale={locale} variant="compact" headingLevel={3} />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div class={gridClass(section.entries.length)}>
+                  {section.entries.map((project, itemIndex) => (
+                    <div data-reveal data-reveal-delay={String((itemIndex % 3) * 60)}>
+                      <ProjectCard project={project} locale={locale} variant={section.variant} headingLevel={3} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </section>
-          );
-        })}
-      </div>
+          ))
+        )
+      }
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  /* ── Section rhythm: rule, spacing, small heading with a counter ── */
+  .projects-section {
+    margin-top: 4rem; /* 64px — within the 56–72px range */
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(var(--color-border-rgb));
+  }
+
+  .projects-section--first {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .projects-section__header {
+    margin-bottom: 1.5rem; /* 24px before the cards */
+  }
+
+  .projects-section__title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+  }
+
+  .projects-section__title {
+    font-size: clamp(1.5rem, 2vw, 1.75rem);
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    /* No narrow max-width: the heading must not break in two on desktop */
+  }
+
+  @media (min-width: 768px) {
+    .projects-section__title {
+      white-space: nowrap;
+    }
+  }
+
+  .projects-section__count {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    color: rgb(var(--color-muted-foreground-rgb));
+    background-color: rgb(var(--color-muted-rgb));
+    border: 1px solid rgb(var(--color-border-rgb));
+    border-radius: 999px;
+  }
+
+  .projects-section__subtitle {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  @media (min-width: 768px) {
+    .projects-section__subtitle {
+      white-space: nowrap;
+    }
+  }
+
+  /* Archived section: compact rows instead of full cards */
+  .projects-section__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* 3-column grid: raised from 1024px to 1200px to avoid cramped cards */
+  @media (min-width: 1200px) {
+    .projects-grid-3col {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -17,6 +17,14 @@ const altLocale = locale === 'pt-BR' ? 'en' : 'pt-BR';
 const altLocaleLabel = altLocale === 'pt-BR' ? 'PT' : 'EN';
 const currentPath = Astro.url.pathname;
 
+// /projects is the only route where the primary CTA would link to itself,
+// so there it swaps to the contact anchor and the nav marks the current page.
+const isProjectsRoute = currentPath === '/projects/' || currentPath === '/en/projects/';
+const projectsHref = locale === 'pt-BR' ? '/projects/' : '/en/projects/';
+const contactHref = locale === 'pt-BR' ? '/#contact' : '/en/#contact';
+const ctaHref = isProjectsRoute ? contactHref : projectsHref;
+const ctaLabel = isProjectsRoute ? navItems.contact : headerCta.viewWork;
+
 // Generate alternate URL for language switch
 const pathWithoutLocale = currentPath.startsWith('/en/') ? currentPath.slice(3) : currentPath;
 const switchPath = pathWithoutLocale === '/404/' ? '/' : pathWithoutLocale || '/';
@@ -34,8 +42,9 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
       <!-- Navigation -->
       <nav class="hidden lg:flex items-center gap-8" aria-label={locale === 'pt-BR' ? 'Navegação principal' : 'Main navigation'}>
         <a
-          href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
+          href={projectsHref}
           class="link-underline text-body-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-fast"
+          aria-current={isProjectsRoute ? 'page' : undefined}
         >
           {navItems.projects}
         </a>
@@ -79,10 +88,10 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
           {headerCta.linkedin}
         </a>
         <a
-          href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
+          href={ctaHref}
           class="btn-primary hidden sm:inline-flex"
         >
-          {headerCta.viewWork}
+          {ctaLabel}
         </a>
 
         <!-- Mobile menu button -->
@@ -104,8 +113,9 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
     <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-normal" role="navigation" aria-label={locale === 'pt-BR' ? 'Navegação móvel' : 'Mobile navigation'}>
       <div class="py-4 space-y-2 border-t border-border">
         <a
-          href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
+          href={projectsHref}
           class="block px-2 py-3 text-body-md font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors duration-fast"
+          aria-current={isProjectsRoute ? 'page' : undefined}
         >
           {navItems.projects}
         </a>
@@ -144,15 +154,27 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
             {headerCta.linkedin}
           </a>
           <a
-            href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
+            href={ctaHref}
             class="block px-2 py-3 text-body-md font-medium text-center btn-primary"
           >
-            {headerCta.viewWork}
+            {ctaLabel}
           </a>
         </div>
       </div>
     </div>
   </div>
+
+  <style>
+    /* Active nav item (set only when the route matches) */
+    a[aria-current='page'] {
+      color: rgb(var(--color-foreground-rgb));
+      font-weight: 600;
+    }
+
+    a[aria-current='page']::after {
+      transform: scaleX(1);
+    }
+  </style>
 
   <script is:inline>
     // Mobile menu toggle
