@@ -47,6 +47,7 @@ export const ui = {
       viewAll: 'Ver todos os projetos',
       empty: 'Novos cases serão publicados em breve.',
       demonstrates: 'Demonstra',
+      highlights: 'Destaques',
     },
 
     // Home-specific project presentation layer
@@ -438,6 +439,7 @@ export const ui = {
       viewAll: 'View all projects',
       empty: 'New case studies coming soon.',
       demonstrates: 'Demonstrates',
+      highlights: 'Highlights',
     },
 
     // Home-specific project presentation layer

@@ -10,9 +10,25 @@ const metricSchema = z.object({
   value: z.string(),
   label: z.string(),
   state: z.enum(['verified', 'needs_confirmation', 'hidden']).default('needs_confirmation'),
+  // Listing-card presentation only (never read by case pages):
+  // 'figure' → big number style in the card metric row (max 3, one row)
+  // 'text'   → never styled as a number; surfaced through `cardHighlights` instead
+  display: z.enum(['figure', 'text']).default('figure'),
   context: z.string().optional(),
   project: z.string().optional(),
 });
+
+/**
+ * Listing-only status badge for /projects cards: colored dot + text.
+ * Kept separate from `statusBadge` so case pages keep their own status wording.
+ */
+const cardBadgeSchema = z.object({
+  label: z.string(),
+  tone: z.enum(['active', 'development', 'functional', 'discovery', 'archived']),
+});
+
+/** Project grouping on the /projects listing — independent from `status`. */
+const projectSection = z.enum(['featured', 'products', 'tools', 'discovery', 'archived']);
 
 const caseSummarySchema = z.object({
   problem: z.string(),
@@ -59,6 +75,12 @@ const projects = defineCollection({
     openSourceUrl: z.string().optional(),
     openSourceLabel: z.string().optional(),
     status: z.enum(['Active', 'Completed', 'Archived', 'On Hold']),
+    // Section shown on the /projects listing (independent from `status`)
+    section: projectSection,
+    // Listing-only badge (dot + text). Case pages keep using `statusBadge`.
+    cardBadge: cardBadgeSchema,
+    // Listing-only textual highlights line under the card metrics
+    cardHighlights: z.array(z.string()).default([]),
     // Draft entries are excluded from every route (used to hide unpublished cases)
     draft: z.boolean().default(false),
     featured: z.boolean().default(false),
