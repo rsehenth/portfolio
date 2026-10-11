@@ -128,4 +128,7 @@ Antes de encerrar uma tarefa: build + `astro check` + abrir `/`, `/projects/` e 
 ## 8. Arquivos-ponteiro
 
 Estes arquivos só apontam para este `AGENTS.md`. Não coloque conteúdo próprio neles, e se alterar este arquivo, não precisa mexer neles.
-(Lista a preencher ao criar os ponteiros.)
+
+- `CLAUDE.md` — importa este arquivo (`@AGENTS.md`).
+
+Sem ponteiro: OpenCode, Codex e Kiro leem `AGENTS.md` nativamente; o Claude Code só o lê se não houver `CLAUDE.md`, por isso existe o import acima.
