@@ -413,7 +413,7 @@ export const ui = {
       Active: 'Ativo',
       Completed: 'Concluído',
       Archived: 'Arquivado',
-      'On Hold': 'Em espera',
+      Discovery: 'Em discovery',
     },
 
     // Common
@@ -835,7 +835,7 @@ export const ui = {
       Active: 'Active',
       Completed: 'Completed',
       Archived: 'Archived',
-      'On Hold': 'On Hold',
+      Discovery: 'In discovery',
     },
 
     // Common

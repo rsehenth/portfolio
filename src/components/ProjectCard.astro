@@ -47,7 +47,7 @@ const toneFallback: Record<string, BadgeTone> = {
   Active: 'active',
   Completed: 'archived',
   Archived: 'archived',
-  'On Hold': 'discovery',
+  Discovery: 'discovery',
 };
 const badgeLabel = cardBadge?.label ?? statusBadge ?? statusLabel(locale, status);
 const badgeTone: BadgeTone = cardBadge?.tone ?? toneFallback[status] ?? 'archived';

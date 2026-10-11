@@ -74,7 +74,7 @@ const projects = defineCollection({
     // Upstream/open-source attribution link (rendered on the "Base" row)
     openSourceUrl: z.string().optional(),
     openSourceLabel: z.string().optional(),
-    status: z.enum(['Active', 'Completed', 'Archived', 'On Hold']),
+    status: z.enum(['Active', 'Completed', 'Archived', 'Discovery']),
     // Section shown on the /projects listing (independent from `status`)
     section: projectSection,
     // Listing-only badge (dot + text). Case pages keep using `statusBadge`.
