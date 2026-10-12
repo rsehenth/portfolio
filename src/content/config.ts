@@ -46,6 +46,32 @@ const statusEvidenceSchema = z.object({
 
 type Metric = z.infer<typeof metricSchema>;
 
+/**
+ * Campos que só existem em projeto com case. A regra R3 do superRefine impede
+ * que um projeto `noCase: true` carregue dados de case esquecidos.
+ */
+const CASE_ONLY_FIELDS = [
+  'views',
+  'readingTime',
+  'caseSummary',
+  'statusEvidence',
+  'snapshot',
+  'externalUrl',
+  'seo',
+] as const;
+
+/** `true` quando o valor traz conteúdo de verdade (não só o default). */
+const isFilled = (value: unknown): boolean => {
+  if (value === undefined || value === null) return false;
+  if (typeof value === 'string') return value.trim() !== '';
+  if (typeof value === 'boolean') return value;
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === 'object') {
+    return Object.values(value as Record<string, unknown>).some(isFilled);
+  }
+  return true;
+};
+
 const projects = defineCollection({
   type: 'content',
   schema: z.object({
@@ -75,16 +101,22 @@ const projects = defineCollection({
     // Upstream/open-source attribution link (rendered on the "Base" row)
     openSourceUrl: z.string().optional(),
     openSourceLabel: z.string().optional(),
-    status: z.enum(['Active', 'Completed', 'Archived', 'Discovery']),
+    status: z
+      .enum(['Active', 'Completed', 'Archived', 'Discovery'])
+      .describe('Status canonico do projeto: Active | Completed | Archived | Discovery (fallback de exibicao)'),
     // Section shown on the /projects listing (independent from `status`)
-    section: projectSection,
+    section: projectSection.describe('Secao do /projects: featured | products | tools | discovery | archived (independente de status)'),
     // Listing-only badge (dot + text). Case pages keep using `statusBadge`.
-    cardBadge: cardBadgeSchema,
+    cardBadge: cardBadgeSchema.describe(
+      'Badge do card do /projects: label + tone (active | development | functional | discovery | archived)',
+    ),
     // Listing-only textual highlights line under the card metrics
-    cardHighlights: z.array(z.string()).default([]),
+    cardHighlights: z
+      .array(z.string())
+      .default([])
+      .describe('Textos lineares exibidos sob as metricas do card; obrigatorio se metrics tem display "text"'),
     // Draft entries are excluded from every route (used to hide unpublished cases)
     draft: z.boolean().default(false),
-    featured: z.boolean().default(false),
     cover: z.string().optional(),
     // Small square logo/icon shown on project cards (ideal: 120×120 px, 1:1 ratio)
     logo: z.string().optional(),
@@ -95,7 +127,10 @@ const projects = defineCollection({
     demonstrates: z.array(z.string()).default([]),
     technologies: z.array(z.string()).default([]),
     // Metrics displayed on the project card (only state === 'verified' render)
-    metrics: z.array(metricSchema).default([]),
+    metrics: z
+      .array(metricSchema)
+      .default([])
+      .describe('Metricas do card: so state "verified" + display "figure" renderizam (maximo 3)'),
     // Technical scope snapshot shown in the case hero area
     snapshot: z
       .object({
@@ -133,10 +168,75 @@ const projects = defineCollection({
       .optional(),
     // When true, the card CTA ("Ver Case") is rendered as a disabled label instead of a link.
     // Use for projects that don't have a case page yet.
-    noCase: z.boolean().default(false).optional(),
+    noCase: z
+      .boolean()
+      .default(false)
+      .optional()
+      .describe('true = sem pagina de case; o card nao vira link e os campos de case ficam proibidos (R3)'),
     // Order in listings
-    order: z.number().int().default(0),
-  }),
+    order: z
+      .number()
+      .int()
+      .default(0)
+      .describe('Ordem na listagem: maior = primeiro, dentro da secao; sem repetir na mesma secao (P5)'),
+  })
+    .strict()
+    .superRefine((data, ctx) => {
+      // R1 — no máximo 3 métricas de destaque no card (o resto é cortado em silêncio)
+      const figureCount = data.metrics.filter(
+        (metric) => metric.state === 'verified' && metric.display === 'figure',
+      ).length;
+      if (figureCount > 3) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['metrics'],
+          message: `metrics: no máximo 3 métricas com state "verified" e display "figure"; encontradas ${figureCount}. Mude state/display de ${figureCount - 3} delas ou mova o excesso para cardHighlights.`,
+        });
+      }
+
+      // R2 — métrica de texto não vira número: o texto precisa estar em cardHighlights
+      const textCount = data.metrics.filter((metric) => metric.display === 'text').length;
+      if (textCount > 0 && data.cardHighlights.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['cardHighlights'],
+          message: `cardHighlights: metrics tem ${textCount} métrica(s) com display "text", mas cardHighlights está vazio. Duplique o texto de cada métrica em cardHighlights.`,
+        });
+      }
+
+      // R3 — noCase não convive com campos de case
+      if (data.noCase === true) {
+        for (const field of CASE_ONLY_FIELDS) {
+          if (isFilled((data as unknown as Record<string, unknown>)[field])) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              path: [field],
+              message: `${field}: projeto com noCase: true não pode ter ${field} preenchido. Remova o campo ou desative noCase.`,
+            });
+          }
+        }
+      }
+
+      // R4 — snapshotMode "product-technical" só renderiza com snapshot
+      if (data.snapshotMode === 'product-technical' && !isFilled(data.snapshot)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['snapshotMode'],
+          message:
+            'snapshotMode: "product-technical" exige snapshot preenchido. Adicione snapshot ou use snapshotMode "default".',
+        });
+      }
+
+      // R5 — CTA externo sem rótulo
+      if (isFilled(data.externalUrl) && !isFilled(data.externalUrlLabel)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['externalUrlLabel'],
+          message:
+            'externalUrlLabel: externalUrl está preenchido, mas externalUrlLabel não. Adicione o rótulo do link externo.',
+        });
+      }
+    }),
 });
 
 export type ProjectMetric = Metric;

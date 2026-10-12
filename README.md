@@ -4,6 +4,8 @@ A static portfolio site built with **Astro**, **TypeScript**, **Tailwind CSS**, 
 
 Bilingual by default: **PT-BR at `/`** and **English at `/en/`** (no auto-redirect; the `PT | EN` switch keeps you on the same page).
 
+> **Agentes de IA:** leiam `AGENTS.md` antes de editar.
+
 ## 🚀 Quick Start
 
 ### 1. Install Dependencies
@@ -76,7 +78,8 @@ src/
 │       │   ├── pt-BR.mdx            # Portuguese content
 │       │   └── en.mdx               # English content (same URL slug)
 │       └── super-squad-ai/
-│           └── pt-BR.mdx            # draft: true (hidden until rewritten)
+│           ├── pt-BR.mdx            # Portuguese content
+│           └── en.mdx               # English content (same URL slug)
 ├── i18n/
 │   ├── ui.ts                     # All UI strings (nav, labels, meta)
 │   ├── routes.ts                 # Localized routes + hreflang links
@@ -107,107 +110,19 @@ src/
 
 ## ✍️ Adding a New Case Study
 
-A case study is **one folder with one file per locale**. The folder name is the URL slug for both languages, so the language switch always stays on the same case.
+**Guia completo: [`AGENTS.md`](./AGENTS.md) (checklists, mapa de tarefas, vocabulário de status e armadilhas) + [`docs/project-template.mdx`](./docs/project-template.mdx) (template pronto para copiar).**
 
-### 1. Create the content files
-
-```
-src/content/projects/your-case-slug/pt-BR.mdx
-src/content/projects/your-case-slug/en.mdx
-```
-
-```mdx
----
-title: Your Project Title
-locale: pt-BR               # or en
-subtitle: Category shown on the card (e.g. "SaaS de IA para educadores")
-description: Card description + fallback meta description.
-tagline: Case hero headline (short, editorial).
-summary: Case hero paragraph (2 lines max).
-year: 2026
-role: Technical Product / Product + Hands-on Development   # editable here, never hardcoded
-productType: SaaS · IA · Educação
-focus: Confiabilidade de IA · Economia de Produto · APIs · Pagamentos
-status: Active              # Active | Completed | Archived | On Hold
-draft: false                # true = hidden from every route
-featured: true              # Shows on homepage
-cover: /projects/your-cover.jpg   # only if a REAL image exists
-tags: [AI Product, SaaS, APIs]
-technologies: [TypeScript, Next.js, PostgreSQL]
-
-# Card metrics — only state: verified renders publicly
-metrics:
-  - value: "16"
-    label: Geradores
-    state: verified
-
-# Hero technical-scope snapshot
-snapshot:
-  primary:
-    - value: "16"
-      label: Geradores de conteúdo
-      state: verified
-  secondary:
-    - value: "2.4K+"
-      label: Test cases
-      state: verified
-
-# "Verified Results" section (near the end of the case)
-scaleMetrics: [...]         # technical scale numbers
-productMetrics: []          # keep empty until real outcomes are confirmed
-
-seo:
-  title: "Your Case — Technical Product & AI | Lucas Sehnem"
-  description: "Localized meta description…"
-order: 5                    # Sort order (higher = first)
----
-
-## O problema
-
-Case study content here…
-
-## Fluxo do produto
-
-<FlowDiagram label="Fluxo principal" steps={['Utilizador', 'Entrada', 'Resultado']} />
-
-## Build vs Buy
-
-<Callout title="Build vs Buy">…</Callout>
-```
-
-### 2. Available MDX components
-
-`FlowDiagram` (steps + optional failure `branch`), `ArchitectureDiagram` (steps + services), `RoleBlocks` (four work fronts), `ComparisonBlock` (aligned A → B rows or two independent lists), `StatsGrid` (verified stats row), `Callout` (info/warning/success/error/attribution/demonstrates), `DataTable`, `AnimatedChart`, `MetricCard`, `Tag`.
-
-### 3. Metric states (enforced by the schema)
-
-| State | Renders publicly? |
-|-------|-------------------|
-| `verified` | ✅ yes |
-| `needs_confirmation` | ❌ never (confirm with Lucas first) |
-| `hidden` | ❌ never (default) |
-
-Never publish metrics, thresholds or rates that are not explicitly `state: verified`.
-
-### 4. Add a cover image (optional)
-
-Place a **real** image at `public/projects/your-cover.jpg` (16:9, 1200×675px) and set `cover:`. If the file does not exist, leave `cover` out — the layout skips the image instead of rendering a broken container.
-
-### 5. That's It!
-
-The case automatically appears on:
-- Homepage (if `featured: true`)
-- `/projects/your-case-slug/` (PT) and `/en/projects/your-case-slug/` (EN)
-- Prev/next navigation and the language switch (same slug in both locales)
-- Sitemap + hreflang alternates
-
-> Entries with `draft: true` are excluded from every route (used to keep unpublished/illustrative cases offline).
+Resumo:
+- A pasta é a URL: `src/content/projects/<slug>/pt-BR.mdx` e `en.mdx`, com os mesmos campos estruturais nos dois arquivos.
+- Copie o template, ajuste `locale` em cada arquivo e apague os comentários.
+- Componentes disponíveis no corpo do MDX: mapa nos dois `src/pages/**/projects/[slug].astro` e em `src/components/index.ts`.
+- Validação: `npm run build`, depois abra `/projects/`, `/projects/<slug>/` e `/en/projects/<slug>/`.
 
 ---
 
 ## 📊 Adding a Metric
 
-### On a project card (homepage + `/projects/`)
+### On a project card (`/projects/`)
 Add to the frontmatter `metrics` array of the case's `pt-BR.mdx` / `en.mdx`:
 
 ```yaml
@@ -217,7 +132,7 @@ metrics:
     state: verified      # only verified metrics are ever rendered
 ```
 
-The card shows up to **4 verified metrics** in a 2-column grid; anything else is filtered out at render time.
+The card shows up to **3 verified metrics** in a single row; anything else is filtered out at render time.
 
 ### On the case page
 - `snapshot.primary` / `snapshot.secondary` → "Technical Scope" block under the hero
@@ -444,57 +359,11 @@ Header and footer update automatically.
 
 ## 📝 Content Collections Schema
 
-Defined in `src/content/config.ts`:
+O contrato do frontmatter é o schema Zod de **`src/content/config.ts`** — fonte de verdade, validado em cada `npm run build`.
 
-```ts
-const metric = z.object({
-  value: z.string(),
-  label: z.string(),
-  // verified | needs_confirmation (default) | hidden — only 'verified' renders
-  state: z.enum(['verified', 'needs_confirmation', 'hidden']).default('needs_confirmation'),
-  context: z.string().optional(),
-  project: z.string().optional(),
-});
-
-const projects = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    locale: z.enum(['pt-BR', 'en']),       // file lives at <key>/<locale>.mdx
-    subtitle: z.string().optional(),        // card category
-    description: z.string(),                // card + meta description
-    tagline: z.string().optional(),         // case hero headline
-    summary: z.string().optional(),         // case hero paragraph
-    year: z.number().int().min(2000).max(2100),
-    role: z.string(),                       // role text lives in content, not code
-    productType: z.string().optional(),
-    focus: z.string().optional(),
-    stage: z.string().optional(),           // free-form stage label (e.g. "MVP · Early Release")
-    stageNote: z.string().optional(),       // note rendered under the stage
-    openSourceUrl: z.string().optional(),   // upstream link → hero "Base" row (fork attribution)
-    status: z.enum(['Active', 'Completed', 'Archived', 'On Hold']),
-    draft: z.boolean().default(false),      // true = hidden from every route
-    featured: z.boolean().default(false),
-    cover: z.string().optional(),
-    tags: z.array(z.string()).default([]),
-    demonstrates: z.array(z.string()).default([]),    // small capability hints on cards
-    technologies: z.array(z.string()).default([]),
-    metrics: z.array(metric).default([]),            // project cards
-    snapshot: z.object({                             // case "Technical Scope"
-      primary: z.array(metric).default([]),
-      secondary: z.array(metric).default([]),
-    }).optional(),
-    scaleMetrics: z.array(metric).default([]),       // Verified Results: scale
-    productMetrics: z.array(metric).default([]),     // Verified Results: impact
-    seo: z.object({
-      title: z.string().optional(),
-      description: z.string().optional(),
-    }).optional(),
-    order: z.number().int().default(0),
-  }),
-});
-```
-
-**Validation runs at build time** — invalid frontmatter fails the build.
+- Campos, tipos e enums: `src/content/config.ts`
+- Template com todos os campos comentados: [`docs/project-template.mdx`](./docs/project-template.mdx)
+- Onde mexer em cada coisa, limites e armadilhas: [`AGENTS.md`](./AGENTS.md)
 
 ---
 

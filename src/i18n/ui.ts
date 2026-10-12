@@ -42,9 +42,7 @@ export const ui = {
     // Selected Work section
     work: {
       title: 'Projetos Selecionados',
-      subtitle: 'Cases que mostram diferentes formas de atuação entre produto, IA e tecnologia.',
       viewCase: 'Ver case →',
-      viewAll: 'Ver todos os projetos',
       empty: 'Novos cases serão publicados em breve.',
       demonstrates: 'Demonstra',
       highlights: 'Destaques',
@@ -101,102 +99,12 @@ export const ui = {
       },
     },
 
-    // Projects index page — editorial layer exclusive to /projects
-    // Isolated from MDX frontmatter and homeProjects — changes here affect ONLY /projects cards
-    projectsIndex: {
-      // Controls which slugs go to "Featured Work" section (order matters for display)
-      featured: ['profresolve', 'super-squad-ai'],
-      projects: {
-        profresolve: {
-          category: 'Produto de IA · SaaS',
-          description: 'Plataforma de inteligência artificial para a rotina docente, com geração de materiais, monetização por créditos e arquitetura resiliente para uso com modelos de linguagem.',
-          highlights: [
-            { value: '16', label: 'Geradores' },
-            { value: '2.4K+', label: 'Casos de teste' },
-          ],
-          focus: ['Produto de IA', 'Confiabilidade', 'Economia do produto'],
-          stage: 'Produto ativo',
-        },
-        'super-squad-ai': {
-          category: 'Produto de IA · Ferramentas de desenvolvimento',
-          description: 'Sistema de orquestração de agentes de IA para desenvolvimento de software, com execução isolada em Git e verificação determinística antes de cada integração.',
-          highlights: [
-            { value: '1 + N', label: 'Arquitetura Leader + Workers' },
-            { value: '2 estágios', label: 'Verificação' },
-          ],
-          focus: ['Produto de IA', 'Orquestração de agentes', 'Confiabilidade'],
-          stage: 'Em desenvolvimento',
-        },
-        'project-aurora': {
-          category: 'Liderança de produto · Sistemas de jogo',
-          description: "Beat 'em up 2D em produção inicial, no qual lidero visão de produto, sistemas, progressão e priorização em uma equipe de três pessoas.",
-          // Stage já comunica o estágio (Post-PoC · Early Production) — não repetir como highlight
-          highlights: [
-            { value: '3', label: 'Pessoas na equipe' },
-          ],
-          focus: ['Liderança de produto', 'Sistemas de jogo', 'Escopo de MVP'],
-          stage: 'Pós-PoC · Produção inicial',
-        },
-        cultos: {
-          category: 'Technical Product · Desktop',
-          description: 'MVP desktop para operação de mídia em igrejas brasileiras, com UX simplificada, funcionamento offline e sincronização opcional com a nuvem.',
-          highlights: [
-            { value: '9 + mídia', label: 'Coleções sincronizadas' },
-            { value: 'Offline-first', label: 'Produto desktop' },
-          ],
-          focus: ['Adaptação de produto', 'Local-first', 'Simplificação de UX'],
-          stage: 'MVP · Primeira versão',
-        },
-        'universal-docs': {
-          category: 'Technical Product · Experiência do desenvolvedor',
-          description: 'Starter reutilizável de documentação técnica com CSS isolado, branding configurável, busca, i18n e arquitetura pensada para integração dentro do produto.',
-          highlights: [
-            { value: '3', label: 'Idiomas' },
-            { value: '57', label: 'Casos de teste' },
-          ],
-          focus: ['Experiência do desenvolvedor', 'Arquitetura reutilizável', 'Docs-as-Code'],
-          stage: 'Starter reutilizável',
-        },
-        mosaic: {
-          category: 'Protótipo de produto · UX',
-          description: 'MVP de link-in-bio com editor visual que permite criar páginas pessoais usando blocos arrastáveis, redimensionáveis e editáveis, sem escrever código.',
-          highlights: [
-            { value: '6', label: 'Tipos de bloco' },
-            { value: '5', label: 'Tamanhos de layout' },
-          ],
-          focus: ['Prototipação de produto', 'Sistemas de UX', 'Design de interação'],
-          stage: 'MVP · Demonstração',
-        },
-        'project-stream': {
-          category: 'Technical Product · Desktop Media',
-          description: 'Arquitetura de um produto desktop de streaming que busca simplificar convidados, layouts e transmissão, com o processamento audiovisual principal no computador do host.',
-          highlights: [],
-          focus: ['Arquitetura de produto', 'Sistemas de mídia', 'Redução de riscos'],
-          stage: 'Discovery · Pre-PoC',
-        },
-        'cripto-host-decentralized-hosting': {
-          category: 'Technical Product · Web3 Infrastructure',
-          description: 'Discovery e arquitetura de uma proposta de hosting descentralizado que buscava oferecer uma experiência simples de deploy para frontends Web3 usando IPFS, Filecoin e Arweave.',
-          highlights: [
-            { value: 'MVP definido', label: 'Escopo definido' },
-            { value: 'Arquitetura candidata', label: 'Planejamento técnico' },
-          ],
-          focus: ['Discovery de produto', 'Arquitetura técnica', 'Escopo de MVP'],
-          stage: 'Discovery · Arquitetura técnica',
-        },
-      },
-    },
-
     // Projects index page
     projectsPage: {
       title: 'Projetos',
       subtitle: 'Produtos de IA e sistemas técnicos, do discovery à execução. Comece pelos dois destaques.',
       description: 'Portfólio de produtos construídos e entregues por Lucas Sehnem, Technical Product Manager.',
       empty: 'Nenhum projeto publicado ainda. Volte em breve!',
-      featuredHeading: 'Projetos em destaque',
-      moreHeading: 'Outros projetos',
-      viewCase: 'Ver case →',
-      focus: 'Foco',
       // Sections shown on /projects, in display order.
       // Membership comes from each project's frontmatter `section` field.
       sections: [
@@ -226,12 +134,6 @@ export const ui = {
           subtitle: 'Explorações encerradas antes de chegar à produção.',
         },
       ],
-    },
-
-    // Product Impact section
-    impact: {
-      title: 'Impacto de Produto',
-      subtitle: 'Resultados verificados de decisões e execução de produto.',
     },
 
     // How I Work section
@@ -464,9 +366,7 @@ export const ui = {
     // Selected Work section
     work: {
       title: 'Selected Work',
-      subtitle: 'Case studies that show different ways I work across product, AI and technology.',
       viewCase: 'View case →',
-      viewAll: 'View all projects',
       empty: 'New case studies coming soon.',
       demonstrates: 'Demonstrates',
       highlights: 'Highlights',
@@ -523,102 +423,12 @@ export const ui = {
       },
     },
 
-    // Projects index page — editorial layer exclusive to /projects
-    // Isolated from MDX frontmatter and homeProjects — changes here affect ONLY /projects cards
-    projectsIndex: {
-      // Controls which slugs go to "Featured Work" section (order matters for display)
-      featured: ['profresolve', 'super-squad-ai'],
-      projects: {
-        profresolve: {
-          category: 'AI Product · SaaS',
-          description: 'A platform for educators that combines AI-powered content generation, credit-based monetization and resilient operations with language models.',
-          highlights: [
-            { value: '16', label: 'Generators' },
-            { value: '2.4K+', label: 'Test cases' },
-          ],
-          focus: ['AI Product', 'Reliability', 'Product Economics'],
-          stage: 'Active product',
-        },
-        'super-squad-ai': {
-          category: 'AI Product · Developer Tools',
-          description: 'A software engineering platform that uses AI agents to plan, implement and verify code — with Git isolation and deterministic checks before each integration.',
-          highlights: [
-            { value: '1 + N', label: 'Leader + Workers architecture' },
-            { value: '2-stage', label: 'Verification' },
-          ],
-          focus: ['AI Product', 'Agent Orchestration', 'Reliability'],
-          stage: 'Active development',
-        },
-        'project-aurora': {
-          category: 'Product Leadership · Game Systems',
-          description: "An independent 2D beat 'em up in early production where I lead product vision, game systems, progression and prioritization within a three-person team.",
-          // Stage already communicates the stage (Post-PoC · Early Production) — not repeated as highlight
-          highlights: [
-            { value: '3', label: 'People on the team' },
-          ],
-          focus: ['Product Leadership', 'Game Systems', 'MVP Scoping'],
-          stage: 'Post-PoC · Early Production',
-        },
-        cultos: {
-          category: 'Technical Product · Desktop',
-          description: 'A desktop MVP for media operations in Brazilian churches, combining simplified UX, offline-first usage and optional cloud synchronization.',
-          highlights: [
-            { value: '9 + media', label: 'Synced collections' },
-            { value: 'Offline-first', label: 'Desktop product' },
-          ],
-          focus: ['Product Adaptation', 'Local-first', 'UX Simplification'],
-          stage: 'MVP · Early Release',
-        },
-        'universal-docs': {
-          category: 'Technical Product · Developer Experience',
-          description: 'A reusable technical documentation starter with scoped CSS, configurable branding, search, i18n and an architecture designed for in-product integration.',
-          highlights: [
-            { value: '3', label: 'Languages' },
-            { value: '57', label: 'Test cases' },
-          ],
-          focus: ['Developer Experience', 'Reusable Architecture', 'Docs-as-Code'],
-          stage: 'Reusable Starter',
-        },
-        mosaic: {
-          category: 'Product Prototype · UX',
-          description: 'A link-in-bio MVP with a visual editor for building personal pages using draggable, resizable and editable blocks without writing code.',
-          highlights: [
-            { value: '6', label: 'Block types' },
-            { value: '5', label: 'Layout sizes' },
-          ],
-          focus: ['Product Prototyping', 'UX Systems', 'Interaction Design'],
-          stage: 'MVP · Demo',
-        },
-        'project-stream': {
-          category: 'Technical Product · Desktop Media',
-          description: 'A desktop streaming product concept exploring simpler guest workflows, layouts and live production, with core audiovisual processing on the host computer.',
-          highlights: [],
-          focus: ['Product Architecture', 'Media Systems', 'Risk Reduction'],
-          stage: 'Discovery · Pre-PoC',
-        },
-        'cripto-host-decentralized-hosting': {
-          category: 'Technical Product · Web3 Infrastructure',
-          description: 'Product discovery and architecture for a decentralized hosting concept designed to provide a simple deployment experience for Web3 frontends using IPFS, Filecoin and Arweave.',
-          highlights: [
-            { value: 'MVP scoped', label: 'Defined scope' },
-            { value: 'Candidate architecture', label: 'Technical planning' },
-          ],
-          focus: ['Product Discovery', 'Technical Architecture', 'MVP Scoping'],
-          stage: 'Discovery · Technical Architecture',
-        },
-      },
-    },
-
     // Projects index page
     projectsPage: {
       title: 'Projects',
       subtitle: 'AI products and technical systems, from discovery to execution. Start with the two featured projects.',
       description: 'Portfolio of products built and shipped by Lucas Sehnem, Technical Product Manager.',
       empty: 'No projects published yet. Check back soon!',
-      featuredHeading: 'Featured Work',
-      moreHeading: 'More Projects',
-      viewCase: 'View case →',
-      focus: 'Focus',
       // Sections shown on /projects, in display order.
       // Membership comes from each project's frontmatter `section` field.
       sections: [
@@ -648,12 +458,6 @@ export const ui = {
           subtitle: 'Explorations closed before reaching production.',
         },
       ],
-    },
-
-    // Product Impact section
-    impact: {
-      title: 'Product Impact',
-      subtitle: 'Verified outcomes from product decisions and execution.',
     },
 
     // How I Work section
