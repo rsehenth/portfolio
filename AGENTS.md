@@ -44,7 +44,7 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 **c) Mudar status:** veja §4. Altere todos os campos relevantes, nos dois idiomas.
 
 **d) Métricas, highlights, tags**
-- Números do card: `metrics` com `state: verified` e `display: figure`, **máx. 3** (o 4º é cortado em silêncio). `needs_confirmation` e `hidden` não renderizam.
+- Números do card: `metrics` com `state: verified` e `display: figure`, **máx. 3** (a 4ª derruba o build — R1). `needs_confirmation` e `hidden` não renderizam, de propósito.
 - `display: text` não vira número: duplique o texto à mão em `cardHighlights`.
 - `demonstrates`: 3 visíveis no card. `tags`: 3 no card, todas no case.
 - `metrics` é só do card. O case usa `snapshot`, `scaleMetrics` e `productMetrics`.
@@ -55,12 +55,12 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 **f) Mover de seção:** `section` nos dois MDX. `archived` usa a variante compacta e `featured` a grande (`variantFor`). Seção que fica vazia some da página. O Anterior/Próximo muda.
 
 **g) Seção nova (4 pontos obrigatórios):** enum `projectSection` (`config.ts`) → `SECTION_ORDER` (`projects.ts`) → `projectsPage.sections` PT → idem EN. Opcional: `variantFor`/`gridClass` em `ProjectsIndex.astro`.
-Se faltar o `SECTION_ORDER`, a seção ordena antes de todas (silencioso). Se faltar em `ui.ts`, os projetos ficam invisíveis no /projects.
+Se faltar em qualquer lugar, o **P4** derruba o `npm run check:content`; sem a checagem, a seção ordena antes de todas e os projetos somem do /projects.
 
 **h) Destaque na Home**
 1. `featuredOrder` em `HomePage.astro` (2 slots).
 2. `homeProjects.projects.<slug>` em `ui.ts`, PT e EN (`category`, `description`, `highlights`, `focus`).
-Isso é independente de `section: featured` (que só afeta o /projects). Chave sem entrada em `homeProjects` deixa a célula vazia, sem erro.
+Isso é independente de `section: featured` (que só afeta o /projects). Chave sem entrada em `homeProjects` deixa a célula vazia — hoje é erro (**P6**).
 
 ## 4. Vocabulário de status
 
@@ -87,18 +87,26 @@ Campos que carregam status (mude todos os relevantes, em PT e EN):
 Fallbacks: card = `cardBadge.label` → `statusBadge` → tradução de `status`. Case = `statusBadge` → `stage` → tradução de `status`.
 `status` e `section` são independentes de propósito. Mudar o **enum** exige `config.ts`, o mapa `status` em `ui.ts` (PT e EN) e `toneFallback` em `ProjectCard.astro`.
 
-## 5. Armadilhas (o build não avisa)
+## 5. Armadilhas (hoje todas falham alto)
 
-1. **PT ≠ EN:** `section`, `order`, `status`, `draft`, `noCase`, `views`, `year`, `cardBadge.tone` e as contagens de `tags`/`metrics` devem ser iguais nos dois arquivos.
-2. **`order` tem efeito colateral:** é por seção, mas a ordenação global alimenta o Anterior/Próximo de todos os cases.
-3. **Seção vive em vários lugares** (veja §2 e §3g).
-4. **Typo no frontmatter passa:** o Zod descarta chaves desconhecidas (`cardbade:` cai no fallback sem erro).
-5. **Projeto só em um idioma** (ou `draft` só em um): a rota do outro idioma dá 404, mas o hreflang da página existente aponta para ela. O sitemap não: ele só lista as rotas realmente geradas.
-6. **`locale` ≠ nome do arquivo:** gera entradas duplicadas.
-7. **Registro de componentes MDX em 3 lugares** (veja §2). Componente novo vai nos três.
-8. **Não há CI e `astro check` não roda no build:** erro de tipo vai para produção se ninguém rodar.
-9. **`display: text` não é automático** e `needs_confirmation` some do card sem aviso.
-10. **Pastas com prefixo `_` dentro de `src/content/` são ignoradas pelo Astro** (o build passa sem ler o conteúdo). Para teste temporário use outro nome (ex.: `zz-test`) e confira a contagem de páginas do build. Remova ao terminar.
+O schema derruba o build e o `npm run check:content` derruba o conteúdo. O código entre parênteses é a regra que pega.
+
+1. **PT ≠ EN** (P3): `section`, `order`, `status`, `draft`, `noCase`, `views`, `year`, `snapshotMode`, `externalUrl`, `logo`, `cover`, `cardBadge.tone`, a presença de `statusBadge`/`stage`/`caseSummary`/`statusEvidence`/`readingTime` e as contagens de `tags`/`demonstrates`/`technologies`/`cardHighlights`/`metrics` (com `state` e `display` de cada métrica).
+2. **Chave desconhecida no frontmatter** (`.strict()`): o Zod não descarta mais em silêncio — `cardbade:` derruba o build.
+3. **Projeto só em um idioma, ou `draft`/`noCase` só em um** (P1, P3): a rota do outro dá 404, mas o hreflang da página existente aponta para ela. O sitemap não: ele só lista as rotas realmente geradas.
+4. **`locale` ≠ nome do arquivo** (P2): gera entradas duplicadas.
+5. **Seção fora do lugar** (P4): precisa estar no enum, em `SECTION_ORDER` e em `projectsPage.sections` nos dois idiomas, com os mesmos ids e a mesma ordem.
+6. **`order` repetido na mesma seção** (P5). Efeito colateral: a ordenação global alimenta o Anterior/Próximo de todos os cases.
+7. **`featuredOrder` órfã** (P6): a chave precisa ser projeto existente com `noCase: false` e `draft: false`, e ter entrada em `homeProjects.projects`.
+8. **`homeProjects.projects` ou `ui` com chaves divergentes PT × EN** (P7, P8): precisam ser idênticas, recursivamente.
+9. **Mais de 3 `metrics` com `state: verified` + `display: figure`** (R1).
+10. **`metrics` com `display: text` e `cardHighlights` vazio** (R2). Separado disso: `needs_confirmation` e `hidden` continuam sumindo do card sem aviso.
+11. **`noCase: true` com campo de case preenchido** (R3): `views`, `readingTime`, `caseSummary`, `statusEvidence`, `snapshot`, `externalUrl`, `seo`.
+12. **`snapshotMode: product-technical` sem `snapshot`** (R4).
+13. **`externalUrl` sem `externalUrlLabel`** (R5).
+14. **Pastas com prefixo `_` dentro de `src/content/`** são ignoradas pelo Astro (o build passa sem ler; o P1 avisa). Para teste temporário use outro nome (ex.: `zz-test`) e confira a contagem de páginas do build. Remova ao terminar.
+15. **Avisos, não fatais** (W1, W2): `statusBadge` diferente de `cardBadge.label` só na caixa e `section: archived` com `tone` diferente de `archived`.
+16. **Registro de componentes MDX em 3 lugares** (§2) e **não há CI** — `npm run check` não roda sozinho. São os dois únicos que build e checker não pegam.
 
 ## 6. Não fazer
 
@@ -114,13 +122,13 @@ Fallbacks: card = `cardBadge.label` → `statusBadge` → tradução de `status`
 | Comando | Uso |
 |---|---|
 | `npm run dev` | servidor de desenvolvimento |
-| `npm run build` | build estático em `dist/` (valida o schema de todo frontmatter) |
+| `npm run build` | build estático em `dist/` (valida o schema de todo frontmatter, incluindo `.strict()` e R1–R5) |
 | `npx astro check` | checagem de tipos (rode antes de commitar) |
+| `npm run check:content` | só as regras P1–P8 do conteúdo, sempre com arquivo e campo (exit 1 em erro) |
+| `npm run check` | `astro check` + `check:content` — o gate completo |
 | `npm run preview` | servir o `dist/` |
 
-(`npm run check:content`: documentar aqui somente quando o script existir.)
-
-Antes de encerrar uma tarefa: build + `astro check` + abrir `/`, `/projects/` e um case, nos dois idiomas.
+Antes de encerrar uma tarefa: `npm run check` + `npm run build` + abrir `/`, `/projects/` e um case, nos dois idiomas.
 
 **`dist/` não é reprodutível byte a byte:** ids aleatórios (prefixos `er-`, `cc-`, `chart-`, gerados em `EmailReveal.astro`, `CaseCarousel.astro` e `AnimatedChart.astro`) mudam a cada build. Ao comparar `dist/` antes/depois, normalize ou ignore esses diffs:
 - Com sed (no Windows use o do Git for Windows, `C:\Program Files\Git\usr\bin\sed.exe`): `sed -E 's/(er|cc|chart)-[a-z0-9]{6,9}/\1-X/g'`
