@@ -14,11 +14,11 @@ statusBadge: "Active"
 caseSummary:
   problem: "Reduce the repetitive work of preparing teaching materials without taking control away from educators."
   role: "Co-founder responsible for discovery, product, monetization and technical implementation."
-  result: "A public SaaS with more than 1,200 educators registered organically."
+  result: "A public SaaS with more than 1,200 users registered organically."
   keyDecision: "Treat AI reliability and cost as product decisions."
 statusEvidence:
   stage: "Active product, continuing to evolve."
-  evidence: "The product is public, has surpassed 1,200 educators registered organically and received responses from 100+ educators in a public survey."
+  evidence: "The product is public, has surpassed 1,200 registered users organically and received responses from 100+ educators in a public survey."
 section: featured
 cardBadge:
   label: "Active"
@@ -80,9 +80,6 @@ snapshot:
       label: Public product
       state: verified
   secondary:
-    - value: "94"
-      label: API handlers
-      state: verified
     - value: "8"
       label: External integrations
       state: verified
@@ -93,11 +90,8 @@ snapshot:
       label: Test files
       state: verified
 scaleMetrics:
-  - value: "94"
-    label: API handlers
-    state: verified
   - value: "8"
-    label: Integrations
+    label: External integrations
     state: verified
   - value: "2.4K+"
     label: Test cases
@@ -162,12 +156,12 @@ A custom crossword engine placed 4 to 7 of 20 words; it was replaced with a spec
 
 ## Result
 
-In production, with 1,200+ organically registered educators, 16 content generators and 7 educational games. Revenue combines subscriptions and one-off credit packs.
+In production, with 1,200+ organically registered users, 16 content generators and 7 educational games. Revenue combines subscriptions and one-off credit packs.
 
 <StatsGrid
   label="Product metrics"
   stats={[
-    { value: '1,200+', label: 'Registered educators' },
+    { value: '1,200+', label: 'Registered users' },
     { value: '16', label: 'Content generators' },
     { value: '7', label: 'Educational games' },
     { value: '100+', label: 'Survey responses' },
@@ -490,7 +484,7 @@ Role-based access control (`freemium`, `pro`, `admin`) is implemented manually i
 
 #### Vitest for API contracts. Playwright for critical product flows.
 
-Vitest tests cover two environments: `node` for API handlers, services and server utilities; and `dom` (happy-dom) for React hooks, client logic and stateful components. Property-based tests with `fast-check` validate payload validation endpoints against generated inputs — empty arrays, invalid IDs, wrong types — ensuring input boundaries are robust.
+Vitest tests cover two environments: `node` for API routes, services and server utilities; and `dom` (happy-dom) for React hooks, client logic and stateful components. Property-based tests with `fast-check` validate payload validation endpoints against generated inputs — empty arrays, invalid IDs, wrong types — ensuring input boundaries are robust.
 
 Playwright tests cover the flows a real user goes through: authentication with redirect, generator modal, credit display, editor, materials and critical error scenarios. They follow the Page Object Model pattern. The Asaas checkout is explicitly excluded from e2e tests due to its dependency on an external service.
 

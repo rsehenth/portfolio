@@ -14,11 +14,11 @@ statusBadge: "Ativo"
 caseSummary:
   problem: "Reduzir o trabalho repetitivo de preparar materiais pedagógicos sem tirar o controle do professor."
   role: "Cofundador e responsável por discovery, produto, monetização e implementação técnica."
-  result: "SaaS público com mais de 1.200 professores cadastrados organicamente."
+  result: "SaaS público com mais de 1.200 usuários cadastrados organicamente."
   keyDecision: "Tratar confiabilidade e custo de IA como decisões de produto."
 statusEvidence:
   stage: "Produto ativo, em evolução."
-  evidence: "O produto está público, ultrapassou 1.200 professores cadastrados organicamente e recebeu respostas de mais de 100 professores em um survey público."
+  evidence: "O produto está público, ultrapassou 1.200 usuários cadastrados organicamente e recebeu respostas de mais de 100 professores em um survey público."
 section: featured
 cardBadge:
   label: "Ativo"
@@ -80,9 +80,6 @@ snapshot:
       label: Produto público
       state: verified
   secondary:
-    - value: "94"
-      label: Handlers de API
-      state: verified
     - value: "8"
       label: Integrações externas
       state: verified
@@ -93,9 +90,6 @@ snapshot:
       label: Arquivos de teste
       state: verified
 scaleMetrics:
-  - value: "94"
-    label: Handlers de API
-    state: verified
   - value: "8"
     label: Integrações externas
     state: verified
@@ -162,12 +156,12 @@ O motor próprio de palavras cruzadas posicionava 4 a 7 de 20 palavras; foi troc
 
 ## Resultado
 
-Em produção, com 1.200+ professores cadastrados organicamente, 16 geradores de conteúdo e 7 jogos educativos. A receita combina assinaturas e pacotes avulsos de créditos.
+Em produção, com 1.200+ usuários cadastrados organicamente, 16 geradores de conteúdo e 7 jogos educativos. A receita combina assinaturas e pacotes avulsos de créditos.
 
 <StatsGrid
   label="Métricas do produto"
   stats={[
-    { value: '1.200+', label: 'Professores cadastrados' },
+    { value: '1.200+', label: 'Usuários cadastrados' },
     { value: '16', label: 'Geradores de conteúdo' },
     { value: '7', label: 'Jogos educativos' },
     { value: '100+', label: 'Respostas de survey' },
@@ -490,7 +484,7 @@ O controle de acesso por papel (`freemium`, `pro`, `admin`) é implementado manu
 
 #### Vitest para contratos de API. Playwright para fluxos críticos de produto.
 
-Os testes Vitest cobrem dois ambientes: `node` para handlers de API, serviços e utilitários do servidor; e `dom` (happy-dom) para hooks React, lógica de cliente e componentes com estado. Testes de propriedade com `fast-check` validam os endpoints de validação de payload contra entradas geradas — arrays vazios, IDs inválidos, tipos errados — garantindo que as fronteiras de entrada sejam robustas.
+Os testes Vitest cobrem dois ambientes: `node` para rotas de API, serviços e utilitários do servidor; e `dom` (happy-dom) para hooks React, lógica de cliente e componentes com estado. Testes de propriedade com `fast-check` validam os endpoints de validação de payload contra entradas geradas — arrays vazios, IDs inválidos, tipos errados — garantindo que as fronteiras de entrada sejam robustas.
 
 Os testes Playwright cobrem os fluxos que um usuário real percorre: autenticação com redirecionamento, modal de gerador, exibição de créditos, editor, materiais e cenários de erro crítico. Seguem o padrão Page Object Model. O checkout Asaas é explicitamente excluído dos testes e2e por depender de serviço externo.
 

@@ -127,8 +127,8 @@ Add to the frontmatter `metrics` array of the case's `pt-BR.mdx` / `en.mdx`:
 
 ```yaml
 metrics:
-  - value: "94"
-    label: API handlers
+  - value: "2.4K+"
+    label: Test cases
     state: verified      # only verified metrics are ever rendered
 ```
 

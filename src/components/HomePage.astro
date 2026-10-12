@@ -204,9 +204,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
           <p class="text-body-lg text-muted-foreground mb-6">
             {about.bio.p1}
           </p>
-          <p class="text-body-md text-muted-foreground">
-            {about.bio.p2}
-          </p>
+          <p class="text-body-md text-muted-foreground" set:html={about.bio.p2} />
         </div>
       </div>
     </div>

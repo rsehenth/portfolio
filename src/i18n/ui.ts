@@ -32,7 +32,7 @@ export const ui = {
     hero: {
       badge: 'Technical Product Manager · AI Products',
       tagline: 'Descubro o problema, decido o que construir e implemento.',
-      subheadline: 'Cofundador do ProfResolve, SaaS de IA com mais de 1.200 professores cadastrados. Antes, 5+ anos em suporte, localização e comunidade no ecossistema Web3, em português, inglês e espanhol.',
+      subheadline: 'Cofundador do ProfResolve, SaaS de IA com mais de 1.200 usuários cadastrados. Antes, 5+ anos em suporte, localização e comunidade no ecossistema Web3, em português, inglês e espanhol.',
       ctaPrimary: 'Ver cases',
       ctaSecondary: 'LinkedIn',
       ctaCV: 'Baixar CV (PDF)',
@@ -173,19 +173,19 @@ export const ui = {
         description: 'Trajetória de Lucas Sehnem entre usuários, produto e tecnologia, com experiência em AI Products, Technical Product, discovery, estratégia e execução hands-on.',
       },
 
-      // bio.* kept untouched — consumed by HomePage.astro for the Home About section
+      // bio.* — 2-sentence home excerpt; the last sentence carries the localized link to the About page (rendered via set:html in HomePage.astro)
       bio: {
-        p1: 'Trabalho de forma hands-on entre produto e tecnologia, atuando diretamente com desenvolvimento, IA, APIs, arquitetura, automações e prototipação para transformar decisões de produto em soluções reais.',
-        p2: 'Meu trabalho não termina na definição do que construir. Busco entender as implicações técnicas, os trade-offs e o caminho mais eficiente para transformar uma decisão de produto em valor real para o usuário.',
+        p1: 'Comecei atendendo usuários de perto, em suporte e comunidade, e foi desse contato que cheguei a produto.',
+        p2: 'Hoje sou Technical Product Manager e cofundador do ProfResolve. A história completa está na <a href="/about/">página Sobre</a>.',
       },
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
-        p1: 'Minha trajetória em tecnologia começou próxima dos usuários. Passei mais de cinco anos no ecossistema TRON DAO / DLive atuando com suporte, onboarding, localização e feedback em português, inglês e espanhol. Depois, na exchange espanhola Bit2Me e em projetos da Play9/NineBlocks, passei a conectar comunidade, growth e produto, levando sinais de usuários para decisões de comunicação, discovery e backlog.',
-        p2: 'Essa experiência me levou a papéis cada vez mais próximos de produto. Na Cripto Host, atuei como Product Owner, trabalhando com backlog, requisitos técnicos, pesquisa de infraestrutura e priorização junto à engenharia.',
-        p3: 'Hoje, como cofundador do ProfResolve, atuo em todo o ciclo do produto: discovery, estratégia, roadmap, UX, monetização e implementação técnica. Participei diretamente da construção da plataforma, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade.',
-        p4: 'O ProfResolve evoluiu para um SaaS público, com mais de 1.200 usuários cadastrados organicamente, permitindo que decisões de produto sejam orientadas também pelo comportamento e feedback de professores reais.',
-        p5: 'Essa combinação entre entendimento do usuário, visão de negócio, decisões de produto e execução técnica é o que levo para a próxima equipe.',
+        p1: 'Minha trajetória em tecnologia começou perto dos usuários. Passei mais de cinco anos no ecossistema TRON DAO / DLive atuando com suporte, onboarding, localização e feedback em português, inglês e espanhol. Depois, na exchange espanhola Bit2Me e em projetos da Play9/NineBlocks, conectei comunidade, growth e produto, levando o que os usuários diziam para decisões de comunicação, discovery e backlog.',
+        p2: 'Essa experiência me aproximou de produto. Na Cripto Host, atuei como Product Owner, cuidando de requisitos técnicos, pesquisa de infraestrutura e priorização junto à engenharia.',
+        p3: 'Hoje, como cofundador do ProfResolve, atuo do discovery à implementação técnica, cobrindo estratégia, roadmap, UX e monetização. Participei diretamente da construção da plataforma, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade.',
+        p4: 'O ProfResolve virou um SaaS público, com mais de 1.200 usuários cadastrados organicamente. Hoje decido também com base no comportamento e no feedback de professores reais.',
+        p5: 'Essa combinação de entendimento de usuário, visão de negócio e execução técnica é o que levo para a próxima equipe.',
       },
 
       transparency: 'Apresento apenas dados que consigo verificar; o status de cada projeto está indicado em cada case.',
@@ -356,7 +356,7 @@ export const ui = {
     hero: {
       badge: 'Technical Product Manager · AI Products',
       tagline: 'I discover the problem, decide what to build and implement it.',
-      subheadline: 'Co-founder of ProfResolve, an AI SaaS with more than 1,200 registered teachers. Before that, 5+ years in support, localization and community in the Web3 ecosystem, in Portuguese, English and Spanish.',
+      subheadline: 'Co-founder of ProfResolve, an AI SaaS with more than 1,200 registered users. Before that, 5+ years in support, localization and community in the Web3 ecosystem, in Portuguese, English and Spanish.',
       ctaPrimary: 'View cases',
       ctaSecondary: 'LinkedIn',
       ctaCV: 'Download CV (PDF)',
@@ -497,19 +497,19 @@ export const ui = {
         description: "Lucas Sehnem's path across users, product and technology — with experience in AI Products, Technical Product, discovery, strategy and hands-on execution.",
       },
 
-      // bio.* kept untouched — consumed by HomePage.astro for the Home About section
+      // bio.* — 2-sentence home excerpt; the last sentence carries the localized link to the About page (rendered via set:html in HomePage.astro)
       bio: {
-        p1: 'I work hands-on across product and technology, directly engaging with development, AI, APIs, architecture, automation and prototyping to turn product decisions into real solutions.',
-        p2: 'My work does not end with defining what to build. I focus on understanding the technical implications, trade-offs and the most efficient path from a product decision to real user value.',
+        p1: 'I started out working with users up close, in support and community, and that is how I got into product.',
+        p2: 'Today I am a Technical Product Manager and co-founder of ProfResolve. The full story is on the <a href="/en/about/">About page</a>.',
       },
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
-        p1: 'My career in technology started close to users. I spent more than five years in the TRON DAO / DLive ecosystem working with support, onboarding, localization and feedback in Portuguese, English and Spanish. Later, at the Spanish exchange Bit2Me and in Play9/NineBlocks projects, I began connecting community, growth and product, bringing user signals into communication, discovery and backlog decisions.',
-        p2: 'That experience led me to increasingly product-focused roles. At Cripto Host, I worked as a Product Owner, dealing with backlog, technical requirements, infrastructure research and prioritization alongside engineering.',
-        p3: 'Today, as co-founder of ProfResolve, I work across the entire product cycle: discovery, strategy, roadmap, UX, monetization and technical implementation. I was directly involved in building the platform, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms.',
-        p4: 'ProfResolve grew into a public SaaS with over 1,200 organically registered users, enabling product decisions to be guided by the real behavior and feedback of practicing teachers.',
-        p5: 'This combination of user understanding, business vision, product decisions and technical execution is what I bring to the next team.',
+        p1: 'I started out in technology close to the user. I spent more than five years in the TRON DAO / DLive ecosystem doing support, onboarding, localization and feedback in Portuguese, English and Spanish. Later, at the Spanish exchange Bit2Me and in Play9/NineBlocks projects, I connected community, growth and product, turning what users said into decisions on communication, discovery and backlog.',
+        p2: 'That experience moved me closer to product. At Cripto Host, I worked as a Product Owner, handling technical requirements, infrastructure research and prioritization alongside engineering.',
+        p3: 'Today, as co-founder of ProfResolve, I work from discovery through technical implementation, covering strategy, roadmap, UX and monetization. I took a direct part in building the platform, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms.',
+        p4: 'ProfResolve grew into a public SaaS with over 1,200 organically registered users. I now base product decisions partly on what real teachers do and say.',
+        p5: 'This mix of user understanding, business sense and technical execution is what I bring to the next team.',
       },
 
       transparency: 'I present only data I can verify; each project’s status is indicated in its case study.',
