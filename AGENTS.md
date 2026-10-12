@@ -3,8 +3,7 @@
 Qualquer agente de IA que edite este repositório deve ler este arquivo antes de alterar conteúdo, i18n ou componentes de projeto.
 Se este arquivo e o código divergirem, **o código vale**: avise e corrija este arquivo.
 
-> **Manutenção:** se mudar campos, seções ou rotas, atualize este arquivo na mesma tarefa.
-> As referências usam arquivo + símbolo (sem número de linha): localize o símbolo com grep.
+> **Manutenção:** se mudar campos, seções ou rotas, atualize este arquivo na mesma tarefa. As referências usam arquivo + símbolo (sem número de linha) — localize o símbolo com grep.
 
 ## 1. Arquitetura em 30 segundos
 
@@ -20,7 +19,7 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 | Tarefa | Onde |
 |---|---|
 | Dados de um projeto (texto, status, métricas, seção, ordem) | `src/content/projects/<slug>/pt-BR.mdx` **e** `en.mdx` |
-| Campos permitidos / obrigatórios | `src/content/config.ts` e `docs/project-template.mdx` |
+| Campos permitidos / obrigatórios | `src/content/config.ts`; template de card `docs/project-template-card.mdx` ou de case `docs/project-template.mdx` |
 | Visual do card do /projects | `src/components/ProjectCard.astro` |
 | Seções do /projects (variante do card, nº de colunas) | `src/components/ProjectsIndex.astro` (`variantFor`, `gridClass`) |
 | Título/subtítulo de uma seção | `src/i18n/ui.ts` → `projectsPage.sections` (PT e EN) |
@@ -31,15 +30,25 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 | Anterior/Próximo entre cases | `src/components/CaseNavigation.astro` (usa a ordenação de `projects.ts`) |
 | Seletor Resumo/Case completo | `docs/case-views.md` |
 
-## 3. Checklists
+## 3. Adicionar projeto / checklists
 
-**a) Projeto novo com case**
-1. Copie `docs/project-template.mdx` para `src/content/projects/<slug>/pt-BR.mdx` e duplique para `en.mdx`, com os **mesmos campos estruturais**.
+### Adicionar projeto (fluxo curto — padrão: projeto só com card)
+
+1. Peça ou confirme com o dono apenas: nome, descrição curta (1–2 frases), status, seção, 2–3 tags e métricas já verificadas. Sem métrica se não houver; nunca invente números, descrição nem status.
+2. Copie `docs/project-template-card.mdx` para `src/content/projects/<slug>/pt-BR.mdx` e `en.mdx` (mesmos campos nos dois, texto traduzido). Status, `cardBadge` e `tone` seguem a §4.
+3. `order`: topo da seção = maior valor existente nela + 1; fim = menor valor − 1; nunca repetir na mesma seção (P5 derruba o build).
+4. Rode `npm run build` e confira o card em `/projects/` e `/en/projects/`.
+5. Não faça commit, branch ou PR, a menos que o dono peça.
+
+### Checklists
+
+**a) Projeto novo com case (só nesse caso use o completo):** `docs/project-template.mdx`. O padrão para projeto novo é o mínimo `docs/project-template-card.mdx`, que é só para card, sem case.
+1. Copie o template para `src/content/projects/<slug>/pt-BR.mdx` e duplique para `en.mdx`, com os **mesmos campos estruturais**.
 2. `locale` igual ao nome do arquivo. `section` e `cardBadge` são obrigatórios.
 3. `logo`/`cover` só se o arquivo existir em `public/projects/<slug>/` (nos dois arquivos).
 4. Rode o build e confira `/projects/`, `/projects/<slug>/` e `/en/projects/<slug>/`.
 
-**b) Projeto sem case:** `noCase: true` e o bloco "PÁGINA DE CASE" inteiro apagado do template. Exemplo real: `project-chat` — entre os campos de case, só mantém `scaleMetrics: []` e `productMetrics: []`. Nunca ponha um projeto `noCase` em `featuredOrder` (o card da Home sempre linka).
+**b) Projeto sem case (padrão):** copie `docs/project-template-card.mdx` — só campos de card, com `noCase: true` e nenhum campo de case (R3 derruba o build). Exemplo real: `project-chat`. Nunca ponha um projeto `noCase` em `featuredOrder` (o card da Home sempre linka).
 
 **c) Mudar status:** veja §4. Altere todos os campos relevantes, nos dois idiomas.
 
@@ -104,7 +113,7 @@ O schema derruba o build e o `npm run check:content` derruba o conteúdo. O cód
 11. **`noCase: true` com campo de case preenchido** (R3): `views`, `readingTime`, `caseSummary`, `statusEvidence`, `snapshot`, `externalUrl`, `seo`.
 12. **`snapshotMode: product-technical` sem `snapshot`** (R4).
 13. **`externalUrl` sem `externalUrlLabel`** (R5).
-14. **Pastas com prefixo `_` dentro de `src/content/`** são ignoradas pelo Astro (o build passa sem ler; o P1 avisa). Para teste temporário use outro nome (ex.: `zz-test`) e confira a contagem de páginas do build. Remova ao terminar.
+14. **Pastas com prefixo `_` dentro de `src/content/`** são ignoradas pelo Astro (o build passa sem ler; o P1 avisa). Para teste temporário use outro nome (ex.: `zz-test`) e remova ao terminar. Atenção: projeto `noCase: true` não gera rota de case, então **não muda a contagem de páginas** — confira o card em `dist/projects/index.html`.
 15. **Avisos, não fatais** (W1, W2): `statusBadge` diferente de `cardBadge.label` só na caixa e `section: archived` com `tone` diferente de `archived`.
 16. **Registro de componentes MDX em 3 lugares** (§2): build e checker não pegam. É o único que segue dependendo de você lembrar — o `npm run check` já roda dentro do `npm run build`, inclusive no deploy.
 
@@ -131,14 +140,10 @@ O schema derruba o build e o `npm run check:content` derruba o conteúdo. O cód
 
 Antes de encerrar uma tarefa: `npm run build` (que já validou tudo) + abrir `/`, `/projects/` e um case, nos dois idiomas.
 
-**`dist/` não é reprodutível byte a byte:** ids aleatórios (prefixos `er-`, `cc-`, `chart-`, gerados em `EmailReveal.astro`, `CaseCarousel.astro` e `AnimatedChart.astro`) mudam a cada build. Ao comparar `dist/` antes/depois, normalize ou ignore esses diffs:
-- Com sed (no Windows use o do Git for Windows, `C:\Program Files\Git\usr\bin\sed.exe`): `sed -E 's/(er|cc|chart)-[a-z0-9]{6,9}/\1-X/g'`
-- PowerShell: `(Get-Content arquivo -Raw) -replace '(er|cc|chart)-[a-z0-9]{6,9}','$1-X'`
+**`dist/` não é reprodutível byte a byte:** ids aleatórios (prefixos `er-`, `cc-`, `chart-` de `EmailReveal.astro`, `CaseCarousel.astro`, `AnimatedChart.astro`) mudam a cada build — ao comparar `dist/` antes/depois, normalize ou ignore: sed (Git for Windows: `C:\Program Files\Git\usr\bin\sed.exe`) `sed -E 's/(er|cc|chart)-[a-z0-9]{6,9}/\1-X/g'` ou PowerShell `(Get-Content arquivo -Raw) -replace '(er|cc|chart)-[a-z0-9]{6,9}','$1-X'`.
 
 ## 8. Arquivos-ponteiro
 
-Estes arquivos só apontam para este `AGENTS.md`. Não coloque conteúdo próprio neles, e se alterar este arquivo, não precisa mexer neles.
+Estes arquivos só apontam para este `AGENTS.md`; não coloque conteúdo próprio neles, nem precisa mexer neles ao alterar este arquivo.
 
-- `CLAUDE.md` — importa este arquivo (`@AGENTS.md`).
-
-Sem ponteiro: OpenCode, Codex e Kiro leem `AGENTS.md` nativamente; o Claude Code só o lê se não houver `CLAUDE.md`, por isso existe o import acima.
+- `CLAUDE.md` — importa este arquivo (`@AGENTS.md`). Sem ponteiro: OpenCode, Codex e Kiro leem `AGENTS.md` nativamente; o Claude Code só o lê se não houver `CLAUDE.md`, por isso existe o import acima.

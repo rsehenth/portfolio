@@ -1,0 +1,20 @@
+---
+# docs/project-template-card.mdx — projeto SÓ com card (sem página de case). Este arquivo não é lido pelo build.
+# Copie para src/content/projects/<slug>/pt-BR.mdx e en.mdx: mesmos campos nos 2 idiomas, só os textos mudam.
+title: Nome do Projeto
+locale: pt-BR                  # igual ao nome do arquivo: pt-BR.mdx → pt-BR | en.mdx → en
+subtitle: Categoria curta      # opcional: subtítulo exibido no card
+description: "1–2 frases. Também é o meta description de fallback."
+year: 2026                     # inteiro entre 2000 e 2100
+role: Technical Product        # texto livre (ex.: Technical Product · Arquitetura de produto)
+status: Discovery              # Active | Completed | Archived | Discovery (fallback de exibição)
+section: discovery             # featured | products | tools | discovery | archived
+cardBadge:                     # badge do card no /projects (mesma história do status, nos 2 idiomas)
+  label: "Em discovery"        # texto livre; vocabulário PT/EN: AGENTS.md §4
+  tone: discovery              # active | development | functional | discovery | archived
+tags: [SaaS, APIs, Automação]  # 3 visíveis no card; mesmas 3 no en
+demonstrates: [Produto de IA, Confiabilidade, MVP]  # 3 visíveis no card; mesmas 3 no en
+order: 5                       # maior = primeiro DENTRO da seção; mesmo valor nos 2 idiomas; nunca repetir na seção
+draft: false                   # true: some de todas as rotas (nos 2 idiomas)
+noCase: true                   # sem página de case; nunca em featuredOrder (o card da Home sempre linka)
+---

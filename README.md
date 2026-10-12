@@ -415,3 +415,20 @@ MIT — Feel free to use as a template for your own portfolio.
 ## 🙋 Questions?
 
 Open an issue or reach out via [LinkedIn](https://www.linkedin.com/in/sehenth/) or [Email](mailto:lucas.sehnemb@gmail.com).
+
+---
+
+## 🤖 Adicionar um projeto com IA
+
+Cole este bloco numa conversa com uma IA e preencha. A IA segue o `AGENTS.md` (template mínimo `docs/project-template-card.mdx`, dois idiomas, `npm run build`, sem commit):
+
+```
+Adicione um projeto. Siga o AGENTS.md.
+Nome: ...
+Descrição (1-2 frases): ...
+Status: (ativo / em desenvolvimento / funcional / em discovery / arquivado)
+Seção: (destaque / produtos / ferramentas / discovery / arquivados)
+Tags: ...
+Métricas verificadas (se houver): ...
+Sem página de case por enquanto. Não faça commit.
+```
