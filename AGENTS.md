@@ -106,7 +106,7 @@ O schema derruba o build e o `npm run check:content` derruba o conteúdo. O cód
 13. **`externalUrl` sem `externalUrlLabel`** (R5).
 14. **Pastas com prefixo `_` dentro de `src/content/`** são ignoradas pelo Astro (o build passa sem ler; o P1 avisa). Para teste temporário use outro nome (ex.: `zz-test`) e confira a contagem de páginas do build. Remova ao terminar.
 15. **Avisos, não fatais** (W1, W2): `statusBadge` diferente de `cardBadge.label` só na caixa e `section: archived` com `tone` diferente de `archived`.
-16. **Registro de componentes MDX em 3 lugares** (§2) e **não há CI** — `npm run check` não roda sozinho. São os dois únicos que build e checker não pegam.
+16. **Registro de componentes MDX em 3 lugares** (§2): build e checker não pegam. É o único que segue dependendo de você lembrar — o `npm run check` já roda dentro do `npm run build`, inclusive no deploy.
 
 ## 6. Não fazer
 
@@ -122,13 +122,14 @@ O schema derruba o build e o `npm run check:content` derruba o conteúdo. O cód
 | Comando | Uso |
 |---|---|
 | `npm run dev` | servidor de desenvolvimento |
-| `npm run build` | build estático em `dist/` (valida o schema de todo frontmatter, incluindo `.strict()` e R1–R5) |
-| `npx astro check` | checagem de tipos (rode antes de commitar) |
+| `npm run build` | roda `npm run check` antes (`astro check` + `check:content`) e só então gera `dist/`; é o comando que o **deploy** usa |
+| `npm run build:fast` | só `astro build`, pulando toda a validação — **não use para entregar** (escape manual) |
+| `npx astro check` | checagem de tipos isolada |
 | `npm run check:content` | só as regras P1–P8 do conteúdo, sempre com arquivo e campo (exit 1 em erro) |
-| `npm run check` | `astro check` + `check:content` — o gate completo |
+| `npm run check` | `astro check` + `check:content` — o que o `build` chama |
 | `npm run preview` | servir o `dist/` |
 
-Antes de encerrar uma tarefa: `npm run check` + `npm run build` + abrir `/`, `/projects/` e um case, nos dois idiomas.
+Antes de encerrar uma tarefa: `npm run build` (que já validou tudo) + abrir `/`, `/projects/` e um case, nos dois idiomas.
 
 **`dist/` não é reprodutível byte a byte:** ids aleatórios (prefixos `er-`, `cc-`, `chart-`, gerados em `EmailReveal.astro`, `CaseCarousel.astro` e `AnimatedChart.astro`) mudam a cada build. Ao comparar `dist/` antes/depois, normalize ou ignore esses diffs:
 - Com sed (no Windows use o do Git for Windows, `C:\Program Files\Git\usr\bin\sed.exe`): `sed -E 's/(er|cc|chart)-[a-z0-9]{6,9}/\1-X/g'`
