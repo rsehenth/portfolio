@@ -173,10 +173,11 @@ export const ui = {
         description: 'Trajetória de Lucas Sehnem entre usuários, produto e tecnologia, com experiência em AI Products, Technical Product, discovery, estratégia e execução hands-on.',
       },
 
-      // bio.* — 2-sentence home excerpt; the last sentence carries the localized link to the About page (rendered via set:html in HomePage.astro)
+      // bio.* — three-paragraph home excerpt; the last sentence carries the localized link to the About page (rendered via set:html in HomePage.astro)
       bio: {
-        p1: 'Comecei atendendo usuários de perto, em suporte e comunidade, e foi desse contato que cheguei a produto.',
-        p2: 'Hoje sou Technical Product Manager e cofundador do ProfResolve. A história completa está na <a href="/about/">página Sobre</a>.',
+        p1: 'Trabalho de forma hands-on entre produto e tecnologia, atuando diretamente com desenvolvimento, IA, APIs, arquitetura, automações e prototipação para transformar decisões de produto em soluções reais.',
+        p2: 'Meu trabalho não termina na definição do que construir. Busco entender as implicações técnicas, os trade-offs e o caminho mais eficiente para transformar uma decisão de produto em valor real para o usuário.',
+        p3: 'Hoje sou Technical Product Manager e cofundador do ProfResolve. A história completa está na <a href="/about/">página Sobre</a>.',
       },
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
@@ -497,10 +498,11 @@ export const ui = {
         description: "Lucas Sehnem's path across users, product and technology — with experience in AI Products, Technical Product, discovery, strategy and hands-on execution.",
       },
 
-      // bio.* — 2-sentence home excerpt; the last sentence carries the localized link to the About page (rendered via set:html in HomePage.astro)
+      // bio.* — three-paragraph home excerpt; the last sentence carries the localized link to the About page (rendered via set:html in HomePage.astro)
       bio: {
-        p1: 'I started out working with users up close, in support and community, and that is how I got into product.',
-        p2: 'Today I am a Technical Product Manager and co-founder of ProfResolve. The full story is on the <a href="/en/about/">About page</a>.',
+        p1: 'I work hands-on across product and technology, directly involved with development, AI, APIs, architecture, automation and prototyping to turn product decisions into real solutions.',
+        p2: 'My work does not end with defining what to build. I seek to understand the technical implications, trade-offs and the most efficient path to turn a product decision into real value for the user.',
+        p3: 'Today I am a Technical Product Manager and co-founder of ProfResolve. The full story is on the <a href="/en/about/">About page</a>.',
       },
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
