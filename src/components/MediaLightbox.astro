@@ -13,9 +13,7 @@
   tabindex="-1"
 >
   <div class="mlb__backdrop" id="mlb-backdrop" aria-hidden="true"></div>
-  <div class="mlb__stage">
-    <img class="mlb__img" id="mlb-img" src="" alt="" draggable="false" />
-  </div>
+  <div class="mlb__stage" id="mlb-stage"></div>
   <button type="button" class="mlb__close" id="mlb-close" aria-label="Fechar">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -110,14 +108,27 @@
     window._mlbReady = true;
 
     const lb    = document.getElementById('media-lightbox');
-    const img   = document.getElementById('mlb-img');
+    const stage = document.getElementById('mlb-stage');
     const close = document.getElementById('mlb-close');
     const back  = document.getElementById('mlb-backdrop');
+    let img = null;
+
+    function getImage() {
+      if (!img && stage) {
+        img = document.createElement('img');
+        img.className = 'mlb__img';
+        img.draggable = false;
+        stage.appendChild(img);
+      }
+      return img;
+    }
 
     function open(src, alt) {
-      if (!lb || !img) return;
-      img.src = src;
-      img.alt = alt || '';
+      if (!lb || !src) return;
+      const media = getImage();
+      if (!media) return;
+      media.src = src;
+      media.alt = alt || '';
       lb.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       lb.focus();
@@ -127,7 +138,7 @@
       if (!lb) return;
       lb.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      setTimeout(() => { if (img) img.src = ''; }, 300);
+      setTimeout(() => { if (img) img.removeAttribute('src'); }, 300);
     }
 
     /* Expose globally so CaseMedia / CaseCarousel can call it.
