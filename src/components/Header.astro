@@ -96,7 +96,7 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
 
         <!-- Mobile menu button -->
         <button
-          class="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-fast"
+          class="inline-flex h-11 w-11 items-center justify-center lg:hidden rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-fast"
           aria-label={locale === 'pt-BR' ? 'Alternar menu' : 'Toggle menu'}
           aria-expanded="false"
           aria-controls="mobile-menu"
@@ -180,7 +180,6 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
     // Mobile menu toggle
     const toggle = document.querySelector('[data-mobile-menu-toggle]');
     const menu = document.getElementById('mobile-menu');
-    const header = document.querySelector('header');
 
     function closeMenu() {
       if (!menu || !toggle) return;
@@ -213,17 +212,5 @@ const altUrl = altLocale === 'pt-BR' ? switchPath : `/en${switchPath}`;
       });
     }
 
-    // Add shadow to header on scroll
-    if (header) {
-      const updateHeader = () => {
-        if (window.scrollY > 8) {
-          header.classList.add('shadow-sm');
-        } else {
-          header.classList.remove('shadow-sm');
-        }
-      };
-      window.addEventListener('scroll', updateHeader, { passive: true });
-      updateHeader();
-    }
   </script>
 </header>

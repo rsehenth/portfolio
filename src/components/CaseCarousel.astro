@@ -190,17 +190,27 @@ const uid = `cc-${Math.random().toString(36).slice(2, 8)}`;
     background: rgb(0 0 0 / 0.35);
   }
   .cc-dot {
-    width: 0.5rem;
-    height: 0.5rem;
+    position: relative;
+    display: grid;
+    width: 1.75rem;
+    height: 1.75rem;
+    place-items: center;
     border-radius: 9999px;
-    background: rgb(255 255 255 / 0.45);
+    background: transparent;
     border: none;
     padding: 0;
     cursor: pointer;
     appearance: none;
     transition: background 250ms ease, transform 250ms ease;
   }
-  .cc-dot--active { background: #fff; transform: scale(1.25); }
+  .cc-dot::after {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.45);
+    content: '';
+  }
+  .cc-dot--active::after { background: #fff; transform: scale(1.25); }
   .cc-dot:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
   /* ── Counter ── */
@@ -242,6 +252,21 @@ const uid = `cc-${Math.random().toString(36).slice(2, 8)}`;
   }
   .cc-zoom svg { width: 1rem; height: 1rem; }
   .cc-root:hover .cc-zoom { opacity: 1; transform: scale(1); }
+
+  @media (hover: none), (pointer: coarse) {
+    .cc-btn,
+    .cc-counter,
+    .cc-zoom {
+      opacity: 1;
+    }
+
+    .cc-btn {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+
+    .cc-dots { gap: 0.125rem; padding: 0.125rem 0.25rem; }
+  }
 
   /* ── Reduced motion ── */
   @media (prefers-reduced-motion: reduce) {

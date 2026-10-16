@@ -13,9 +13,7 @@
   tabindex="-1"
 >
   <div class="mlb__backdrop" id="mlb-backdrop" aria-hidden="true"></div>
-  <div class="mlb__stage">
-    <img class="mlb__img" id="mlb-img" src="" alt="" draggable="false" />
-  </div>
+  <div class="mlb__stage" id="mlb-stage"></div>
   <button type="button" class="mlb__close" id="mlb-close" aria-label="Fechar">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -33,7 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
     opacity: 0;
     visibility: hidden;
     transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -78,14 +76,14 @@
   }
   .mlb__close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: max(1rem, env(safe-area-inset-top));
+    right: max(1rem, env(safe-area-inset-right));
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: 9999px;
     background: rgb(255 255 255 / 0.12);
     border: 1px solid rgb(255 255 255 / 0.18);
@@ -110,14 +108,27 @@
     window._mlbReady = true;
 
     const lb    = document.getElementById('media-lightbox');
-    const img   = document.getElementById('mlb-img');
+    const stage = document.getElementById('mlb-stage');
     const close = document.getElementById('mlb-close');
     const back  = document.getElementById('mlb-backdrop');
+    let img = null;
+
+    function getImage() {
+      if (!img && stage) {
+        img = document.createElement('img');
+        img.className = 'mlb__img';
+        img.draggable = false;
+        stage.appendChild(img);
+      }
+      return img;
+    }
 
     function open(src, alt) {
-      if (!lb || !img) return;
-      img.src = src;
-      img.alt = alt || '';
+      if (!lb || !src) return;
+      const media = getImage();
+      if (!media) return;
+      media.src = src;
+      media.alt = alt || '';
       lb.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       lb.focus();
@@ -127,7 +138,7 @@
       if (!lb) return;
       lb.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      setTimeout(() => { if (img) img.src = ''; }, 300);
+      setTimeout(() => { if (img) img.removeAttribute('src'); }, 300);
     }
 
     /* Expose globally so CaseMedia / CaseCarousel can call it.

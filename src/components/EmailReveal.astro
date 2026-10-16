@@ -23,7 +23,7 @@ const tld = domainParts.at(-1) ?? '';
 const uid = `er-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
-<span id={uid} aria-live="polite" class="inline-flex">
+<span id={uid} aria-live="polite" class="email-reveal inline-flex">
   <button
     type="button"
     class="inline-flex items-center gap-2 px-4 py-2 text-body-sm font-medium text-muted-foreground border border-border rounded-lg hover:text-foreground hover:border-foreground/40 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
@@ -79,3 +79,19 @@ const uid = `er-${Math.random().toString(36).slice(2, 8)}`;
     document.addEventListener('DOMContentLoaded', initEmailReveal);
   }
 </script>
+
+<style>
+  @media (max-width: 639px) {
+    .email-reveal,
+    .email-reveal > button,
+    .email-reveal > a {
+      width: 100%;
+    }
+
+    .email-reveal > button,
+    .email-reveal > a {
+      min-height: 2.75rem;
+      justify-content: center;
+    }
+  }
+</style>

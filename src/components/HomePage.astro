@@ -47,7 +47,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
 })() : null;
 ---
 
-<BaseLayout fullTitle={meta.siteTitle} description={meta.siteDescription} locale={locale}>
+<BaseLayout class="proof-page proof-page--home" fullTitle={meta.siteTitle} description={meta.siteDescription} locale={locale}>
   <Hero locale={locale} />
 
   <!-- Selected Work -->
@@ -80,6 +80,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
                       revealDelay={delay}
                       logo={project.data.logo}
                       logoPosition={project.data.logoPosition}
+                      cover={project.data.cover}
                     />
                   </div>
                 ) : null
@@ -101,6 +102,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
                   revealDelay={0}
                   logo={singleProject.project.data.logo}
                   logoPosition={singleProject.project.data.logoPosition}
+                  cover={singleProject.project.data.cover}
                 />
               </div>
             </div>
@@ -137,11 +139,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
 
       <div class="grid-3">
         <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="0">
-          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-          </div>
+          <img src="/produto.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-6" />
           <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.product.title}</h3>
           <p class="text-body-md text-muted-foreground mb-6">{howIWork.product.description}</p>
           <ul class="space-y-2" role="list">
@@ -155,11 +153,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
         </div>
 
         <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="100">
-          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 16l4-16M6 16l-4-8m16 8l-4-8m0 0L8 4m8 8v12" />
-            </svg>
-          </div>
+          <img src="/tecnologia.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-6" />
           <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.technology.title}</h3>
           <p class="text-body-md text-muted-foreground mb-6">{howIWork.technology.description}</p>
           <ul class="space-y-2" role="list">
@@ -173,11 +167,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
         </div>
 
         <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="200">
-          <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 text-accent" aria-hidden="true">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
+          <img src="/execucao.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-6" />
           <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.execution.title}</h3>
           <p class="text-body-md text-muted-foreground mb-6">{howIWork.execution.description}</p>
           <ul class="space-y-2" role="list">
@@ -204,9 +194,10 @@ const singleProject = featuredProjects.length === 1 ? (() => {
           <p class="text-body-lg text-muted-foreground mb-6">
             {about.bio.p1}
           </p>
-          <p class="text-body-md text-muted-foreground">
+          <p class="text-body-md text-muted-foreground mb-6">
             {about.bio.p2}
           </p>
+          <p class="text-body-md text-muted-foreground" set:html={about.bio.p3} />
         </div>
       </div>
     </div>
@@ -248,25 +239,3 @@ const singleProject = featuredProjects.length === 1 ? (() => {
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  @keyframes home-projects-cta-pulse {
-    0%, 72%, 100% {
-      box-shadow: 0 0 0 0 rgb(var(--color-accent-rgb) / 0);
-    }
-
-    84% {
-      box-shadow: 0 0 0 0.45rem rgb(var(--color-accent-rgb) / 0.14);
-    }
-  }
-
-  .home-projects-cta {
-    animation: home-projects-cta-pulse 5s ease-in-out infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .home-projects-cta {
-      animation: none;
-    }
-  }
-</style>

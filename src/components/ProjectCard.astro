@@ -616,4 +616,31 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
       margin-right: auto;
     }
   }
+
+  /* Proof-sheet override: each project reads as an editorial plate. */
+  .project-card {
+    border-radius: 0;
+    border-color: rgb(var(--color-border-rgb));
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .project-card__body,
+  .project-card--featured .project-card__body {
+    padding: clamp(1.25rem, 2.5vw, 2.25rem);
+  }
+
+  .project-card__top { padding-bottom: .75rem; border-bottom: 1px solid rgb(var(--color-border-rgb)); }
+  .project-card__logo, .project-card--featured .project-card__logo { border-radius: 0; background: transparent; }
+  .project-card__badge { padding: 0; border: 0; border-radius: 0; background: transparent; font-family: var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+  .project-card__title { margin-top: 1.65rem; font-size: clamp(1.85rem, 3vw, 3.15rem); line-height: .96; letter-spacing: -.04em; }
+  .project-card__subtitle { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; }
+  .project-card__description { margin-top: 1.25rem; }
+  .project-card__metrics { border-top: 1px solid rgb(var(--color-border-rgb)); border-bottom: 1px solid rgb(var(--color-border-rgb)); }
+  .project-card__metric + .project-card__metric { border-left-color: rgb(var(--color-border-rgb)); }
+  .project-card__metric-value { font-size: clamp(1.6rem, 2.5vw, 2.5rem); }
+  .project-card__footer { border-top-color: rgb(var(--color-border-rgb)); }
+  .project-card__cta { color: rgb(var(--color-foreground-rgb)); font-family: var(--font-mono); font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; }
+  .project-card:not(.project-card--disabled):hover .project-card__cta { color: rgb(var(--color-accent-rgb)); }
+  .project-card--compact .project-card__body { border-left: 1px solid rgb(var(--color-accent-rgb)); }
 </style>

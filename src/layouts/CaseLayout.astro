@@ -115,6 +115,7 @@ const hasResults = !views && (scale.length > 0 || productImpact.length > 0);
 ---
 
 <BaseLayout
+  class="proof-page proof-page--case"
   title={title}
   fullTitle={seoTitle}
   description={seoDescription || description}
@@ -173,7 +174,7 @@ const hasResults = !views && (scale.length > 0 || productImpact.length > 0);
               href={externalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-foreground px-5 py-2.5 text-body-sm font-semibold text-background shadow-sm transition-all duration-fast hover:opacity-90 hover:shadow-md hover:-translate-y-px active:translate-y-0"
+              class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-border bg-foreground px-5 py-2.5 text-body-sm font-semibold text-background transition-all duration-fast hover:opacity-90 hover:-translate-y-px active:translate-y-0"
             >
               {externalUrlLabel ?? caseStudy.visitProduct}
               <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

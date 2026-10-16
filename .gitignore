@@ -8,6 +8,9 @@ dist/
 # Astro internals
 .astro/
 
+# Impeccable local metadata
+.impeccable/
+
 # Environment variables
 .env
 .env.*

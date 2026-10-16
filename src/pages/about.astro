@@ -11,6 +11,7 @@ const contact = ui['pt-BR'].contact;
 ---
 
 <BaseLayout
+  class="proof-page proof-page--about"
   title={about.meta.title}
   fullTitle={about.meta.title}
   description={about.meta.description}
@@ -96,11 +97,7 @@ const contact = ui['pt-BR'].contact;
         </h2>
         <div class="grid sm:grid-cols-3 gap-4 lg:gap-6">
           <div class="card p-5 lg:p-8" data-reveal data-reveal-delay="0">
-            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 lg:mb-6 text-accent" aria-hidden="true">
-              <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-            </div>
+            <img src="/produto.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-4 lg:mb-6" />
             <h3 class="text-heading-md font-semibold text-foreground mb-2">{howIWork.product.title}</h3>
             <p class="text-body-sm lg:text-body-md text-muted-foreground mb-4 lg:mb-6">{howIWork.product.description}</p>
             <ul class="space-y-2" role="list">
@@ -114,11 +111,7 @@ const contact = ui['pt-BR'].contact;
           </div>
 
           <div class="card p-5 lg:p-8" data-reveal data-reveal-delay="100">
-            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 lg:mb-6 text-accent" aria-hidden="true">
-              <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 16l4-16M6 16l-4-8m16 8l-4-8m0 0L8 4m8 8v12" />
-              </svg>
-            </div>
+            <img src="/tecnologia.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-4 lg:mb-6" />
             <h3 class="text-heading-md font-semibold text-foreground mb-2">{howIWork.technology.title}</h3>
             <p class="text-body-sm lg:text-body-md text-muted-foreground mb-4 lg:mb-6">{howIWork.technology.description}</p>
             <ul class="space-y-2" role="list">
@@ -132,11 +125,7 @@ const contact = ui['pt-BR'].contact;
           </div>
 
           <div class="card p-5 lg:p-8" data-reveal data-reveal-delay="200">
-            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 lg:mb-6 text-accent" aria-hidden="true">
-              <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
+            <img src="/execucao.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-4 lg:mb-6" />
             <h3 class="text-heading-md font-semibold text-foreground mb-2">{howIWork.execution.title}</h3>
             <p class="text-body-sm lg:text-body-md text-muted-foreground mb-4 lg:mb-6">{howIWork.execution.description}</p>
             <ul class="space-y-2" role="list">
@@ -171,7 +160,7 @@ const contact = ui['pt-BR'].contact;
       </div>
 
       <!-- CTA -->
-      <div class="max-w-2xl mx-auto pb-8 lg:pb-0" data-reveal="scale">
+      <div class="about-contact pb-8 lg:pb-0" data-reveal="scale">
         <div class="card p-6 lg:p-12 text-center">
           <h2 class="text-display-sm font-bold tracking-tight text-foreground mb-3 lg:mb-4">
             {contact.title}

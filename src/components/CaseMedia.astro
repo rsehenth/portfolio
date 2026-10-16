@@ -133,6 +133,10 @@ if (!Number.isFinite(width) || width <= 0 || !Number.isFinite(height) || height 
   .cm-wrap:hover .cm-zoom,
   .cm-wrap:focus-visible .cm-zoom { opacity: 1; transform: scale(1); }
 
+  @media (hover: none), (pointer: coarse) {
+    .cm-zoom { opacity: 1; transform: scale(1); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .cm-img, .cm-wrap, .cm-zoom { transition: none !important; transform: none !important; }
   }

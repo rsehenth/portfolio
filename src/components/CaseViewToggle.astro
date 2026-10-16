@@ -45,6 +45,7 @@ const fullLabel   = fullMinutes   ? `${t.full} · ${fullMinutes} ${t.minuteSuffi
   .case-view-toggle {
     display: inline-flex;
     align-items: center;
+    max-width: 100%;
   }
 
   .cvt-group {
@@ -113,6 +114,26 @@ const fullLabel   = fullMinutes   ? `${t.full} · ${fullMinutes} ${t.minuteSuffi
   @media (prefers-reduced-motion: reduce) {
     .cvt-group { animation: none !important; }
     .cvt-btn { animation: none !important; transition: none !important; }
+  }
+
+  @media (pointer: coarse) {
+    .cvt-btn { min-height: 2.75rem; }
+  }
+
+  @media (max-width: 420px) {
+    .case-view-toggle,
+    .cvt-group {
+      width: 100%;
+    }
+
+    .cvt-btn {
+      min-width: 0;
+      flex: 1 1 0;
+      min-height: 2.75rem;
+      padding-inline: 0.5rem;
+      text-align: center;
+      white-space: normal;
+    }
   }
 </style>
 

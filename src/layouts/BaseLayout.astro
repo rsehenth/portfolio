@@ -124,16 +124,10 @@ const alternateLinks = noIndex ? '' : generateAlternateLinks(canonical ?? Astro.
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
-
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
   </head>
-  <body class={`min-h-screen text-foreground antialiased ${className}`}>
+  <body class={`proof-site min-h-screen text-foreground antialiased ${className}`}>
     <div id="bg-canvas" aria-hidden="true"></div>
     <div class="relative z-10 flex min-h-screen flex-col">
     <a href="#main" class="skip-link">{locale === 'pt-BR' ? 'Pular para o conteúdo principal' : 'Skip to main content'}</a>
