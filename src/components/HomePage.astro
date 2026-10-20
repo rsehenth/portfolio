@@ -22,6 +22,7 @@ const featuredProjects = featuredOrder
 
 const meta = ui[locale].meta;
 const work = ui[locale].work;
+const homeEvidence = ui[locale].homeEvidence;
 const homeProjectsData = ui[locale].homeProjects;
 const howIWork = ui[locale].howIWork;
 const about = ui[locale].about;
@@ -122,6 +123,17 @@ const singleProject = featuredProjects.length === 1 ? (() => {
           {work.empty}
         </p>
       )}
+    </div>
+  </section>
+
+  <section class="home-evidence section" aria-labelledby="evidence-heading">
+    <div class="container">
+      <h2 id="evidence-heading">{homeEvidence.title}</h2>
+      <ul role="list">
+        {homeEvidence.items.map((item) => (
+          <li>{item.href ? <a href={item.href}>{item.text} →</a> : <span>{item.text}</span>}</li>
+        ))}
+      </ul>
     </div>
   </section>
 

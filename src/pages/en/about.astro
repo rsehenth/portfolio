@@ -6,8 +6,9 @@ import { ui } from '@/i18n';
 import EmailReveal from '@/components/EmailReveal.astro';
 
 const about = ui['en'].about;
-const howIWork = ui['en'].howIWork;
 const contact = ui['en'].contact;
+const productDecision = about.productDecision;
+const hasProductDecision = Boolean(productDecision.context || productDecision.decision || productDecision.result);
 ---
 
 <BaseLayout
@@ -21,7 +22,7 @@ const contact = ui['en'].contact;
     <div class="container">
 
       <!-- Hero -->
-      <header class="max-w-3xl mx-auto text-center mb-10 lg:mb-20" data-reveal>
+      <header class="about-heading mb-10 lg:mb-20" data-reveal>
         <h1 id="about-heading" class="text-display-lg font-bold tracking-tight text-foreground mb-4 lg:mb-6">
           {about.title}
         </h1>
@@ -31,13 +32,15 @@ const contact = ui['en'].contact;
       </header>
 
       <!-- Intro -->
-      <div class="max-w-3xl mx-auto mb-10 lg:mb-20" data-reveal>
-        <p class="text-body-md lg:text-body-lg text-muted-foreground mb-5 lg:mb-6">
+      <div class="about-reading mb-10 lg:mb-20" data-reveal>
+        <h2 class="about-subheading text-heading-md font-semibold text-foreground mb-3 lg:mb-4">{about.intro.productPathTitle}</h2>
+        <p class="text-body-lg text-muted-foreground mb-5 lg:mb-6">
           {about.intro.p1}
         </p>
         <p class="text-body-md text-muted-foreground mb-5 lg:mb-6">
           {about.intro.p2}
         </p>
+        <h2 class="about-subheading text-heading-md font-semibold text-foreground mb-3 lg:mb-4">{about.intro.todayTitle}</h2>
         <p class="text-body-md text-muted-foreground mb-5 lg:mb-6">
           {about.intro.p3}
         </p>
@@ -48,26 +51,43 @@ const contact = ui['en'].contact;
           {about.intro.p5}
         </p>
         <p class="text-body-sm text-muted-foreground">{about.transparency}</p>
+        <div class="about-inline-actions mt-6 flex flex-col sm:flex-row gap-3" aria-label="Next steps">
+          <a href="/en/projects/" class="btn-primary w-full sm:w-auto">{about.ctaProjects}</a>
+          <a href={profile.linkedin} class="btn-secondary w-full sm:w-auto" target="_blank" rel="noopener noreferrer">{about.ctaLinkedin}</a>
+        </div>
       </div>
 
-      <section class="max-w-3xl mx-auto mb-10 lg:mb-20" aria-labelledby="timeline-heading" data-reveal>
+      {hasProductDecision && (
+        <section class="about-reading mb-10 lg:mb-20" aria-labelledby="decision-heading" data-reveal>
+          <h2 id="decision-heading" class="text-display-sm font-bold tracking-tight text-foreground mb-6">{productDecision.title}</h2>
+          <dl class="about-decision border-t border-border" data-ui>
+            {productDecision.context && <div><dt>{productDecision.contextLabel}</dt><dd>{productDecision.context}</dd></div>}
+            {productDecision.decision && <div><dt>{productDecision.decisionLabel}</dt><dd>{productDecision.decision}</dd></div>}
+            {productDecision.result && <div><dt>{productDecision.resultLabel}</dt><dd>{productDecision.result}</dd></div>}
+          </dl>
+        </section>
+      )}
+
+      <section class="about-reading mb-10 lg:mb-20" aria-labelledby="timeline-heading" data-reveal>
         <h2 id="timeline-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6 lg:mb-8">{about.timeline.title}</h2>
-        <ol class="border-l border-border pl-5 lg:pl-6 space-y-6 lg:space-y-8">
+        {about.timeline.showOverlapNote && <p class="text-body-sm text-muted-foreground mb-5">{about.timeline.overlapNote}</p>}
+        <ol class="border-l border-border pl-5 lg:pl-6 space-y-6 lg:space-y-8" data-ui>
           {about.timeline.items.map((item) => (
             <li class="relative">
               <span class="absolute -left-[29px] lg:-left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-background bg-accent" aria-hidden="true"></span>
-              <p class="text-caption font-mono text-muted-foreground">{item.period}</p>
+              <p class="text-caption font-mono text-muted-foreground">{item.period}</p><!-- taste-skill-ignore: timeline period is a compact data label. -->
               <h3 class="mt-1 text-heading-sm lg:text-heading-md font-semibold text-foreground">{item.company}</h3>
               <p class="mt-1 text-body-sm font-medium text-foreground">{item.role}</p>
               <p class="mt-1 text-body-sm text-muted-foreground">{item.description}</p>
+              {item.highlight && <p class="mt-3 text-body-sm font-medium text-foreground">{item.highlight}</p>}
             </li>
           ))}
         </ol>
       </section>
 
       <!-- Where I Work -->
-      <div class="max-w-4xl mx-auto mb-10 lg:mb-20">
-        <h2 class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6 lg:mb-10 text-center" data-reveal>
+      <section class="about-wide mb-10 lg:mb-20" aria-labelledby="focus-heading">
+        <h2 id="focus-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6 lg:mb-10" data-reveal>
           {about.focus.title}
         </h2>
         <div class="grid sm:grid-cols-2 gap-4 lg:gap-6">
@@ -88,61 +108,11 @@ const contact = ui['en'].contact;
             <p class="text-body-sm lg:text-body-md text-muted-foreground">{about.focus.experimentation.description}</p>
           </div>
         </div>
-      </div>
-
-      <!-- How I Work -->
-      <div class="max-w-4xl mx-auto mb-10 lg:mb-20">
-        <h2 class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6 lg:mb-10 text-center" data-reveal>
-          {howIWork.title}
-        </h2>
-        <div class="grid sm:grid-cols-3 gap-4 lg:gap-6">
-          <div class="card p-5 lg:p-8" data-reveal data-reveal-delay="0">
-            <img src="/produto.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-4 lg:mb-6" />
-            <h3 class="text-heading-md font-semibold text-foreground mb-2">{howIWork.product.title}</h3>
-            <p class="text-body-sm lg:text-body-md text-muted-foreground mb-4 lg:mb-6">{howIWork.product.description}</p>
-            <ul class="space-y-2" role="list">
-              {howIWork.skills.product.map((skill) => (
-                <li class="flex items-center gap-2 text-body-sm lg:text-body-md text-muted-foreground">
-                  <span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
-                  {skill}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div class="card p-5 lg:p-8" data-reveal data-reveal-delay="100">
-            <img src="/tecnologia.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-4 lg:mb-6" />
-            <h3 class="text-heading-md font-semibold text-foreground mb-2">{howIWork.technology.title}</h3>
-            <p class="text-body-sm lg:text-body-md text-muted-foreground mb-4 lg:mb-6">{howIWork.technology.description}</p>
-            <ul class="space-y-2" role="list">
-              {howIWork.skills.technology.map((skill) => (
-                <li class="flex items-center gap-2 text-body-sm lg:text-body-md text-muted-foreground">
-                  <span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
-                  {skill}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div class="card p-5 lg:p-8" data-reveal data-reveal-delay="200">
-            <img src="/execucao.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-4 lg:mb-6" />
-            <h3 class="text-heading-md font-semibold text-foreground mb-2">{howIWork.execution.title}</h3>
-            <p class="text-body-sm lg:text-body-md text-muted-foreground mb-4 lg:mb-6">{howIWork.execution.description}</p>
-            <ul class="space-y-2" role="list">
-              {howIWork.skills.execution.map((skill) => (
-                <li class="flex items-center gap-2 text-body-sm lg:text-body-md text-muted-foreground">
-                  <span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
-                  {skill}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
+      </section>
 
       <!-- Technical Toolkit -->
-      <div class="max-w-4xl mx-auto mb-10 lg:mb-20" data-reveal>
-        <h2 class="text-display-sm font-bold tracking-tight text-foreground mb-6 lg:mb-8 text-center">
+      <section class="about-wide mb-10 lg:mb-20" aria-labelledby="toolkit-heading" data-reveal>
+        <h2 id="toolkit-heading" class="text-display-sm font-bold tracking-tight text-foreground mb-6 lg:mb-8">
           {about.toolkit.title}
         </h2>
         <div class="grid sm:grid-cols-3 gap-3 lg:gap-4">
@@ -157,18 +127,18 @@ const contact = ui['en'].contact;
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       <!-- CTA -->
       <div class="about-contact pb-8 lg:pb-0" data-reveal="scale">
-        <div class="card p-6 lg:p-12 text-center">
+        <div class="card p-6 lg:p-12 text-left">
           <h2 class="text-display-sm font-bold tracking-tight text-foreground mb-3 lg:mb-4">
             {contact.title}
           </h2>
           <p class="text-body-md text-muted-foreground mb-6 lg:mb-8">
             {contact.subtitle}
           </p>
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4 flex-wrap">
+          <div class="flex flex-col sm:flex-row items-start justify-start gap-3 lg:gap-4 flex-wrap">
             <a href={profile.linkedin} class="btn-primary w-full sm:w-auto" target="_blank" rel="noopener noreferrer">
               {contact.ctaLinkedin}
             </a>

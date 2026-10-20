@@ -6,6 +6,20 @@ Bilingual by default: **PT-BR at `/`** and **English at `/en/`** (no auto-redire
 
 > **Agentes de IA:** leiam `AGENTS.md` antes de editar.
 
+## Contexto de desenvolvimento assistido por IA
+
+O projeto mantém contexto técnico verificável sem duplicar suas regras de conteúdo:
+
+- [`AGENTS.md`](./AGENTS.md): restrições operacionais e mapa de manutenção de conteúdo.
+- [`PRODUCT.md`](./PRODUCT.md): público, escopo e compromissos de produto.
+- [`DESIGN.md`](./DESIGN.md): sistema visual canônico e critérios de acessibilidade.
+- [`docs/architecture.md`](./docs/architecture.md): estrutura e limites técnicos observados.
+- [`docs/onboarding.md`](./docs/onboarding.md): ambiente local e primeiro fluxo.
+- [`docs/quality.md`](./docs/quality.md): checks, revisão e riscos conhecidos.
+- [`docs/setup.md`](./docs/setup.md): fontes, decisões de integração e evidências da adoção do toolkit.
+
+Ferramentas e skills são usadas sob demanda, conforme a tarefa; elas não autorizam mudanças de produto, deploys ou dependências por si só. `seo-audit` foi deliberadamente excluída deste projeto.
+
 ## 🚀 Quick Start
 
 ### 1. Install Dependencies

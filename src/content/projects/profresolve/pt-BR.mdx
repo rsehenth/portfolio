@@ -4,7 +4,7 @@ locale: pt-BR
 subtitle: SaaS de IA para educadores
 description: "Plataforma que transforma necessidades pedagógicas em materiais estruturados, editáveis e exportáveis, combinando IA, monetização por créditos e fluxos pensados para a rotina docente."
 tagline: "Construindo um produto de IA confiável para educadores."
-summary: "SaaS de IA para educadores que transforma tarefas da rotina docente em materiais estruturados, editáveis e prontos para distribuição. O produto está disponível publicamente e já ultrapassou 1.200 usuários cadastrados organicamente."
+summary: "SaaS de IA para educadores que transforma tarefas da rotina docente em materiais estruturados, editáveis e prontos para distribuição. O produto está disponível publicamente."
 year: 2026
 role: Technical Product / Product + Desenvolvimento prático
 productType: SaaS · IA · Educação
@@ -14,11 +14,11 @@ statusBadge: "Ativo"
 caseSummary:
   problem: "Reduzir o trabalho repetitivo de preparar materiais pedagógicos sem tirar o controle do professor."
   role: "Cofundador e responsável por discovery, produto, monetização e implementação técnica."
-  result: "SaaS público com mais de 1.200 usuários cadastrados organicamente."
+  result: "SaaS público para criar, editar e exportar materiais pedagógicos com IA."
   keyDecision: "Tratar confiabilidade e custo de IA como decisões de produto."
 statusEvidence:
   stage: "Produto ativo, em evolução."
-  evidence: "O produto está público, ultrapassou 1.200 usuários cadastrados organicamente e recebeu respostas de mais de 100 professores em um survey público."
+  evidence: "O produto está público e inclui um survey de nove perguntas no dashboard."
 section: featured
 cardBadge:
   label: "Ativo"
@@ -56,28 +56,28 @@ technologies:
   - Asaas
   - Resend
 metrics:
-  - value: "1.200+"
-    label: Usuários cadastrados
+  - value: "15"
+    label: Geradores pedagógicos
     state: verified
-  - value: "16"
-    label: Geradores
+  - value: "7"
+    label: Jogos educativos
     state: verified
   - value: "2.4K+"
     label: Test cases
     state: verified
 snapshot:
   primary:
-    - value: "1.200+"
-      label: Usuários cadastrados
-      state: verified
-    - value: "16"
-      label: Geradores de conteúdo
+    - value: "15"
+      label: Geradores pedagógicos
       state: verified
     - value: "7"
       label: Jogos educativos
       state: verified
     - value: "Live"
       label: Produto público
+      state: verified
+    - value: "9"
+      label: Perguntas do survey
       state: verified
   secondary:
     - value: "8"
@@ -100,12 +100,12 @@ scaleMetrics:
     label: Tabelas de banco de dados
     state: verified
 productMetrics:
-  - value: "1.200+"
-    label: Usuários cadastrados
+  - value: "9"
+    label: Perguntas do survey
     state: verified
 seo:
   title: "ProfResolve | Produto de IA e Technical Product | Lucas Sehnem"
-  description: "Case do ProfResolve cobrindo discovery com mais de 100 professores, estratégia de produto, arquitetura de IA, monetização e operação de um SaaS educacional em produção."
+  description: "Case do ProfResolve sobre estratégia de produto, arquitetura de IA, modelo comercial e operação de um SaaS educacional público."
 order: 10
 ---
 
@@ -120,9 +120,9 @@ Professores refazem planos de aula, atividades e avaliações o tempo todo. A me
 <FlowDiagram
   label="Validação do ProfResolve"
   steps={[
-    'Piloto em 3 escolas de Santiago (RS) com 20+ professores',
-    'Ajustes até a primeira versão final',
-    'Survey público no dashboard (6 perguntas, 100+ respostas orgânicas)',
+    'Survey no dashboard',
+    '9 perguntas sobre perfil, valor percebido e facilidade de uso',
+    'Feedback como insumo para evolução do produto',
   ]}
 />
 
@@ -132,48 +132,38 @@ Professores refazem planos de aula, atividades e avaliações o tempo todo. A me
 
 ### Falha de IA não custa crédito ao professor
 
-Cadeia de modelos com retry, fallback entre provedores e reembolso automático de créditos. Trade-off: mais mecanismos para manter, em troca da confiança no produto.
+Nas rotas pedagógicas, uma falha após o débito aciona reembolso de créditos. No planejamento, o fallback de modelo é condicional e depende da configuração. A política varia conforme o gerador.
 
 <SeeFull to="falha-de-ia" label="Ver detalhes" />
 
 ### O custo de IA virou preço
 
-Créditos como unidade de consumo, com custo por tipo de geração, e assinaturas mensais/anuais mais pacotes avulsos. Trade-off: o preço passa a acompanhar o custo dos modelos.
+Créditos são a unidade de consumo, com custo por tipo de geração. O modelo comercial oferece planos por período e pacotes avulsos. Trade-off: preço e custo dos modelos precisam evoluir juntos.
 
 <SeeFull to="custo-de-ia" label="Ver detalhes" />
 
 ### Previsibilidade antes de fluidez
 
-Streaming SSE foi testado e revertido para geração síncrona, porque falhas de parsing geravam conteúdo parcial. Trade-off: menos sensação de resposta progressiva.
+Geração síncrona prioriza previsibilidade quando uma resposta progressiva não preserva a integridade do material. Trade-off: menos sensação de resposta imediata.
 
 <SeeFull to="previsibilidade" label="Ver detalhes" />
 
 ### Comprar onde não é diferencial
 
-O motor próprio de palavras cruzadas posicionava 4 a 7 de 20 palavras; foi trocado por uma biblioteca especializada, e o esforço foi para a experiência.
+Uma biblioteca especializada passou a apoiar a geração de palavras cruzadas. O esforço de engenharia foi direcionado para a experiência e a qualidade do material.
 
 <SeeFull to="build-vs-buy" label="Ver detalhes" />
 
 ## Resultado
 
-Em produção, com 1.200+ usuários cadastrados organicamente, 16 geradores de conteúdo e 7 jogos educativos. A receita combina assinaturas e pacotes avulsos de créditos.
-
-<StatsGrid
-  label="Métricas do produto"
-  stats={[
-    { value: '1.200+', label: 'Usuários cadastrados' },
-    { value: '16', label: 'Geradores de conteúdo' },
-    { value: '7', label: 'Jogos educativos' },
-    { value: '100+', label: 'Respostas de survey' },
-  ]}
-/>
+Produto público com geração, edição, exportação, jogos educativos e survey no dashboard.
 
 <CaseMedia
-  src="/projects/profresolve/dashboardprof.webp"
-  alt="Dashboard do ProfResolve mostrando os geradores de conteúdo disponíveis para o professor"
-  width={1526}
-  height={1177}
-  caption="Dashboard principal — visão geral dos geradores disponíveis para o professor"
+  src="/projects/profresolve/game2.webp"
+  alt="Palavras cruzadas geradas pelo ProfResolve, prontas para uso em sala de aula"
+  width={838}
+  height={1193}
+  caption="Material gerado — palavras cruzadas prontas para imprimir ou usar em sala de aula"
   protected={true}
 />
 
@@ -194,9 +184,9 @@ Em produção, com 1.200+ usuários cadastrados organicamente, 16 geradores de c
 
 <h2 id="produto-em-uso">Produto em uso</h2>
 
-O ProfResolve está disponível publicamente em profresolve.com.br. A plataforma evoluiu com base no comportamento real dos professores que a utilizam.
+O ProfResolve está disponível publicamente em profresolve.com.br. A plataforma reúne geração, edição e exportação de materiais pedagógicos com IA.
 
-Com o produto em uso por professores, as decisões deixam de depender apenas de hipóteses. Passamos a observar quais fluxos os professores realmente usam, onde encontram dificuldades e a quais recursos retornam.
+O dashboard inclui um survey para coletar perfil, percepção de valor, facilidade de uso e sugestões dos professores.
 
 <CaseMedia
   src="/projects/profresolve/dashboardprof.webp"
@@ -213,31 +203,24 @@ Professores produzem continuamente planos de aula, avaliações, atividades e ad
 
 ## Validação com professores
 
-Antes de validar o MVP para venda, a plataforma foi testada em três escolas de Santiago (RS), com mais de 20 professores. O feedback recebido orientou ajustes até a primeira versão final.
+O dashboard inclui um survey para coletar perfil, percepção de valor, facilidade de uso e sugestões dos professores. O instrumento atual tem nove perguntas.
 
 <FlowDiagram
-  label="Validação e aquisição do ProfResolve"
+  label="Coleta de feedback no ProfResolve"
   steps={[
-    'Piloto em 3 escolas de Santiago (RS)',
-    '20+ professores testaram a plataforma',
-    'Feedback recebido e ajustes no produto',
-    'Primeira versão final',
     'Survey público dentro do dashboard',
-    '100+ respostas orgânicas de professores',
+    '9 perguntas sobre perfil e uso',
+    'Feedback para orientar evolução do produto',
   ]}
 />
 
-Depois, o dashboard passou a oferecer um survey público de seis perguntas: quatro de múltipla escolha e duas abertas, incluindo familiaridade com IA e o que os professores gostariam que o ProfResolve tivesse. Mais de 100 professores responderam organicamente. As respostas eram enviadas por e-mail via Resend ao contato da plataforma.
-
-{/* TODO [CONFIRMAR]: ao concluir o survey, as respostas eram enviadas por e-mail formatado pela API Resend ao contato da plataforma e o professor recebia 300 créditos de agradecimento. */}
+As respostas registram perfil, percepção de valor, facilidade de uso e sugestões. Totais de respostas, participantes e mudanças resultantes só serão publicados com fonte e data de corte.
 
 {/* TODO: acrescentar "O que aprendemos com os professores" quando os principais achados do survey e as mudanças resultantes estiverem disponíveis. */}
 
-## Modelo de receita
+## Modelo comercial
 
-O ProfResolve combina assinaturas mensais e anuais com pacotes avulsos de créditos para quem prefere usar a plataforma sob demanda.
-
-{/* TODO [CONFIRMAR]: Google Analytics, Cloudflare Analytics, Microsoft Clarity e Sentry foram usados para acompanhar comportamento, tráfego e erros. */}
+O produto oferece planos por período e pacotes avulsos de créditos. Receita realizada ou recorrência só serão descritas com evidência financeira.
 
 ## Da hipótese ao produto em uso
 
@@ -245,7 +228,7 @@ O projeto começou com uma hipótese simples: IA poderia reduzir parte do trabal
 
 A partir dessa hipótese, a plataforma evoluiu para um produto com múltiplos geradores de conteúdo, edição, exportação, créditos, pagamentos, jogos educacionais e mecanismos de confiabilidade para operações com LLMs.
 
-Com o produto em uso por professores, a próxima etapa não é só construir mais funcionalidades. Próximas validações: frequência de uso, retenção e quais fluxos entregam mais valor.
+Com o produto público, a próxima etapa não é só construir mais funcionalidades. Próximas validações: frequência de uso, retenção e quais fluxos entregam mais valor.
 
 {/* TODO: acrescentar dados de retenção quando disponíveis. */}
 
@@ -271,7 +254,7 @@ O fluxo principal foi desenhado para caber na rotina docente: poucas escolhas an
     'Geração com IA',
     'Material estruturado',
     'Edição',
-    'PDF / DOCX / Impressão / WhatsApp',
+    'PDF / DOCX / Impressão',
   ]}
 />
 
@@ -315,36 +298,25 @@ O ProfResolve inclui jogos educativos gerados por IA — palavras cruzadas, quiz
   protected={true}
 />
 
-<h2 id="falha-de-ia">IA falha. O produto não pode falhar junto.</h2>
+<h2 id="falha-de-ia">IA falha. A política precisa ser explícita.</h2>
 
-Uma falha do provedor não deve consumir os créditos do professor nem encerrar a tarefa. Por isso, o fluxo trata a falha como parte esperada da operação.
+Uma falha do provedor não deve deixar o professor sem material nem cobrar uma geração que não foi concluída. Nas rotas pedagógicas, uma falha após um novo débito aciona o reembolso de créditos.
 
-Confiabilidade foi tratada como requisito de produto, não como detalhe de implementação. Em nível conceitual, a estratégia inclui:
-
-- **Cadeia de modelos:** mais de um modelo disponível para a mesma geração
-- **Retries com orçamento de tempo:** tentativas adicionais dentro de um limite definido
-- **Fallback entre providers:** troca de provedor quando o primário falha
-- **Circuit breaker:** pausa temporária de um caminho problemático
-- **Fallback de contexto:** geração degradada em vez de erro exposto ao usuário
-- **Reembolso automático de créditos:** uma falha não custa crédito ao professor
-- **Kill switch e recuperação:** parada e retomada em nível operacional
-
-Parâmetros, limiares e configurações internas permanecem na implementação; os mecanismos acima descrevem a estratégia em nível conceitual.
+A política não é universal. O planejamento prevê fallback condicional para OpenAI quando a falha é recuperável e o segundo provedor está configurado. Os demais fluxos seguem suas próprias regras.
 
 ## Transformando uma chamada de IA em um produto confiável
 
 Uma geração não é só enviar um prompt para um LLM. No ProfResolve, cada geração passa por uma cadeia de controle que transforma uma chamada de IA em um processo previsível:
 
 <FlowDiagram
-  label="Cadeia de execução de uma geração"
+  label="Fluxo de uma geração pedagógica"
   steps={[
     'Pedido do usuário',
     'Validação',
     'Débito de créditos',
     'Prompt + contexto',
-    'Modelo primário',
-    'Retry / fallback',
-    'Sanitização',
+    'Modelo',
+    'Processamento',
     'Persistência',
     'Editor / export',
   ]}
@@ -355,16 +327,15 @@ Uma geração não é só enviar um prompt para um LLM. No ProfResolve, cada ger
   }}
 />
 
-Validação, débito de créditos, montagem de prompt e contexto, roteamento de modelo, retry, fallback, sanitização, persistência e reembolso automático fazem parte do fluxo. A experiência do professor não pode depender de um único ponto de falha.
+Validação, débito de créditos, contexto, processamento, persistência e reembolso compõem o fluxo pedagógico. As políticas de modelo e recuperação são definidas por gerador.
 
 <CaseCarousel
   slides={[
     { src: "/projects/profresolve/editor1.webp", alt: "Editor do ProfResolve — material gerado com estrutura completa e opções de edição visíveis", width: 2495, height: 1281 },
     { src: "/projects/profresolve/editor2.webp", alt: "Editor do ProfResolve — professor editando o conteúdo gerado pela IA em tempo real", width: 2499, height: 1262 },
-    { src: "/projects/profresolve/editor3.webp", alt: "Editor do ProfResolve — opções de exportação PDF, DOCX e compartilhamento via WhatsApp", width: 2513, height: 1312 },
   ]}
   ratio="16/9"
-  caption="Editor de materiais — o professor pode editar o conteúdo gerado e exportar em diferentes formatos"
+  caption="Editor de materiais — o professor pode editar o conteúdo gerado e exportar em PDF, DOCX ou impressão"
   protected={true}
 />
 
@@ -388,15 +359,11 @@ O custo de cada gerador precisa acompanhar a estratégia e o modelo utilizados p
 
 <h2 id="previsibilidade">Nem toda evolução técnica deve permanecer no produto</h2>
 
-**Contexto:** Streaming via SSE foi testado para melhorar a experiência de geração.
+**Decisão:** priorizar geração síncrona quando uma resposta progressiva não preserva a integridade do material.
 
-**Problema:** Falhas de parsing podiam interromper o fluxo e produzir conteúdo parcial.
+**Trade-off:** menos percepção de resposta imediata em troca de previsibilidade.
 
-**Decisão:** O projeto voltou para uma geração síncrona mais previsível, com controle de timeout mais rigoroso.
-
-**Trade-off:** menos percepção de resposta progressiva em troca de maior previsibilidade e confiabilidade.
-
-O rollback foi tratado como parte normal do desenvolvimento. O que importa é que o trade-off foi explícito.
+O aprendizado é tornar explícito quando um experimento técnico não melhora o fluxo do professor.
 
 <Callout variant="info">
   Rollback também é decisão de produto.
@@ -405,15 +372,14 @@ O rollback foi tratado como parte normal do desenvolvimento. O que importa é qu
 <h2 id="build-vs-buy">Build vs Buy: onde vale a pena investir engenharia</h2>
 
 <Callout title="Build vs Buy">
-  Um motor próprio de palavras cruzadas posicionava apenas parte das palavras. Em vez de continuar investindo no algoritmo interno, o produto passou a usar uma biblioteca especializada e o esforço foi redirecionado para a experiência e a qualidade do resultado.
+  Uma biblioteca especializada apoia a geração de palavras cruzadas. O esforço de engenharia fica na experiência e na qualidade do resultado, não no algoritmo de posicionamento.
 </Callout>
 
 <FlowDiagram
-  label="Evolução do gerador de palavras cruzadas"
+  label="Decisão para o gerador de palavras cruzadas"
   steps={[
-    'Motor próprio: 4 a 7 de 20 palavras',
     'Biblioteca especializada',
-    'Todas ou quase todas as palavras',
+    'Experiência e qualidade do material',
   ]}
 />
 
@@ -437,7 +403,7 @@ Representação conceitual da arquitetura do produto, sem endpoints internos, sc
     'PostgreSQL',
     'Redis',
     'Cloudflare R2',
-    'Gemini / DeepSeek',
+    'Gemini / OpenAI / DeepSeek',
     'Asaas',
     'Resend',
   ]}
@@ -452,9 +418,9 @@ O ProfResolve foi construído com Next.js App Router como base unificada de fron
   steps={[
     { label: "Aplicação e interface", detail: "Next.js (App Router) · React · TypeScript · Tailwind CSS · Radix UI · SWR" },
     { label: "Backend e dados", detail: "APIs Next.js · PostgreSQL (pg) · Upstash Redis · Better Auth · Cloudflare R2" },
-    { label: "IA e documentos", detail: "Gemini · DeepSeek · Processamento de PDF · Geração de DOCX · Exportação HTML→PDF" },
+    { label: "IA e documentos", detail: "Gemini · OpenAI no planejamento · DeepSeek nos jogos · Processamento de PDF · Geração de DOCX · Exportação HTML→PDF" },
     { label: "Serviços e integrações", detail: "Asaas (pagamentos) · Resend (e-mail) · Google OAuth" },
-    { label: "Qualidade e observabilidade", detail: "Vitest (unitários + integração) · Playwright (e2e) · Sentry · ESLint · TypeScript estrito" },
+    { label: "Qualidade e observabilidade", detail: "Vitest (unitários + integração) · Playwright (e2e) · Logs sanitizados · Health check · Analytics · Clarity · ESLint · TypeScript estrito" },
   ]}
 />
 
@@ -494,7 +460,7 @@ A separação é intencional: Vitest valida contratos e lógica de negócio de f
 
 No ProfResolve, testes e observabilidade não são apenas preocupações técnicas. Fazem parte da estratégia para manter a plataforma confiável enquanto novas funcionalidades são desenvolvidas.
 
-A combinação de testes automatizados, TypeScript estrito, logging estruturado e Sentry ajuda a identificar regressões, investigar falhas e reduzir riscos durante a evolução do produto.
+A combinação de testes automatizados, TypeScript estrito, logs sanitizados, endpoint de saúde, Analytics e Clarity apoia a investigação de falhas e reduz riscos durante a evolução do produto.
 
 Em operações críticas, como créditos e pagamentos, a idempotência ajuda a evitar processamentos duplicados durante tentativas repetidas de uma mesma operação. São decisões de engenharia que protegem a experiência do professor e contribuem para a confiabilidade do negócio.
 

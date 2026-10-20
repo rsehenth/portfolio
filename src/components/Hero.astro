@@ -1,81 +1,49 @@
 ---
-import { profile, ctaButtons } from '@/data/profile';
 import { ui, type Locale } from '@/i18n';
 
-interface Props {
-  class?: string;
-  locale?: Locale;
-}
-
-const { class: className = '', locale = 'pt-BR' } = Astro.props;
+interface Props { locale?: Locale; }
+const { locale = 'pt-BR' } = Astro.props;
 const hero = ui[locale].hero;
-const evidence = locale === 'pt-BR'
-  ? [
-      'ProfResolve · 1.200+ usuários cadastrados',
-      'ProfResolve · 8 integrações externas',
-      'ProfResolve · 16 geradores de conteúdo',
-      'ProfResolve · 2.4K+ casos de teste',
-      'Super Squad AI · arquitetura Leader + Workers (1 + N)',
-      'Super Squad AI · verificação em 2 estágios',
-      'CultoOS · 9 coleções + mídia sincronizadas',
-      'Universal Docs · busca e highlighting sem bibliotecas externas',
-      'Mosaic · editor client-side, sem backend',
-    ]
-  : [
-      'ProfResolve · 1,200+ registered users',
-      'ProfResolve · 8 external integrations',
-      'ProfResolve · 16 content generators',
-      'ProfResolve · 2.4K+ test cases',
-      'Super Squad AI · Leader + Workers architecture (1 + N)',
-      'Super Squad AI · 2 verification stages',
-      'CultoOS · 9 synced collections + media',
-      'Universal Docs · search and highlighting without external libraries',
-      'Mosaic · client-side editor, no backend',
-    ];
+const projectsHref = locale === 'pt-BR' ? '/projects/' : '/en/projects/';
+const cvHref = locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas-cven.pdf';
 ---
 
-<section class={`proof-hero ${className}`} aria-labelledby="hero-heading">
+<section class="home-hero" aria-labelledby="hero-heading">
   <div class="container">
-    <div class="proof-hero__masthead">
-      <p>{profile.name} <span aria-hidden="true">·</span> {hero.badge}</p>
-      <span aria-hidden="true">{locale === 'pt-BR' ? 'Portfólio selecionado' : 'Selected portfolio'}</span>
-    </div>
-
-    <div class="proof-hero__grid">
-      <div class="proof-hero__lead">
-        <h1 id="hero-heading" class="proof-hero__title hero-slide-up" style="animation-delay: 80ms; opacity: 0;">
-          {hero.tagline}
+    <p class="home-hero__eyebrow">{hero.badge}</p>
+    <div class="home-hero__grid">
+      <div>
+        <h1 id="hero-heading" class="home-hero__title">
+          <span>{hero.headlineBefore}</span>
+          <span class="home-hero__accent">{hero.headlineAccent}</span>
+          <span>{hero.headlineAfter}</span>
         </h1>
-        <p class="proof-hero__summary hero-slide-up" style="animation-delay: 160ms; opacity: 0;">{hero.subheadline}</p>
-
-        <div class="proof-hero__actions hero-slide-up" style="animation-delay: 240ms; opacity: 0;">
-          <a href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'} class="btn-primary">
-            {hero.ctaPrimary}
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-          </a>
-          <a href={ctaButtons.secondary.href} class="btn-secondary" target="_blank" rel="noopener noreferrer">{hero.ctaSecondary}</a>
-          <a href={locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas-cven.pdf'} download aria-label={hero.ctaCVAriaLabel} class="proof-hero__cv">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-            {hero.ctaCV}
-          </a>
+        <p class="home-hero__summary">{hero.subheadline}</p>
+        {hero.differentiator && <p class="home-hero__differentiator">{hero.differentiator}</p>}
+        <div class="home-hero__actions">
+          <a href={projectsHref} class="btn-primary">{hero.ctaPrimary}</a>
+          <a href={cvHref} download aria-label={hero.ctaCVAriaLabel} class="btn-secondary">{hero.ctaCV}</a>
         </div>
       </div>
 
-      <aside class="proof-hero__evidence" aria-label={locale === 'pt-BR' ? 'Evidências de experiência' : 'Experience evidence'}>
-        <div class="proof-hero__evidence-heading">
-          <span class="proof-hero__seal">{locale === 'pt-BR' ? 'Fatos\nverificados' : 'Verified\nfacts'}</span>
-          <p>{locale === 'pt-BR' ? 'Evidências de experiência' : 'Experience evidence'}</p>
-        </div>
-        <ul role="list">
-          {evidence.map((item) => <li>{item}</li>)}
-        </ul>
+      <aside class="home-process" aria-label={hero.process.title}>
+        <div class="home-process__heading"><span>{hero.process.title}</span><span>{hero.process.label}</span></div>
+        <ol>
+          {hero.process.steps.map((step) => (
+            <li>
+              <span class="home-process__number">{step.number}</span>
+              <div>
+                <h2>{step.title}</h2>
+                {step.href ? <a href={step.href}>{step.description} →</a> : <p>{step.description}</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+        <a href="#work" class="home-process__evidence">{hero.process.evidence}</a>
       </aside>
     </div>
+    <dl class="home-stats">
+      {hero.stats.map((stat) => <div><dt>{stat.value}</dt><dd>{stat.label}</dd></div>)}
+    </dl>
   </div>
 </section>
-
-<style>
-  @keyframes hero-slide-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-slide-up { animation: hero-slide-up .7s cubic-bezier(.16, 1, .3, 1) forwards; }
-  @media (prefers-reduced-motion: reduce) { .hero-slide-up { animation: none !important; opacity: 1 !important; } }
-</style>

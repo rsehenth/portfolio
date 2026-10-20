@@ -147,3 +147,14 @@ Antes de encerrar uma tarefa: `npm run build` (que já validou tudo) + abrir `/`
 Estes arquivos só apontam para este `AGENTS.md`; não coloque conteúdo próprio neles, nem precisa mexer neles ao alterar este arquivo.
 
 - `CLAUDE.md` — importa este arquivo (`@AGENTS.md`). Sem ponteiro: OpenCode, Codex e Kiro leem `AGENTS.md` nativamente; o Claude Code só o lê se não houver `CLAUDE.md`, por isso existe o import acima.
+
+## 9. Desenvolvimento assistido por IA
+
+- Antes de alterar, leia estas instruções, o código afetado e os documentos de contexto: `PRODUCT.md`, `DESIGN.md`, `docs/architecture.md`, `docs/quality.md` e `docs/setup.md`.
+- Diferencie fatos observados, suposições, decisões e evidências. A fonte de verdade para comportamento continua sendo o código; atualize o documento responsável quando mudar comportamento, comandos, schema, limites ou configuração.
+- Defina critérios de aceite e a validação proporcional antes de implementar. Para este projeto, `npm run build` é a verificação integrada obrigatória; valide também as rotas afetadas em navegador local quando houver mudança visual ou de navegação.
+- Preserve as regras locais de conteúdo, a identidade visual e as dependências existentes. Skills e ferramentas globais orientam o trabalho quando relevantes, mas não autorizam refactors, deploys, novas dependências, hooks ou serviços não solicitados.
+- Use a skill `caveman` quando estiver disponível, em qualquer tarefa, para comunicação concisa sem reduzir precisão, segurança, testes ou registro de riscos.
+- Use `security-and-hardening` para limites de confiança, dependências e integrações externas; `diagnosing-bugs` para falhas e regressões; `performance` para otimizações; e `frontend-design`, `design-taste-frontend`, `impeccable` e `web-design-guidelines` para trabalho ou auditoria de interface. Não usar `seo-audit` neste projeto por decisão explícita do dono.
+- Para tarefas não triviais, mantenha plano, decisões, comandos executados, evidências e pendências descobríveis em `docs/setup.md` ou no documento temático adequado. Ao retomar um handoff, confira arquivos, estado do Git, processos e checks em vez de confiar apenas no texto anterior.
+- As integrações locais existentes do Impeccable em `.codex/hooks.json`, `.claude/settings.local.json` e `.gemini/settings.json` são preservadas. Não adicione nem execute hooks novos sem revisão e necessidade comprovada.
