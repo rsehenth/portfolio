@@ -7,6 +7,7 @@ export type Locale = 'pt-BR' | 'en';
 
 export const locales: Locale[] = ['pt-BR', 'en'];
 export const defaultLocale: Locale = 'pt-BR';
+const profresolveRole = 'COO & Co-founder | Product & Technical Lead';
 
 export const ui = {
   'pt-BR': {
@@ -30,13 +31,32 @@ export const ui = {
 
     // Hero
     hero: {
-      badge: 'Technical Product Manager · AI Products',
-      tagline: 'Descubro o problema, decido o que construir e implemento.',
-      subheadline: 'Cofundador do ProfResolve, SaaS de IA com mais de 1.200 usuários cadastrados. Antes, 5+ anos em suporte, localização e comunidade no ecossistema Web3, em português, inglês e espanhol.',
-      ctaPrimary: 'Ver cases',
+      badge: 'Technical Product Manager / Sistemas, Produto, IA',
+      headlineBefore: 'Do problema ao produto.',
+      headlineAccent: 'Da estratégia',
+      headlineAfter: 'à execução.',
+      subheadline: 'Eu descubro o problema, decido o que vale construir e implemento. Produto e engenharia conectados, sem separar intenção de entrega.',
+      differentiator: undefined, // TODO(conteúdo): publicar somente após confirmar a métrica de usuários cadastrados.
+      ctaPrimary: 'Ver projetos',
       ctaSecondary: 'LinkedIn',
-      ctaCV: 'Baixar CV (PDF)',
+      ctaCV: 'Download CV',
       ctaCVAriaLabel: 'Baixar currículo em PDF',
+      process: {
+        title: 'Meu processo',
+        label: 'Processo / 01–04',
+        evidence: 'Projetos documentados com evidências',
+        steps: [
+          { number: '01', title: 'Entender', description: 'Contexto, usuários, problema real', href: undefined },
+          { number: '02', title: 'Priorizar', description: 'Escopo, hipótese, viabilidade', href: undefined },
+          { number: '03', title: 'Construir', description: 'Arquitetura, código, integração', href: undefined },
+          { number: '04', title: 'Validar', description: 'Testes, feedback, evolução', href: undefined },
+        ],
+      },
+      stats: [
+        { value: '2.4K+', label: 'Testes / ProfResolve' },
+        { value: '2 estágios', label: 'Verificação / Super Squad AI' },
+        { value: 'PT · EN · ES', label: 'Idiomas de trabalho' },
+      ],
     },
 
     // Selected Work section
@@ -47,6 +67,20 @@ export const ui = {
       demonstrates: 'Demonstra',
       highlights: 'Destaques',
       caseSoon: 'Case em breve',
+    },
+    homeEvidence: {
+      title: 'Fatos verificados',
+      items: [
+        { text: 'ProfResolve · 15 geradores pedagógicos', href: '/projects/profresolve/' },
+        { text: 'ProfResolve · 8 integrações externas', href: '/projects/profresolve/' },
+        { text: 'ProfResolve · 7 jogos educativos', href: '/projects/profresolve/' },
+        { text: 'ProfResolve · 2.4K+ casos de teste', href: '/projects/profresolve/' },
+        { text: 'Super Squad AI · arquitetura Leader + Workers (1 + N)', href: '/projects/super-squad-ai/' },
+        { text: 'Super Squad AI · verificação em 2 estágios', href: '/projects/super-squad-ai/' },
+        { text: 'CultoOS · 9 coleções + mídia sincronizadas', href: undefined }, // TODO(conteúdo): publicar link quando houver case.
+        { text: 'Universal Docs · busca e highlighting sem bibliotecas externas', href: undefined }, // TODO(conteúdo): publicar link quando houver case.
+        { text: 'Mosaic · editor client-side, sem backend', href: undefined }, // TODO(conteúdo): publicar link quando houver case.
+      ],
     },
 
     // Home-specific project presentation layer
@@ -59,10 +93,10 @@ export const ui = {
         profresolve: {
           category: 'Produto de IA · SaaS',
           statusBadge: 'Ativo',
-          description: 'Plataforma de IA para a rotina docente, com geração de materiais, monetização por créditos e arquitetura de resiliência para LLMs.',
+          description: 'Plataforma de IA para a rotina docente, com geração de materiais, créditos e políticas de confiabilidade que variam por fluxo.',
           highlights: [
-            { value: '16', label: 'Geradores' },
-            { value: '2.4K+', label: 'Casos de teste' },
+            { value: '15', label: 'Geradores pedagógicos' },
+            { value: '7', label: 'Jogos educativos' },
           ],
           focus: ['Produto de IA', 'Confiabilidade', 'Economia de produto'],
         },
@@ -182,23 +216,40 @@ export const ui = {
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
+        productPathTitle: 'Como cheguei a produto',
         p1: 'Minha trajetória em tecnologia começou perto dos usuários. Passei mais de cinco anos no ecossistema TRON DAO / DLive atuando com suporte, onboarding, localização e feedback em português, inglês e espanhol. Depois, na exchange espanhola Bit2Me e em projetos da Play9/NineBlocks, conectei comunidade, growth e produto, levando o que os usuários diziam para decisões de comunicação, discovery e backlog.',
         p2: 'Essa experiência me aproximou de produto. Na Cripto Host, atuei como Product Owner, cuidando de requisitos técnicos, pesquisa de infraestrutura e priorização junto à engenharia.',
+        todayTitle: 'Hoje',
         p3: 'Hoje, como cofundador do ProfResolve, atuo do discovery à implementação técnica, cobrindo estratégia, roadmap, UX e monetização. Participei diretamente da construção da plataforma, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade.',
-        p4: 'O ProfResolve virou um SaaS público, com mais de 1.200 usuários cadastrados organicamente. Hoje decido também com base no comportamento e no feedback de professores reais.',
+        p4: 'O ProfResolve é um SaaS público. Hoje decido também com base no feedback de professores e nas evidências disponíveis no produto.',
         p5: 'Essa combinação de entendimento de usuário, visão de negócio e execução técnica é o que levo para a próxima equipe.',
       },
 
       transparency: 'Apresento apenas dados que consigo verificar; o status de cada projeto está indicado em cada case.',
+      ctaProjects: 'Ver cases',
+      ctaLinkedin: 'LinkedIn',
+      productDecision: {
+        title: 'Uma decisão de produto',
+        contextLabel: 'Contexto',
+        decisionLabel: 'Decisão',
+        resultLabel: 'Resultado',
+        context: undefined,
+        decision: undefined,
+        result: undefined,
+        // TODO(conteúdo): preencher apenas com uma decisão, evidência e resultado verificáveis.
+      },
       timeline: {
         title: 'Trajetória',
+        showOverlapNote: false,
+        overlapNote: 'Alguns períodos se sobrepõem porque representam atuações simultâneas.',
+        // TODO(conteúdo): confirmar o texto antes de habilitar showOverlapNote.
         items: [
-          { period: '2026 – Presente', company: 'ProfResolve', role: 'COO & Co-founder | Product & Technical Lead', description: 'Cofundador e líder de produto de um SaaS de IA para professores.' },
-          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requisitos e pesquisa de infraestrutura junto à engenharia.' },
-          { period: '2019 – 2025 (5+ anos)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) e contratado direto TRON DAO (2023 – 2025).' },
-          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Comunidade, conteúdo localizado e feedback do mercado brasileiro.' },
-          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'Feedback de usuários, discovery, backlog e projetos Web3.' },
-          { period: '2010 – Presente', company: 'YouTube / Independente', role: 'Content Creator across Multiple Channels', description: 'Estratégia de conteúdo, métricas e crescimento orgânico em múltiplos canais.' },
+          { period: '2026 – Presente', company: 'ProfResolve', role: profresolveRole, description: 'Cofundador e líder de produto de um SaaS de IA para professores.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requisitos e pesquisa de infraestrutura junto à engenharia.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2019 – 2025 (5+ anos)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) e contratado direto TRON DAO (2023 – 2025).', highlight: undefined },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Comunidade, conteúdo localizado e feedback do mercado brasileiro.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'Feedback de usuários, discovery, backlog e projetos Web3.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2010 – Presente', company: 'YouTube / Independente', role: 'Content Creator across Multiple Channels', description: 'Estratégia de conteúdo, métricas e crescimento orgânico em múltiplos canais.', highlight: undefined },
         ],
       },
 
@@ -240,9 +291,10 @@ export const ui = {
             items: ['LLMs', 'APIs', 'Saídas estruturadas', 'Roteamento de modelos', 'Fallback entre provedores', 'Fluxos de IA', 'Orquestração de agentes'],
           },
           {
-            category: 'Engenharia de produto',
+            category: 'Desenvolvimento',
             items: ['TypeScript', 'Python', 'React / Next.js', 'SQL', 'Pydantic', 'Tailwind CSS'],
           },
+          // TODO(conteúdo): avaliar uma categoria separada para Produto e pesquisa.
           {
             category: 'Arquitetura e entrega',
             items: ['PostgreSQL', 'Redis', 'Git', 'Observabilidade', 'Testes automatizados', 'Integrações e pagamentos'],
@@ -355,13 +407,32 @@ export const ui = {
 
     // Hero
     hero: {
-      badge: 'Technical Product Manager · AI Products',
-      tagline: 'I discover the problem, decide what to build and implement it.',
-      subheadline: 'Co-founder of ProfResolve, an AI SaaS with more than 1,200 registered users. Before that, 5+ years in support, localization and community in the Web3 ecosystem, in Portuguese, English and Spanish.',
-      ctaPrimary: 'View cases',
+      badge: 'Technical Product Manager / Systems, Product, AI',
+      headlineBefore: 'From problem to product.',
+      headlineAccent: 'From strategy',
+      headlineAfter: 'to execution.',
+      subheadline: 'I discover the problem, decide what is worth building and implement it. Product and engineering stay connected, without separating intent from delivery.',
+      differentiator: undefined, // TODO(conteúdo): publish only after confirming the registered-user metric.
+      ctaPrimary: 'View projects',
       ctaSecondary: 'LinkedIn',
-      ctaCV: 'Download CV (PDF)',
+      ctaCV: 'Download CV',
       ctaCVAriaLabel: 'Download resume as PDF',
+      process: {
+        title: 'My process',
+        label: 'Process / 01–04',
+        evidence: 'Documented projects with evidence',
+        steps: [
+          { number: '01', title: 'Understand', description: 'Context, users, real problem', href: undefined },
+          { number: '02', title: 'Prioritize', description: 'Scope, hypothesis, feasibility', href: undefined },
+          { number: '03', title: 'Build', description: 'Architecture, code, integration', href: undefined },
+          { number: '04', title: 'Validate', description: 'Tests, feedback, evolution', href: undefined },
+        ],
+      },
+      stats: [
+        { value: '2.4K+', label: 'Tests / ProfResolve' },
+        { value: '2 stages', label: 'Verification / Super Squad AI' },
+        { value: 'PT · EN · ES', label: 'Working languages' },
+      ],
     },
 
     // Selected Work section
@@ -372,6 +443,20 @@ export const ui = {
       demonstrates: 'Demonstrates',
       highlights: 'Highlights',
       caseSoon: 'Case coming soon',
+    },
+    homeEvidence: {
+      title: 'Verified facts',
+      items: [
+        { text: 'ProfResolve · 15 pedagogical generators', href: '/en/projects/profresolve/' },
+        { text: 'ProfResolve · 8 external integrations', href: '/en/projects/profresolve/' },
+        { text: 'ProfResolve · 7 educational games', href: '/en/projects/profresolve/' },
+        { text: 'ProfResolve · 2.4K+ test cases', href: '/en/projects/profresolve/' },
+        { text: 'Super Squad AI · Leader + Workers architecture (1 + N)', href: '/en/projects/super-squad-ai/' },
+        { text: 'Super Squad AI · 2-stage verification', href: '/en/projects/super-squad-ai/' },
+        { text: 'CultoOS · 9 synced collections + media', href: undefined }, // TODO(conteúdo): publish link when a case exists.
+        { text: 'Universal Docs · search and highlighting without external libraries', href: undefined }, // TODO(conteúdo): publish link when a case exists.
+        { text: 'Mosaic · client-side editor, no backend', href: undefined }, // TODO(conteúdo): publish link when a case exists.
+      ],
     },
 
     // Home-specific project presentation layer
@@ -384,10 +469,10 @@ export const ui = {
         profresolve: {
           category: 'AI Product · SaaS',
           statusBadge: 'Active',
-          description: 'An AI platform for educators, combining content generation, credit-based monetization and a resilient LLM architecture.',
+          description: 'An AI platform for educators, combining material generation, credits and reliability policies that vary by workflow.',
           highlights: [
-            { value: '16', label: 'Generators' },
-            { value: '2.4K+', label: 'Test cases' },
+            { value: '15', label: 'Pedagogical generators' },
+            { value: '7', label: 'Educational games' },
           ],
           focus: ['AI Product', 'Reliability', 'Product Economics'],
         },
@@ -507,23 +592,40 @@ export const ui = {
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
+        productPathTitle: 'How I moved into product',
         p1: 'I started out in technology close to the user. I spent more than five years in the TRON DAO / DLive ecosystem doing support, onboarding, localization and feedback in Portuguese, English and Spanish. Later, at the Spanish exchange Bit2Me and in Play9/NineBlocks projects, I connected community, growth and product, turning what users said into decisions on communication, discovery and backlog.',
         p2: 'That experience moved me closer to product. At Cripto Host, I worked as a Product Owner, handling technical requirements, infrastructure research and prioritization alongside engineering.',
+        todayTitle: 'Today',
         p3: 'Today, as co-founder of ProfResolve, I work from discovery through technical implementation, covering strategy, roadmap, UX and monetization. I took a direct part in building the platform, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms.',
-        p4: 'ProfResolve grew into a public SaaS with over 1,200 organically registered users. I now base product decisions partly on what real teachers do and say.',
+        p4: 'ProfResolve is a public SaaS. I now also make decisions based on educator feedback and evidence available in the product.',
         p5: 'This mix of user understanding, business sense and technical execution is what I bring to the next team.',
       },
 
       transparency: 'I present only data I can verify; each project’s status is indicated in its case study.',
+      ctaProjects: 'View case studies',
+      ctaLinkedin: 'LinkedIn',
+      productDecision: {
+        title: 'A product decision',
+        contextLabel: 'Context',
+        decisionLabel: 'Decision',
+        resultLabel: 'Result',
+        context: undefined,
+        decision: undefined,
+        result: undefined,
+        // TODO(conteúdo): fill only with a verifiable decision, evidence and result.
+      },
       timeline: {
         title: 'Career path',
+        showOverlapNote: false,
+        overlapNote: 'Some periods overlap because they represent simultaneous work.',
+        // TODO(conteúdo): confirm copy before enabling showOverlapNote.
         items: [
-          { period: '2026 – Present', company: 'ProfResolve', role: 'COO & Co-founder | Product & Technical Lead', description: 'Co-founder and product lead for an AI SaaS for teachers.' },
-          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requirements and infrastructure research alongside engineering.' },
-          { period: '2019 – 2025 (5+ years)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) and direct hire TRON DAO (2023 – 2025).' },
-          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Community, localized content and feedback from the Brazilian market.' },
-          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'User feedback, discovery, backlog and Web3 projects.' },
-          { period: '2010 – Present', company: 'YouTube / Independent', role: 'Content Creator across Multiple Channels', description: 'Content strategy, metrics and organic growth across multiple channels.' },
+          { period: '2026 – Present', company: 'ProfResolve', role: profresolveRole, description: 'Co-founder and product lead for an AI SaaS for teachers.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requirements and infrastructure research alongside engineering.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2019 – 2025 (5+ years)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) and direct hire TRON DAO (2023 – 2025).', highlight: undefined },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Community, localized content and feedback from the Brazilian market.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'User feedback, discovery, backlog and Web3 projects.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2010 – Present', company: 'YouTube / Independent', role: 'Content Creator across Multiple Channels', description: 'Content strategy, metrics and organic growth across multiple channels.', highlight: undefined },
         ],
       },
 
@@ -565,9 +667,10 @@ export const ui = {
             items: ['LLMs', 'APIs', 'Structured Outputs', 'Model Routing', 'Provider Fallback', 'AI Workflows', 'Agent Orchestration'],
           },
           {
-            category: 'Product Engineering',
+            category: 'Development',
             items: ['TypeScript', 'Python', 'React / Next.js', 'SQL', 'Pydantic', 'Tailwind CSS'],
           },
+          // TODO(conteúdo): consider a separate Product & Research category.
           {
             category: 'Architecture & Delivery',
             items: ['PostgreSQL', 'Redis', 'Git', 'Observability', 'Automated Testing', 'Integrations & Payments'],
