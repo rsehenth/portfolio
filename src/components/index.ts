@@ -34,6 +34,7 @@ export const RoleBlocks = createComponentLoader('@/components/RoleBlocks.astro')
 export const ComparisonBlock = createComponentLoader('@/components/ComparisonBlock.astro');
 export const StatsGrid = createComponentLoader('@/components/StatsGrid.astro');
 export const CaseMedia = createComponentLoader('@/components/CaseMedia.astro');
+export const MediaSlot = createComponentLoader('@/components/MediaSlot.astro');
 export const BasicView = createComponentLoader('@/components/BasicView.astro');
 export const FullView = createComponentLoader('@/components/FullView.astro');
 export const SeeFull = createComponentLoader('@/components/SeeFull.astro');
@@ -54,6 +55,7 @@ export default {
   ComparisonBlock,
   StatsGrid,
   CaseMedia,
+  MediaSlot,
   BasicView,
   FullView,
   SeeFull,

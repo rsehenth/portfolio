@@ -21,12 +21,13 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 | Dados de um projeto (texto, status, métricas, seção, ordem) | `src/content/projects/<slug>/pt-BR.mdx` **e** `en.mdx` |
 | Campos permitidos / obrigatórios | `src/content/config.ts`; template de card `docs/project-template-card.mdx` ou de case `docs/project-template.mdx` |
 | Visual do card do /projects | `src/components/ProjectCard.astro` |
-| Seções do /projects (variante do card, nº de colunas) | `src/components/ProjectsIndex.astro` (`variantFor`, `gridClass`) |
+| Seções do /projects (variante do card, nº de colunas) | `src/components/ProjectsIndex.astro` (`variantFor`, `gridClass`: 1 item = coluna única; 2 ou 4 = 2 colunas desde 768px; 3 ou 5+ = 3 colunas desde 1200px. O 4 vira grade 2×2 justamente para não deixar trio + card órfão) |
 | Título/subtítulo de uma seção | `src/i18n/ui.ts` → `projectsPage.sections` (PT e EN) |
 | Ordem das seções | `SECTION_ORDER` (`projects.ts`) **e** `projectsPage.sections` (PT e EN) **e** enum `projectSection` (`config.ts`) |
-| Card de projeto na Home | `featuredOrder` (`src/components/HomePage.astro`) + `homeProjects.projects.<slug>` (`ui.ts`, PT e EN) |
+| Card de projeto na Home | `featuredOrder` (`src/components/HomePage.astro`, 3 cards) + `homeProjects.projects.<slug>` (`ui.ts`, PT e EN) |
 | Página de case | `src/layouts/CaseLayout.astro` e `src/pages/**/projects/[slug].astro` |
 | Componentes usáveis no corpo do MDX | mapa de componentes em `src/pages/projects/[slug].astro`, `src/pages/en/projects/[slug].astro` e `src/components/index.ts` (ligado em `astro.config.mjs`) |
+| Slot de mídia ainda sem arquivo (case em desenvolvimento) | `src/components/MediaSlot.astro` (registrado nos 3 lugares da armadilha 16); mostra uma linha compacta de "prévia a caminho" quando o arquivo não existe em `public/`. Caminhos previstos por case ficam em `public/projects/README.md` |
 | Anterior/Próximo entre cases | `src/components/CaseNavigation.astro` (usa a ordenação de `projects.ts`) |
 | Seletor Resumo/Case completo | `docs/case-views.md` |
 
@@ -67,7 +68,7 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 Se faltar em qualquer lugar, o **P4** derruba o `npm run check:content`; sem a checagem, a seção ordena antes de todas e os projetos somem do /projects.
 
 **h) Destaque na Home**
-1. `featuredOrder` em `HomePage.astro` (2 slots).
+1. `featuredOrder` em `HomePage.astro` (hoje 3 chaves: ProfResolve, Super Squad AI, CLT Simulator). Todos saem na mesma grade, em `variant="hero"`: coluna única abaixo de 768px, o primeiro card ocupa a linha inteira e os outros dois ficam lado a lado entre 768 e 1279px, e as três colunas equilibradas entram a partir de 1280px (`md:col-span-2 xl:col-span-1` no primeiro).
 2. `homeProjects.projects.<slug>` em `ui.ts`, PT e EN (`category`, `description`, `highlights`, `focus`).
 Isso é independente de `section: featured` (que só afeta o /projects). Chave sem entrada em `homeProjects` deixa a célula vazia — hoje é erro (**P6**).
 

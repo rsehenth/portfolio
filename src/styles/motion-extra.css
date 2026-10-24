@@ -1,0 +1,170 @@
+/* Extra motion layers, additive to the [data-reveal] system in BaseLayout.
+   Hidden states only exist under html.js and prefers-reduced-motion: no-preference,
+   so no-JS and reduced-motion visitors get the untouched layout. */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Softer than the site's expo curve: expo-out leaves the mask at full speed,
+     which reads as a snap. This one accelerates gently and keeps a long tail. */
+  :root {
+    --fx-ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  /* ── 1. Hero masked lines ─────────────────────────────────────────── */
+  /* .home-hero__title uses line-height .92, so the glyphs overflow the line
+     box: the clip box needs padding for descenders and the same negative
+     margin so the grid rows keep their original height. */
+  html.js .hero-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  html.js .hero-line > span {
+    display: block;
+    transform: translateY(150%);
+    animation: hero-line-up 1.2s var(--fx-ease-soft) forwards;
+  }
+
+  html.js .hero-line:nth-child(1) > span { animation-delay: 0.15s; }
+  html.js .hero-line:nth-child(2) > span { animation-delay: 0.30s; }
+  html.js .hero-line:nth-child(3) > span { animation-delay: 0.45s; }
+
+  /* ── 2. Home process rail ─────────────────────────────────────────── */
+  html.js .home-process ol {
+    position: relative;
+  }
+
+  html.js .home-process ol::before,
+  html.js .home-process ol::after {
+    content: "";
+    position: absolute;
+    left: -0.75rem;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    width: 2px;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  html.js .home-process ol::before {
+    background: rgb(var(--color-border-rgb));
+  }
+
+  html.js .home-process ol::after {
+    background: rgb(var(--color-accent-rgb));
+    transform: scaleY(var(--process-p, 0));
+    transform-origin: top center;
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+
+  /* ── 3. About trajectory rail ─────────────────────────────────────── */
+  html.js [data-fx-timeline] {
+    position: relative;
+    border-left-color: rgb(var(--color-border-rgb));
+  }
+
+  html.js [data-fx-timeline]::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgb(var(--color-accent-rgb));
+    transform: scaleY(var(--timeline-p, 0));
+    transform-origin: top center;
+    transition: transform 0.7s var(--ease-out-expo);
+    pointer-events: none;
+  }
+
+  /* ── 8. Pillar cards entering on scroll (FX-3) ────────────────────── */
+  /* Ported from efeitospraticos.html [FX-3]: the card slides in from the side
+     its column sits on, rises, fades, and its text lines follow in stagger.
+     --fx-x / --fx-y / --fx-sx / --fx-delay are written by the JS on entry.
+     Distances are shorter than the demo's: these columns are flush and share
+     1px dividers, so a long slide reads as the strip breaking apart. */
+  html.js [data-fx-cards] {
+    overflow: hidden;
+  }
+
+  html.js [data-fx-cards] .fx-card {
+    opacity: 0;
+    transform: translate3d(var(--fx-x, 0px), var(--fx-y, 64px), 0);
+    transition: opacity 1.05s var(--fx-ease-soft) var(--fx-delay, 0s),
+      transform 1.5s var(--fx-ease-soft) var(--fx-delay, 0s);
+  }
+
+  html.js [data-fx-cards] .fx-card.is-in {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  html.js [data-fx-cards] .fx-card > :is(h3, p, ul) {
+    opacity: 0;
+    transform: translateX(var(--fx-sx, 22px));
+    transition: opacity 0.85s var(--fx-ease-soft), transform 1.15s var(--fx-ease-soft);
+  }
+
+  html.js [data-fx-cards] .fx-card.is-in > :is(h3, p, ul) {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.js [data-fx-cards] .fx-card.is-in > :is(h3, p, ul):nth-child(2) { transition-delay: 0.34s; }
+  html.js [data-fx-cards] .fx-card.is-in > :is(h3, p, ul):nth-child(3) { transition-delay: 0.46s; }
+  html.js [data-fx-cards] .fx-card.is-in > :is(h3, p, ul):nth-child(4) { transition-delay: 0.58s; }
+
+  /* ── 6. Project card logo reveal ──────────────────────────────────── */
+  /* Own .is-in class, never [data-reveal]: [data-view] forces
+     [data-reveal] visible with !important. */
+  html.js .project-card__logo:not(.is-in) .project-card__logo-img {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  html.js .project-card__logo-img {
+    clip-path: inset(0);
+    transition: clip-path 0.7s var(--ease-out-expo), transform 400ms var(--ease-out-expo);
+  }
+
+  /* ── 5. Featured card tilt return ─────────────────────────────────── */
+  /* Keeps the .card transitions intact and adds only transform. The home
+     cards use Tailwind's transition-all; pinning the list here makes the
+     return identical to /projects/. */
+  @media (hover: hover) and (pointer: fine) {
+    html.js .project-card--featured,
+    html.js .home-featured .card {
+      transition: transform 0.4s var(--ease-out-expo), background-color 250ms ease,
+        border-color 250ms ease, box-shadow 250ms ease;
+    }
+  }
+
+  /* ── 7. Scroll progress bar (projects only) ───────────────────────── */
+  html.js .scroll-progress {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 2px;
+    z-index: 40;
+    background: rgb(var(--color-foreground-rgb) / 0.1);
+    pointer-events: none;
+  }
+
+  html.js .scroll-progress__fill {
+    display: block;
+    height: 100%;
+    background: rgb(var(--color-accent-rgb));
+    transform: scaleX(var(--p, 0));
+    transform-origin: left center;
+  }
+
+  @keyframes hero-line-up {
+    from {
+      transform: translateY(150%);
+      opacity: 0.3;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}

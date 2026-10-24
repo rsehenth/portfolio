@@ -1,0 +1,439 @@
+---
+title: CLT Simulator
+locale: en
+subtitle: "Indie Game · Technical Product"
+description: "A Brazilian indie pixel-art life simulation built as an MVP to validate exploration, narrative, job hunting, and interactive computer and phone systems."
+tagline: "A game about getting hired in a country where even the first job asks for experience."
+summary: "CLT Simulator is a Brazilian indie life simulation in pixel art that follows Cleiton, a young unemployed man trying to keep up with his bills and land a professional opportunity. The project combines life simulation, narrative, exploration and interactive systems inspired by everyday life in Brazil."
+year: 2026
+role: "Project creator · Product Development · Game Design · Technical development"
+productType: "Indie game · Life simulation · Narrative"
+focus: "Technical Product · System architecture · Game Design · AI-assisted development"
+stage: "Playable MVP, in development."
+stageNote: "CLT is Brazil's standard regime of formal employment, the one that comes with a signed work card."
+statusBadge: "In development"
+caseSummary:
+  problem: "Turn the Brazilian labor market into a simulation that combines humour, financial pressure and player decisions."
+  role: "Product concept, scope, gameplay decisions, development direction, AI-assisted implementation and testing."
+  result: "Playable prototype where exploration, narrative, time, computer, phone and job hunting are connected."
+  keyDecision: "Validate a playable core with connected systems before expanding the map, missions and final art."
+statusEvidence:
+  stage: "Working MVP under active development, with automated tests and a planned expansion."
+  evidence: "The prototype includes the bedroom, a six-room house, a street with vehicles and pedestrians, WinTário OS, a phone with ZapZap, applications through FudidIn, objectives and narrative events."
+  nextValidation: "Visual evolution plus stronger mechanics and narrative, with a demo planned for 2027. The date may shift as development proceeds."
+section: products
+cardBadge:
+  label: "In development"
+  tone: development
+cardHighlights:
+  - "Playable prototype"
+  - "Demo planned for 2027"
+status: Active
+draft: false
+views: true
+readingTime:
+  basic: 2
+  full: 9
+tags:
+  - Game Design
+  - Phaser 3
+  - AI-assisted Development
+  - Life Simulation
+  - System Architecture
+demonstrates:
+  - Technical Product
+  - Game Design
+  - System Architecture
+  - Prototyping
+  - AI-assisted Engineering
+technologies:
+  - JavaScript
+  - Phaser 3
+  - Vite
+  - HTML/CSS
+  - Automated testing
+metrics:
+  - value: "MVP"
+    label: "Playable prototype"
+    state: verified
+    display: text
+  - value: "2027"
+    label: "Demo planned"
+    state: verified
+    display: text
+snapshot:
+  primary:
+    - value: "MVP"
+      label: Playable prototype
+      state: verified
+    - value: "6"
+      label: Explorable rooms
+      state: verified
+    - value: "12"
+      label: System areas
+      state: verified
+    - value: "2027"
+      label: Demo planned
+      state: verified
+  secondary: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "CLT Simulator | Indie Game & Technical Product | Lucas Sehnem"
+  description: "CLT Simulator case study: a Brazilian indie pixel-art life simulation. Playable MVP, gameplay systems, technical architecture, AI-assisted development and roadmap."
+externalUrl: "https://cltsimulatorsite.pages.dev/"
+externalUrlLabel: "Visit official site ↗"
+order: 8
+noCase: false
+---
+
+<BasicView>
+
+## The problem
+
+How do you turn the Brazilian labor market into a simulation that combines humour, financial pressure and player decisions. Cleiton has diplomas and no replies. The game makes that imbalance mechanical: the first job requires experience, applications disappear in silence, bills keep running against the clock.
+
+## My role
+
+Product concept, scope definition, gameplay decisions, development direction, AI-assisted implementation, testing and the technical evolution of the MVP.
+
+## What was built
+
+A playable prototype with exploration, narrative, time management, computer and phone systems, job applications and simulation of the urban environment.
+
+<MediaSlot
+  src="/projects/clt-simulator/clt-bedroom.webp"
+  alt="Screenshot of Cleiton's bedroom in CLT Simulator, the isometric pixel-art starting scene"
+  width={1600}
+  height={900}
+  caption="Cleiton's bedroom, where every run starts"
+  pending="Preview coming"
+/>
+
+## Key decision
+
+Prioritise a playable core with connected systems before expanding the map, adding many missions or investing in final graphical polish.
+
+<SeeFull to="decisoes" label="See the decisions and trade-offs" />
+
+## Current state
+
+A working MVP under active development, with automated tests and a planned expansion. The art is still provisional: the prototype uses procedural graphics with an initial pixel-art identity.
+
+## Next milestone
+
+Visual refinement plus stronger mechanics and narrative, with a demo planned for 2027. The date may shift as development proceeds.
+
+## Evidence
+
+What supports this case today:
+
+- A playable prototype where the house, the street, the computer, the phone, the narrative and the objectives work together.
+- An automated test suite covering gameplay rules, systems and regressions.
+- A public roadmap that separates what already exists in the prototype from what is still a plan, on the [official game site](https://cltsimulatorsite.pages.dev/).
+
+Nothing here depends on a commercial release, revenue or market validation. There has been no audience retention test and no player measurement, and the prototype is not available for download yet.
+
+<ViewCtaButton label="See the full case: systems, architecture and testing" />
+
+</BasicView>
+
+<FullView>
+
+<nav aria-label="On this page" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">On this page:</span>
+  <a href="#conceito" class="link-underline hover:text-foreground">Concept</a>
+  <span aria-hidden="true">·</span>
+  <a href="#sistemas" class="link-underline hover:text-foreground">Systems</a>
+  <span aria-hidden="true">·</span>
+  <a href="#arquitetura" class="link-underline hover:text-foreground">Architecture</a>
+  <span aria-hidden="true">·</span>
+  <a href="#testes" class="link-underline hover:text-foreground">Testing</a>
+  <span aria-hidden="true">·</span>
+  <a href="#roadmap" class="link-underline hover:text-foreground">Roadmap</a>
+</nav>
+
+<h2 id="conceito">The concept</h2>
+
+CLT Simulator follows Cleiton, a young man who finished his studies, collected diplomas and believed that education would secure a job. The market answered differently. With bills arriving and the house he shares with his mother at risk, he has only a few days to change his situation.
+
+The game combines life simulation, exploration, narrative and satire of the Brazilian labor market. The comedy comes from recognition: experience required for the first job, vacancies that vanish after you apply, a professional network that becomes a stage for absurd situations.
+
+The title is part of the joke. CLT is Brazil's standard regime of formal employment, the contract signed with a work card and the labor protections that come with it. It is the answer Cleiton is looking for, and the game treats it as a goal that is reachable in parts.
+
+<MediaSlot
+  src="/projects/clt-simulator/clt-street.webp"
+  alt="Screenshot of the neighbourhood street in CLT Simulator, with facades, sidewalks and vehicles in pixel art"
+  width={1600}
+  height={900}
+  caption="Street and neighbourhood, the stretch between home and the next attempt"
+  pending="Preview coming"
+/>
+
+## From concept to MVP
+
+The first objective was a playable prototype that answered a small set of design questions:
+
+<FlowDiagram
+  label="Questions the MVP had to answer"
+  steps={[
+    'Do movement and interaction feel right?',
+    'Does moving between scenes preserve context?',
+    'Can time create pressure without blocking the player?',
+    'Are the computer and the phone playable rather than decorative?',
+    'Does job hunting produce visible consequences?',
+    'Can the street hold continuous ambient life?',
+  ]}
+/>
+
+Validating those systems came before expanding content. More map, more missions and more characters only make sense once the core holds. No audience test, no sales and no retention measurement has been run, so none of them appear in this case.
+
+<h2 id="sistemas">Main systems</h2>
+
+### Exploration and scenes
+
+Isometric pixel-art environments. The game starts in Cleiton's bedroom and grows into a house with six explorable rooms, with doors, a window, interactive objects and the daily routine with his mother.
+
+### WinTário OS
+
+An interactive computer inside the game, from boot to desktop, with its own interface inspired by classic operating systems. Working applications, restarts and a blue screen are part of the experience.
+
+<MediaSlot
+  src="/projects/clt-simulator/clt-wintario.webp"
+  alt="Screenshot of WinTário OS, the interactive computer in CLT Simulator with desktop and applications"
+  width={1600}
+  height={900}
+  caption="WinTário OS, the desktop Cleiton uses to search for openings"
+  pending="Preview coming"
+/>
+
+### FudidIn
+
+A parody of a professional network used to search for openings and send applications. The feed, the vacancies and application progress exist in the prototype. The humour comes from recognition: experience demanded for an entry role, applications that never reply.
+
+<MediaSlot
+  src="/projects/clt-simulator/clt-fudidin.webp"
+  alt="Screenshot of FudidIn, the satirical professional network in CLT Simulator with job listings and applications"
+  width={1600}
+  height={900}
+  caption="FudidIn, where Cleiton applies and waits"
+  pending="Preview coming"
+/>
+
+### ZapZap
+
+Cleiton's phone holds conversations, calendar, notifications and events that feed the narrative and the simulation of daily life, including how battery drains across the day.
+
+<MediaSlot
+  src="/projects/clt-simulator/clt-zapzap.webp"
+  alt="Screenshot of Cleiton's phone showing the ZapZap messaging app and notifications"
+  width={900}
+  height={1600}
+  caption="ZapZap, the phone that warns when things get tight"
+  pending="Preview coming"
+/>
+
+### Time and state
+
+An internal clock, the passage of days, daily checkpoints and local persistence carry the financial pressure. Balance, rent and the job objective live in the same central state.
+
+### Street and ambient behaviour
+
+An explorable neighbourhood with pedestrians, vehicles, cars passing by with music and sound layers per environment. Scenes stay continuous while the player moves instead of restarting on every screen.
+
+<Callout variant="info">
+The prototype uses procedural graphics and an initial pixel-art identity. The systems already work; the visual finish is its own roadmap stage.
+</Callout>
+
+<h2 id="fluxo">Gameplay and flow</h2>
+
+The main loop connects exploration, interaction and consequence:
+
+<FlowDiagram
+  label="Main loop of the prototype"
+  steps={[
+    'The player takes over Cleiton day',
+    'Explores the house and the neighbourhood',
+    'Interacts with objects and characters',
+    'Uses the computer or the phone',
+    'Finds vacancies and sends applications',
+    'Events arrive and a decision is required',
+    'Time advances until the checkpoint',
+    'The narrative progresses or tightens',
+  ]}
+/>
+
+Early on, the objective structure holds the player: five required actions and five applications in FudidIn before the door unlocks. The HUD adapts per scene. It is a design that teaches the loop without a tutorial.
+
+<h2 id="arquitetura">Technical architecture</h2>
+
+The prototype is built in JavaScript with ES Modules on top of Phaser 3, using Vite for development and for the static build. The interface combines Canvas and DOM/CSS: the world renders on the canvas while some interface layers use HTML for denser text, dialogue and screens.
+
+<ArchitectureDiagram
+  label="Layers of the prototype"
+  steps={[
+    { label: 'Central state', detail: 'GameState, balance, rent, clock, objective progress' },
+    { label: 'Scenes', detail: 'Bedroom, house, street, opening, end-of-day screens' },
+    { label: 'World systems', detail: 'Movement, camera, interactions, pedestrians, vehicles, audio' },
+    { label: 'Interfaces', detail: 'WinTário OS, FudidIn, PomboMail, phone, HUD' },
+  ]}
+/>
+
+That separation matters for a practical reason. The central state holds progression rules, while scenes and world systems handle presentation. When a new interface enters the game, it reads and writes the same state instead of creating a second version of the truth.
+
+This reduces inconsistencies between screens. The phone and the computer show the same day, the same balance and the same objective. Without that boundary, each interface would tend to keep its own progress tracking, and one bug fix would have to be repeated in several places.
+
+Persistence is local, with daily checkpoints. The prototype has no backend, no accounts and no telemetry.
+
+<h2 id="ia">AI-assisted development</h2>
+
+This project is a case study of using AI in the development process, not a game mechanic. No artificial intelligence takes part in Cleiton run: the one who searches for jobs, replies to messages and makes decisions is the player.
+
+AI takes part in the build work, with defined roles:
+
+<RoleBlocks
+  label="How AI takes part in development"
+  blocks={[
+    {
+      title: 'Implementation',
+      items: ['Drafting modules and systems', 'Test-guided refactoring', 'Provisional asset generators'],
+    },
+    {
+      title: 'Investigation',
+      items: ['Code review before commit', 'Root cause work on bugs', 'Regression audits'],
+    },
+    {
+      title: 'Planning',
+      items: ['Breaking down MVP scope', 'Visual experimentation', 'Structuring the roadmap'],
+    },
+  ]}
+/>
+
+Decisions about direction, scope and technical assessment stay with me. An AI suggestion only enters the game after being read, tested and accepted. No deliverable in this project relies on unreviewed automatic validation.
+
+<Callout variant="info" title="What this changes about the product">
+AI made a solo prototype faster to build. It did not replace deciding what the game is, or owning whatever breaks.
+</Callout>
+
+<h2 id="testes">Quality and testing</h2>
+
+Development of the prototype includes an automated test suite covering gameplay rules, systems and regressions. The number of tests changes with every stage of the project, so it is not published here as a metric.
+
+The defects that became test cases show the kind of risk a game with many overlapping interfaces creates:
+
+<DataTable
+  caption="Defects reproduced and kept as regression tests"
+  columns={['Defect', 'Why it mattered']}
+  rows={[
+    ['Messages arriving out of order on the phone', 'Dialogue out of sequence breaks the narrative and the joke'],
+    ['Pedestrians and vehicles restarting on zoom changes', 'The street lost continuity and stopped feeling alive'],
+    ['Scene lifecycle handled incorrectly', 'Old state survived the scene change and produced ghost behaviour'],
+    ['Listeners accumulating without removal', 'Inputs fired more than once and events repeated'],
+    ['Settings overwritten during execution', 'Player or system adjustments vanished mid-run'],
+    ['Saves without normalization', 'An older checkpoint could load fields that no longer existed'],
+  ]}
+/>
+
+Each one was reproduced before being fixed, and kept as a test so it does not come back. There is no published coverage percentage, no automated visual validation, and no external player testing so far.
+
+<h2 id="decisoes">Decisions and trade-offs</h2>
+
+### Systems before polish
+
+<ComparisonBlock
+  titleA="Start with the finish"
+  titleB="Start with the systems"
+  arrows={false}
+  label="Decision: validate the functional experience before the final art"
+  itemsA={[
+    "Final art from the very first scene",
+    "Remaking assets whenever design changes",
+    "High cost to test one hypothesis",
+    "Risk of polishing something that does not work",
+  ]}
+  itemsB={[
+    "Procedural graphics as the base",
+    "Design changes cost little",
+    "Hypothesis tested early",
+    "Final art arrives with stable rules",
+  ]}
+/>
+
+The accepted trade-off: the current look does not represent the final game. It is a deliberate decision, not a forgotten stage.
+
+### Centralized state
+
+Progression rules live in one central state that every interface reads. The cost is the discipline of never solving a problem by duplicating local state. The benefit is that the phone, the computer and the HUD tell the same story about Cleiton day.
+
+### Regression tests as project memory
+
+Known defects become tests. This makes every change more expensive, because part of the suite has to stay green, and it protects evolution from slipping back into errors that were already paid for.
+
+### Gradual expansion
+
+Neighbourhood, missions and events arrive in stages, after the previous one is technically validated. The risk being controlled is scope growing faster than the base can support.
+
+<h2 id="roadmap">Roadmap</h2>
+
+<ComparisonBlock
+  titleA="Built in the prototype"
+  titleB="In evolution or planned"
+  arrows={false}
+  label="Project state, separated by evidence"
+  itemsA={[
+    "Playable core with bedroom and movement",
+    "House with six explorable rooms",
+    "WinTário OS with working applications",
+    "Phone with ZapZap and calendar",
+    "FudidIn with vacancies and applications",
+    "Narrative events and the opening cutscene",
+    "Street with pedestrians and vehicles",
+    "Ambient audio and the early objectives",
+  ]}
+  itemsB={[
+    "Visual quality, characters and assets",
+    "New interactions in the neighbourhood",
+    "More missions and side quests",
+    "The in-person interview as the next milestone",
+    "Bus stop and working transport",
+    "Balance of economy and difficulty",
+    "Technical polish and player experience",
+    "Demo planned for 2027",
+  ]}
+/>
+
+Nothing in the right-hand column works in the prototype today. There is no detailed schedule beyond the demo forecast, and that forecast may change as development proceeds.
+
+## Current result
+
+CLT Simulator has a playable MVP with interconnected systems. That makes it possible to validate the core of the experience before moving on to content expansion and visual finish.
+
+The project shows direct work in product concept, technical implementation, problem analysis, testing and prioritisation. There has been no commercial release and no market validation.
+
+## Next steps
+
+- Evolve the visual identity of scenes, characters and vehicles.
+- Expand content and mechanics on top of the already validated core.
+- Improve how the gameplay is presented, with real captures on the [official site](https://cltsimulatorsite.pages.dev/).
+- Prepare the demo planned for 2027.
+
+<MediaSlot
+  src="/projects/clt-simulator/clt-art-evolution.webp"
+  alt="Comparison between the provisional prototype graphics and the refined pixel-art identity planned for CLT Simulator"
+  width={1600}
+  height={900}
+  caption="Planned visual evolution, from prototype to the definitive identity"
+  pending="Comparison coming"
+/>
+
+<Callout variant="demonstrates" title="What this project demonstrates">
+
+- **Technical Product:** define MVP scope, prioritise system validation and drive evolution stage by stage.
+- **Game Design:** turn a recognisable social tension into mechanics of time, decision and consequence.
+- **System architecture:** keep central state, scenes, world systems and interfaces separated so the game can evolve without duplicating the truth.
+- **AI-assisted engineering:** use AI inside the development process with human review, testing and technical decisions.
+- **Quality and reliability:** record defects as regression tests to protect the evolution of the prototype.
+
+</Callout>
+
+</FullView>
