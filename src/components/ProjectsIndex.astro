@@ -31,8 +31,10 @@ function variantFor(id: SectionId): CardVariant {
  *   2 items → 1 col below 768px, 2 cols from 768px
  *   3 items → 1 col below 1200px, 3 cols from 1200px (raised from 1024px to
  *              avoid cramped cards with long titles/subtitles at narrow 1024)
+ *   4 items → 2 cols from 768px: a 2×2 block, never a trio plus an orphan
  */
 function gridClass(count: number): string {
+  if (count === 4) return 'grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6';
   if (count >= 3) return 'grid grid-cols-1 gap-5 projects-grid-3col lg:gap-6';
   if (count === 2) return 'grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6';
   return 'grid grid-cols-1 gap-5 lg:gap-6';
@@ -64,6 +66,10 @@ const sections: SectionView[] = page.sections
   canonical={locale === 'pt-BR' ? '/projects/' : '/en/projects/'}
   locale={locale}
 >
+  <div class="scroll-progress" aria-hidden="true">
+    <span class="scroll-progress__fill" data-fx-progress></span>
+  </div>
+
   <div class="pb-20 pt-24 lg:pb-28 lg:pt-28">
     <div class="container">
       <header class="mb-14 lg:mb-16" data-reveal>

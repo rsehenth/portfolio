@@ -1,0 +1,74 @@
+---
+// MediaSlot.astro — configurable case media slot.
+// Renders CaseMedia when the file exists in public/, otherwise a compact
+// pending row: no broken image, no empty plate, same slot in the MDX source.
+import fs from 'node:fs';
+import path from 'node:path';
+import CaseMedia from './CaseMedia.astro';
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+  /** Localized "preview coming" label, shown only while the file is absent. */
+  pending: string;
+  protected?: boolean;
+}
+
+const { src, alt, width, height, caption, pending, protected: isProtected = false } = Astro.props;
+
+const publicRoot = path.resolve(process.cwd(), 'public');
+const relative = src.replace(/^\/+/, '').split('/').join(path.sep);
+const target = path.resolve(publicRoot, relative);
+const hasFile = (target + path.sep).startsWith(publicRoot + path.sep) && fs.existsSync(target);
+---
+
+{
+  hasFile ? (
+    <CaseMedia
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      caption={caption}
+      protected={isProtected}
+    />
+  ) : (
+    <figure class="not-prose my-6">
+      <div class="ms-pending" role="img" aria-label={alt}>
+        <span class="ms-pending__flag">{pending}</span>
+        <span class="ms-pending__text">{caption ?? alt}</span>
+      </div>
+    </figure>
+  )
+}
+
+<style>
+  .ms-pending {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.875rem;
+    padding: 0.875rem 1rem;
+    border-left: 2px solid rgb(var(--color-border-rgb));
+    background-color: rgb(var(--color-muted-rgb) / 0.55);
+  }
+
+  .ms-pending__flag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1.35;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--color-accent-rgb));
+    white-space: nowrap;
+  }
+
+  .ms-pending__text {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+</style>

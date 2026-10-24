@@ -14,9 +14,9 @@ const cvHref = locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas-cven.pdf';
     <div class="home-hero__grid">
       <div>
         <h1 id="hero-heading" class="home-hero__title">
-          <span>{hero.headlineBefore}</span>
-          <span class="home-hero__accent">{hero.headlineAccent}</span>
-          <span>{hero.headlineAfter}</span>
+          <span class="hero-line"><span>{hero.headlineBefore}</span></span>
+          <span class="hero-line"><span class="home-hero__accent">{hero.headlineAccent}</span></span>
+          <span class="hero-line"><span>{hero.headlineAfter}</span></span>
         </h1>
         <p class="home-hero__summary">{hero.subheadline}</p>
         {hero.differentiator && <p class="home-hero__differentiator">{hero.differentiator}</p>}

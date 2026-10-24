@@ -79,7 +79,7 @@ export const ui = {
         { text: 'Super Squad AI · verificação em 2 estágios', href: '/projects/super-squad-ai/' },
         { text: 'CultoOS · 9 coleções + mídia sincronizadas', href: undefined }, // TODO(conteúdo): publicar link quando houver case.
         { text: 'Universal Docs · busca e highlighting sem bibliotecas externas', href: undefined }, // TODO(conteúdo): publicar link quando houver case.
-        { text: 'Mosaic · editor client-side, sem backend', href: undefined }, // TODO(conteúdo): publicar link quando houver case.
+        { text: 'CLT Simulator · protótipo jogável, sem backend', href: '/projects/clt-simulator/' },
       ],
     },
 
@@ -119,6 +119,16 @@ export const ui = {
             { value: 'Pós-PoC', label: 'Produção inicial' },
           ],
           focus: ['Liderança de produto', 'Sistemas de jogo', 'Escopo de MVP'],
+        },
+        'clt-simulator': {
+          category: 'Jogo indie · Technical Product',
+          statusBadge: 'Em desenvolvimento',
+          description: 'Jogo indie brasileiro de simulação de vida em pixel art, desenvolvido como MVP para validar exploração, narrativa, procura de emprego e sistemas de computador e celular.',
+          highlights: [
+            { value: 'MVP', label: 'Protótipo jogável' },
+            { value: '2027', label: 'Demo prevista' },
+          ],
+          focus: ['Game Design', 'Phaser 3', 'Desenvolvimento assistido por IA'],
         },
         cultos: {
           category: 'Technical Product · Tecnologia para igrejas',
@@ -455,7 +465,7 @@ export const ui = {
         { text: 'Super Squad AI · 2-stage verification', href: '/en/projects/super-squad-ai/' },
         { text: 'CultoOS · 9 synced collections + media', href: undefined }, // TODO(conteúdo): publish link when a case exists.
         { text: 'Universal Docs · search and highlighting without external libraries', href: undefined }, // TODO(conteúdo): publish link when a case exists.
-        { text: 'Mosaic · client-side editor, no backend', href: undefined }, // TODO(conteúdo): publish link when a case exists.
+        { text: 'CLT Simulator · playable prototype, no backend', href: '/en/projects/clt-simulator/' },
       ],
     },
 
@@ -495,6 +505,16 @@ export const ui = {
             { value: 'Post-PoC', label: 'Early Production' },
           ],
           focus: ['Product Leadership', 'Game Systems', 'MVP Scoping'],
+        },
+        'clt-simulator': {
+          category: 'Indie Game · Technical Product',
+          statusBadge: 'In development',
+          description: 'A Brazilian indie pixel-art life simulation built as an MVP to validate exploration, narrative, job hunting and interactive computer and phone systems.',
+          highlights: [
+            { value: 'MVP', label: 'Playable prototype' },
+            { value: '2027', label: 'Demo planned' },
+          ],
+          focus: ['Game Design', 'Phaser 3', 'AI-assisted Development'],
         },
         cultos: {
           category: 'Technical Product · Church Tech',

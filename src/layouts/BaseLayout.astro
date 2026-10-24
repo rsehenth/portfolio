@@ -3,6 +3,7 @@
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import '@/styles/global.css';
+import '@/styles/motion-extra.css';
 import { siteConfig } from '@/data/profile';
 import { generateAlternateLinks, type Locale } from '@/i18n';
 
@@ -230,6 +231,26 @@ const alternateLinks = noIndex ? '' : generateAlternateLinks(canonical ?? Astro.
         // Re-run after view transitions
         document.addEventListener('astro:page-load', initObserver);
       })();
+    </script>
+
+    <!-- Extra motion layer (hero lines, rails, tilt, progress) -->
+    <script>
+      import { initMotionExtra } from '../scripts/motion-extra.js';
+
+      let booted = false;
+      const boot = () => {
+        if (booted) return;
+        booted = true;
+        initMotionExtra();
+      };
+
+      // Bundled modules only execute once, so the listener survives view
+      // transitions; the flag keeps exactly one init per page load.
+      document.addEventListener('astro:before-swap', () => {
+        booted = false;
+      });
+      document.addEventListener('astro:page-load', boot);
+      boot();
     </script>
     </div>
   </body>

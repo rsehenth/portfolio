@@ -71,7 +71,7 @@ const hasProductDecision = Boolean(productDecision.context || productDecision.de
       <section class="about-reading mb-10 lg:mb-20" aria-labelledby="timeline-heading" data-reveal>
         <h2 id="timeline-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6 lg:mb-8">{about.timeline.title}</h2>
         {about.timeline.showOverlapNote && <p class="text-body-sm text-muted-foreground mb-5">{about.timeline.overlapNote}</p>}
-        <ol class="border-l border-border pl-5 lg:pl-6 space-y-6 lg:space-y-8" data-ui>
+        <ol class="border-l border-border pl-5 lg:pl-6 space-y-6 lg:space-y-8" data-ui data-fx-timeline>
           {about.timeline.items.map((item) => (
             <li class="relative">
               <span class="absolute -left-[29px] lg:-left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-background bg-accent" aria-hidden="true"></span>

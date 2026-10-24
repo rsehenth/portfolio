@@ -15,7 +15,7 @@ interface Props {
 const { locale = 'pt-BR' } = Astro.props;
 
 const projects = await getPublishedProjects(locale);
-const featuredOrder = ['profresolve', 'super-squad-ai'];
+const featuredOrder = ['profresolve', 'super-squad-ai', 'clt-simulator'];
 const featuredProjects = featuredOrder
   .map((key) => projects.find((project) => projectKey(project) === key))
   .filter((project): project is NonNullable<typeof project> => Boolean(project));
@@ -32,7 +32,7 @@ const contact = ui[locale].contact;
 // (avoids TypeScript generic syntax inside JSX template which esbuild cannot parse)
 type HomeProjectKey = keyof typeof homeProjectsData.projects;
 
-const topRow = featuredProjects.slice(0, 2).map((project, i) => {
+const featuredCards = featuredProjects.map((project, i) => {
   const key = projectKey(project);
   const href = caseUrl(locale, key);
   const homeData = homeProjectsData.projects[key as HomeProjectKey] ?? null;
@@ -65,12 +65,13 @@ const singleProject = featuredProjects.length === 1 ? (() => {
 
       {featuredProjects.length > 0 ? (
         <>
-          {/* Top row: first two featured projects — hero variant (larger) */}
-          {featuredProjects.length >= 2 && (
-            <div class="grid gap-6 sm:gap-8 md:grid-cols-2 mb-6 sm:mb-8 items-stretch">
-              {topRow.map(({ project, href, homeData, delay }) =>
+          {/* Featured cases: one column on phone, the lead plate on its own row
+              beside a pair on tablet and notebook, three equal plates from xl. */}
+          {featuredCards.length >= 2 && (
+            <div class="grid gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3 mb-6 sm:mb-8 items-stretch">
+              {featuredCards.map(({ project, href, homeData, delay }, i) =>
                 homeData ? (
-                  <div class="h-full">
+                  <div class:list={['h-full home-featured', i === 0 && 'md:col-span-2 xl:col-span-1']}>
                     <HomeProjectCard
                       title={project.data.title}
                       href={href}
@@ -92,7 +93,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
           {/* Fallback: single project */}
           {singleProject && singleProject.homeData && (
             <div class="grid-auto-fit items-stretch">
-              <div class="h-full">
+              <div class="h-full home-featured">
                 <HomeProjectCard
                   title={singleProject.project.data.title}
                   href={singleProject.href}
@@ -149,8 +150,8 @@ const singleProject = featuredProjects.length === 1 ? (() => {
         </p>
       </header>
 
-      <div class="grid-3">
-        <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="0">
+      <div class="grid-3" data-fx-cards>
+        <div class="card p-6 lg:p-8 fx-card">
           <img src="/produto.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-6" />
           <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.product.title}</h3>
           <p class="text-body-md text-muted-foreground mb-6">{howIWork.product.description}</p>
@@ -164,7 +165,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
           </ul>
         </div>
 
-        <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="100">
+        <div class="card p-6 lg:p-8 fx-card">
           <img src="/tecnologia.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-6" />
           <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.technology.title}</h3>
           <p class="text-body-md text-muted-foreground mb-6">{howIWork.technology.description}</p>
@@ -178,7 +179,7 @@ const singleProject = featuredProjects.length === 1 ? (() => {
           </ul>
         </div>
 
-        <div class="card p-6 lg:p-8" data-reveal data-reveal-delay="200">
+        <div class="card p-6 lg:p-8 fx-card">
           <img src="/execucao.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-6" />
           <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.execution.title}</h3>
           <p class="text-body-md text-muted-foreground mb-6">{howIWork.execution.description}</p>
