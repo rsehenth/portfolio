@@ -48,3 +48,15 @@ Solte os arquivos em `public/projects/clt-simulator/` com estes nomes. Os dois i
 | `clt-cover.webp` | Reservado para `cover:` no frontmatter, nos dois arquivos |
 
 `logo` e `cover` no frontmatter só entram quando o arquivo existir, e nos dois idiomas. Sem arquivo, o card do /projects usa as iniciais e o card da Home não desenha imagem.
+
+### Logo do CLT Simulator (publicado)
+
+Os três slots de logo — card da Home (`HomeProjectCard`), card do /projects (`ProjectCard`) e hero do case (`CaseLayout`) — são quadrados fixos com `object-fit: cover`. Um arquivo 2:1 entra recortado no meio e fica ilegível, então o asset publicado é 1:1.
+
+| Arquivo | O que é |
+|---|---|
+| `logo-clt-simulator.webp` | 640×640, fundo transparente, logotipo completo centralizado com folga de 5%. É o caminho do `logo:` nos dois MDX |
+| `logo-wide.webp` | Fonte 1774×887 (2:1) em fundo transparente. Não é referenciada por nada; guardada para um futuro `cover:` ou cartela |
+
+Para refazer o quadrado a partir do wide: recorte a mancha útil (`left:187 top:77 width:1457 height:781`), redimensione para 90% da largura do canvas e centre com `extend` em fundo transparente.
+
