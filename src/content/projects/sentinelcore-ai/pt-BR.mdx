@@ -1,0 +1,399 @@
+---
+title: SentinelCore AI
+locale: pt-BR
+subtitle: "Technical Product · Windows Desktop · IA"
+description: "Software desktop de diagnóstico avançado para Windows que combina investigação técnica determinística, memória persistente e inteligência artificial opcional para identificar causas prováveis de instabilidade e orientar correções conservadoras."
+tagline: "Diagnóstico profundo do Windows com inteligência artificial opcional e correções conservadoras."
+summary: "O SentinelCore AI é um conceito de software desktop para Windows projetado para investigar problemas reais de desempenho, estabilidade, hardware e drivers. Sua arquitetura combina um backend determinístico, memória persistente e assistência opcional de IA para transformar registros técnicos em investigações compreensíveis, rastreáveis e seguras."
+year: 2026
+role: "Product Discovery · Technical Product · Arquitetura de Produto"
+productType: "Windows Desktop · Diagnóstico · IA híbrida"
+focus: "Confiabilidade · Diagnóstico baseado em evidências · Segurança operacional"
+stage: "Discovery / Arquitetura"
+stageNote: "Arquitetura e requisitos documentados. Sem MVP executável."
+statusBadge: "Em discovery"
+caseSummary:
+  problem: "Ferramentas de otimização tratam sintomas com limpezas e ajustes genéricos, enquanto instabilidades intermitentes exigem investigação técnica e correlação de evidências."
+  role: "Concepção do produto, definição de requisitos, discovery técnico, arquitetura híbrida e estratégia de confiabilidade e segurança operacional."
+  result: "Arquitetura e requisitos principais documentados. Sem MVP executável nem resultados de validação do software."
+  keyDecision: "Separar a execução determinística da interpretação por IA, impedindo que modelos executem comandos arbitrários ou alterem o Windows."
+statusEvidence:
+  stage: "Discovery e definição arquitetural."
+  evidence: "Arquitetura, modalidades de auditoria e requisitos de segurança documentados. Não há MVP executável nem resultados de validação do software."
+  nextValidation: "Construir o núcleo determinístico de diagnóstico e validá-lo com evidências históricas e cenários de teste."
+section: discovery
+cardBadge:
+  label: "Em discovery"
+  tone: discovery
+cardHighlights:
+  - "3 modalidades de auditoria propostas"
+  - "2 provedores de IA considerados"
+  - "Backend determinístico local-first"
+status: Discovery
+draft: false
+cover: /projects/sentinelcoreai/cover.webp
+views: true
+readingTime:
+  basic: 2
+  full: 8
+tags:
+  - Windows Desktop
+  - Diagnóstico
+  - IA híbrida
+  - Confiabilidade
+  - Segurança operacional
+demonstrates:
+  - Product Discovery
+  - Arquitetura de sistemas
+  - IA híbrida
+  - Confiabilidade
+  - Segurança operacional
+  - Technical Product
+technologies:
+  - C#/.NET
+  - Windows APIs
+  - SQLite
+  - Markdown
+  - Gemini
+  - DeepSeek
+metrics: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "SentinelCore AI | Discovery de software Windows com IA opcional | Lucas Sehnem"
+  description: "SentinelCore AI: discovery e arquitetura de um software Windows de diagnóstico profundo, com backend determinístico, memória persistente e IA opcional."
+  image: /projects/sentinelcoreai/cover.webp
+order: 1
+---
+
+<BasicView>
+
+## Origem da ideia
+
+A proposta surgiu de uma investigação técnica real de instabilidades em um computador com Windows. O trabalho usou consultas ao sistema, análise de eventos, medições de desempenho e correlação de evidências, e não uma sequência de limpezas genéricas.
+
+Essa investigação revelou uma oportunidade: transformar procedimentos de diagnóstico técnico em uma aplicação reutilizável, acessível e conservadora. O SentinelCore AI nasce desse problema, não de uma funcionalidade pensada de cima para baixo.
+
+## O que o produto propõe
+
+Um aplicativo desktop com backend próprio para executar auditorias técnicas, preservar histórico, identificar anomalias e recorrer à inteligência artificial quando isso ajudar a interpretar evidências. O backend continua funcional sem internet e sem provedor de IA.
+
+<CaseMedia
+  src="/projects/sentinelcoreai/arquitetura.webp"
+  alt="Diagrama da arquitetura proposta do SentinelCore AI: app desktop .NET, núcleo de diagnóstico determinístico, hardware intelligence, eventos e evidências, rede e desempenho, memória persistente em Markdown e SQLite, cache de contexto, assistente de IA opcional, motor de correções seguras e relatório final"
+  width={1672}
+  height={941}
+  caption="Arquitetura proposta do SentinelCore AI. Diagrama de planejamento, não uma implementação em produção. Clique para ampliar."
+/>
+
+<SeeFull to="arquitetura" label="Ver a arquitetura proposta" />
+
+## Quatro decisões principais
+
+### 1. Diagnóstico antes de otimização
+
+O aplicativo deve investigar causas, não apenas recomendar limpezas.
+
+### 2. IA opcional e econômica
+
+Gemini 3.1 Flash-Lite e DeepSeek V4.1 Flash-1017 são candidatos à interpretação dos resultados, enquanto o backend executa as verificações. A integração ainda não foi implementada.
+
+### 3. Memória persistente local
+
+Markdown e SQLite preservam auditorias, datas, incidentes e alterações de hardware.
+
+### 4. Segurança como requisito
+
+Correções devem usar procedimentos predefinidos, autorização explícita, verificação posterior e reversão quando tecnicamente possível.
+
+## Estado atual
+
+Projeto em Discovery e definição arquitetural. Arquitetura e requisitos principais documentados. Ainda sem MVP executável ou resultados de validação do software desenvolvido.
+
+## Próximo passo
+
+Construir o núcleo determinístico de diagnóstico e validá-lo com evidências históricas e cenários de teste.
+
+<ViewCtaButton label="Ver o case completo: contexto, arquitetura, riscos e roadmap" />
+
+</BasicView>
+
+<FullView>
+
+<nav aria-label="Nesta página" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">Nesta página:</span>
+  <a href="#contexto" class="link-underline hover:text-foreground">Contexto</a>
+  <span aria-hidden="true">·</span>
+  <a href="#problema" class="link-underline hover:text-foreground">Problema</a>
+  <span aria-hidden="true">·</span>
+  <a href="#discovery" class="link-underline hover:text-foreground">Discovery</a>
+  <span aria-hidden="true">·</span>
+  <a href="#solucao" class="link-underline hover:text-foreground">Solução</a>
+  <span aria-hidden="true">·</span>
+  <a href="#arquitetura" class="link-underline hover:text-foreground">Arquitetura</a>
+  <span aria-hidden="true">·</span>
+  <a href="#seguranca" class="link-underline hover:text-foreground">Segurança</a>
+  <span aria-hidden="true">·</span>
+  <a href="#riscos" class="link-underline hover:text-foreground">Riscos</a>
+  <span aria-hidden="true">·</span>
+  <a href="#roadmap" class="link-underline hover:text-foreground">Roadmap</a>
+</nav>
+
+<h2 id="contexto">Contexto e origem</h2>
+
+O projeto surgiu da necessidade de investigar problemas reais de desempenho e estabilidade no Windows. A investigação que originou o produto foi manual, conduzida com consultas ao sistema, leitura de eventos, medições e correlação de evidências, com auxílio do Codex na exploração técnica.
+
+Uma auditoria anterior identificou exemplos como timeout gráfico, eventos de esgotamento de portas de rede, consumo elevado de memória comprometida, desligamentos inesperados e falhas localizadas de aplicativos. Esses achados não foram detectados pelo SentinelCore AI: eles motivaram o discovery e servirão como casos de teste para o backend planejado.
+
+<Callout variant="info" title="Relação com o produto">
+
+A investigação manual é a origem do problema de produto. O SentinelCore AI ainda não executou essas detecções; ele propõe transformar esse tipo de procedimento em software.
+
+</Callout>
+
+<h2 id="problema">Problema de produto</h2>
+
+Ferramentas tradicionais de otimização costumam começar pela limpeza e por ajustes genéricos. Problemas intermitentes de desempenho e estabilidade raramente se resolvem assim: exigem investigação, correlação de evidências e compreensão das causas.
+
+A diferença entre identificar sintomas, detectar anomalias, encontrar evidências, investigar hipóteses, confirmar causas e propor intervenções seguras é o centro do problema. Alta utilização de recursos ou um grande volume de eventos registrados não significa necessariamente que exista um problema.
+
+<FlowDiagram
+  label="Do sintoma à intervenção segura, na proposta do produto"
+  steps={[
+    'Identificar sintomas',
+    'Detectar anomalias',
+    'Encontrar evidências',
+    'Investigar hipóteses',
+    'Confirmar causas',
+    'Propor intervenções seguras',
+  ]}
+/>
+
+O desafio é transformar dados técnicos em informação confiável. Um relatório que mistura fato, inferência e sugestão sem distinção não ajuda a decidir.
+
+<h2 id="discovery">Insight de discovery</h2>
+
+A investigação original combinou recursos nativos do Windows: CIM/WMI, Performance Counters, Event Logs, Windows Error Reporting, APIs nativas de hardware, análise de processos, diagnóstico de rede e correlação temporal.
+
+A principal hipótese de produto é que essas verificações possam ser transformadas em um backend reutilizável, sem depender da interpretação constante de um modelo de IA. O backend produziria fatos e correlações; a IA entraria apenas para interpretar o que é complexo.
+
+<Callout variant="warning" title="Hipótese ainda não validada">
+
+A hipótese não foi validada em diferentes computadores, fabricantes e versões do Windows. Ela orienta a arquitetura, mas ainda não é um resultado comprovado.
+
+</Callout>
+
+<RoleBlocks
+  label="Frentes de trabalho no SentinelCore AI"
+  blocks={[
+    {
+      title: 'Discovery técnico',
+      items: ['Investigação de instabilidades reais', 'Mapa de sinais nativos do Windows', 'Casos de teste a partir de evidências'],
+    },
+    {
+      title: 'Produto',
+      items: ['Problema antes da solução', 'Modalidades de auditoria', 'Escopo do MVP em fases'],
+    },
+    {
+      title: 'Arquitetura',
+      items: ['Backend determinístico', 'Memória persistente local', 'IA opcional e substituível'],
+    },
+    {
+      title: 'Segurança',
+      items: ['Correções conservadoras', 'Autorização explícita', 'Reversão quando possível'],
+    },
+  ]}
+/>
+
+<h2 id="solucao">Proposta de solução</h2>
+
+O SentinelCore AI é proposto como um aplicativo executável para Windows. O escopo planejado organiza o trabalho em três modalidades de auditoria, com profundidades e custos diferentes.
+
+<DataTable
+  class="[contain:inline-size]"
+  caption="Modalidades de auditoria propostas, ainda não implementadas"
+  columns={['Modalidade', 'Escopo planejado']}
+  rows={[
+    ['Auditoria rápida', 'Avaliação básica das condições atuais e dos principais indicadores do sistema.'],
+    ['Auditoria completa', 'Investigação aprofundada de hardware, drivers, processos, memória, armazenamento, rede e registros de estabilidade.'],
+    ['Investigação direcionada', 'Análises adicionais sobre problemas específicos, orientadas pelas evidências encontradas.'],
+  ]}
+/>
+
+A auditoria completa é o cenário mais exigente: ela precisa coletar muito, correlacionar sem perder rastreabilidade e terminar com um relatório que separe o que foi confirmado do que permanece hipótese.
+
+<h2 id="arquitetura">Arquitetura híbrida</h2>
+
+A arquitetura separa a execução determinística da interpretação por IA. O backend continua operacional sem internet ou provedor de IA; quando há um modelo conectado, ele interpreta evidências já coletadas e não executa comandos.
+
+<CaseMedia
+  src="/projects/sentinelcoreai/arquitetura.webp"
+  alt="Diagrama da arquitetura proposta do SentinelCore AI: app desktop .NET, núcleo de diagnóstico determinístico, hardware intelligence, eventos e evidências, rede e desempenho, memória persistente em Markdown e SQLite, cache de contexto, assistente de IA opcional, motor de correções seguras e relatório final"
+  width={1672}
+  height={941}
+  caption="Arquitetura proposta do SentinelCore AI. Diagrama de planejamento, não uma implementação em produção. Clique para ampliar."
+/>
+
+As camadas propostas são:
+
+1. Interface desktop em .NET.
+2. Backend determinístico de diagnóstico.
+3. Motor de regras.
+4. Correlação de evidências.
+5. Memória persistente local.
+6. Assistência opcional por IA.
+7. Motor controlado de correções.
+8. Relatórios técnicos e legíveis.
+
+A escolha de um backend próprio significa manter coletores e regras ao longo do tempo. É mais trabalho do que delegar toda a análise a um modelo, mas torna o comportamento previsível e cada conclusão rastreável até a evidência que a sustenta.
+
+<h2 id="hardware">Hardware Intelligence</h2>
+
+O módulo planejado de inventário reúne o que o sistema expõe sobre a máquina: CPU, GPU, memória, placa-mãe, BIOS/UEFI, armazenamento, monitores, rede, dispositivos conectados, drivers e versões, além da versão e do build do Windows.
+
+O objetivo não é só listar componentes. O inventário serve para detectar mudanças entre auditorias, como troca de driver, atualização de BIOS ou alteração de hardware. Essas mudanças ajudam a explicar incidentes que apareceram depois delas.
+
+Nem todos os dispositivos fornecem todas as informações, e a cobertura varia por fabricante. O produto precisa declarar o que não conseguiu ler em vez de preencher lacunas com suposições.
+
+<h2 id="memoria">Memória persistente</h2>
+
+A memória persistente planejada usa dois formatos com papéis diferentes.
+
+<ComparisonBlock
+  titleA="Markdown"
+  titleB="SQLite"
+  arrows={false}
+  label="Papéis planejados de Markdown e SQLite na memória persistente"
+  itemsA={[
+    'Histórico legível de auditorias',
+    'Incidentes, decisões e correções',
+    'Inspeção e portabilidade',
+  ]}
+  itemsB={[
+    'Indexação e consultas rápidas',
+    'Relacionamentos entre registros',
+    'Cache de contexto',
+  ]}
+/>
+
+O Audit Freshness Engine controla a validade das informações. Um exemplo planejado: após 30 dias desde a última auditoria completa bem-sucedida, o aplicativo pode recomendar uma nova auditoria. O prazo deve ser configurável.
+
+Registros históricos e medições atuais precisam ser distinguidos na interface. Um dado antigo apresentado como atual é um erro de produto, não só de formatação.
+
+<h2 id="ia">Inteligência artificial opcional</h2>
+
+Dois provedores são considerados: Gemini 3.1 Flash-Lite e DeepSeek V4.1 Flash-1017. A arquitetura deve permitir selecionar o provedor, e o produto deve continuar útil sem nenhum deles.
+
+A IA será usada principalmente para interpretar evidências complexas, priorizar hipóteses, sugerir investigações permitidas, explicar diagnósticos e redigir relatórios. O Smart Context Engine seleciona as informações relevantes e reduz o volume de dados enviados ao modelo.
+
+<Callout variant="warning" title="Sem promessas de desempenho">
+
+Não há benchmarks, economia financeira comprovada ou comparação de qualidade entre os modelos. A integração é uma decisão de arquitetura, ainda sem implementação.
+
+</Callout>
+
+<h2 id="seguranca">Segurança e correções conservadoras</h2>
+
+Esta é uma das decisões mais importantes do produto. Um aplicativo desktop com acesso ao sistema pode causar dano, então a arquitetura trata correções como procedimentos controlados, não como comandos livres.
+
+- Nenhuma limpeza indiscriminada de Registro.
+- Nenhuma execução arbitrária de comandos gerados por IA.
+- Privilégios mínimos.
+- Correções limitadas a um catálogo validado.
+- Autorização explícita do usuário.
+- Verificação de pré-condições.
+- Simulação antes da execução.
+- Registro do estado anterior.
+- Verificação após a correção.
+- Reversão quando possível.
+
+Nenhuma ferramenta capaz de alterar um sistema operacional pode garantir risco zero. O objetivo é reduzir riscos e tornar cada intervenção visível, autorizada e reversível quando a reversão for tecnicamente viável.
+
+<h2 id="incidentes">Monitoramento de incidentes</h2>
+
+Problemas intermitentes raramente acontecem enquanto o usuário está olhando para um relatório. A proposta é permitir que a pessoa registre um incidente depois de perceber lentidão ou instabilidade.
+
+O aplicativo examinaria os dados disponíveis próximos do horário relatado, procurando correlações com eventos, hardware e alterações recentes. Capturas mais profundas teriam limites de duração, tamanho e impacto no sistema.
+
+Esse recurso é planejado. Não existe monitoramento contínuo implementado.
+
+<h2 id="tradeoffs">Trade-offs técnicos</h2>
+
+<DataTable
+  class="[contain:inline-size]"
+  caption="Trade-offs registrados no discovery"
+  columns={['Decisão', 'Benefício', 'Custo ou limite']}
+  rows={[
+    ['Backend determinístico vs. IA', 'Previsibilidade e rastreabilidade', 'Desenvolver e manter coletores e regras'],
+    ['WPF vs. Tauri', 'Avaliação entre confiabilidade gráfica, integração com Windows e flexibilidade de interface', 'A escolha definitiva ainda depende de validação técnica'],
+    ['Auditoria profunda vs. impacto no sistema', 'Mais evidências para correlacionar', 'Consumo de recursos exige limites'],
+    ['Correção automática vs. segurança', 'Menos trabalho manual quando o procedimento é seguro', 'Nem todo problema tem correção automatizável segura'],
+    ['Diagnóstico universal vs. diferenças de hardware', 'Cobertura mais ampla de máquinas', 'Compatibilidade exige adaptação e testes por fabricante'],
+  ]}
+/>
+
+<h2 id="riscos">Riscos do produto</h2>
+
+Os riscos abaixo influenciam o escopo e a ordem de implementação. Eles não são apenas técnicos: alguns mudam a proposta de valor e a comunicação do produto.
+
+<DataTable
+  class="[contain:inline-size]"
+  caption="Riscos planejados do SentinelCore AI e como afetam o escopo"
+  columns={['Risco', 'Efeito', 'Estratégia planejada']}
+  rows={[
+    ['Falsos positivos', 'Alarme sem problema real reduz a confiança', 'Separar evidência de inferência e permitir revisão'],
+    ['Diagnósticos inconclusivos', 'Nem todo incidente tem causa confirmável', 'Declarar limite e próximos testes em vez de concluir'],
+    ['Dados históricos desatualizados', 'Recomendação baseada em estado antigo', 'Audit Freshness Engine e data visível'],
+    ['Compatibilidade entre fabricantes', 'Leitura incompleta ou diferente por hardware', 'Declarar lacunas e testar em cenários variados'],
+    ['Limitações das APIs do Windows', 'Dados indisponíveis ou restritos', 'Fallbacks explícitos, sem inventar medições'],
+    ['Impacto do monitoramento', 'Capturas profundas consomem recursos', 'Limites de duração, tamanho e escopo'],
+    ['Privacidade de logs', 'Dados técnicos podem conter informação sensível', 'Processamento local e controle do que é enviado à IA'],
+    ['Segurança de correções', 'Alterações no sistema podem ser danosas', 'Catálogo validado, autorização e reversão'],
+    ['Dependência de fornecedores de IA', 'Mudança de preço, limite ou disponibilidade', 'Provedor opcional e interpretação substituível'],
+  ]}
+/>
+
+<h2 id="mvp">Escopo do MVP</h2>
+
+O MVP é planejado para provar o núcleo antes de ampliar a superfície do produto. Entram na primeira versão: aplicativo executável Windows, inventário de hardware, auditorias básicas e completas, análise de eventos, análise de processos, investigação de desempenho, histórico em Markdown, SQLite local, controle de validade das auditorias e relatórios estruturados.
+
+A integração de IA e o motor de correções podem ser introduzidos progressivamente. Não há data de lançamento nem disponibilidade anunciada.
+
+<h2 id="roadmap">Roadmap</h2>
+
+<DataTable
+  class="[contain:inline-size]"
+  caption="Fases planejadas do SentinelCore AI"
+  columns={['Fase', 'Entrega planejada']}
+  rows={[
+    ['Fase 1 — Diagnostic Core', 'Backend determinístico e coletores.'],
+    ['Fase 2 — Persistent Memory', 'Markdown, SQLite e histórico.'],
+    ['Fase 3 — Desktop Experience', 'Interface Windows e relatórios.'],
+    ['Fase 4 — Monitoring', 'Incidentes e investigações direcionadas.'],
+    ['Fase 5 — AI Assistance', 'Integração com Gemini e DeepSeek.'],
+    ['Fase 6 — Safe Corrections', 'Procedimentos aprovados, validação e reversão.'],
+  ]}
+/>
+
+Essa sequência representa o planejamento, não entregas concluídas. A ordem segue o risco: primeiro o núcleo que produz evidências, depois a memória, depois a experiência, e só então recursos que interpretam ou alteram o sistema.
+
+<h2 id="estado">Status e aprendizados</h2>
+
+O SentinelCore AI parte de um problema real, investigado tecnicamente, e não de uma ideia genérica de otimização. A arquitetura híbrida é uma decisão de produto: ela limita o que a IA pode fazer para preservar confiabilidade e rastreabilidade.
+
+O aprendizado central até aqui é que a parte difícil não é listar sintomas, e sim transformar registros técnicos em informação confiável. Por isso o escopo começa por um backend determinístico, com coletores e regras que possam ser inspecionados.
+
+A próxima validação é reproduzir diagnósticos reais com o backend próprio, usando as evidências que motivaram o projeto e cenários de teste controlados.
+
+<Callout variant="demonstrates" title="O que este case demonstra">
+
+- **Technical Product:** problema real, escopo e critérios antes da implementação.
+- **Product Discovery:** hipótese construída a partir de investigação técnica.
+- **Arquitetura de sistemas:** backend determinístico, memória persistente e IA opcional separados.
+- **Confiabilidade:** evidências rastreáveis em vez de conclusões opacas.
+- **Segurança operacional:** correções limitadas, autorizadas e reversíveis.
+- **Planejamento de MVP:** fases explícitas, com limites declarados.
+
+</Callout>
+
+</FullView>

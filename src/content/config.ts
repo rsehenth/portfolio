@@ -155,6 +155,8 @@ const projects = defineCollection({
       .object({
         title: z.string().optional(),
         description: z.string().optional(),
+        // Per-case Open Graph image (path under /public). Falls back to the site default.
+        image: z.string().optional(),
       })
       .optional(),
     // Opt-in dual-view toggle (Resumo / Case completo)
