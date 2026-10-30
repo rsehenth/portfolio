@@ -82,3 +82,17 @@ export async function getPublishedProject(
   const entry = all.find((e) => projectKey(e) === key && e.data.locale === locale);
   return entry && !entry.data.draft ? entry : undefined;
 }
+
+export type BadgeTone = 'active' | 'development' | 'functional' | 'discovery' | 'archived';
+
+const TONE_BY_STATUS: Record<string, BadgeTone> = {
+  Active: 'active',
+  Completed: 'archived',
+  Archived: 'archived',
+  Discovery: 'discovery',
+};
+
+/** Status tone of a project: its listing badge, else its canonical status. */
+export function badgeToneOf(data: ProjectEntry['data']): BadgeTone {
+  return data.cardBadge?.tone ?? TONE_BY_STATUS[data.status] ?? 'archived';
+}

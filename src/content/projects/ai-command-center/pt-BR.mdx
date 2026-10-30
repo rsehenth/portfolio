@@ -1,0 +1,357 @@
+---
+title: AI Command Center
+locale: pt-BR
+subtitle: "Technical Product · IA aplicada · Produtividade"
+description: "Centro de controle pessoal para reunir sinais de projetos, comunicação e ferramentas de trabalho em uma interface única. O protótipo navegável existe; integrações, memória persistente e inteligência contextual estão planejadas em etapas."
+tagline: "Um lugar para reunir o contexto que hoje se perde entre ferramentas."
+summary: "O AI Command Center é um centro de controle pessoal para acompanhar projetos, conversas e ferramentas de trabalho. A interface já existe como protótipo navegável. Backend local, memória persistente e integrações estão planejados, com escopo e etapas explícitos."
+year: 2026
+role: "Idealização, discovery e direção de produto"
+productType: "Aplicativo local · IA aplicada"
+focus: "Arquitetura de produto · Priorização · Engenharia de contexto · Gestão de riscos"
+stage: "Discovery de produto · Protótipo navegável"
+stageNote: "A interface foi prototipada. Backend, memória e integrações seguem planejados."
+statusBadge: "Em discovery"
+caseSummary:
+  problem: "O contexto de trabalho se dispersa entre e-mail, tarefas, repositórios e ferramentas de IA, e reconstruí-lo custa tempo."
+  role: "Idealizador e responsável por discovery, escopo, arquitetura de produto, priorização e critérios de aceitação."
+  result: "Protótipo de interface navegável e escopo do MVP definido."
+  keyDecision: "Construir a experiência visual primeiro e deixar integrações remotas para etapas posteriores."
+statusEvidence:
+  stage: "Discovery de produto com protótipo navegável."
+  evidence: "A interface modular existe como protótipo. Arquitetura local, memória e integrações estão descritas neste case como planejamento."
+  nextValidation: "Validar a leitura de projetos locais antes de conectar serviços externos."
+section: discovery
+cardBadge:
+  label: "Em discovery"
+  tone: discovery
+cardHighlights:
+  - "Protótipo navegável"
+  - "Backend local planejado"
+  - "Integrações em etapas"
+status: Discovery
+draft: false
+cover: /projects/ai-command-center/cover.webp
+views: true
+readingTime:
+  basic: 3
+  full: 11
+tags:
+  - Aplicativo local
+  - Integrações
+  - IA
+  - Memória contextual
+demonstrates:
+  - Product Discovery
+  - Arquitetura de produto
+  - Priorização
+  - Engenharia de contexto
+  - Gestão de riscos
+technologies:
+  - React
+  - TypeScript
+  - Vite
+metrics: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "AI Command Center | Discovery de produto e IA aplicada | Lucas Sehnem"
+  description: "Case de discovery de um centro de controle pessoal com IA: problema, escopo do MVP, arquitetura planejada, priorização, riscos e o que já existe como protótipo."
+order: 2
+---
+
+<BasicView>
+
+## O problema
+
+Meu trabalho passa por e-mail, gestão de tarefas, repositórios, documentos e conversas com modelos de IA. Cada ferramenta guarda uma parte do contexto. Quando preciso decidir o próximo passo de um projeto, reconstruo esse contexto manualmente, e parte do raciocínio se perde entre uma sessão e outra.
+
+## A proposta
+
+O AI Command Center é uma camada de leitura sobre as ferramentas que já uso. Reúne sinais relevantes, atualiza sob demanda e mostra o que merece atenção. Não é um cliente de e-mail completo nem um sistema de gestão de tarefas. O objetivo é reduzir o custo de retomar contexto, não substituir as ferramentas.
+
+## O que já existe
+
+Existe uma interface navegável, com menu recolhível, módulos contextuais e um núcleo visual animado. O protótipo valida composição, hierarquia e sensação de uso. Ele não lê dados reais, não persiste memória e não chama modelos.
+
+<CaseMedia
+  src="/projects/ai-command-center/demo.webp"
+  alt="Interface do AI Command Center em modo demonstração: núcleo visual animado ao centro e módulos de Prioridades, Projetos, Comunicações e Conexões ao redor"
+  width={1592}
+  height={1197}
+  caption="Protótipo navegável do AI Command Center em modo demonstração, com dados de exemplo e nenhuma IA conectada"
+  protected={true}
+/>
+
+<SeeFull to="experiencia" label="Ver a visão de experiência" />
+
+## Meu papel
+
+Idealizei o produto e conduzo o discovery. Defino escopo, arquitetura, prioridades, direção de UX e critérios de aceitação. As entregas são implementadas com agentes de IA e revisadas por mim contra esses critérios.
+
+## Escopo do MVP
+
+O MVP foi organizado em três etapas. A ordem importa: cada etapa precisa produzir algo verificável antes de abrir a seguinte.
+
+<FlowDiagram
+  label="Sequência planejada do MVP do AI Command Center"
+  steps={[
+    'Experiência visual e módulos',
+    'Infraestrutura local e leitura Git',
+    'Integrações remotas e briefings',
+  ]}
+/>
+
+Atualização por clique, não por polling, para controlar chamadas e custo. As decisões completas estão no case completo.
+
+<SeeFull to="decisoes" label="Ver as decisões de MVP" />
+
+## Onde está hoje
+
+A interface é o que existe. Backend local, leitura de repositórios, memória persistente, conectores e análise com IA estão planejados.
+
+<ViewCtaButton label="Ver o case completo: decisões, arquitetura e riscos" />
+
+</BasicView>
+
+<FullView>
+
+<nav aria-label="Nesta página" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">Nesta página:</span>
+  <a href="#contexto" class="link-underline hover:text-foreground">Contexto</a>
+  <span aria-hidden="true">·</span>
+  <a href="#decisoes" class="link-underline hover:text-foreground">Decisões</a>
+  <span aria-hidden="true">·</span>
+  <a href="#arquitetura" class="link-underline hover:text-foreground">Arquitetura</a>
+  <span aria-hidden="true">·</span>
+  <a href="#riscos" class="link-underline hover:text-foreground">Riscos</a>
+  <span aria-hidden="true">·</span>
+  <a href="#estado" class="link-underline hover:text-foreground">Estado</a>
+</nav>
+
+<h2 id="contexto">Contexto e problema</h2>
+
+Em um dia de trabalho, um sinal pode chegar por e-mail, aparecer em uma tarefa, depender de um repositório e precisar de uma conversa com um modelo de IA. Nenhuma dessas ferramentas vê o conjunto. A informação existe, mas o contexto que liga uma coisa à outra fica comigo.
+
+O custo aparece quando retomo um projeto. Leio conversas antigas, procuro a decisão que ficou em um comentário e tento reconstruir o raciocínio. Decisões importantes perdem o rastro, e o mesmo contexto é processado várias vezes.
+
+<FlowDiagram
+  label="Problema no fluxo de trabalho atual"
+  steps={[
+    'Sinal chega em uma ferramenta',
+    'Contexto fica fragmentado',
+    'Retomada exige reconstrução manual',
+    'Decisão perde o rastro',
+  ]}
+/>
+
+<h2 id="hipotese">Oportunidade e hipótese de produto</h2>
+
+Se o contexto relevante estiver legível em um só lugar, com atualização sob demanda, consigo decidir com menos retrabalho e perder menos raciocínio entre sessões.
+
+O produto não tenta substituir e-mail, tarefas ou repositórios. Ele lê esses sinais, mantém o que é relevante e destaca o que precisa de atenção. A fronteira de escopo faz parte da hipótese. Quanto menos o produto duplica ferramentas, menor o custo de manter integrações e menor o risco de exibir informação desatualizada.
+
+<Callout variant="info" title="Hipótese de produto">
+
+Um contexto legível em um só lugar reduz o custo de retomar projetos e torna decisões mais rastreáveis. A hipótese ainda não foi testada com usuários.
+
+</Callout>
+
+<h2 id="papel">Meu papel e abordagem</h2>
+
+Atuo como idealizador e responsável por produto. Isso inclui discovery, definição de escopo, decisões de arquitetura, priorização, direção de UX, critérios de aceitação e validação das entregas produzidas com agentes de IA.
+
+Não há equipe separada nem pesquisa com usuários neste case. O produto nasce do meu próprio fluxo de trabalho, então as premissas precisam ser revistas antes de qualquer generalização.
+
+<RoleBlocks
+  label="Frentes de atuação no AI Command Center"
+  blocks={[
+    {
+      title: 'Discovery',
+      items: ['Problema antes da solução', 'Sinais que merecem atenção', 'Escopo do MVP'],
+    },
+    {
+      title: 'Arquitetura de produto',
+      items: ['Protótipo, backend e integrações separados', 'Dados locais por padrão', 'Contratos entre módulos'],
+    },
+    {
+      title: 'Priorização',
+      items: ['Experiência visual primeiro', 'Atualização sob demanda', 'Integrações em etapas'],
+    },
+    {
+      title: 'Entrega com IA',
+      items: ['Critérios de aceitação antes do código', 'Revisão das entregas', 'Estado explícito do que existe'],
+    },
+  ]}
+/>
+
+O processo começa pelo problema e pela menor fatia verificável. Uma decisão de arquitetura só entra no escopo quando eu consigo explicar qual risco ela reduz e como vou inspecionar o resultado.
+
+<h2 id="decisoes">Decisões de MVP</h2>
+
+<h3 id="experiencia-primeiro">Experiência antes de integração</h3>
+
+Construir a interface primeiro permite testar hierarquia, leitura e navegação sem o custo de manter conectores. Existe o risco de uma casca bonita sem função. A mitigação é declarar o estado de cada módulo na própria interface e neste case.
+
+<h3 id="local-primeiro">Local antes de nuvem</h3>
+
+O backend local em Node.js e SQLite está previsto. Os dados ficam no dispositivo e o acesso a diretórios é controlado. A desvantagem é que instalação e backup dependem de mim, e o produto fica menos portátil do que um serviço web.
+
+<h3 id="refresh-sob-demanda">Atualização sob demanda</h3>
+
+O refresh acontece por clique, não por polling. Isso torna o custo de chamadas previsível e evita processar o mesmo contexto várias vezes. O custo dessa escolha: a interface pode mostrar um sinal mais antigo até a próxima atualização.
+
+<h3 id="memoria-legivel">Memória em arquivos legíveis</h3>
+
+O Persistent Memory Core usa Markdown e arquivos diários de até 500 linhas. O formato é inspecionável e portátil, sem dependência de um banco proprietário. A desvantagem é que a qualidade da recuperação depende da estrutura dos arquivos e do Context Engine.
+
+<ComparisonBlock
+  titleA="MVP definido"
+  titleB="Adiado para depois"
+  arrows={false}
+  label="Escopo do MVP comparado ao que fica para depois"
+  itemsA={[
+    'Interface modular e navegável',
+    'Leitura local de repositórios Git',
+    'Memória em arquivos Markdown',
+    'Atualização por clique',
+  ]}
+  itemsB={[
+    'Conectores Gmail, GitHub e Jira',
+    'Geração automática de briefings',
+    'Análise com modelos de IA',
+    'Autenticação em serviços externos',
+  ]}
+/>
+
+Integrações remotas só entram quando a leitura local e a memória estiverem verificáveis.
+
+<h2 id="experiencia">Visão de experiência</h2>
+
+O centro visual é animado e discreto, com menu recolhível e módulos contextuais. A intenção é que o produto pareça um painel de leitura, não um dashboard de métricas. Legibilidade, acessibilidade e desempenho entram como critérios desde o protótipo.
+
+O núcleo animado é parte da interface. Ele não mede inteligência, atividade ou qualidade de análise, e não deve ser lido como prova de que o sistema está funcionando.
+
+<CaseMedia
+  src="/projects/ai-command-center/demo.webp"
+  alt="Interface do AI Command Center em modo demonstração: núcleo visual animado ao centro e módulos de Prioridades, Projetos, Comunicações e Conexões ao redor"
+  width={1592}
+  height={1197}
+  caption="Protótipo navegável do AI Command Center em modo demonstração, com dados de exemplo e nenhuma IA conectada"
+  protected={true}
+/>
+
+<Callout variant="warning" title="Limites do protótipo">
+
+- Não lê e-mail, repositórios ou tarefas.
+- Não persiste memória entre sessões.
+- Não chama modelos de IA.
+- Não executa integrações externas.
+
+</Callout>
+
+<h2 id="arquitetura">Arquitetura e segurança (planejadas)</h2>
+
+A arquitetura abaixo é uma proposta de implementação. Nenhum componente além da interface foi implementado ou verificado neste case.
+
+<ArchitectureDiagram
+  label="Arquitetura planejada do AI Command Center, não implementada"
+  steps={[
+    { label: 'Interface', detail: 'React, TypeScript e Vite. Protótipo navegável existente.' },
+    { label: 'Runtime local', detail: 'Node.js. Planejado.' },
+    { label: 'Persistência', detail: 'SQLite. Planejado.' },
+    { label: 'Memória', detail: 'Markdown e arquivos diários. Planejado.' },
+    { label: 'Contexto', detail: 'Context Engine e cache. Planejados.' },
+    { label: 'Conectores', detail: 'Gmail, GitHub e Jira. Planejados.' },
+  ]}
+  servicesLabel="Modelos de IA configuráveis (planejado)"
+  services={['Modelos por tarefa', 'Chamadas sob demanda']}
+/>
+
+<p class="not-prose mt-2 text-body-sm text-muted-foreground">Leitura de cima para baixo: camadas propostas, não um fluxo em produção.</p>
+
+A premissa é manter os dados no dispositivo. O backend leria apenas diretórios autorizados, com validação de caminho. Integrações futuras com Gmail, GitHub e Jira exigiriam autenticação por API, escopos mínimos e possibilidade de revogação. O modelo de ameaças cobre filesystem, credenciais e conteúdo não confiável. Ele faz parte do planejamento, não de uma auditoria concluída.
+
+<h2 id="memoria">Memória, contexto e cache (planejados)</h2>
+
+O Persistent Memory Core previsto usa Markdown e arquivos diários de até 500 linhas. O Context Engine recupera o que é relevante para a tarefa atual. Cache e métricas reduzem processamento repetido.
+
+Nenhum desses componentes está implementado. Os benefícios esperados são contexto recuperável sem reconstrução manual, memória inspecionável e menor custo de chamadas. Não há números de ganho para publicar.
+
+Arquivos legíveis são fáceis de auditar, mas exigem estrutura para recuperação. Arquivos diários limitados controlam o tamanho, mas pedem compactação. Cache reduz custo, mas pode servir contexto antigo. A data e a origem de cada sinal precisam aparecer na interface.
+
+<FlowDiagram
+  label="Fluxo planejado de atualização, não implementado"
+  steps={[
+    'Clique em atualizar',
+    'Coleta dos sinais configurados',
+    'Contexto relevante recuperado',
+    'Briefing com atenção',
+    'Memória atualizada',
+  ]}
+/>
+
+<h2 id="processo">Processo e decisões técnicas</h2>
+
+O desenvolvimento segue uma arquitetura modular, com contratos explícitos entre interface, backend e integrações. Critérios de aceitação são definidos antes da implementação, e as entregas produzidas com agentes de IA são revisadas contra eles. Documentação e modelo de ameaças fazem parte do escopo, não ficam para depois.
+
+Este case não afirma resultados de teste, versões ou desempenho do aplicativo sem evidência verificável.
+
+<h2 id="riscos">Trade-offs e riscos</h2>
+
+Os riscos abaixo são de produto, não só de engenharia. Cada um muda o escopo ou a ordem das etapas.
+
+<DataTable
+  caption="Riscos e mitigações planejadas do AI Command Center"
+  columns={['Risco', 'Efeito', 'Mitigação planejada']}
+  rows={[
+    ['Dados apenas locais', 'Backup e portabilidade dependem do usuário', 'Exportação e formato documentado'],
+    ['Escopo pessoal', 'Risco de ajustar o produto a um único fluxo', 'Revisar premissas antes de abrir para outras pessoas'],
+    ['Autenticação futura', 'Escopos amplos em Gmail, GitHub e Jira', 'Consentimento explícito, escopo mínimo e revogação'],
+    ['Custo de tokens', 'Atualização frequente encarece a operação', 'Refresh por clique, cache e modelo por tarefa'],
+    ['Conteúdo desatualizado', 'Um sinal antigo pode parecer atual', 'Data e origem visíveis em cada item'],
+    ['Segurança do filesystem', 'Acesso local amplia a superfície de ataque', 'Diretórios autorizados, validação de caminho e modelo de ameaças'],
+    ['Informação não verificada', 'IA pode apresentar inferência como fato', 'Separar fato, inferência e sugestão na interface'],
+  ]}
+/>
+
+<h2 id="estado">Estado atual vs. roadmap</h2>
+
+<DataTable
+  caption="Estado atual do AI Command Center, por camada"
+  columns={['Camada', 'Estado', 'Evidência']}
+  rows={[
+    ['Interface (React, TypeScript, Vite)', 'Implementado', 'Protótipo navegável, sem dados reais'],
+    ['Escopo e arquitetura', 'Documentado', 'Definido neste case'],
+    ['Backend local (Node.js)', 'Planejado', 'Sem implementação verificada'],
+    ['Persistência (SQLite)', 'Planejado', 'Sem implementação verificada'],
+    ['Persistent Memory Core', 'Planejado', 'Formato definido, não implementado'],
+    ['Context Engine e cache', 'Planejado', 'Sem implementação verificada'],
+    ['Leitura de projetos Git', 'Planejado', 'Próxima etapa de validação'],
+    ['Conectores Gmail, GitHub e Jira', 'Planejado', 'Dependem de autenticação e escopo'],
+    ['Análise com IA', 'Planejado', 'Depende de memória e contexto'],
+  ]}
+/>
+
+Nenhuma integração externa está conectada. O protótipo não processa dados reais.
+
+<h2 id="proximos-passos">Aprendizados e próximos passos</h2>
+
+O aprendizado central é priorizar uma fundação que eu consiga inspecionar. Uma interface navegável não prova o produto, mas permite discutir hierarquia, escopo e riscos antes de investir em integrações.
+
+Próximos passos, nesta ordem: leitura de projetos locais, memória persistente, conectores remotos e análise com IA. Cada etapa precisa de critérios de aceitação e de uma forma de verificar o que foi entregue.
+
+Este case será atualizado quando essas etapas tiverem evidência. Até lá, o estado declarado é o protótipo de interface.
+
+<Callout variant="demonstrates" title="O que este case demonstra">
+
+- **Product discovery:** problema e hipótese antes da solução.
+- **Arquitetura de produto:** separação entre protótipo, backend, memória e integrações.
+- **Priorização:** escopo em etapas e atualização sob demanda.
+- **Engenharia de contexto:** memória recuperável, cache e origem dos sinais.
+- **Gestão de riscos:** dados locais, custo de tokens e segurança do filesystem.
+- **Execução com IA:** critérios de aceitação e revisão de entregas.
+
+</Callout>
+
+</FullView>

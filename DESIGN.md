@@ -1,156 +1,125 @@
 ---
 name: Lucas Sehnem Portfolio
-description: A proof-sheet portfolio for reviewing real product work.
+description: A portfolio where real product screens carry the page, on a calm cool ground with dark stages.
 colors:
-  ink: "#161513"
-  paper: "#f4f0e7"
-  paper-soft: "#ebe4d8"
-  rule: "#aaa295"
-  vermilion: "#d9472d"
-  verification-green: "#2d8659"
+  ink: "#162126"
+  ground: "#eef1ef"
+  ground-soft: "#e2e8e5"
+  line: "#c3ccc9"
+  muted: "#4a5b62"
+  petrol: "#1f6a8c"
+  stage: "#0d1a1f"
+  stage-text: "#edf2f0"
+  stage-muted: "#a9b9bd"
+  stage-accent: "#8cc0dc"
 typography:
   display:
-    fontFamily: "Archivo, Arial, sans-serif"
-    fontSize: "clamp(3.4rem, 7.3vw, 7.6rem)"
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "clamp(2.375rem, 5.8vw, 5.75rem)"
     fontWeight: 700
-    lineHeight: 0.92
-    letterSpacing: "-0.055em"
+    lineHeight: 0.98
+    letterSpacing: "-0.04em"
   body:
-    fontFamily: "Archivo, Arial, sans-serif"
-    fontSize: "1rem"
-    lineHeight: 1.7
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "1.0625rem"
+    lineHeight: 1.6
   label:
-    fontFamily: "IBM Plex Mono, Consolas, monospace"
-    fontSize: "0.75rem"
-    fontWeight: 500
-    letterSpacing: "0.04em"
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 700
+  code:
+    fontFamily: "IBM Plex Mono, ui-monospace, Consolas, monospace"
+    fontSize: "0.875rem"
+    fontWeight: 400
 rounded:
-  editorial: "0px"
+  none: "0px"
 spacing:
-  compact: "0.75rem"
-  standard: "1.5rem"
-  section: "clamp(4.5rem, 8vw, 8rem)"
+  section: "clamp(5rem, 9vw, 8.5rem)"
 components:
   button-primary:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.editorial}"
+    textColor: "{colors.ground}"
+    rounded: "{rounded.none}"
     padding: "0 1.5rem"
-    height: "2.9rem"
+    height: "3rem"
   button-secondary:
     backgroundColor: "transparent"
     textColor: "{colors.ink}"
-    rounded: "{rounded.editorial}"
+    rounded: "{rounded.none}"
     padding: "0 1.5rem"
-    height: "2.9rem"
+    height: "3rem"
 ---
 
 # Design System: Lucas Sehnem Portfolio
 
+Source of truth for tokens: `src/styles/site.css`. If this file and the code disagree, the code wins; fix this file.
+
 ## Overview
 
-**Creative North Star: "The Product Proof Sheet"**
+**Creative North Star: "The work, first."**
 
-The portfolio reads like an editorial page prepared for a close review: large, decisive statements; hairline rules; source-like labels; and clear evidence placed beside the work it supports. It is warm and physical without pretending to be a scanned document.
+A recruiter should see real products before they read a claim. Every public page leads with a screen, a diagram or a game frame taken from the actual project, set large on a dark stage, with the case summary beside it. The interface around it stays quiet: one typeface, flat surfaces, square corners, no decorative marks.
 
-Recruiters should be able to identify the role, verified evidence, and the next case to open in a single glance. Product imagery and artifacts carry the page where they exist; interface chrome remains quiet.
+**Key characteristics**
 
-**Key Characteristics:**
-
-- Warm paper, near-black ink, and rare vermilion emphasis.
-- Flat plates separated by rules rather than floating cards.
-- Strong Archivo display type paired with IBM Plex Mono labels.
-- Evidence, project role, and status presented as structured editorial credits.
+- Cool mineral ground, near-black ink, one petrol-blue accent.
+- Dark "stages" (`.field-ink`) alternate with light sections and carry the product imagery. The Home opens on one in the hero, then the projects, then the contact and footer.
+- Big Archivo statements, two lines at most, tight tracking.
+- Real covers only (16:10). Where a project has no screenshot yet, a flat emblem (`ProjectPlate`) holds the slot: one geometric mark per project in the page ink plus its status tone. It never imitates an interface.
+- `/projects` opens on the dark stage: title, then the featured pair at once. Each section's layout follows its size (one wide row, two columns, a wide lead plus two, a 2×2 block, three columns), wide rows alternate sides, and sections alternate page ground and soft ground.
 
 ## Colors
 
-The palette is deliberately print-like: warm neutrals bear the reading load, while vermilion marks only evidence and primary moments.
+- **Ink** `#162126`: text, primary buttons. **Ground** `#eef1ef`: page. **Ground soft** `#e2e8e5`: one tonal step for grouped sections ("Como trabalho", status block, chips).
+- **Petrol** `#1f6a8c`: links, the status word on a case row, the one-pixel process line. 5.3:1 on the ground.
+- **Stage** `#0d1a1f` (and `#081014` in dark theme): dark sections. `.field-ink` re-maps the same rgb tokens, so any utility inside it adapts.
+- Status tones (`--tone-active/development/functional/discovery/archived`) colour a status word, never a dot or a pill, and all pass 4.5:1 on their ground.
+- Dark theme: ground `#101a1e`, accent `#8cc0dc`.
 
-### Primary
-
-- **Vermilion**: reserved for selected actions and meaningful interaction emphasis.
-- **Verification Green**: reserved for verified evidence.
-
-### Neutral
-
-- **Ink**: all primary reading, strong borders, and primary actions.
-- **Paper**: the page ground and primary surface.
-- **Soft Paper**: restrained tonal grouping.
-- **Rule**: hairline structure between plates and reading groups.
-
-**The Evidence Accent Rule.** Vermilion must explain a fact or lead a meaningful action; it never decorates empty space.
+Rule: surfaces separate by tone step, not by lines. One-pixel rules are allowed only where they are a real list or table (the verified-facts index, the timeline, the case meta row).
 
 ## Typography
 
-**Display Font:** Archivo, with Arial fallback.
-**Body Font:** Archivo, with Arial fallback.
-**Label/Mono Font:** IBM Plex Mono, with Consolas fallback.
+One family, **Archivo** 400/700, self-hosted. Mono (`IBM Plex Mono`) stays loaded for code only; it is not used for labels or buttons.
 
-**Character:** Archivo gives statements a forceful editorial voice; IBM Plex Mono makes metadata and evidence read as source material rather than decoration.
-
-### Hierarchy
-
-- **Display:** bold, tightly tracked, and reserved for route titles and decisive page statements.
-- **Headline:** bold display treatment for project names and long-form section leads.
-- **Body:** generous line-height with a readable 65–75 character measure.
-- **Label:** uppercase or compact mono text for categories, dates, status, and evidence.
-
-**The Statement Rule.** A heading carries its own hierarchy; do not add decorative eyebrows above it.
+- Display: `clamp(2.375rem, 5.8vw, 5.75rem)`, 700, line-height .98, tracking −0.04em, balanced. Hero is two lines on desktop (PT and EN).
+- Section titles: `clamp(2.25rem, 4.6vw, 4.25rem)`. Case titles with a cover: `clamp(2.5rem, 4.4vw, 4.25rem)`.
+- Body 17px / 1.6–1.7, measure ≤ 46rem. Minimum rendered size 12px (13px for metadata).
+- Buttons and labels: sentence case, 700, no uppercase tracking.
 
 ## Layout
 
-The maximum content width is 1440px. Desktop compositions use ruled editorial grids with intentionally unequal columns; mobile collapses to a single sequential reading path without shrinking label text. Sections have generous vertical separation and are divided by one-pixel rules.
+Container 1440px, gutters 16/24/32px. The Home hero stage bleeds to the right viewport edge. Featured case rows alternate image left/right at ≥ 900px. Case pages put the title and promise left and the cover on a stage right; the meta row (Year, Role, Stage, Product, Focus) sits below as a quiet grid. About uses a 4/8 split with sticky section titles.
 
 ## Elevation & Depth
 
-This is a flat system. Structure comes from paper tone, spacing, crop, and rules rather than shadows or translucent glass.
-
-**The Flat Plate Rule.** A surface may use a one-pixel rule or a tonal shift, but not a generic raised-card shadow.
+Flat. The only shadow is on the second Home hero image, which genuinely floats over the stage.
 
 ## Shapes
 
-Most containers are square-cornered (0px radius). The one intentional exception is the circular verification seal, whose round form identifies a reviewable fact rather than a generic UI chip.
+Square (0px) everywhere. Small round markers (flow-step numbers, carousel controls) are the only circles.
 
 ## Components
 
-### Buttons
+- **Buttons:** flat, 48px, 700 sentence case. Primary = ink fill, petrol on hover. Secondary = 1px inset ink at 38%. Inside a stage the primary becomes the light button automatically.
+- **Case row / Project card:** cover (16:10) → status word + year → title → description → figures → link. The whole card is one stretched link; focus draws a petrol outline around the card.
+- **Segmented controls** (case view, language): square, ink-filled active segment.
+- **Navigation:** solid bar, name + role at left, three links, language, theme, LinkedIn, one "Contact" action.
 
-- **Shape:** square corners (0px), mono uppercase labels.
-- **Primary:** ink background with paper text; vermilion on hover.
-- **Secondary:** transparent with an ink rule.
-- **Focus:** a two-pixel vermilion outline with visible offset.
+## Motion
 
-### Chips
-
-- **Style:** compact mono labels, no pill treatment, used only for factual taxonomy.
-
-### Cards / Containers
-
-- **Corner Style:** square.
-- **Background:** transparent or paper-toned.
-- **Border:** one-pixel rules create the plate grid.
-- **Internal Padding:** 1.25–2.25rem according to viewport.
-
-### Navigation
-
-Navigation is a restrained fixed paper strip: name mark, links, language, theme control, and a single action. Active state is ink, not a decorative badge.
-
-### Verification Seal
-
-The seal is circular, green, and slightly rotated. It labels verified evidence; it is never used as a general logo mark.
+One authored moment per page: the masked hero lines. Everything else is a single fade-up on enter (`[data-reveal]`), a slow image scale on hover and an arrow nudge. The process line fills as the steps enter. `prefers-reduced-motion` keeps content and state change and drops the travel.
 
 ## Do's and Don'ts
 
-### Do:
+**Do**
 
-- **Do** put the real project artifact or screenshot beside its evidence when it exists.
-- **Do** use one-pixel rules to organize a reading sequence.
-- **Do** keep claims tied to verified project data and visible paths into cases.
-- **Do** use responsive stacks that preserve the editorial reading order.
+- Put a real project image beside every claim that has one.
+- Keep headlines to two lines; cut words before shrinking type.
+- Add new project covers as `public/projects/<slug>/cover.webp` at 16:10 and reference them in both MDX files.
 
-### Don't:
+**Don't**
 
-- **Don't** use rounded floating cards, glass panels, or ambient shadows as the page structure.
-- **Don't** use gradient text or decorative technical grids.
-- **Don't** turn labels into pills unless they represent a compact control.
-- **Don't** use vermilion for non-functional decoration.
+- Don't add eyebrows, numbered labels, uppercase mono, pills, gradients, glass or shadows to resting surfaces.
+- Don't reintroduce a second accent colour.
+- Don't invent screenshots. A tile with the logo is better than a mock.

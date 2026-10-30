@@ -27,6 +27,7 @@ cardBadge:
   tone: functional
 status: Active
 draft: false
+cover: /projects/projectrelay/cover.webp
 views: true
 readingTime:
   basic: 2
@@ -87,6 +88,15 @@ Relay centralizes the product catalogue, affiliate profiles, collections, campai
     'Execute publication',
     'Track delivery, failures and items that need review',
   ]}
+/>
+
+<CaseMedia
+  src="/projects/projectrelay/interface.webp"
+  alt="Project Relay panel overview, with a sidebar grouped by area and the panel map laid out as Catalogue, WhatsApp, Campaigns and Operations lines"
+  width={1485}
+  height={1187}
+  caption="Panel overview — each line on the map is a product area and each station is a screen (interface text in Portuguese)"
+  protected={true}
 />
 
 ## Decisions that shaped the product
@@ -165,6 +175,15 @@ Project Relay organizes the operation into six connected capabilities:
   ]}
 />
 
+<CaseMedia
+  src="/projects/projectrelay/interface.webp"
+  alt="Project Relay panel overview, with a sidebar grouped by area and the panel map laid out as Catalogue, WhatsApp, Campaigns and Operations lines"
+  width={1485}
+  height={1187}
+  caption="Panel overview — each line on the map is a product area and each station is a screen (interface text in Portuguese)"
+  protected={true}
+/>
+
 <h2 id="decisions">Five decisions that shaped the product</h2>
 
 <h3 id="integrations">1. Solve the operation before relying on APIs</h3>
@@ -212,6 +231,15 @@ The architecture uses Node.js, TypeScript and SQLite, with persistent tasks and 
 />
 
 The key boundary is between the operational core and external services. Marketplaces provide data when integration is feasible; channels receive publications through dedicated adapters. The catalogue and campaign continue working when a connector does not yet exist.
+
+<CaseMedia
+  src="/projects/projectrelay/login.webp"
+  alt="Project Relay administrative sign-in screen: a dark panel with metro-style lines on the left and the operator password field on the right"
+  width={1429}
+  height={1163}
+  caption="Administrative access — local panel, operator password and a session that expires on its own (interface text in Portuguese)"
+  protected={true}
+/>
 
 ## Product and engineering challenges
 

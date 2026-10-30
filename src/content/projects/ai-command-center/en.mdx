@@ -1,0 +1,357 @@
+---
+title: AI Command Center
+locale: en
+subtitle: "Technical Product · Applied AI · Developer productivity"
+description: "A personal command center that brings signals from projects, communication and work tools into one interface. The navigable prototype exists; integrations, persistent memory and contextual intelligence are planned in stages."
+tagline: "One place to gather the context that gets lost between tools."
+summary: "AI Command Center is a personal control center for tracking projects, conversations and work tools. The interface exists as a navigable prototype. Local backend, persistent memory and integrations are planned, with an explicit scope and clear stages."
+year: 2026
+role: "Product discovery and product direction"
+productType: "Local application · Applied AI"
+focus: "Product architecture · Prioritization · Context engineering · Risk management"
+stage: "Product discovery · Navigable prototype"
+stageNote: "The interface has been prototyped. Backend, memory and integrations remain planned."
+statusBadge: "In discovery"
+caseSummary:
+  problem: "Work context is scattered across email, tasks, repositories and AI tools, and rebuilding it takes time."
+  role: "Creator and owner of discovery, scope, product architecture, prioritization and acceptance criteria."
+  result: "A navigable interface prototype and a defined MVP scope."
+  keyDecision: "Build the visual experience first and leave remote integrations for later stages."
+statusEvidence:
+  stage: "Product discovery with a navigable prototype."
+  evidence: "The modular interface exists as a prototype. Local architecture, memory and integrations are described in this case as planning."
+  nextValidation: "Validate local project reading before connecting external services."
+section: discovery
+cardBadge:
+  label: "In discovery"
+  tone: discovery
+cardHighlights:
+  - "Navigable prototype"
+  - "Local backend planned"
+  - "Integrations in stages"
+status: Discovery
+draft: false
+cover: /projects/ai-command-center/cover.webp
+views: true
+readingTime:
+  basic: 3
+  full: 11
+tags:
+  - Local application
+  - Integrations
+  - AI
+  - Contextual memory
+demonstrates:
+  - Product discovery
+  - Product architecture
+  - Prioritization
+  - Context engineering
+  - Risk management
+technologies:
+  - React
+  - TypeScript
+  - Vite
+metrics: []
+scaleMetrics: []
+productMetrics: []
+seo:
+  title: "AI Command Center | Product discovery and applied AI | Lucas Sehnem"
+  description: "Discovery case for a personal AI control center: problem, MVP scope, planned architecture, prioritization, risks and what already exists as a prototype."
+order: 2
+---
+
+<BasicView>
+
+## The problem
+
+My work moves through email, task management, repositories, documents and conversations with AI models. Each tool holds one part of the context. When I need to decide a project's next step, I rebuild that context by hand, and part of the reasoning is lost between sessions.
+
+## The proposal
+
+AI Command Center is a reading layer over the tools I already use. It gathers relevant signals, refreshes on demand and surfaces what deserves attention. It is not a full email client or a task management system. The goal is to lower the cost of resuming context, not to replace the tools.
+
+## What already exists
+
+A navigable interface exists, with a collapsible menu, contextual modules and an animated visual core. The prototype validates composition, hierarchy and feel. It does not read real data, persist memory or call models.
+
+<CaseMedia
+  src="/projects/ai-command-center/demo.webp"
+  alt="AI Command Center interface in demo mode: an animated visual core in the centre, surrounded by Priorities, Projects, Communications and Connections modules"
+  width={1592}
+  height={1197}
+  caption="Navigable AI Command Center prototype in demo mode, with sample data and no AI connected (interface text in Portuguese)"
+  protected={true}
+/>
+
+<SeeFull to="experiencia" label="See the experience vision" />
+
+## My role
+
+I created the product and lead discovery. I define scope, architecture, priorities, UX direction and acceptance criteria. Deliveries are implemented with AI agents and reviewed by me against those criteria.
+
+## MVP scope
+
+The MVP is organized in three stages. Order matters: each stage has to produce something verifiable before the next one opens.
+
+<FlowDiagram
+  label="Planned MVP sequence for AI Command Center"
+  steps={[
+    'Visual experience and modules',
+    'Local infrastructure and Git reading',
+    'Remote integrations and briefings',
+  ]}
+/>
+
+Refresh happens on click, not by polling, to keep calls and cost predictable. The full case details the decisions.
+
+<SeeFull to="decisoes" label="See the MVP decisions" />
+
+## Where it stands
+
+The interface is what exists. Local backend, repository reading, persistent memory, connectors and AI analysis are planned.
+
+<ViewCtaButton label="See the full case: decisions, architecture and risks" />
+
+</BasicView>
+
+<FullView>
+
+<nav aria-label="On this page" class="not-prose mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm text-muted-foreground">
+  <span class="font-semibold text-foreground">On this page:</span>
+  <a href="#contexto" class="link-underline hover:text-foreground">Context</a>
+  <span aria-hidden="true">·</span>
+  <a href="#decisoes" class="link-underline hover:text-foreground">Decisions</a>
+  <span aria-hidden="true">·</span>
+  <a href="#arquitetura" class="link-underline hover:text-foreground">Architecture</a>
+  <span aria-hidden="true">·</span>
+  <a href="#riscos" class="link-underline hover:text-foreground">Risks</a>
+  <span aria-hidden="true">·</span>
+  <a href="#estado" class="link-underline hover:text-foreground">State</a>
+</nav>
+
+<h2 id="contexto">Context and problem</h2>
+
+During a workday, a signal can arrive by email, show up in a task, depend on a repository and require a conversation with an AI model. None of these tools sees the whole picture. The information exists, but the context that connects one thing to another stays with me.
+
+The cost shows up when I resume a project. I read old conversations, look for the decision that ended up in a comment and try to rebuild the reasoning. Important decisions lose their trail, and the same context is processed several times.
+
+<FlowDiagram
+  label="Problem in the current workflow"
+  steps={[
+    'A signal arrives in one tool',
+    'Context becomes fragmented',
+    'Resuming requires manual reconstruction',
+    'The decision loses its trail',
+  ]}
+/>
+
+<h2 id="hipotese">Opportunity and product hypothesis</h2>
+
+If the relevant context is readable in one place and refreshes on demand, I can decide with less rework and lose less reasoning between sessions.
+
+The product does not try to replace email, tasks or repositories. It reads those signals, keeps what is relevant and surfaces what needs attention. The scope boundary is part of the hypothesis. The less the product duplicates other tools, the lower the cost of maintaining integrations and the lower the risk of showing stale information.
+
+<Callout variant="info" title="Product hypothesis">
+
+Context readable in one place lowers the cost of resuming projects and makes decisions easier to trace. The hypothesis has not been tested with users yet.
+
+</Callout>
+
+<h2 id="papel">My role and approach</h2>
+
+I act as the creator and product owner. That includes discovery, scope definition, architecture decisions, prioritization, UX direction, acceptance criteria and validation of deliveries produced with AI agents.
+
+There is no separate team and no user research in this case. The product comes from my own workflow, and that is an explicit limitation. The assumptions need to be reviewed before any generalization.
+
+<RoleBlocks
+  label="Areas of work in AI Command Center"
+  blocks={[
+    {
+      title: 'Discovery',
+      items: ['Problem before solution', 'Signals that matter', 'MVP scope'],
+    },
+    {
+      title: 'Product architecture',
+      items: ['Prototype, backend and integrations kept apart', 'Local data by default', 'Contracts between modules'],
+    },
+    {
+      title: 'Prioritization',
+      items: ['Visual experience first', 'Refresh on demand', 'Integrations in stages'],
+    },
+    {
+      title: 'Delivery with AI',
+      items: ['Acceptance criteria before code', 'Review of deliveries', 'Explicit state of what exists'],
+    },
+  ]}
+/>
+
+The process starts with the problem and the smallest verifiable slice. An architecture decision only enters scope when I can explain which risk it reduces and how I will inspect the result.
+
+<h2 id="decisoes">MVP decisions</h2>
+
+<h3 id="experiencia-primeiro">Experience before integration</h3>
+
+Building the interface first makes it possible to test hierarchy, reading and navigation without the cost of maintaining connectors. There is a risk of a polished shell with no function. The mitigation is to state the status of each module in the interface and in this case.
+
+<h3 id="local-primeiro">Local before cloud</h3>
+
+The local backend in Node.js and SQLite is planned. Data stays on the device and directory access is controlled. The downside is that installation and backup depend on me, and the product is less portable than a web service.
+
+<h3 id="refresh-sob-demanda">Refresh on demand</h3>
+
+Refresh happens on click, not by polling. That makes call cost predictable and avoids processing the same context several times. The cost of that choice: the interface may show an older signal until the next refresh.
+
+<h3 id="memoria-legivel">Memory in readable files</h3>
+
+The Persistent Memory Core uses Markdown and daily files of up to 500 lines. The format is inspectable and portable, with no dependency on a proprietary database. The downside is that retrieval quality depends on file structure and the Context Engine.
+
+<ComparisonBlock
+  titleA="Defined MVP"
+  titleB="Deferred"
+  arrows={false}
+  label="MVP scope compared with what is deferred"
+  itemsA={[
+    'Modular, navigable interface',
+    'Local reading of Git repositories',
+    'Memory in Markdown files',
+    'Refresh on click',
+  ]}
+  itemsB={[
+    'Gmail, GitHub and Jira connectors',
+    'Automatic briefing generation',
+    'Analysis with AI models',
+    'Authentication with external services',
+  ]}
+/>
+
+Remote integrations only enter once local reading and memory are verifiable.
+
+<h2 id="experiencia">Experience vision</h2>
+
+The visual core is animated and restrained, with a collapsible menu and contextual modules. The intent is for the product to feel like a reading panel, not a metrics dashboard. Legibility, accessibility and performance are criteria from the prototype onward.
+
+The animated core is part of the interface. It does not measure intelligence, activity or analysis quality, and it should not be read as proof that the system works.
+
+<CaseMedia
+  src="/projects/ai-command-center/demo.webp"
+  alt="AI Command Center interface in demo mode: an animated visual core in the centre, surrounded by Priorities, Projects, Communications and Connections modules"
+  width={1592}
+  height={1197}
+  caption="Navigable AI Command Center prototype in demo mode, with sample data and no AI connected (interface text in Portuguese)"
+  protected={true}
+/>
+
+<Callout variant="warning" title="Prototype limits">
+
+- It does not read email, repositories or tasks.
+- It does not persist memory between sessions.
+- It does not call AI models.
+- It does not run external integrations.
+
+</Callout>
+
+<h2 id="arquitetura">Architecture and security (planned)</h2>
+
+The architecture below is a proposed implementation. No component beyond the interface has been implemented or verified in this case.
+
+<ArchitectureDiagram
+  label="Planned AI Command Center architecture, not implemented"
+  steps={[
+    { label: 'Interface', detail: 'React, TypeScript and Vite. Existing navigable prototype.' },
+    { label: 'Local runtime', detail: 'Node.js. Planned.' },
+    { label: 'Persistence', detail: 'SQLite. Planned.' },
+    { label: 'Memory', detail: 'Markdown and daily files. Planned.' },
+    { label: 'Context', detail: 'Context Engine and cache. Planned.' },
+    { label: 'Connectors', detail: 'Gmail, GitHub and Jira. Planned.' },
+  ]}
+  servicesLabel="Configurable AI models (planned)"
+  services={['Model per task', 'Calls on demand']}
+/>
+
+<p class="not-prose mt-2 text-body-sm text-muted-foreground">Top to bottom: proposed layers, not a production flow.</p>
+
+The premise is to keep data on the device. The backend would read only authorized directories, with path validation. Future integrations with Gmail, GitHub and Jira would require API authentication, minimal scopes and revocability. The threat model covers the filesystem, credentials and untrusted content. It is part of the planning, not a completed audit.
+
+<h2 id="memoria">Memory, context and cache (planned)</h2>
+
+The planned Persistent Memory Core uses Markdown and daily files of up to 500 lines. The Context Engine retrieves what is relevant to the current task. Cache and metrics reduce repeated processing.
+
+None of these components is implemented. The expected benefits are context that can be recovered without manual reconstruction, inspectable memory and lower call cost. There are no gain figures to publish.
+
+Readable files are easy to audit but require structure for retrieval. Limited daily files control size but require compaction. Cache reduces cost but may serve stale context. The date and origin of each signal need to be visible in the interface.
+
+<FlowDiagram
+  label="Planned refresh flow, not implemented"
+  steps={[
+    'Click to refresh',
+    'Collect the configured signals',
+    'Retrieve relevant context',
+    'Briefing with attention',
+    'Memory updated',
+  ]}
+/>
+
+<h2 id="processo">Process and technical decisions</h2>
+
+Development follows a modular architecture, with explicit contracts between interface, backend and integrations. Acceptance criteria are defined before implementation, and deliveries produced with AI agents are reviewed against them. Documentation and the threat model are part of scope, not deferred work.
+
+This case does not claim test results, versions or application performance without verifiable evidence.
+
+<h2 id="riscos">Trade-offs and risks</h2>
+
+The risks below are product risks, not only engineering risks. Each one changes the scope or the order of the stages.
+
+<DataTable
+  caption="Planned risks and mitigations for AI Command Center"
+  columns={['Risk', 'Effect', 'Planned mitigation']}
+  rows={[
+    ['Local data only', 'Backup and portability depend on the user', 'Export and a documented format'],
+    ['Personal scope', 'Risk of fitting the product to one workflow', 'Review assumptions before opening it to other people'],
+    ['Future authentication', 'Broad scopes on Gmail, GitHub and Jira', 'Explicit consent, minimal scope and revocation'],
+    ['Token cost', 'Frequent refresh makes operation more expensive', 'Refresh on click, cache and model per task'],
+    ['Stale content', 'An old signal may look current', 'Date and origin visible on every item'],
+    ['Filesystem security', 'Local access widens the attack surface', 'Authorized directories, path validation and threat model'],
+    ['Unverified information', 'AI can present inference as fact', 'Separate fact, inference and suggestion in the interface'],
+  ]}
+/>
+
+<h2 id="estado">Current state vs. roadmap</h2>
+
+<DataTable
+  caption="Current state of AI Command Center, by layer"
+  columns={['Layer', 'State', 'Evidence']}
+  rows={[
+    ['Interface (React, TypeScript, Vite)', 'Implemented', 'Navigable prototype, no real data'],
+    ['Scope and architecture', 'Documented', 'Defined in this case'],
+    ['Local backend (Node.js)', 'Planned', 'No verified implementation'],
+    ['Persistence (SQLite)', 'Planned', 'No verified implementation'],
+    ['Persistent Memory Core', 'Planned', 'Format defined, not implemented'],
+    ['Context Engine and cache', 'Planned', 'No verified implementation'],
+    ['Git project reading', 'Planned', 'Next validation step'],
+    ['Gmail, GitHub and Jira connectors', 'Planned', 'Depend on authentication and scope'],
+    ['AI analysis', 'Planned', 'Depends on memory and context'],
+  ]}
+/>
+
+No external integration is connected. The prototype does not process real data.
+
+<h2 id="proximos-passos">Lessons and next steps</h2>
+
+The central lesson is to prioritize a foundation I can inspect. A navigable interface does not prove the product, but it makes it possible to discuss hierarchy, scope and risk before investing in integrations.
+
+Next steps, in order: local project reading, persistent memory, remote connectors and AI analysis. Each stage needs acceptance criteria and a way to verify what was delivered.
+
+This case will be updated when those stages have evidence. Until then, the stated state is the interface prototype.
+
+<Callout variant="demonstrates" title="What this case shows">
+
+- **Product discovery:** problem and hypothesis before the solution.
+- **Product architecture:** prototype, backend, memory and integrations kept separate.
+- **Prioritization:** staged scope and refresh on demand.
+- **Context engineering:** recoverable memory, cache and signal origin.
+- **Risk management:** local data, token cost and filesystem security.
+- **Delivery with AI:** acceptance criteria and review of deliveries.
+
+</Callout>
+
+</FullView>

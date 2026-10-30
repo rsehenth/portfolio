@@ -25,6 +25,15 @@ const work = ui[locale].work;
 const homeEvidence = ui[locale].homeEvidence;
 const homeProjectsData = ui[locale].homeProjects;
 const howIWork = ui[locale].howIWork;
+const howProcess = ui[locale].hero.process;
+const projectsHref = locale === 'pt-BR' ? '/projects/' : '/en/projects/';
+
+// "ProfResolve · 15 geradores" → project + fact, so each fact reads as a row.
+const facts = homeEvidence.items.map((item) => {
+  const [project, ...rest] = item.text.split(' · ');
+  const fact = rest.join(' · ');
+  return { project, fact: fact.charAt(0).toUpperCase() + fact.slice(1), href: item.href };
+});
 const about = ui[locale].about;
 const contact = ui[locale].contact;
 
@@ -39,194 +48,127 @@ const featuredCards = featuredProjects.map((project, i) => {
   return { project, key, href, homeData, delay: i * 100 };
 });
 
-const singleProject = featuredProjects.length === 1 ? (() => {
-  const project = featuredProjects[0];
-  const key = projectKey(project);
-  const href = caseUrl(locale, key);
-  const homeData = homeProjectsData.projects[key as HomeProjectKey] ?? null;
-  return { project, key, href, homeData };
-})() : null;
 ---
 
 <BaseLayout class="proof-page proof-page--home" fullTitle={meta.siteTitle} description={meta.siteDescription} locale={locale}>
   <Hero locale={locale} />
 
-  <!-- Selected Work -->
-  <section id="work" class="section" aria-labelledby="work-heading">
+  <!-- Selected Work: a dark stage so the product images carry the page -->
+  <section id="work" class="section field-ink work-stage" aria-labelledby="work-heading">
     <div class="container">
-      <header class="text-center max-w-2xl mx-auto mb-12 lg:mb-16" data-reveal>
-        <h2 id="work-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-4">
-          {work.title}
-        </h2>
-        <p class="text-body-lg text-muted-foreground">
-          {homeProjectsData.subtitle}
-        </p>
+      <header class="section-head" data-reveal>
+        <div>
+          <h2 id="work-heading" class="section-title">{work.title}</h2>
+          <p class="section-lede">{homeProjectsData.subtitle}</p>
+        </div>
+        <a href={projectsHref} class="section-link">
+          {homeProjectsData.viewAll.replace(/\s*→\s*$/, '')}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </a>
       </header>
 
       {featuredProjects.length > 0 ? (
-        <>
-          {/* Featured cases: one column on phone, the lead plate on its own row
-              beside a pair on tablet and notebook, three equal plates from xl. */}
-          {featuredCards.length >= 2 && (
-            <div class="grid gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3 mb-6 sm:mb-8 items-stretch">
-              {featuredCards.map(({ project, href, homeData, delay }, i) =>
-                homeData ? (
-                  <div class:list={['h-full home-featured', i === 0 && 'md:col-span-2 xl:col-span-1']}>
-                    <HomeProjectCard
-                      title={project.data.title}
-                      href={href}
-                      homeData={homeData}
-                      viewCaseLabel={homeProjectsData.viewCase}
-                      variant="hero"
-                      locale={locale}
-                      revealDelay={delay}
-                      logo={project.data.logo}
-                      logoPosition={project.data.logoPosition}
-                      cover={project.data.cover}
-                    />
-                  </div>
-                ) : null
-              )}
-            </div>
+        <div class="case-rows">
+          {featuredCards.map(({ project, href, homeData, delay }) =>
+            homeData ? (
+              <HomeProjectCard
+                title={project.data.title}
+                href={href}
+                homeData={homeData}
+                viewCaseLabel={homeProjectsData.viewCase}
+                locale={locale}
+                revealDelay={delay}
+                logo={project.data.logo}
+                logoPosition={project.data.logoPosition}
+                cover={project.data.cover}
+              />
+            ) : null
           )}
-
-          {/* Fallback: single project */}
-          {singleProject && singleProject.homeData && (
-            <div class="grid-auto-fit items-stretch">
-              <div class="h-full home-featured">
-                <HomeProjectCard
-                  title={singleProject.project.data.title}
-                  href={singleProject.href}
-                  homeData={singleProject.homeData}
-                  viewCaseLabel={homeProjectsData.viewCase}
-                  variant="default"
-                  locale={locale}
-                  revealDelay={0}
-                  logo={singleProject.project.data.logo}
-                  logoPosition={singleProject.project.data.logoPosition}
-                  cover={singleProject.project.data.cover}
-                />
-              </div>
-            </div>
-          )}
-
-          <div class="text-center mt-10" data-reveal>
-            <a href={locale === 'pt-BR' ? '/projects/' : '/en/projects/'} class="btn-secondary home-projects-cta">
-              {homeProjectsData.viewAll}
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
-        </>
+        </div>
       ) : (
-        <p class="text-center text-body-md text-muted-foreground">
-          {work.empty}
-        </p>
+        <p class="section-lede">{work.empty}</p>
       )}
     </div>
   </section>
 
-  <section class="home-evidence section" aria-labelledby="evidence-heading">
-    <div class="container">
-      <h2 id="evidence-heading">{homeEvidence.title}</h2>
-      <ul role="list">
-        {homeEvidence.items.map((item) => (
-          <li>{item.href ? <a href={item.href}>{item.text} →</a> : <span>{item.text}</span>}</li>
+  <!-- Verified facts: an index of rows, each linking to its case when there is one -->
+  <section class="section home-facts" aria-labelledby="evidence-heading">
+    <div class="container home-facts__grid">
+      <h2 id="evidence-heading" class="section-title" data-reveal>{homeEvidence.title}</h2>
+      <ul role="list" class="fact-list" data-reveal data-reveal-delay="80">
+        {facts.map((item) => (
+          <li>
+            {item.href ? (
+              <a href={item.href}>
+                <span class="fact-list__text">{item.fact}</span>
+                <span class="fact-list__project">{item.project}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+              </a>
+            ) : (
+              <div>
+                <span class="fact-list__text">{item.fact}</span>
+                <span class="fact-list__project">{item.project}</span>
+              </div>
+            )}
+          </li>
         ))}
       </ul>
     </div>
   </section>
 
-  <!-- How I Work -->
-  <section id="how-i-work" class="section" aria-labelledby="how-i-work-heading">
+  <!-- How I work: the process as one line, then the three pillars -->
+  <section id="how-i-work" class="section home-how" aria-labelledby="how-i-work-heading">
     <div class="container">
-      <header class="text-center max-w-2xl mx-auto mb-12 lg:mb-16" data-reveal>
-        <h2 id="how-i-work-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-4">
-          {howIWork.title}
-        </h2>
-        <p class="text-body-lg text-muted-foreground">
-          {howIWork.subtitle}
-        </p>
+      <header class="section-head section-head--stack" data-reveal>
+        <h2 id="how-i-work-heading" class="section-title">{howIWork.title}</h2>
+        <p class="section-lede">{howIWork.subtitle}</p>
       </header>
 
-      <div class="grid-3" data-fx-cards>
-        <div class="card p-6 lg:p-8 fx-card">
-          <img src="/produto.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-6" />
-          <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.product.title}</h3>
-          <p class="text-body-md text-muted-foreground mb-6">{howIWork.product.description}</p>
-          <ul class="space-y-2" role="list">
-            {howIWork.skills.product.map((skill) => (
-              <li class="flex items-center gap-2 text-body-md text-muted-foreground">
-                <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
-                {skill}
-              </li>
-            ))}
-          </ul>
-        </div>
+      <ol class="home-process" aria-label={howProcess.title}>
+        {howProcess.steps.map((step) => (
+          <li>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </li>
+        ))}
+      </ol>
 
-        <div class="card p-6 lg:p-8 fx-card">
-          <img src="/tecnologia.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-6" />
-          <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.technology.title}</h3>
-          <p class="text-body-md text-muted-foreground mb-6">{howIWork.technology.description}</p>
-          <ul class="space-y-2" role="list">
-            {howIWork.skills.technology.map((skill) => (
-              <li class="flex items-center gap-2 text-body-md text-muted-foreground">
-                <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
-                {skill}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div class="card p-6 lg:p-8 fx-card">
-          <img src="/execucao.webp" alt="" width="1280" height="1280" loading="lazy" decoding="async" class="how-i-work-image mb-6" />
-          <h3 class="text-heading-lg font-semibold text-foreground mb-2">{howIWork.execution.title}</h3>
-          <p class="text-body-md text-muted-foreground mb-6">{howIWork.execution.description}</p>
-          <ul class="space-y-2" role="list">
-            {howIWork.skills.execution.map((skill) => (
-              <li class="flex items-center gap-2 text-body-md text-muted-foreground">
-                <span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>
-                {skill}
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div class="pillars" data-fx-cards>
+        {[
+          { block: howIWork.product, skills: howIWork.skills.product },
+          { block: howIWork.technology, skills: howIWork.skills.technology },
+          { block: howIWork.execution, skills: howIWork.skills.execution },
+        ].map(({ block, skills }) => (
+          <div class="pillar fx-card">
+            <h3>{block.title}</h3>
+            <p>{block.description}</p>
+            <ul role="list">
+              {skills.map((skill) => <li>{skill}</li>)}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- About — single-column layout; duplicate contact card removed (Phase 4) -->
-  <section id="about" class="section bg-muted/30" aria-labelledby="about-heading">
-    <div class="container">
-      <div class="max-w-3xl mx-auto" data-reveal>
-        <h2 id="about-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-6">
-          {about.title}
-        </h2>
-        <div class="prose prose-lg max-w-none">
-          <p class="text-body-lg text-muted-foreground mb-6">
-            {about.bio.p1}
-          </p>
-          <p class="text-body-md text-muted-foreground mb-6">
-            {about.bio.p2}
-          </p>
-          <p class="text-body-md text-muted-foreground" set:html={about.bio.p3} />
-        </div>
+  <!-- About: short; the full story lives on /about -->
+  <section id="about" class="section home-about" aria-labelledby="about-heading">
+    <div class="container home-about__grid">
+      <h2 id="about-heading" class="section-title" data-reveal>{about.title}</h2>
+      <div class="home-about__text" data-reveal data-reveal-delay="80">
+        <p class="home-about__lead">{about.bio.p1}</p>
+        <p>{about.bio.p2}</p>
+        <p set:html={about.bio.p3} />
       </div>
     </div>
   </section>
 
-  <!-- Contact CTA -->
-  <section id="contact" class="section" aria-labelledby="contact-heading">
+  <!-- Contact: the second dark stage closes the page -->
+  <section id="contact" class="section field-ink contact-stage" aria-labelledby="contact-heading">
     <div class="container">
-      <div class="card p-8 lg:p-12 text-center max-w-2xl mx-auto" data-reveal="scale">
-        <h2 id="contact-heading" class="text-display-sm lg:text-display-md font-bold tracking-tight text-foreground mb-4">
-          {contact.title}
-        </h2>
-        <p class="text-body-lg text-muted-foreground mb-8">
-          {contact.subtitle}
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
+      <div class="contact-stage__inner" data-reveal>
+        <h2 id="contact-heading" class="contact-stage__title">{contact.title}</h2>
+        <p class="section-lede">{contact.subtitle}</p>
+        <div class="contact-stage__actions">
           <a href={profile.linkedin} class="btn-primary" target="_blank" rel="noopener noreferrer">
             {contact.ctaLinkedin}
           </a>
@@ -240,11 +182,8 @@ const singleProject = featuredProjects.length === 1 ? (() => {
             href={locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas-cven.pdf'}
             download
             aria-label={locale === 'pt-BR' ? 'Baixar currículo em PDF' : 'Download resume as PDF'}
-            class="btn-secondary inline-flex items-center gap-2"
+            class="btn-secondary"
           >
-            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
             {contact.ctaCV}
           </a>
         </div>

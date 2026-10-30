@@ -2,19 +2,13 @@
 /**
  * HomeProjectCard.astro
  *
- * Home-EXCLUSIVE project card component.
- * Uses the homeProjects editorial layer from ui.ts — NOT MDX frontmatter.
+ * Home-EXCLUSIVE featured case row: a large real image beside the case summary.
+ * Uses the homeProjects editorial layer from ui.ts — NOT MDX frontmatter —
+ * for every word, and the project's own `cover` for the image.
  * This component must NOT be used in /projects or case pages.
  *
- * Renders:
- *   1. Category chip        — homeData.category
- *   2. Title (h3)           — MDX data.title (authoritative project name)
- *   3. Description          — homeData.description
- *   4. Focus chips (max 3)  — homeData.focus (no label)
- *   5. Highlights (2-col)   — homeData.highlights (value + label; qualitative ok)
- *   6. CTA link             — homeData.viewCase + href
- *
- * No "Demonstra" label. No tags list. No year/status in hero variant.
+ * Renders: image (cover, 16:10) · title (h3) · category + status · description ·
+ * focus line · highlights (value + label) · case link.
  */
 import type { Locale } from '@/i18n';
 
@@ -40,16 +34,15 @@ interface Props {
   homeData: HomeProjectData;
   /** CTA label from ui[locale].homeProjects.viewCase */
   viewCaseLabel: string;
-  /** hero = top-row larger cards; default = bottom-row standard cards */
+  /** Kept for call-site compatibility; every featured row uses the same layout. */
   variant?: 'hero' | 'default';
   locale?: Locale;
   /** data-reveal-delay value in ms (used by scroll-reveal JS) */
   revealDelay?: number;
-  /** Project logo path from MDX frontmatter */
+  /** Project logo path from MDX frontmatter (fallback when there is no cover) */
   logo?: string;
-  /** Logo object-position, e.g. "center" */
   logoPosition?: string;
-  /** Optional real project cover used only as the Home plate image. */
+  /** Real 16:10 project cover from MDX frontmatter */
   cover?: string;
 }
 
@@ -58,7 +51,6 @@ const {
   href,
   homeData,
   viewCaseLabel,
-  variant = 'default',
   locale = 'pt-BR',
   revealDelay = 0,
   logo,
@@ -66,138 +58,53 @@ const {
   cover,
 } = Astro.props;
 
-const isHero = variant === 'hero';
+const titleId = `hpc-${href.replace(/\//g, '-').replace(/^-|-$/g, '')}-title`;
+const label = viewCaseLabel.replace(/\s*→\s*$/, '');
 ---
 
-<article
-  class={`card group relative flex flex-col h-full hover:border-accent/40 hover:shadow-xl transition-all duration-normal`}
-  aria-labelledby={`hpc-${href.replace(/\//g, '-').replace(/^-|-$/g, '')}-title`}
-  data-reveal
-  data-reveal-delay={String(revealDelay)}
->
-  <div class={`flex flex-col flex-1 ${isHero ? 'p-7 lg:p-8' : 'p-6'}`}>
-
-    <!-- Category + status badge — always on one line -->
-    <div class="mb-3 flex items-center gap-2 min-w-0">
-      <p class="text-caption font-medium text-muted-foreground whitespace-nowrap">{homeData.category}</p>
-      {homeData.statusBadge && <span class="tag whitespace-nowrap">{homeData.statusBadge}</span>}
-    </div>
-
-    <!-- Title + Logo -->
-    <div class="flex items-start justify-between gap-4 mb-3">
-      <h3
-        id={`hpc-${href.replace(/\//g, '-').replace(/^-|-$/g, '')}-title`}
-        class={`font-bold tracking-tight text-foreground group-hover:text-accent transition-colors duration-fast ${isHero ? 'text-display-sm' : 'text-heading-lg'}`}
-      >
-        {title}
-      </h3>
-      {logo && (
-        <div class="hpc-logo shrink-0" aria-hidden="true">
-          <img
-            src={logo}
-            alt=""
-            class="hpc-logo__img"
-            style={logoPosition ? `object-position: ${logoPosition}` : undefined}
-            loading="lazy"
-            draggable="false"
-          />
-        </div>
-      )}
-    </div>
-
-    {cover && (
-      <div class="hpc-cover" aria-hidden="true">
-        <img src={cover} alt="" loading="lazy" />
-      </div>
+<article class="case-row group" aria-labelledby={titleId} data-reveal data-reveal-delay={String(revealDelay)}>
+  <a class="case-row__media" href={href} tabindex="-1" aria-hidden="true">
+    {cover ? (
+      <img src={cover} alt="" width="1600" height="1000" loading="lazy" decoding="async" />
+    ) : (
+      logo && <img class="case-row__logo" src={logo} alt="" width="256" height="256" loading="lazy" decoding="async" style={logoPosition ? `object-position: ${logoPosition}` : undefined} />
     )}
+  </a>
 
-    <!-- Description -->
-    <p class={`text-muted-foreground leading-relaxed mb-5 flex-1 ${isHero ? 'text-body-lg' : 'text-body-md'}`}>
-      {homeData.description}
+  <div class="case-row__text">
+    <h3 id={titleId} class="case-row__title">
+      <a href={href}>{title}</a>
+    </h3>
+
+    <p class="case-row__meta">
+      {homeData.category}
+      {homeData.statusBadge && <span class="case-row__status">{homeData.statusBadge}</span>}
     </p>
 
-    <!-- Focus chips (max 3, no label) -->
+    <p class="case-row__description">{homeData.description}</p>
+
     {homeData.focus.length > 0 && (
-      <div class="flex flex-wrap gap-2 mb-5" aria-label={locale === 'pt-BR' ? 'Áreas de atuação' : 'Focus areas'}>
-        {homeData.focus.slice(0, 3).map((item) => (
-          <span class="inline-flex items-center px-2.5 py-1 text-caption font-medium rounded-md bg-accent/8 text-accent border border-accent/20">
-            {item}
-          </span>
-        ))}
-      </div>
+      <p class="case-row__focus" aria-label={locale === 'pt-BR' ? 'Áreas de atuação' : 'Focus areas'}>
+        {homeData.focus.slice(0, 3).join(' · ')}
+      </p>
     )}
 
-    <!-- Highlights (2-col grid) -->
     {homeData.highlights.length > 0 && (
-      <div class="grid grid-cols-2 gap-4 mb-5 pt-4 border-t border-border">
+      <dl class="case-row__figures">
         {homeData.highlights.slice(0, 2).map((h) => (
-          <div class="min-w-0">
-            <div class={`font-bold text-foreground ${isHero ? 'text-display-sm' : 'text-heading-lg'}`}>
-              {h.value}
-            </div>
-            <div class="text-caption text-muted-foreground leading-tight">
-              {h.label}
-            </div>
+          <div>
+            <dt>{h.value}</dt>
+            <dd>{h.label}</dd>
           </div>
         ))}
-      </div>
+      </dl>
     )}
 
-    <!-- CTA -->
-    <div class="mt-auto pt-4 border-t border-border">
-      <a
-        href={href}
-        class="link-underline inline-flex items-center gap-1.5 text-body-sm font-medium text-accent hover:text-accent/80 transition-colors duration-fast group/cta"
-      >
-        {viewCaseLabel}
-        <svg
-          class="w-4 h-4 transition-transform duration-fast group-hover/cta:translate-x-1"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </a>
-    </div>
-
+    <a class="case-row__cta" href={href}>
+      {label}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </svg>
+    </a>
   </div>
-
-  <!-- Full-card accessible overlay link (hidden from AT, for pointer users) -->
-  <a href={href} class="absolute inset-0 rounded-2xl" tabindex="-1" aria-hidden="true"></a>
 </article>
-
-<style>
-  .hpc-logo {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    border: 1px solid rgb(var(--color-border-rgb));
-    background-color: rgb(var(--color-muted-rgb));
-    flex-shrink: 0;
-  }
-
-  .hpc-logo__img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  :global(.group:hover) .hpc-logo__img {
-    transform: scale(1.06);
-  }
-
-  .hpc-logo { border-radius: 0; background: transparent; }
-  .hpc-cover { aspect-ratio: 16 / 8; margin: .5rem 0 1.25rem; overflow: hidden; border: 1px solid rgb(var(--color-border-rgb)); background: rgb(var(--color-muted-rgb)); }
-  .hpc-cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s cubic-bezier(.16, 1, .3, 1); }
-  :global(.group:hover) .hpc-cover img { transform: scale(1.025); }
-  :global(.proof-page--home) article { border-radius: 0 !important; box-shadow: none; }
-  :global(.proof-page--home) article > div { padding: clamp(1.25rem, 2.5vw, 2.25rem) !important; }
-  :global(.proof-page--home) article h3 { font-size: clamp(2rem, 3vw, 3.25rem); line-height: .95; letter-spacing: -.04em; }
-  :global(.proof-page--home) article .rounded-full { border-radius: 0; border: 0; padding: 0; background: transparent; font-family: var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
-</style>

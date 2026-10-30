@@ -6,44 +6,57 @@ const { locale = 'pt-BR' } = Astro.props;
 const hero = ui[locale].hero;
 const projectsHref = locale === 'pt-BR' ? '/projects/' : '/en/projects/';
 const cvHref = locale === 'pt-BR' ? '/lucas-cvpt.pdf' : '/lucas-cven.pdf';
+const { main, side } = hero.visual;
 ---
 
 <section class="home-hero" aria-labelledby="hero-heading">
   <div class="container">
-    <p class="home-hero__eyebrow">{hero.badge}</p>
-    <div class="home-hero__grid">
-      <div>
-        <h1 id="hero-heading" class="home-hero__title">
-          <span class="hero-line"><span>{hero.headlineBefore}</span></span>
-          <span class="hero-line"><span class="home-hero__accent">{hero.headlineAccent}</span></span>
-          <span class="hero-line"><span>{hero.headlineAfter}</span></span>
-        </h1>
+    <h1 id="hero-heading" class="home-hero__title">
+      <span class="hero-line"><span>{hero.headlineBefore}</span></span>
+      <span class="hero-line"><span>{hero.headlineAccent} {hero.headlineAfter}</span></span>
+    </h1>
+
+    <div class="home-hero__lower">
+      <div class="home-hero__copy">
         <p class="home-hero__summary">{hero.subheadline}</p>
         {hero.differentiator && <p class="home-hero__differentiator">{hero.differentiator}</p>}
         <div class="home-hero__actions">
           <a href={projectsHref} class="btn-primary">{hero.ctaPrimary}</a>
           <a href={cvHref} download aria-label={hero.ctaCVAriaLabel} class="btn-secondary">{hero.ctaCV}</a>
         </div>
+
+        <dl class="home-stats">
+          {hero.stats.map((stat) => <div><dt>{stat.value}</dt><dd>{stat.label}</dd></div>)}
+        </dl>
       </div>
 
-      <aside class="home-process" aria-label={hero.process.title}>
-        <div class="home-process__heading"><span>{hero.process.title}</span><span>{hero.process.label}</span></div>
-        <ol>
-          {hero.process.steps.map((step) => (
-            <li>
-              <span class="home-process__number">{step.number}</span>
-              <div>
-                <h2>{step.title}</h2>
-                {step.href ? <a href={step.href}>{step.description} →</a> : <p>{step.description}</p>}
-              </div>
-            </li>
-          ))}
-        </ol>
-        <a href="#work" class="home-process__evidence">{hero.process.evidence}</a>
-      </aside>
+      <div class="home-stage" data-hero-stage>
+        <div class="home-stage__field field-ink">
+          <a class="home-stage__main" href={main.href}>
+            <span class="home-stage__caption"><strong>{main.title}</strong> {main.caption}</span>
+            <img
+              src={main.src}
+              alt={main.alt}
+              width={main.width}
+              height={main.height}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </a>
+        </div>
+        <a class="home-stage__side" href={side.href}>
+          <img
+            src={side.src}
+            alt={side.alt}
+            width={side.width}
+            height={side.height}
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="home-stage__side-caption"><strong>{side.title}</strong> {side.caption}</span>
+        </a>
+      </div>
     </div>
-    <dl class="home-stats">
-      {hero.stats.map((stat) => <div><dt>{stat.value}</dt><dd>{stat.label}</dd></div>)}
-    </dl>
   </div>
 </section>

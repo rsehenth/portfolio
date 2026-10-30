@@ -1,5 +1,5 @@
 ---
-// Footer.astro - Site footer
+// Footer.astro - Site footer: the second dark stage, closing with the name at full width
 import { footerLinks, profile } from '@/data/profile';
 import { ui, type Locale } from '@/i18n';
 
@@ -19,157 +19,141 @@ const ptUrl = switchPath;
 const enUrl = `/en${switchPath}`;
 
 const isPt = locale === 'pt-BR';
+const nav = ui[locale].nav;
+const navLinks = [
+  { label: nav.projects, href: isPt ? '/projects/' : '/en/projects/' },
+  { label: nav.about, href: isPt ? '/about/' : '/en/about/' },
+  { label: nav.contact, href: isPt ? '/#contact' : '/en/#contact' },
+];
 ---
 
-<footer class={`border-t border-border ${className}`} role="contentinfo">
-  <div class="container py-10 lg:py-12">
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-
-      <!-- Brand / About — last on mobile (order-3), first on sm+ (sm:order-1) -->
-      <div class="order-3 sm:order-1">
-        <a
-          href={isPt ? '/' : '/en/'}
-          class="inline-flex items-center text-foreground font-semibold text-body-lg mb-4"
-          aria-label={isPt ? 'LS — Ir para página inicial' : 'LS — Go to homepage'}
-        >
-          LS
+<footer class={`site-footer field-ink ${className}`} role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href={isPt ? '/' : '/en/'} class="footer-brand__name" aria-label={isPt ? `${profile.name} — Ir para a página inicial` : `${profile.name} — Go to the homepage`}>
+          {profile.name}
         </a>
-        <p class="text-body-md text-muted-foreground max-w-xs mb-2">
-          {profile.headline}
-        </p>
-        <p class="text-body-sm text-muted-foreground">
-          {footer.copyright.replace('{year}', currentYear.toString())}
-        </p>
+        <p class="footer-brand__role">{profile.headline}</p>
       </div>
 
-      <!-- Links — first on mobile (order-1), second on sm+ (sm:order-2) -->
-      <div class="order-1 sm:order-2">
-        <h3 class="text-heading-sm font-semibold text-foreground mb-4">Links</h3>
-        <ul class="space-y-3" role="list">
+      <nav class="footer-links" aria-label={isPt ? 'Navegação do rodapé' : 'Footer navigation'}>
+        <ul role="list">
+          {navLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
           {footerLinks.map((link) => (
             <li>
               <a
                 href={link.href}
-                class="link-underline text-body-md text-muted-foreground hover:text-foreground transition-colors duration-fast inline-flex items-center gap-2"
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
               >
                 {link.label}
                 {link.external && (
-                  <svg class="w-3.5 h-3.5 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M7 17 17 7M8 7h9v9" />
                   </svg>
                 )}
               </a>
             </li>
           ))}
         </ul>
+      </nav>
+
+      <div class="footer-lang" role="group" aria-label={isPt ? 'Selecionar idioma' : 'Select language'}>
+        <a href={ptUrl} class={`lang-option ${isPt ? 'lang-option--active' : ''}`} hreflang="pt-BR" aria-current={isPt ? 'true' : undefined}>PT</a>
+        <a href={enUrl} class={`lang-option ${!isPt ? 'lang-option--active' : ''}`} hreflang="en" aria-current={!isPt ? 'true' : undefined}>EN</a>
       </div>
-
-      <!-- Language toggle — second on mobile (order-2), third on sm+ (sm:order-3) -->
-      <div class="order-2 sm:order-3 flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
-        <div>
-          <p class="text-heading-sm font-semibold text-foreground mb-4">
-            {isPt ? 'Idioma' : 'Language'}
-          </p>
-
-          <div
-            class="lang-toggle"
-            role="group"
-            aria-label={isPt ? 'Selecionar idioma' : 'Select language'}
-          >
-            <a
-              href={ptUrl}
-              class={`lang-toggle__option ${isPt ? 'lang-toggle__option--active' : ''}`}
-              hreflang="pt-BR"
-              aria-current={isPt ? 'true' : undefined}
-            >
-              <span>PT</span>
-            </a>
-            <a
-              href={enUrl}
-              class={`lang-toggle__option ${!isPt ? 'lang-toggle__option--active' : ''}`}
-              hreflang="en"
-              aria-current={!isPt ? 'true' : undefined}
-            >
-              <span>EN</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <!-- Built by — always at the very bottom -->
-    <p class="text-body-sm text-muted-foreground mt-8">
-      {footer.builtBy}
-    </p>
+    <div class="footer-legal">
+      <p>{footer.copyright.replace('{year}', currentYear.toString())}</p>
+      <p>{footer.builtBy}</p>
+    </div>
+
+    <p class="site-footer__wordmark" aria-hidden="true">{profile.name}</p>
   </div>
 </footer>
 
 <style>
-  .lang-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
-    padding: 3px;
-    border-radius: 9999px;
-    border: 1px solid rgb(var(--color-border-rgb));
-    background-color: rgb(var(--color-muted-rgb));
+  .footer-inner { padding-top: clamp(3.5rem, 6vw, 5rem); }
+
+  .footer-grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
   }
 
-  .lang-toggle__option {
-    position: relative;
+  @media (min-width: 768px) {
+    .footer-grid { grid-template-columns: minmax(0, 1fr) auto auto; gap: 3rem; align-items: center; }
+  }
+
+  .footer-brand__name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: rgb(var(--color-foreground-rgb));
+    text-decoration: none;
+  }
+
+  .footer-brand__role {
+    margin: 0.5rem 0 0;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  .footer-links ul { display: flex; flex-wrap: wrap; gap: 0 1.75rem; margin: 0; padding: 0; list-style: none; }
+
+  .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    color: rgb(var(--color-foreground-rgb));
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .footer-links a:hover { color: rgb(var(--color-accent-rgb)); }
+  .footer-links svg { width: 0.9rem; height: 0.9rem; }
+
+  /* Square segmented switch, same language as the case view toggle */
+  .footer-lang {
+    display: inline-flex;
+    padding: 0.25rem;
+    background: rgb(var(--color-muted-rgb));
+  }
+
+  .lang-option {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 1.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-decoration: none;
+    min-width: 3rem;
+    min-height: 2.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
     color: rgb(var(--color-muted-foreground-rgb));
-    transition: color 200ms ease;
+    text-decoration: none;
+    transition: color 180ms ease, background-color 180ms ease;
   }
 
-  /* The sliding pill background */
-  .lang-toggle__option::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    background-color: rgb(var(--color-card-rgb));
-    box-shadow: 0 1px 3px rgb(var(--color-shadow-rgb) / 0.10), 0 1px 2px rgb(var(--color-shadow-rgb) / 0.06);
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
-                transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
+  .lang-option:hover { color: rgb(var(--color-foreground-rgb)); }
 
-  .lang-toggle__option--active {
-    color: rgb(var(--color-foreground-rgb));
+  .lang-option--active {
+    background: rgb(var(--color-foreground-rgb));
+    color: rgb(var(--color-background-rgb));
     pointer-events: none;
   }
 
-  .lang-toggle__option--active::before {
-    opacity: 1;
-    transform: scale(1);
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin-top: 3rem;
+    font-size: 0.875rem;
+    color: rgb(var(--color-muted-foreground-rgb));
   }
 
-  .lang-toggle__option:not(.lang-toggle__option--active):hover {
-    color: rgb(var(--color-foreground-rgb));
-  }
-
-  .lang-toggle__option:not(.lang-toggle__option--active):hover::before {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-
-  /* Text sits above the pill pseudo-element */
-  .lang-toggle__option span {
-    position: relative;
-    z-index: 1;
-  }
+  .footer-legal p { margin: 0; }
 </style>
