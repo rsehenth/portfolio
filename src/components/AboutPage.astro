@@ -1,0 +1,151 @@
+---
+// AboutPage.astro - Shared About page for both locales (PT-BR / EN).
+// Routes stay duplicated (src/pages/about.astro, src/pages/en/about.astro); only the markup is shared.
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import EmailReveal from '@/components/EmailReveal.astro';
+import { profile } from '@/data/profile';
+import { ui, type Locale } from '@/i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'pt-BR' } = Astro.props;
+const isPt = locale === 'pt-BR';
+const about = ui[locale].about;
+const contact = ui[locale].contact;
+const productDecision = about.productDecision;
+const hasProductDecision = Boolean(productDecision.context || productDecision.decision || productDecision.result);
+const projectsHref = isPt ? '/projects/' : '/en/projects/';
+const cvHref = isPt ? '/lucas-cvpt.pdf' : '/lucas-cven.pdf';
+---
+
+<BaseLayout
+  class="proof-page proof-page--about"
+  title={about.meta.title}
+  fullTitle={about.meta.title}
+  description={about.meta.description}
+  locale={locale}
+>
+  <header class="container about-head" data-reveal>
+    <h1 class="about-head__title">{about.title}</h1>
+    <p class="about-head__lede">{about.heroTagline}</p>
+  </header>
+
+  <!-- Story -->
+  <section class="about-block" aria-label={isPt ? 'Trajetória em produto' : 'Path into product'}>
+    <div class="container about-block__grid">
+      <h2 class="about-block__title" data-reveal>{about.intro.productPathTitle}</h2>
+      <div class="about-prose" data-reveal data-reveal-delay="80">
+        <p>{about.intro.p1}</p>
+        <p>{about.intro.p2}</p>
+        <h3>{about.intro.todayTitle}</h3>
+        <p>{about.intro.p3}</p>
+        <p>{about.intro.p4}</p>
+        <p>{about.intro.p5}</p>
+        <p class="about-note">{about.transparency}</p>
+        <div class="about-actions">
+          <a href={projectsHref} class="btn-primary">{about.ctaProjects}</a>
+          <a href={profile.linkedin} class="btn-secondary" target="_blank" rel="noopener noreferrer">{about.ctaLinkedin}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {hasProductDecision && (
+    <section class="about-block" aria-labelledby="decision-heading">
+      <div class="container about-block__grid">
+        <h2 id="decision-heading" class="about-block__title" data-reveal>{productDecision.title}</h2>
+        <dl class="about-decision" data-reveal data-reveal-delay="80">
+          {productDecision.context && <div><dt>{productDecision.contextLabel}</dt><dd>{productDecision.context}</dd></div>}
+          {productDecision.decision && <div><dt>{productDecision.decisionLabel}</dt><dd>{productDecision.decision}</dd></div>}
+          {productDecision.result && <div><dt>{productDecision.resultLabel}</dt><dd>{productDecision.result}</dd></div>}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  <!-- Timeline -->
+  <section class="about-block" aria-labelledby="timeline-heading">
+    <div class="container about-block__grid">
+      <div data-reveal>
+        <h2 id="timeline-heading" class="about-block__title">{about.timeline.title}</h2>
+        {about.timeline.showOverlapNote && <p class="section-lede">{about.timeline.overlapNote}</p>}
+      </div>
+      <ol class="timeline" data-reveal data-reveal-delay="80">
+        {about.timeline.items.map((item) => (
+          <li>
+            <p class="timeline__period">{item.period}</p>
+            <div>
+              <h3>{item.company}</h3>
+              <p class="timeline__role">{item.role}</p>
+              <p class="timeline__desc">{item.description}</p>
+              {item.highlight && <p class="timeline__role">{item.highlight}</p>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Where I work -->
+  <section class="about-block" aria-labelledby="focus-heading">
+    <div class="container about-block__grid">
+      <h2 id="focus-heading" class="about-block__title" data-reveal>{about.focus.title}</h2>
+      <div class="focus-grid" data-reveal data-reveal-delay="80">
+        {[about.focus.productStrategy, about.focus.aiProducts, about.focus.technicalProduct, about.focus.experimentation].map((item) => (
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Toolkit -->
+  <section class="about-block" aria-labelledby="toolkit-heading">
+    <div class="container about-block__grid">
+      <h2 id="toolkit-heading" class="about-block__title" data-reveal>{about.toolkit.title}</h2>
+      <div class="toolkit" data-reveal data-reveal-delay="80">
+        {about.toolkit.groups.map((group) => (
+          <div>
+            <h3>{group.category}</h3>
+            <ul role="list">
+              {group.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact: the dark stage again -->
+  <section class="section field-ink contact-stage" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="contact-stage__inner" data-reveal>
+        <h2 id="contact-heading" class="contact-stage__title">{contact.title}</h2>
+        <p class="section-lede">{contact.subtitle}</p>
+        <div class="contact-stage__actions">
+          <a href={profile.linkedin} class="btn-primary" target="_blank" rel="noopener noreferrer">
+            {contact.ctaLinkedin}
+          </a>
+          <EmailReveal
+            locale={locale}
+            buttonLabel={contact.showEmail}
+            revealedLabel={contact.emailRevealedLabel}
+            ariaLabel={contact.emailAriaLabel}
+          />
+          <a
+            href={cvHref}
+            download
+            aria-label={isPt ? 'Baixar currículo em PDF' : 'Download resume as PDF'}
+            class="btn-secondary"
+          >
+            {contact.ctaCV}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

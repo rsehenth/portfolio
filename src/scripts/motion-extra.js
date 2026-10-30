@@ -3,7 +3,6 @@
    run inside [data-view], where [data-reveal] is forced visible with !important. */
 
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const finePointer = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 /* One observer registry and one scroll pipeline for the whole page, so
    navigating with view transitions cannot accumulate listeners or rAF loops. */
@@ -51,7 +50,7 @@ function onScroll(task) {
 
 /* ── 2. Home process rail ───────────────────────────────────────────── */
 function initHomeProcess() {
-  const ol = document.querySelector('.home-process ol');
+  const ol = document.querySelector('ol.home-process');
   if (!ol || ol.dataset.fxInit) return;
   ol.dataset.fxInit = '1';
 
@@ -67,27 +66,6 @@ function initHomeProcess() {
       ol.style.setProperty('--process-p', String((i + 1) / steps.length));
     },
     { threshold: 0.4, rootMargin: '0px 0px -12% 0px' }
-  );
-}
-
-/* ── 3. About trajectory rail ───────────────────────────────────────── */
-function initTimeline() {
-  const ol = document.querySelector('[data-fx-timeline]');
-  if (!ol || ol.dataset.fxInit) return;
-  ol.dataset.fxInit = '1';
-
-  const items = [...ol.children];
-  if (!items.length) return;
-
-  ol.style.setProperty('--timeline-p', '0');
-
-  onceInView(
-    items,
-    (el) => {
-      const i = items.indexOf(el);
-      ol.style.setProperty('--timeline-p', String((i + 1) / items.length));
-    },
-    { threshold: 0.5, rootMargin: '0px 0px -25% 0px' }
   );
 }
 
@@ -134,58 +112,6 @@ function initPillarCards() {
   );
 }
 
-/* ── 5. Featured card tilt ──────────────────────────────────────────── */
-function initProjectTilt() {
-  if (!finePointer()) return;
-
-  for (const card of document.querySelectorAll('.project-card--featured, .home-featured .card')) {
-    if (card.dataset.fxTilt) continue;
-    card.dataset.fxTilt = '1';
-
-    const MAX = 3;
-    let raf = 0;
-    let nx = 0;
-    let ny = 0;
-
-    const apply = () => {
-      raf = 0;
-      card.style.transform =
-        `perspective(900px) rotateX(${((0.5 - ny) * 2 * MAX).toFixed(3)}deg) ` +
-        `rotateY(${((nx - 0.5) * 2 * MAX).toFixed(3)}deg)`;
-    };
-
-    const move = (event) => {
-      const rect = card.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
-      nx = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
-      ny = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
-      if (!raf) raf = requestAnimationFrame(apply);
-    };
-
-    const reset = () => {
-      if (raf) {
-        cancelAnimationFrame(raf);
-        raf = 0;
-      }
-      card.style.transform = '';
-    };
-
-    card.addEventListener('pointermove', move);
-    card.addEventListener('pointerleave', reset);
-  }
-}
-
-/* ── 6. Project card logo reveal ────────────────────────────────────── */
-function initProjectLogos() {
-  const logos = [...document.querySelectorAll('.project-card__logo')];
-  if (!logos.length) return;
-  onceInView(
-    logos,
-    (el) => el.classList.add('is-in'),
-    { threshold: 0.3 }
-  );
-}
-
 /* ── 7. Scroll progress bar ─────────────────────────────────────────── */
 function initScrollProgress() {
   const fill = document.querySelector('[data-fx-progress]');
@@ -204,10 +130,7 @@ export function initMotionExtra() {
   resetMotionState();
 
   initHomeProcess();
-  initTimeline();
   initPillarCards();
-  initProjectTilt();
-  initProjectLogos();
   initScrollProgress();
 }
 

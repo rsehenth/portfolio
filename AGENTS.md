@@ -13,6 +13,7 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 - `src/content/config.ts`: schema Zod, o contrato do frontmatter.
 - `src/i18n/ui.ts`: textos de UI, editorial da Home (`homeProjects`), seções do /projects (`projectsPage.sections`) e tradução do enum de status. Os blocos PT e EN são espelhados no mesmo objeto: edite sempre os dois.
 - `src/lib/projects.ts`: `SECTION_ORDER`, ordenação (`order`, depois `year`), filtro de `draft`, URLs.
+- `src/styles/site.css`: o sistema visual (tokens, `.field-ink`, Home, case, Sobre). `global.css` só tem a base Tailwind (botões, prose, tag). Não crie um terceiro lugar para tokens. Ver `DESIGN.md`.
 
 ## 2. Quero mexer em… → onde
 
@@ -20,14 +21,17 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 |---|---|
 | Dados de um projeto (texto, status, métricas, seção, ordem) | `src/content/projects/<slug>/pt-BR.mdx` **e** `en.mdx` |
 | Campos permitidos / obrigatórios | `src/content/config.ts`; template de card `docs/project-template-card.mdx` ou de case `docs/project-template.mdx` |
-| Visual do card do /projects | `src/components/ProjectCard.astro` |
-| Seções do /projects (variante do card, nº de colunas) | `src/components/ProjectsIndex.astro` (`variantFor`, `gridClass`: 1 item = coluna única; 2 ou 4 = 2 colunas desde 768px; 3 ou 5+ = 3 colunas desde 1200px. O 4 vira grade 2×2 justamente para não deixar trio + card órfão) |
+| Visual do card do /projects | `src/components/ProjectCard.astro` (capa 16:10, status, título, descrição, números; `tags` não aparecem no card) |
+| Seções do /projects (variante do card, layout por nº de itens) | `src/components/ProjectsIndex.astro` (`variantFor`, `layout`) e `src/components/ProjectsSection.astro`. A página abre num palco escuro com título + seção `featured`. Por nº de itens: 1 = linha larga (imagem ao lado do texto); 2 = duas colunas; 3 = linha larga de abertura + duas colunas; 4 = 2×2; 5+ = três colunas. Linhas largas alternam o lado da imagem. `discovery` e `archived` usam o fundo suave. |
+| Imagem de projeto sem `cover` | `src/components/ProjectPlate.astro`: emblema 16:10 por chave de projeto (`marks`), na cor do status. Chave desconhecida cai nas iniciais. Para um projeto novo, desenhe a marca ali ou adicione um `cover` real |
 | Título/subtítulo de uma seção | `src/i18n/ui.ts` → `projectsPage.sections` (PT e EN) |
 | Ordem das seções | `SECTION_ORDER` (`projects.ts`) **e** `projectsPage.sections` (PT e EN) **e** enum `projectSection` (`config.ts`) |
-| Card de projeto na Home | `featuredOrder` (`src/components/HomePage.astro`, 3 cards) + `homeProjects.projects.<slug>` (`ui.ts`, PT e EN) |
+| Card de projeto na Home | `featuredOrder` (`src/components/HomePage.astro`, 3 linhas alternadas) + `homeProjects.projects.<slug>` (`ui.ts`, PT e EN) + `cover:` do projeto |
+| Imagens do hero da Home | `hero.visual` em `ui.ts` (PT e EN), ligado a `src/components/Hero.astro` |
+| Página Sobre | `src/components/AboutPage.astro` (as rotas `about.astro` e `en/about.astro` só chamam o componente) |
 | Página de case | `src/layouts/CaseLayout.astro` e `src/pages/**/projects/[slug].astro` |
 | Componentes usáveis no corpo do MDX | mapa de componentes em `src/pages/projects/[slug].astro`, `src/pages/en/projects/[slug].astro` e `src/components/index.ts` (ligado em `astro.config.mjs`) |
-| Slot de mídia ainda sem arquivo (case em desenvolvimento) | `src/components/MediaSlot.astro` (registrado nos 3 lugares da armadilha 16); mostra uma linha compacta de "prévia a caminho" quando o arquivo não existe em `public/`. Caminhos previstos por case ficam em `public/projects/README.md` |
+| Slot de mídia ainda sem arquivo (case em desenvolvimento) | `src/components/MediaSlot.astro` (registrado nos 3 lugares da armadilha 16); mostra uma linha compacta de "prévia a caminho" quando o arquivo não existe em `public/`. Caminhos previstos por case ficam em `docs/media-slots.md` |
 | Anterior/Próximo entre cases | `src/components/CaseNavigation.astro` (usa a ordenação de `projects.ts`) |
 | Seletor Resumo/Case completo | `docs/case-views.md` |
 
@@ -46,17 +50,17 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 **a) Projeto novo com case (só nesse caso use o completo):** `docs/project-template.mdx`. O padrão para projeto novo é o mínimo `docs/project-template-card.mdx`, que é só para card, sem case.
 1. Copie o template para `src/content/projects/<slug>/pt-BR.mdx` e duplique para `en.mdx`, com os **mesmos campos estruturais**.
 2. `locale` igual ao nome do arquivo. `section` e `cardBadge` são obrigatórios.
-3. `logo`/`cover` só se o arquivo existir em `public/projects/<slug>/` (nos dois arquivos).
+3. `logo`/`cover` só se o arquivo existir em `public/projects/<slug>/` (nos dois arquivos). `cover`: captura real em 16:10 (ex.: 1600×1000, `.webp`, ~100–350 KB), usada na Home, no /projects e no topo do case. `logo`: 256×256. Sem `cover`, o card do /projects mostra um bloco com o logo ou as iniciais.
 4. Rode o build e confira `/projects/`, `/projects/<slug>/` e `/en/projects/<slug>/`.
 
-**b) Projeto sem case (padrão):** copie `docs/project-template-card.mdx` — só campos de card, com `noCase: true` e nenhum campo de case (R3 derruba o build). Exemplo real: `project-chat`. Nunca ponha um projeto `noCase` em `featuredOrder` (o card da Home sempre linka).
+**b) Projeto sem case (padrão):** copie `docs/project-template-card.mdx` — só campos de card, com `noCase: true` e nenhum campo de case (R3 derruba o build). Hoje nenhum projeto publicado usa `noCase`; o template continua valendo para o próximo card isolado. Nunca ponha um projeto `noCase` em `featuredOrder` (o card da Home sempre linka).
 
 **c) Mudar status:** veja §4. Altere todos os campos relevantes, nos dois idiomas.
 
 **d) Métricas, highlights, tags**
 - Números do card: `metrics` com `state: verified` e `display: figure`, **máx. 3** (a 4ª derruba o build — R1). `needs_confirmation` e `hidden` não renderizam, de propósito.
 - `display: text` não vira número: duplique o texto à mão em `cardHighlights`.
-- `demonstrates`: 3 visíveis no card. `tags`: 3 no card, todas no case.
+- `demonstrates`: 3 visíveis no card, só quando o projeto não tem `cardHighlights`. `tags`: só no case (coluna lateral "Temas").
 - `metrics` é só do card. O case usa `snapshot`, `scaleMetrics` e `productMetrics`.
 - Home: `highlights` (máx. 2) e `focus` (máx. 3) em `homeProjects`, **sem** o filtro `verified`: escreva só o que já está verificado.
 
@@ -64,11 +68,11 @@ Se este arquivo e o código divergirem, **o código vale**: avise e corrija este
 
 **f) Mover de seção:** `section` nos dois MDX. `archived` usa a variante compacta e `featured` a grande (`variantFor`). Seção que fica vazia some da página. O Anterior/Próximo muda.
 
-**g) Seção nova (4 pontos obrigatórios):** enum `projectSection` (`config.ts`) → `SECTION_ORDER` (`projects.ts`) → `projectsPage.sections` PT → idem EN. Opcional: `variantFor`/`gridClass` em `ProjectsIndex.astro`.
+**g) Seção nova (4 pontos obrigatórios):** enum `projectSection` (`config.ts`) → `SECTION_ORDER` (`projects.ts`) → `projectsPage.sections` PT → idem EN. Opcional: `variantFor`/`layout` em `ProjectsIndex.astro` e `ProjectsSection.astro`.
 Se faltar em qualquer lugar, o **P4** derruba o `npm run check:content`; sem a checagem, a seção ordena antes de todas e os projetos somem do /projects.
 
 **h) Destaque na Home**
-1. `featuredOrder` em `HomePage.astro` (hoje 3 chaves: ProfResolve, Super Squad AI, CLT Simulator). Todos saem na mesma grade, em `variant="hero"`: coluna única abaixo de 768px, o primeiro card ocupa a linha inteira e os outros dois ficam lado a lado entre 768 e 1279px, e as três colunas equilibradas entram a partir de 1280px (`md:col-span-2 xl:col-span-1` no primeiro).
+1. `featuredOrder` em `HomePage.astro` (hoje 3 chaves: ProfResolve, Super Squad AI, CLT Simulator). Cada destaque é uma linha: imagem (`cover`, 16:10) de um lado e texto do outro, alternando a partir de 900px; abaixo disso, imagem sobre texto.
 2. `homeProjects.projects.<slug>` em `ui.ts`, PT e EN (`category`, `description`, `highlights`, `focus`).
 Isso é independente de `section: featured` (que só afeta o /projects). Chave sem entrada em `homeProjects` deixa a célula vazia — hoje é erro (**P6**).
 
@@ -79,7 +83,7 @@ Isso é independente de `section: featured` (que só afeta o /projects). Chave s
 | Ativo | Active | `active` | ProfResolve |
 | Em desenvolvimento | In development | `development` | CultoOS |
 | Funcional (rótulos compostos: "Funcional · Protótipo") | Working ("Working · Prototype") | `functional` | Mosaic, Universal Docs |
-| Em discovery | In discovery | `discovery` | Project Stream |
+| Em discovery | In discovery | `discovery` | AI Command Center |
 | Arquivado | Archived | `archived` | Cripto Host |
 | Ferramenta de uso próprio | Own-use tool | `development` | Super Squad AI |
 | Concluído | Completed | via `toneFallback` | (nenhum hoje) |

@@ -1,0 +1,145 @@
+---
+// ProjectsSection.astro - one section of the /projects listing (header + its cards).
+import ProjectCard from '@/components/ProjectCard.astro';
+import { projectKey, type ProjectEntry } from '@/lib/projects';
+import type { Locale } from '@/i18n';
+
+type CardVariant = 'default' | 'featured' | 'compact' | 'wide';
+
+interface Props {
+  id: string;
+  title: string;
+  subtitle: string;
+  entries: ProjectEntry[];
+  /** Per-project card variant and flip, decided by the page from section sizes. */
+  layout: Record<string, { variant: CardVariant; reverse: boolean }>;
+  /** Sits on the soft tonal step instead of the page ground. */
+  soft?: boolean;
+  /** First block under the page title on the dark stage: tighter top padding. */
+  opening?: boolean;
+  locale?: Locale;
+}
+
+const { id, title, subtitle, entries, layout, soft = false, opening = false, locale = 'pt-BR' } = Astro.props;
+
+const isCompact = entries.every((project) => layout[projectKey(project)]?.variant === 'compact');
+const count = entries.length;
+const gridClass =
+  count >= 5
+    ? 'projects-grid projects-grid--3'
+    : count === 1
+      ? 'projects-grid projects-grid--1'
+      : 'projects-grid projects-grid--2';
+---
+
+<section
+  aria-labelledby={`${id}-heading`}
+  class:list={['projects-section', soft && 'projects-section--soft', opening && 'projects-section--opening']}
+>
+  <div class="container">
+    <header class="projects-section__header">
+      <h2 id={`${id}-heading`} class="projects-section__title">{title}</h2>
+      <p class="projects-section__subtitle">{subtitle}</p>
+    </header>
+
+    {isCompact ? (
+      <div class="projects-section__list">
+        {entries.map((project, itemIndex) => (
+          <div id={`project-${projectKey(project)}`} class="projects-anchor" data-reveal data-reveal-delay={String((itemIndex % 3) * 60)}>
+            <ProjectCard project={project} locale={locale} variant="compact" headingLevel={3} />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class={gridClass}>
+        {entries.map((project, itemIndex) => {
+          const { variant, reverse } = layout[projectKey(project)];
+          return (
+            <div
+              id={`project-${projectKey(project)}`}
+              class:list={['projects-anchor', variant === 'wide' && count > 1 && 'projects-lead']}
+              data-reveal
+              data-reveal-delay={String((itemIndex % 3) * 60)}
+            >
+              <ProjectCard project={project} locale={locale} variant={variant} reverse={reverse} headingLevel={3} />
+            </div>
+          );
+        })}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    padding-block: clamp(4rem, 8vw, 6.5rem);
+  }
+
+  /* Alternating ground: dark stage, page, soft step, page, soft step */
+  .projects-section--soft {
+    background: rgb(var(--color-muted-rgb));
+  }
+
+  /* Directly under the page title on the stage: the featured pair starts at once. */
+  .projects-section--opening {
+    padding-block: 0 clamp(4.5rem, 9vw, 7.5rem);
+  }
+
+  .projects-section--opening .projects-section__header {
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .projects-anchor { scroll-margin-top: 6.5rem; }
+
+  .projects-section__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 3rem;
+    margin-bottom: clamp(2.25rem, 4.5vw, 3.5rem);
+  }
+
+  .projects-section__title {
+    margin: 0;
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .projects-section__subtitle {
+    max-width: 28rem;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  /* Grids: 1 → one wide row · 2/3/4 → two columns (a 3-section's lead spans both) · 5+ → three columns */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3.5rem 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .projects-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .projects-lead { grid-column: 1 / -1; }
+  }
+
+  @media (min-width: 1200px) {
+    .projects-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  /* Archived section: compact rows with a small plate */
+  .projects-section__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgb(var(--color-border-rgb));
+  }
+
+  .projects-section__list > div {
+    border-bottom: 1px solid rgb(var(--color-border-rgb));
+  }
+</style>

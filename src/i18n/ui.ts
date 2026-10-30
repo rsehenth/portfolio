@@ -57,6 +57,27 @@ export const ui = {
         { value: '2 estágios', label: 'Verificação / Super Squad AI' },
         { value: 'PT · EN · ES', label: 'Idiomas de trabalho' },
       ],
+      // Real product imagery shown in the hero stage; both link to their cases.
+      visual: {
+        main: {
+          src: '/projects/profresolve/cover.webp',
+          width: 1500,
+          height: 938,
+          title: 'ProfResolve',
+          caption: 'Painel do produto em produção',
+          alt: 'Captura do painel do ProfResolve com os geradores de materiais pedagógicos',
+          href: '/projects/profresolve/',
+        },
+        side: {
+          src: '/projects/super-squad-ai/cover.webp',
+          width: 1672,
+          height: 1045,
+          title: 'Super Squad AI',
+          caption: 'Arquitetura Leader + Workers',
+          alt: 'Diagrama da arquitetura do Super Squad AI, com líder, orquestrador e workers especializados',
+          href: '/projects/super-squad-ai/',
+        },
+      },
     },
 
     // Selected Work section
@@ -165,7 +186,7 @@ export const ui = {
         {
           id: 'discovery',
           title: 'Em discovery',
-          subtitle: 'Pesquisa inicial e hipótese definidas; o desenvolvimento ainda não começou.',
+          subtitle: 'Projetos em definição e validação: escopo, arquitetura e próximos passos explícitos, do conceito à produção inicial.',
         },
         {
           id: 'tools',
@@ -339,6 +360,7 @@ export const ui = {
 
     // Case study page
     caseStudy: {
+      year: 'Ano',
       role: 'Papel',
       product: 'Produto',
       focus: 'Foco',
@@ -443,6 +465,27 @@ export const ui = {
         { value: '2 stages', label: 'Verification / Super Squad AI' },
         { value: 'PT · EN · ES', label: 'Working languages' },
       ],
+      // Real product imagery shown in the hero stage; both link to their cases.
+      visual: {
+        main: {
+          src: '/projects/profresolve/cover.webp',
+          width: 1500,
+          height: 938,
+          title: 'ProfResolve',
+          caption: 'Product dashboard in production',
+          alt: 'Screenshot of the ProfResolve dashboard with its pedagogical material generators',
+          href: '/en/projects/profresolve/',
+        },
+        side: {
+          src: '/projects/super-squad-ai/cover.webp',
+          width: 1672,
+          height: 1045,
+          title: 'Super Squad AI',
+          caption: 'Leader + Workers architecture',
+          alt: 'Super Squad AI architecture diagram showing the leader, orchestrator and specialised workers',
+          href: '/en/projects/super-squad-ai/',
+        },
+      },
     },
 
     // Selected Work section
@@ -551,7 +594,7 @@ export const ui = {
         {
           id: 'discovery',
           title: 'In discovery',
-          subtitle: 'Initial research and a defined hypothesis; development has not started yet.',
+          subtitle: 'Projects in definition and validation: explicit scope, architecture and next steps, from concept to early production.',
         },
         {
           id: 'tools',
@@ -725,6 +768,7 @@ export const ui = {
 
     // Case study page
     caseStudy: {
+      year: 'Year',
       role: 'Role',
       product: 'Product',
       focus: 'Focus',

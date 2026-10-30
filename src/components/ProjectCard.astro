@@ -3,20 +3,21 @@
 // Case pages never render this component (only the MDX registry exposes it),
 // so every field below marked "listing-only" stays out of the case studies.
 import { ui, statusLabel, type Locale } from '@/i18n';
-import { caseUrl, projectKey, verifiedOnly, type ProjectEntry } from '@/lib/projects';
-
-type BadgeTone = 'active' | 'development' | 'functional' | 'discovery' | 'archived';
+import ProjectPlate from '@/components/ProjectPlate.astro';
+import { badgeToneOf, caseUrl, projectKey, verifiedOnly, type ProjectEntry } from '@/lib/projects';
 
 interface Props {
   project: ProjectEntry;
-  variant?: 'default' | 'featured' | 'compact';
+  variant?: 'default' | 'featured' | 'compact' | 'wide';
+  /** Wide rows only: put the image on the right. */
+  reverse?: boolean;
   class?: string;
   locale?: Locale;
   /** Heading level for the card title (2 under a page h1, 3 under a section h2) */
   headingLevel?: 2 | 3;
 }
 
-const { project, variant = 'default', class: className = '', locale = 'pt-BR', headingLevel = 3 } = Astro.props;
+const { project, variant = 'default', reverse = false, class: className = '', locale = 'pt-BR', headingLevel = 3 } = Astro.props;
 const { data } = project;
 const {
   title,
@@ -27,9 +28,7 @@ const {
   statusBadge,
   cardBadge,
   cardHighlights,
-  logo,
-  logoPosition,
-  tags,
+  cover,
   metrics,
   demonstrates,
 } = data;
@@ -41,57 +40,26 @@ const noCase = data.noCase ?? false;
 const isCompact = variant === 'compact';
 const TitleTag = headingLevel === 2 ? 'h2' : 'h3';
 
-// Status badge — colored dot + text, never color alone. Falls back to the
+// Status: text colour by tone, never colour alone. Falls back to the
 // frontmatter badge / localized status when a project has no listing badge.
-const toneFallback: Record<string, BadgeTone> = {
-  Active: 'active',
-  Completed: 'archived',
-  Archived: 'archived',
-  Discovery: 'discovery',
-};
 const badgeLabel = cardBadge?.label ?? statusBadge ?? statusLabel(locale, status);
-const badgeTone: BadgeTone = cardBadge?.tone ?? toneFallback[status] ?? 'archived';
+const badgeTone = badgeToneOf(data);
 
-// Metrics: max 3 numeric/short values in ONE row (3-column grid).
+// Metrics: max 3 numeric/short values in ONE row.
 // `display: 'text'` values are words — they go to the highlights line instead,
 // so they never render with the big-number treatment.
 const cardMetrics = verifiedOnly(metrics).filter((metric) => metric.display !== 'text').slice(0, 3);
 const highlights = cardHighlights ?? [];
-
-// "Demonstrates" list: max 3 items
 const demonstratesItems = demonstrates.slice(0, 3);
 
-// Tags: max 3 visible. Drop tags that repeat the subtitle category or a
-// "Demonstrates" item (no "+N" chips).
-const demonstratesSet = new Set(demonstrates.map((item) => item.toLowerCase()));
-const subtitleLower = (subtitle ?? '').toLowerCase();
-const cardTags = tags
-  .filter((tag) => {
-    const lower = tag.toLowerCase();
-    if (demonstratesSet.has(lower)) return false;
-    if (lower === 'technical product' && subtitleLower.includes('technical product')) return false;
-    return true;
-  })
-  .slice(0, 3);
-
-// Whether to clamp the description: only when there are metrics or highlights
-// (those push content down and need a fixed text height to keep footers aligned).
-// Without them the extra space is better used by the description itself.
-const clampDescription = cardMetrics.length > 0 || highlights.length > 0;
-
-// Logo fallback: an initials tile keeps the fixed logo slot aligned until the
-// real logo files arrive through the same `logo` prop.
-const words = title.trim().split(/\s+/);
-const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : [words[0]?.[0] ?? ''])
-  .join('')
-  .toUpperCase();
+const ctaLabel = work.viewCase.replace(/\s*→\s*$/, '');
 ---
 
 <article
   class:list={[
-    'card',
     'project-card',
     `project-card--${variant}`,
+    reverse && 'project-card--reverse',
     noCase && 'project-card--disabled',
     className,
   ]}
@@ -99,73 +67,46 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
 >
   {
     isCompact ? (
-      <div class="project-card__body project-card__body--compact">
-        <span class="project-card__meta">
-          <span class="project-card__badge" data-tone={badgeTone}>
-            <span class="project-card__dot" aria-hidden="true" />
-            {badgeLabel}
-          </span>
-          <time class="project-card__year" datetime={year.toString()}>
-            {year}
-          </time>
-        </span>
-
-        <TitleTag id={`project-${key}-title`} class="project-card__title project-card__title--compact">
-          {noCase ? (
-            <span>{title}</span>
+      <div class="project-card__row">
+        <div class="project-card__thumb">
+          {cover ? (
+            <img src={cover} alt="" width="1600" height="1000" loading="lazy" decoding="async" />
           ) : (
-            <a class="project-card__link" href={href}>
-              {title}
-            </a>
-          )}
-        </TitleTag>
-
-        <p class="project-card__description project-card__description--compact line-clamp-2">{description}</p>
-
-        <div class="project-card__cta-row">
-          {noCase ? (
-            <span class="project-card__cta project-card__cta--disabled" aria-disabled="true">
-              {work.caseSoon}
-            </span>
-          ) : (
-            <span class="project-card__cta">
-              {work.viewCase}
-              <svg class="project-card__cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
+            <ProjectPlate projectKey={key} title={title} tone={badgeTone} />
           )}
         </div>
+        <div class="project-card__row-main">
+          <TitleTag id={`project-${key}-title`} class="project-card__title project-card__title--compact">
+            {noCase ? (
+              <span>{title}</span>
+            ) : (
+              <a class="project-card__link" href={href}>
+                {title}
+              </a>
+            )}
+          </TitleTag>
+          <p class="project-card__description project-card__description--compact">{description}</p>
+        </div>
+        <p class="project-card__meta">
+          <span class="project-card__badge" data-tone={badgeTone}>{badgeLabel}</span>
+          <time datetime={year.toString()}>{year}</time>
+        </p>
       </div>
     ) : (
-      <div class="project-card__body">
-        <header class="project-card__header">
-          <div class="project-card__top">
-            <span class="project-card__meta">
-              <span class="project-card__badge" data-tone={badgeTone}>
-                <span class="project-card__dot" aria-hidden="true" />
-                {badgeLabel}
-              </span>
-              <time class="project-card__year" datetime={year.toString()}>
-                {year}
-              </time>
-            </span>
+      <>
+        <div class="project-card__media" aria-hidden="true">
+          {cover ? (
+            <img src={cover} alt="" width="1600" height="1000" loading="lazy" decoding="async" />
+          ) : (
+            <ProjectPlate projectKey={key} title={title} tone={badgeTone} />
+          )}
+        </div>
 
-            <div class="project-card__logo" aria-hidden="true">
-              {logo ? (
-                <img
-                  src={logo}
-                  alt=""
-                  class="project-card__logo-img"
-                  style={logoPosition ? `object-position: ${logoPosition}` : undefined}
-                  loading="lazy"
-                  draggable="false"
-                />
-              ) : (
-                <span class="project-card__logo-initials">{initials}</span>
-              )}
-            </div>
-          </div>
+        <div class="project-card__body">
+          <p class="project-card__meta">
+            <span class="project-card__badge" data-tone={badgeTone}>{badgeLabel}</span>
+            <time datetime={year.toString()}>{year}</time>
+          </p>
 
           <TitleTag id={`project-${key}-title`} class="project-card__title">
             {noCase ? (
@@ -178,47 +119,24 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
           </TitleTag>
 
           {subtitle && <p class="project-card__subtitle">{subtitle}</p>}
-        </header>
 
-        <p class:list={['project-card__description', variant !== 'featured' && clampDescription && 'line-clamp-3']}>
-          {description}
-        </p>
+          <p class="project-card__description">{description}</p>
 
-        {demonstratesItems.length > 0 && (
-          <p class="project-card__demonstrates">
-            <span class="project-card__label">{work.demonstrates}:</span>
-            {demonstratesItems.join(' · ')}
-          </p>
-        )}
-
-        {cardMetrics.length > 0 && (
-          <div
-            class="project-card__metrics"
-            style={`--metrics-n: ${cardMetrics.length}`}
-          >
-            {cardMetrics.map((metric) => (
-              <div class="project-card__metric">
-                <div class="project-card__metric-value">{metric.value}</div>
-                <div class="project-card__metric-label">{metric.label}</div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {highlights.length > 0 && (
-          <p class="project-card__highlights">
-            <span class="project-card__label">{work.highlights}:</span>
-            {highlights.join(' · ')}
-          </p>
-        )}
-
-        <footer class="project-card__footer">
-          {cardTags.length > 0 && (
-            <div class="project-card__tags">
-              {cardTags.map((tag) => (
-                <span class="tag">{tag}</span>
+          {cardMetrics.length > 0 && (
+            <dl class="project-card__metrics">
+              {cardMetrics.map((metric) => (
+                <div>
+                  <dt>{metric.value}</dt>
+                  <dd>{metric.label}</dd>
+                </div>
               ))}
-            </div>
+            </dl>
+          )}
+
+          {highlights.length > 0 && <p class="project-card__line">{highlights.join(' · ')}</p>}
+
+          {highlights.length === 0 && demonstratesItems.length > 0 && (
+            <p class="project-card__line project-card__line--soft">{demonstratesItems.join(' · ')}</p>
           )}
 
           <div class="project-card__cta-row">
@@ -228,419 +146,246 @@ const initials = (words.length > 1 ? words.slice(0, 2).map((word) => word[0]) : 
               </span>
             ) : (
               <span class="project-card__cta">
-                {work.viewCase}
-                <svg class="project-card__cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                {ctaLabel}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </span>
             )}
           </div>
-        </footer>
-      </div>
+        </div>
+      </>
     )
   }
 </article>
 
 <style>
-  /* ── Card shell ────────────────────────────────────────────────── */
   .project-card {
     position: relative; /* anchors the stretched title link */
     display: flex;
     flex-direction: column;
     height: 100%;
+    background: transparent;
   }
 
-  .project-card--disabled:hover {
-    border-color: rgb(var(--color-border-rgb));
-    box-shadow: none;
-  }
-
-  .project-card__body {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    padding: 1.5rem;
-  }
-
-  .project-card--featured .project-card__body {
-    padding: 1.75rem;
-  }
-
-  @media (min-width: 1024px) {
-    .project-card--featured .project-card__body {
-      padding: 2rem;
-    }
-  }
-
-  /* ── Meta row: status badge + year … logo ──────────────────────── */
-  .project-card__top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 0.875rem;
-  }
-
-  .project-card__meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    min-width: 0;
-  }
-
-  .project-card__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.25rem 0.625rem;
-    font-size: 0.75rem; /* 12px minimum */
-    line-height: 1.5;
-    font-weight: 500;
-    color: rgb(var(--color-muted-foreground-rgb));
-    background-color: rgb(var(--color-muted-rgb));
-    border: 1px solid rgb(var(--color-border-rgb));
-    border-radius: 999px;
-    --pc-tone: 78 93 108;
-    white-space: nowrap; /* badge text never wraps inside the pill */
-    flex-shrink: 0;      /* pill never shrinks; year wraps to next line instead */
-  }
-
-  .project-card__badge[data-tone='active'] {
-    --pc-tone: 22 101 52;
-  }
-  .project-card__badge[data-tone='development'] {
-    --pc-tone: 29 78 216;
-  }
-  .project-card__badge[data-tone='functional'] {
-    --pc-tone: 15 118 110;
-  }
-  .project-card__badge[data-tone='discovery'] {
-    --pc-tone: 146 64 14;
-  }
-  .project-card__badge[data-tone='archived'] {
-    --pc-tone: 78 93 108;
-  }
-
-  :global(.dark) .project-card__badge[data-tone='active'] {
-    --pc-tone: 74 222 128;
-  }
-  :global(.dark) .project-card__badge[data-tone='development'] {
-    --pc-tone: 96 165 250;
-  }
-  :global(.dark) .project-card__badge[data-tone='functional'] {
-    --pc-tone: 45 212 191;
-  }
-  :global(.dark) .project-card__badge[data-tone='discovery'] {
-    --pc-tone: 251 191 36;
-  }
-  :global(.dark) .project-card__badge[data-tone='archived'] {
-    --pc-tone: 174 184 196;
-  }
-
-  .project-card__dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 999px;
-    background-color: rgb(var(--pc-tone));
-    flex-shrink: 0;
-  }
-
-  .project-card__year {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    line-height: 1.5;
-    color: rgb(var(--color-muted-foreground-rgb));
-  }
-
-  /* ── Logo slot (fixed) + initials fallback ─────────────────────── */
-  .project-card__logo {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border: 1px solid rgb(var(--color-border-rgb));
-    border-radius: 0.75rem;
-    background-color: rgb(var(--color-muted-rgb));
-  }
-
-  .project-card--featured .project-card__logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 0.875rem;
-  }
-
-  .project-card__logo-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .project-card:hover .project-card__logo-img {
-    transform: scale(1.06);
-  }
-
-  .project-card__logo-initials {
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: rgb(var(--color-muted-foreground-rgb));
-  }
-
-  .project-card--featured .project-card__logo-initials {
-    font-size: 1.125rem;
-  }
-
-  /* ── Title (stretched link) ────────────────────────────────────── */
-  .project-card__title {
-    font-size: 1.375rem;
-    line-height: 1.3;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    overflow-wrap: break-word;
-  }
-
-  .project-card--featured .project-card__title {
-    font-size: clamp(1.5rem, 2.2vw, 1.875rem);
-    line-height: 1.25;
-  }
-
-  .project-card__title--compact {
-    font-size: 1.125rem;
-  }
-
-  .project-card__title :global(a) {
-    color: inherit;
-    text-decoration: none;
-    transition: color 150ms ease;
-  }
-
-  .project-card:hover .project-card__title :global(a) {
-    color: rgb(var(--color-accent-rgb));
-  }
-
-  /* Whole card clickable: the title link is stretched over the card */
-  .project-card__title :global(a)::after {
+  /* One stretched link makes the whole card clickable, with one tab stop. */
+  .project-card__link::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 1;
-    border-radius: inherit;
   }
 
-  .project-card__title :global(a):focus-visible {
-    outline: none;
-    box-shadow: none;
-  }
-
-  .project-card__title :global(a):focus-visible::after {
+  .project-card__link { color: inherit; text-decoration: none; }
+  .project-card__link:focus-visible { outline: none; }
+  .project-card:has(.project-card__link:focus-visible) {
     outline: 2px solid rgb(var(--color-accent-rgb));
-    outline-offset: -3px;
+    outline-offset: 6px;
   }
 
-  .project-card__subtitle {
-    margin-top: 0.25rem;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: rgb(var(--color-muted-foreground-rgb));
-    /* Reserve exactly 2 lines so cards in the same row start descriptions
-       at the same vertical position regardless of subtitle length */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  /* ── Media: every card gets a 16:10 slot, real cover or a quiet tile ── */
+  .project-card__media {
+    aspect-ratio: 16 / 10;
     overflow: hidden;
-    min-height: calc(2 * 0.875rem * 1.6); /* 2 lines × font-size × line-height */
+    background: rgb(var(--color-muted-rgb));
   }
 
-  /* ── Description / demonstrates / highlights ───────────────────── */
-  .project-card__description {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: rgb(var(--color-muted-foreground-rgb));
+  .project-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .project-card__description--compact {
-    flex: 1 1 14rem;
-    min-width: 0;
-    margin: 0;
-    font-size: 0.9375rem;
-    line-height: 1.6;
-  }
-
-  .project-card__demonstrates,
-  .project-card__highlights {
-    font-size: 0.75rem; /* 12px */
-    line-height: 1.6;
-    color: rgb(var(--color-muted-foreground-rgb));
-    margin-bottom: 1rem;
-  }
-
-  .project-card__label {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: rgb(var(--color-foreground-rgb));
-    margin-right: 0.25rem;
-  }
-
-  /* ── Metrics: dynamic columns (1–3), value never wraps ───────────── */
-  .project-card__metrics {
-    display: grid;
-    /* Columns = number of metrics (1, 2 or 3) set via --metrics-n */
-    grid-template-columns: repeat(var(--metrics-n, 3), minmax(0, 1fr));
-    gap: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgb(var(--color-border-rgb));
-  }
-
-  .project-card__metric-value {
-    /* clamp: shrinks at 320px with 3 metrics, keeps full size on wider cards */
-    font-size: clamp(0.9rem, 1.5vw + 0.35rem, 1.25rem);
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    color: rgb(var(--color-foreground-rgb));
-    white-space: nowrap; /* value must never wrap to a second line */
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .project-card--featured .project-card__metric-value {
-    font-size: clamp(1rem, 1.8vw + 0.35rem, 1.375rem);
-  }
-
-  @media (min-width: 768px) {
-    .project-card--featured .project-card__metric-value {
-      font-size: clamp(1.25rem, 2vw + 0.25rem, 1.75rem);
+  @media (hover: hover) {
+    .project-card:hover .project-card__media img {
+      transform: scale(1.03);
     }
   }
 
-  .project-card__metric-label {
-    margin-top: 0.125rem;
-    font-size: 0.75rem;
+  /* ── Body ──────────────────────────────────────────────────────── */
+  .project-card__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 0 0;
+  }
+
+  .project-card__meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.3;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  .project-card__meta time {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .project-card__badge {
+    font-weight: 700;
+    color: var(--tone, rgb(var(--color-muted-foreground-rgb)));
+  }
+
+  .project-card__badge[data-tone='active'] { --tone: var(--tone-active); }
+  .project-card__badge[data-tone='development'] { --tone: var(--tone-development); }
+  .project-card__badge[data-tone='functional'] { --tone: var(--tone-functional); }
+  .project-card__badge[data-tone='discovery'] { --tone: var(--tone-discovery); }
+  .project-card__badge[data-tone='archived'] { --tone: var(--tone-archived); }
+
+  .project-card__title {
+    margin: 0;
+    font-size: clamp(1.625rem, 2.2vw, 2.125rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: rgb(var(--color-foreground-rgb));
+  }
+
+  .project-card--featured .project-card__title {
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    letter-spacing: -0.035em;
+  }
+
+  .project-card__title--compact {
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .project-card__subtitle {
+    margin: -0.25rem 0 0;
+    font-size: 0.9375rem;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  .project-card__description {
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgb(var(--color-foreground-rgb) / 0.82);
+  }
+
+  .project-card--featured .project-card__description {
+    -webkit-line-clamp: 4;
+    font-size: 1.0625rem;
+  }
+
+  .project-card__metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2.25rem;
+    margin: 0.5rem 0 0;
+  }
+
+  .project-card__metrics dt {
+    font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: rgb(var(--color-foreground-rgb));
+  }
+
+  .project-card__metrics dd {
+    margin: 0.375rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    color: rgb(var(--color-muted-foreground-rgb));
+  }
+
+  .project-card__line {
+    margin: 0;
+    font-size: 0.875rem;
     line-height: 1.5;
     color: rgb(var(--color-muted-foreground-rgb));
   }
 
-  /* ── Footer: tags + CTA, pushed to the bottom as one block ─────── */
-  .project-card__footer {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgb(var(--color-border-rgb));
-  }
-
-  .project-card__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+  .project-card__line--soft { opacity: 0.9; }
 
   .project-card__cta-row {
-    display: flex;
-    align-items: center;
+    margin-top: auto;
+    padding-top: 0.75rem;
   }
 
   .project-card__cta {
     display: inline-flex;
     align-items: center;
-    gap: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 500;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
     color: rgb(var(--color-accent-rgb));
-    transition: color 150ms ease;
   }
 
-  .project-card__cta--disabled {
-    color: rgb(var(--color-muted-foreground-rgb));
-    cursor: default;
-    user-select: none;
-  }
-
-  .project-card__cta-arrow {
+  .project-card__cta svg {
     width: 1rem;
     height: 1rem;
-    transition: transform 150ms ease;
+    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .project-card:not(.project-card--disabled):hover .project-card__cta-arrow {
-    transform: translateX(4px);
+  @media (hover: hover) {
+    .project-card:hover .project-card__cta svg { transform: translateX(4px); }
   }
 
-  /* ── Compact variant (archived) ────────────────────────────────── */
-  .project-card__body--compact {
-    /* Mobile-first: stack vertically so description has full width */
+  .project-card__cta--disabled { color: rgb(var(--color-muted-foreground-rgb)); font-weight: 500; }
+
+  .project-card--disabled .project-card__media img { transform: none; }
+
+  /* ── Compact row (archived) ────────────────────────────────────── */
+  .project-card__row {
+    display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem 1.25rem;
+    gap: 0.75rem;
+    padding-block: 1.25rem;
   }
 
-  .project-card__body--compact .project-card__meta {
-    /* badge + year on one row */
-    flex-shrink: 0;
+  .project-card__thumb {
+    flex: none;
+    width: 6.5rem;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
   }
 
-  .project-card__body--compact .project-card__title {
-    margin-right: 0;
+  .project-card__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  .project-card__row-main { min-width: 0; }
+
+  .project-card__description--compact {
+    margin-top: 0.375rem;
+    -webkit-line-clamp: 2;
+    font-size: 0.9375rem;
   }
 
-  .project-card__body--compact .project-card__description--compact {
-    flex: unset;
-  }
-
-  .project-card__body--compact .project-card__cta-row {
-    flex-shrink: 0;
-  }
-
-  /* At 1024px+: switch to the original horizontal layout */
-  @media (min-width: 1024px) {
-    .project-card__body--compact {
+  @media (min-width: 768px) {
+    .project-card__row {
       flex-direction: row;
-      flex-wrap: wrap;
       align-items: center;
-      gap: 0.625rem 1rem;
+      gap: 1.75rem;
     }
+    .project-card__row-main { flex: 1; }
+    .project-card__row .project-card__meta { flex: none; }
+    .project-card__thumb { width: 8rem; }
+  }
 
-    .project-card__body--compact .project-card__title {
-      margin-right: auto;
+  /* ── Wide: a section with a single project, image beside text ──── */
+  @media (min-width: 900px) {
+    .project-card--wide {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: clamp(2.5rem, 5vw, 5rem);
+      align-items: center;
     }
+    .project-card--reverse { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+    .project-card--reverse .project-card__media { order: 2; }
+    .project-card--wide .project-card__body { padding: 0; }
+    .project-card--wide .project-card__title { font-size: clamp(2rem, 3.2vw, 3rem); letter-spacing: -0.035em; }
+    .project-card--wide .project-card__description { -webkit-line-clamp: 5; font-size: 1.0625rem; }
   }
-
-  /* Proof-sheet override: each project reads as an editorial plate. */
-  .project-card {
-    border-radius: 0;
-    border-color: rgb(var(--color-border-rgb));
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .project-card__body,
-  .project-card--featured .project-card__body {
-    padding: clamp(1.25rem, 2.5vw, 2.25rem);
-  }
-
-  .project-card__top { padding-bottom: .75rem; border-bottom: 1px solid rgb(var(--color-border-rgb)); }
-  .project-card__logo, .project-card--featured .project-card__logo { border-radius: 0; background: transparent; }
-  .project-card__badge { padding: 0; border: 0; border-radius: 0; background: transparent; font-family: var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
-  .project-card__title { margin-top: 1.65rem; font-size: clamp(1.85rem, 3vw, 3.15rem); line-height: .96; letter-spacing: -.04em; }
-  .project-card__subtitle { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; }
-  .project-card__description { margin-top: 1.25rem; }
-  .project-card__metrics { border-top: 1px solid rgb(var(--color-border-rgb)); border-bottom: 1px solid rgb(var(--color-border-rgb)); }
-  .project-card__metric + .project-card__metric { border-left-color: rgb(var(--color-border-rgb)); }
-  .project-card__metric-value { font-size: clamp(1.6rem, 2.5vw, 2.5rem); }
-  .project-card__footer { border-top-color: rgb(var(--color-border-rgb)); }
-  .project-card__cta { color: rgb(var(--color-foreground-rgb)); font-family: var(--font-mono); font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; }
-  .project-card:not(.project-card--disabled):hover .project-card__cta { color: rgb(var(--color-accent-rgb)); }
-  .project-card--compact .project-card__body { border-left: 1px solid rgb(var(--color-accent-rgb)); }
 </style>

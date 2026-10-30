@@ -93,17 +93,13 @@ const labels = ui[locale].theme;
     height: 2.75rem;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgb(var(--color-border-rgb));
-    border-radius: 0.5rem;
     color: rgb(var(--color-muted-foreground-rgb));
-    background-color: rgb(var(--color-background-rgb) / 0.56);
-    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+    background-color: transparent;
+    transition: color 150ms ease;
   }
 
   .theme-toggle:hover {
     color: rgb(var(--color-foreground-rgb));
-    border-color: rgb(var(--color-accent-rgb) / 0.35);
-    background-color: rgb(var(--color-muted-rgb) / 0.8);
   }
 
   .theme-toggle__icon {

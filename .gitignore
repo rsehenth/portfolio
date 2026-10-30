@@ -16,11 +16,25 @@ dist/
 .env.*
 !.env.example
 
+# Cloudflare local dev secrets
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
+# Local key material
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
 
 # Editor directories and files
 .vscode/
@@ -32,9 +46,25 @@ pnpm-debug.log*
 *.sw?
 .DS_Store
 Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
 
 # TypeScript
 *.tsbuildinfo
 
 # Cloudflare
 .wrangler/
+
+# Verificação e artefatos de QA de navegador
+.verify/
+.playwright-mcp/
+test-results/
+playwright-report/
+
+# Local tool permissions (per machine, never shipped or shared)
+.claude/settings.local.json
+
+# Local caches and temporary output
+.cache/
+coverage/
+*.tmp

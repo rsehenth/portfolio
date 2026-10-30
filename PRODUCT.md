@@ -27,13 +27,11 @@ Visitors arrive on desktop or mobile, often with limited time, and compare the h
 - Astro static site deployed to Cloudflare Pages, with Tailwind CSS and TypeScript.
 - PT-BR and English use duplicated route files; do not introduce `astro:i18n` or locale parameter routes.
 - Project content is source-controlled MDX; only verified metrics are published.
-- The current homepage (`/`) and every file it uses must remain unchanged during the `/home2` experiment.
-- `/home2` is a direct-access experimental route and must not be added to the public navigation.
 - The redesign must preserve real content, project routes, LinkedIn, email reveal, CV download, accessibility expectations, responsive behavior, and relevant functions.
 
 ## Brand Commitments
 
-Use Lucas Sehnem's real name, profile information, cases, verified claims, project assets, and Portuguese-first voice. The experimental route may adopt an independent visual identity; it must not imply invented clients, outcomes, metrics, or product claims.
+Use Lucas Sehnem's real name, profile information, cases, verified claims, project assets, and Portuguese-first voice. No page may imply invented clients, outcomes, metrics, screenshots, or product claims.
 
 ## Evidence on Hand
 
