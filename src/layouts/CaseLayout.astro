@@ -20,6 +20,8 @@ interface Props {
   description: string;
   seoTitle?: string;
   seoDescription?: string;
+  /** Per-case Open Graph image path (falls back to the site default) */
+  ogImage?: string;
   year: number;
   role: string;
   productType?: string;
@@ -72,6 +74,7 @@ const {
   description,
   seoTitle,
   seoDescription,
+  ogImage,
   year,
   role,
   productType,
@@ -119,6 +122,7 @@ const hasResults = !views && (scale.length > 0 || productImpact.length > 0);
   title={title}
   fullTitle={seoTitle}
   description={seoDescription || description}
+  ogImage={ogImage}
   canonical={canonical}
   locale={locale}
   {...rest}
