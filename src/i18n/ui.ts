@@ -7,7 +7,7 @@ export type Locale = 'pt-BR' | 'en';
 
 export const locales: Locale[] = ['pt-BR', 'en'];
 export const defaultLocale: Locale = 'pt-BR';
-const profresolveRole = 'COO & Co-founder | Product & Technical Lead';
+const profresolveRole = 'Co-founder & COO | Technical Product Manager';
 
 export const ui = {
   'pt-BR': {
@@ -248,11 +248,11 @@ export const ui = {
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
         productPathTitle: 'Como cheguei a produto',
-        p1: 'Minha trajetória em tecnologia começou perto dos usuários. Passei mais de cinco anos no ecossistema TRON DAO / DLive atuando com suporte, onboarding, localização e feedback em português, inglês e espanhol. Depois, na exchange espanhola Bit2Me e em projetos da Play9/NineBlocks, conectei comunidade, growth e produto, levando o que os usuários diziam para decisões de comunicação, discovery e backlog.',
+        p1: 'Minha trajetória em tecnologia começou perto dos usuários. No ecossistema TRON DAO / DLive, atuei em suporte, onboarding, localização e feedback; depois, colaborei em pesquisa, testes e evolução de produtos com equipes globais. Na Bit2Me e em projetos da Play9/NineBlocks, trabalhei com comunidade, pesquisa tecnológica e desenvolvimento de produto.',
         p2: 'Essa experiência me aproximou de produto. Na Cripto Host, atuei como Product Owner, cuidando de requisitos técnicos, pesquisa de infraestrutura e priorização junto à engenharia.',
         todayTitle: 'Hoje',
         p3: 'Hoje, como cofundador do ProfResolve, atuo do discovery à implementação técnica, cobrindo estratégia, roadmap, UX e monetização. Participei diretamente da construção da plataforma, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade.',
-        p4: 'O ProfResolve é um SaaS público. Hoje decido também com base no feedback de professores e nas evidências disponíveis no produto.',
+        p4: 'O ProfResolve tem mais de 1.200 usuários cadastrados organicamente e monetização ativa. Um survey aberto a mais de 100 professores e o feedback contínuo ajudam a orientar as prioridades do produto.',
         p5: 'Essa combinação de entendimento de usuário, visão de negócio e execução técnica é o que levo para a próxima equipe.',
       },
 
@@ -271,16 +271,15 @@ export const ui = {
       },
       timeline: {
         title: 'Trajetória',
-        showOverlapNote: false,
+        showOverlapNote: true,
         overlapNote: 'Alguns períodos se sobrepõem porque representam atuações simultâneas.',
-        // TODO(conteúdo): confirmar o texto antes de habilitar showOverlapNote.
         items: [
-          { period: '2026 – Presente', company: 'ProfResolve', role: profresolveRole, description: 'Cofundador e líder de produto de um SaaS de IA para professores.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
-          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requisitos e pesquisa de infraestrutura junto à engenharia.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
-          { period: '2019 – 2025 (5+ anos)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) e contratado direto TRON DAO (2023 – 2025).', highlight: undefined },
-          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Comunidade, conteúdo localizado e feedback do mercado brasileiro.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
-          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'Feedback de usuários, discovery, backlog e projetos Web3.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
-          { period: '2010 – Presente', company: 'YouTube / Independente', role: 'Content Creator across Multiple Channels', description: 'Estratégia de conteúdo, métricas e crescimento orgânico em múltiplos canais.', highlight: undefined },
+          { period: '2026 – Presente', company: 'ProfResolve', role: profresolveRole, description: 'Cofundador e líder de produto de um SaaS de IA para professores.', highlight: 'Mais de 1.200 usuários cadastrados organicamente e monetização ativa.' }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research', description: 'Backlog, requisitos e pesquisa de infraestrutura junto à engenharia.', highlight: 'Mais de 100 oportunidades de nodes pesquisadas; mais de 20 disponibilizadas comercialmente pela Cripto Host.' }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2019 – 2025 (5+ anos)', company: 'TRON DAO Ecosystem', role: 'Product Operations, Research & Growth | Web3', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) e contratado direto TRON DAO (2023 – 2025).', highlight: undefined },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Comunidade, conteúdo localizado e feedback do mercado brasileiro.', highlight: 'Comunidade Bitmeiros: mais de 10 mil membros orgânicos em menos de cinco meses.' }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Product Research, Discovery & Development | Web3 · Community Manager', description: 'Pesquisa tecnológica, whitepapers e colaboração no desenvolvimento de projetos Web3.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2010 – Presente', company: 'YouTube / Independente', role: 'Content Creator across Multiple Channels', description: 'Estratégia de conteúdo, métricas e crescimento orgânico em múltiplos canais.', highlight: 'Mais de 60 milhões de visualizações e 250 mil seguidores.' },
         ],
       },
 
@@ -656,11 +655,11 @@ export const ui = {
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
         productPathTitle: 'How I moved into product',
-        p1: 'I started out in technology close to the user. I spent more than five years in the TRON DAO / DLive ecosystem doing support, onboarding, localization and feedback in Portuguese, English and Spanish. Later, at the Spanish exchange Bit2Me and in Play9/NineBlocks projects, I connected community, growth and product, turning what users said into decisions on communication, discovery and backlog.',
+        p1: 'I started out in technology close to users. In the TRON DAO / DLive ecosystem, I worked in support, onboarding, localization and feedback; later, I collaborated with global teams on research, testing and product improvements. At Bit2Me and on Play9/NineBlocks projects, I worked across community, technology research and product development.',
         p2: 'That experience moved me closer to product. At Cripto Host, I worked as a Product Owner, handling technical requirements, infrastructure research and prioritization alongside engineering.',
         todayTitle: 'Today',
         p3: 'Today, as co-founder of ProfResolve, I work from discovery through technical implementation, covering strategy, roadmap, UX and monetization. I took a direct part in building the platform, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms.',
-        p4: 'ProfResolve is a public SaaS. I now also make decisions based on educator feedback and evidence available in the product.',
+        p4: 'ProfResolve has over 1,200 organically registered users and active monetization. A survey open to more than 100 teachers and ongoing user feedback help guide product priorities.',
         p5: 'This mix of user understanding, business sense and technical execution is what I bring to the next team.',
       },
 
@@ -679,16 +678,15 @@ export const ui = {
       },
       timeline: {
         title: 'Career path',
-        showOverlapNote: false,
+        showOverlapNote: true,
         overlapNote: 'Some periods overlap because they represent simultaneous work.',
-        // TODO(conteúdo): confirm copy before enabling showOverlapNote.
         items: [
-          { period: '2026 – Present', company: 'ProfResolve', role: profresolveRole, description: 'Co-founder and product lead for an AI SaaS for teachers.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
-          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research & Community Manager', description: 'Backlog, requirements and infrastructure research alongside engineering.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
-          { period: '2019 – 2025 (5+ years)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Internal Ecosystem Projects', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) and direct hire TRON DAO (2023 – 2025).', highlight: undefined },
-          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Community, localized content and feedback from the Brazilian market.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
-          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product & Web3 Projects', description: 'User feedback, discovery, backlog and Web3 projects.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
-          { period: '2010 – Present', company: 'YouTube / Independent', role: 'Content Creator across Multiple Channels', description: 'Content strategy, metrics and organic growth across multiple channels.', highlight: undefined },
+          { period: '2026 – Present', company: 'ProfResolve', role: profresolveRole, description: 'Co-founder and product lead for an AI SaaS for teachers.', highlight: 'Over 1,200 organically registered users and active monetization.' }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research', description: 'Backlog, requirements and infrastructure research alongside engineering.', highlight: 'Over 100 node opportunities researched; more than 20 made commercially available by Cripto Host.' }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2019 – 2025 (5+ years)', company: 'TRON DAO Ecosystem', role: 'Product Operations, Research & Growth | Web3', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) and direct hire TRON DAO (2023 – 2025).', highlight: undefined },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Community, localized content and feedback from the Brazilian market.', highlight: 'Bitmeiros community: over 10,000 organic members in under five months.' }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Product Research, Discovery & Development | Web3 · Community Manager', description: 'Technology research, whitepapers and collaboration on Web3 product development.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2010 – Present', company: 'YouTube / Independent', role: 'Content Creator across Multiple Channels', description: 'Content strategy, metrics and organic growth across multiple channels.', highlight: 'Over 60 million views and 250,000 followers.' },
         ],
       },
 
