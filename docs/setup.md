@@ -87,3 +87,11 @@ Não foram instalados serviços, MCPs, CLIs globais, dependências, hooks, SDKs 
 - A linha do tempo tem `highlight` opcional por item; `showOverlapNote` permanece `false` nos dois idiomas, portanto a nota não é publicada.
 - O contraste de `--color-accent` no tema claro foi ajustado para AA; os demais tokens e qualquer layout fora da About foram preservados.
 - Validação: `npm run build` aprovou `astro check`, `check-content` e a geração de 26 páginas.
+
+## Alinhamento da About com o CV — 1º de novembro de 2026
+
+- Critérios: alinhar trajetória e cargos ao novo CV em PT e EN, preservar a distinção entre pesquisa e lançamento e publicar apenas números informados no currículo.
+- Atualizados os destaques de ProfResolve, Cripto Host, Bit2Me e YouTube; a nota explica períodos simultâneos. O PDF português de download foi substituído pelo novo CV. O PDF inglês permanece anterior e precisa de atualização própria.
+- Pendente de confirmação: o CV descreve Decentralized Hosting como em desenvolvimento, enquanto o case afirma que a implementação da plataforma não começou. O case foi preservado.
+- Graphify: grafo estrutural criado e consultado; documentos, PDFs e imagens não passaram por extração semântica. `graphify update .` atualiza o código. O arquivo `.npmrc` foi ignorado como potencialmente sensível.
+- Validação: `npm run build` passou com 0 erros e 0 avisos, gerando 30 páginas; About, Home, projetos e case ProfResolve foram abertos nos dois idiomas em preview local.

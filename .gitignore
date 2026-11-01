@@ -68,3 +68,6 @@ playwright-report/
 .cache/
 coverage/
 *.tmp
+
+# Local Graphify index and generated reports
+graphify-out/
