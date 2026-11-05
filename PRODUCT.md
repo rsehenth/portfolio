@@ -8,7 +8,7 @@ web
 
 ## Users
 
-Primary visitors are recruiters and hiring managers evaluating Lucas Sehnem for Technical Product Manager and AI Products roles. They need to quickly establish his product judgment, technical range, verified evidence, and the depth of the work behind selected projects.
+Primary visitors are recruiters and hiring managers evaluating Lucas Sehnem for Product Manager and AI Products roles. They need to quickly establish his product judgment, technical range, verified evidence, and the depth of the work behind selected projects.
 
 ## Product Purpose
 
@@ -16,7 +16,7 @@ A bilingual, static professional portfolio that presents Lucas Sehnem's work acr
 
 ## Positioning
 
-The portfolio shows a Technical Product Manager who works from discovery and prioritization through hands-on implementation, using cases and only verified product evidence rather than generic capability claims.
+The portfolio shows a Product Manager who works from discovery and prioritization through hands-on implementation, using cases and only verified product evidence rather than generic capability claims.
 
 ## Operating Context
 

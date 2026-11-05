@@ -1,4 +1,4 @@
-# Lucas Sehnem — Technical Product Manager Portfolio
+# Lucas Sehnem — Product Manager Portfolio
 
 A static portfolio site built with **Astro**, **TypeScript**, **Tailwind CSS**, and **Chart.js**. Deployed on **Cloudflare Pages**.
 
@@ -250,9 +250,9 @@ All reusable content lives in **`src/data/profile.ts`**:
 ```ts
 export const profile = {
   name: 'Lucas Sehnem',
-  headline: 'Technical Product Manager',
+  headline: 'Product Manager',
   tagline: 'I build products at the intersection of AI, Product & Engineering.',
-  subheadline: 'Technical Product Manager focused on turning complex problems into simple, scalable products.',
+  subheadline: 'Product Manager focused on turning complex problems into simple, scalable products.',
   description: `Longer bio...`,
   email: 'lucas.sehnemb@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sehenth/',

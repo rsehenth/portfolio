@@ -95,3 +95,12 @@ Não foram instalados serviços, MCPs, CLIs globais, dependências, hooks, SDKs 
 - Pendente de confirmação: o CV descreve Decentralized Hosting como em desenvolvimento, enquanto o case afirma que a implementação da plataforma não começou. O case foi preservado.
 - Graphify: grafo estrutural criado e consultado; documentos, PDFs e imagens não passaram por extração semântica. `graphify update .` atualiza o código. O arquivo `.npmrc` foi ignorado como potencialmente sensível.
 - Validação: `npm run build` passou com 0 erros e 0 avisos, gerando 30 páginas; About, Home, projetos e case ProfResolve foram abertos nos dois idiomas em preview local.
+
+## Atualização da About com o CV — 3 de novembro de 2026
+
+- Fonte: `Lucas Sehnem - CV PM (BR).pdf`, idêntico (mesmo SHA-256) ao `public/lucas-cvpt.pdf` já versionado; nenhum PDF precisou ser substituído.
+- Título do site, metadados, hero e textos de contato passam de “Technical Product Manager” para “Product Manager” em PT e EN. O cargo do ProfResolve na linha do tempo foi preservado como “Co-founder & COO | Technical Product Manager” por decisão do dono.
+- About: a linha do tempo ganhou a DSC Investimentos (2017–2019); a introdução agora começa em 2017 e os cargos da TRON DAO, Bit2Me e Play9 foram alinhados ao CV.
+- `public/og-image.jpg`: apenas o subtítulo foi atualizado para “Product Manager”, mantendo título, tagline e composição originais.
+- Validação: `npm run build` aprovou `astro check`, `check:content` e gerou 30 páginas; `/about/`, `/en/about/` e a Home foram conferidos no `dist/`.
+- Resumo da About reescrito a partir do resumo do CV (produto desde 2017, DSC como ponto de partida) e item da DSC na linha do tempo ampliado com backtesting, validação de estratégias e KPIs.
