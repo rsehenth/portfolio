@@ -31,7 +31,7 @@ export const ui = {
 
     // Hero
     hero: {
-      badge: 'Technical Product Manager / Sistemas, Produto, IA',
+      badge: 'Product Manager / Sistemas, Produto, IA',
       headlineBefore: 'Do problema ao produto.',
       headlineAccent: 'Da estratégia',
       headlineAfter: 'à execução.',
@@ -168,7 +168,7 @@ export const ui = {
     projectsPage: {
       title: 'Projetos',
       subtitle: 'Produtos de IA e sistemas técnicos, do discovery à execução. Comece pelos dois destaques.',
-      description: 'Portfólio de produtos construídos e entregues por Lucas Sehnem, Technical Product Manager.',
+      description: 'Portfólio de produtos construídos e entregues por Lucas Sehnem, Product Manager.',
       empty: 'Nenhum projeto publicado ainda. Volte em breve!',
       // Sections shown on /projects, in display order.
       // Membership comes from each project's frontmatter `section` field.
@@ -234,22 +234,22 @@ export const ui = {
 
       // SEO meta exclusive to About — not the site-wide siteDescription
       meta: {
-        title: 'Sobre | Lucas Sehnem · Technical Product Manager',
-        description: 'Trajetória de Lucas Sehnem entre usuários, produto e tecnologia, com experiência em AI Products, Technical Product, discovery, estratégia e execução hands-on.',
+        title: 'Sobre | Lucas Sehnem · Product Manager',
+        description: 'Trajetória de Lucas Sehnem entre usuários, produto e tecnologia, com experiência em AI Products, gestão de produto, discovery, estratégia e execução hands-on.',
       },
 
       // bio.* — three-paragraph home excerpt; the last sentence carries the localized link to the About page (rendered via set:html in HomePage.astro)
       bio: {
         p1: 'Trabalho de forma hands-on entre produto e tecnologia, atuando diretamente com desenvolvimento, IA, APIs, arquitetura, automações e prototipação para transformar decisões de produto em soluções reais.',
         p2: 'Meu trabalho não termina na definição do que construir. Busco entender as implicações técnicas, os trade-offs e o caminho mais eficiente para transformar uma decisão de produto em valor real para o usuário.',
-        p3: 'Hoje sou Technical Product Manager e cofundador do ProfResolve. A história completa está na <a href="/about/">página Sobre</a>.',
+        p3: 'Hoje sou Product Manager e cofundador do ProfResolve. A história completa está na <a href="/about/">página Sobre</a>.',
       },
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
         productPathTitle: 'Como cheguei a produto',
-        p1: 'Minha trajetória em tecnologia começou perto dos usuários. No ecossistema TRON DAO / DLive, atuei em suporte, onboarding, localização e feedback; depois, colaborei em pesquisa, testes e evolução de produtos com equipes globais. Na Bit2Me e em projetos da Play9/NineBlocks, trabalhei com comunidade, pesquisa tecnológica e desenvolvimento de produto.',
-        p2: 'Essa experiência me aproximou de produto. Na Cripto Host, atuei como Product Owner, cuidando de requisitos técnicos, pesquisa de infraestrutura e priorização junto à engenharia.',
+        p1: 'Trabalho com produtos digitais desde 2017, de trading algorítmico a SaaS de IA e Web3. Comecei na DSC Investimentos, como Gerente de Produto Digital, cuidando do ciclo de vida de sistemas de trading algorítmico para B3/BMF e Forex, da definição de requisitos ao lançamento. Meu papel era ligar os desenvolvedores aos especialistas do mercado financeiro e transformar estratégias de negociação em software.',
+        p2: 'Depois, passei a trabalhar perto dos usuários e de equipes globais. No ecossistema TRON DAO / DLive, atuei em suporte, onboarding, localização e feedback e, mais tarde, em pesquisa, testes e evolução de produtos Web3. Na Bit2Me e na Play9/NineBlocks, trabalhei com comunidade, pesquisa tecnológica e desenvolvimento de produto. Na Cripto Host, fui Product Owner, definindo backlog e requisitos técnicos junto à engenharia.',
         todayTitle: 'Hoje',
         p3: 'Hoje, como cofundador do ProfResolve, atuo do discovery à implementação técnica, cobrindo estratégia, roadmap, UX e monetização. Participei diretamente da construção da plataforma, incluindo frontend, backend, APIs, pagamentos, banco de dados, infraestrutura de IA e mecanismos de confiabilidade.',
         p4: 'O ProfResolve tem mais de 1.200 usuários cadastrados organicamente e monetização ativa. Um survey aberto a mais de 100 professores e o feedback contínuo ajudam a orientar as prioridades do produto.',
@@ -276,9 +276,10 @@ export const ui = {
         items: [
           { period: '2026 – Presente', company: 'ProfResolve', role: profresolveRole, description: 'Cofundador e líder de produto de um SaaS de IA para professores.', highlight: 'Mais de 1.200 usuários cadastrados organicamente e monetização ativa.' }, // TODO(conteúdo): destacar uma evidência verificável.
           { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research', description: 'Backlog, requisitos e pesquisa de infraestrutura junto à engenharia.', highlight: 'Mais de 100 oportunidades de nodes pesquisadas; mais de 20 disponibilizadas comercialmente pela Cripto Host.' }, // TODO(conteúdo): destacar uma evidência verificável.
-          { period: '2019 – 2025 (5+ anos)', company: 'TRON DAO Ecosystem', role: 'Product Operations, Research & Growth | Web3', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) e contratado direto TRON DAO (2023 – 2025).', highlight: undefined },
-          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Comunidade, conteúdo localizado e feedback do mercado brasileiro.', highlight: 'Comunidade Bitmeiros: mais de 10 mil membros orgânicos em menos de cinco meses.' }, // TODO(conteúdo): destacar uma evidência verificável.
-          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Product Research, Discovery & Development | Web3 · Community Manager', description: 'Pesquisa tecnológica, whitepapers e colaboração no desenvolvimento de projetos Web3.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2019 – 2025 (5+ anos)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Product Operations | Web3', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) e contratado direto TRON DAO (2023 – 2025).', highlight: undefined },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager & Social Media Manager', description: 'Comunidade, conteúdo localizado e feedback do mercado brasileiro.', highlight: 'Comunidade Bitmeiros: mais de 10 mil membros orgânicos em menos de cinco meses.' }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product Research & Discovery', description: 'Pesquisa tecnológica, whitepapers e colaboração no desenvolvimento de projetos Web3.', highlight: undefined }, // TODO(conteúdo): destacar uma evidência verificável.
+          { period: '2017 – 2019', company: 'DSC Investimentos', role: 'Gerente de Produto Digital | Trading Algorítmico & Mercado Financeiro', description: 'Ciclo de vida de produtos digitais para o mercado financeiro, da definição de requisitos ao lançamento. Coordenei sistemas de trading algorítmico para B3/BMF e Forex, com backtesting, validação de estratégias e KPIs de adoção e uso.', highlight: 'Portfólio com robôs personalizados, licenciamento de software e modelos por assinatura.' },
           { period: '2010 – Presente', company: 'YouTube / Independente', role: 'Content Creator across Multiple Channels', description: 'Estratégia de conteúdo, métricas e crescimento orgânico em múltiplos canais.', highlight: 'Mais de 60 milhões de visualizações e 250 mil seguidores.' },
         ],
       },
@@ -335,14 +336,14 @@ export const ui = {
       // contact.* kept for TypeScript compatibility — new About CTA uses the global contact.* keys
       contact: {
         title: 'Vamos conversar',
-        subtitle: 'Estou aberto a conversar sobre oportunidades em Technical Product, AI Products e equipes construindo produtos tecnicamente complexos.',
+        subtitle: 'Estou aberto a conversar sobre oportunidades em Product Management, AI Products e equipes construindo produtos tecnicamente complexos.',
       },
     },
 
     // Contact section
     contact: {
       title: 'Vamos conversar',
-      subtitle: 'Estou aberto a conversar sobre oportunidades em Technical Product, AI Products e equipes construindo produtos tecnicamente complexos.',
+      subtitle: 'Estou aberto a conversar sobre oportunidades em Product Management, AI Products e equipes construindo produtos tecnicamente complexos.',
       ctaLinkedin: 'LinkedIn',
       ctaEmail: 'Enviar e-mail',
       ctaCV: 'Baixar CV (PDF)',
@@ -412,8 +413,8 @@ export const ui = {
 
     // SEO / Meta
     meta: {
-      siteTitle: 'Lucas Sehnem — Technical Product Manager | Produtos de IA',
-      siteDescription: 'Technical Product Manager na interseção de IA, Produto e Engenharia. Construindo produtos com IA, APIs e SaaS.',
+      siteTitle: 'Lucas Sehnem — Product Manager | Produtos de IA',
+      siteDescription: 'Product Manager na interseção de IA, Produto e Engenharia. Construindo produtos com IA, APIs e SaaS.',
     },
   },
 
@@ -438,7 +439,7 @@ export const ui = {
 
     // Hero
     hero: {
-      badge: 'Technical Product Manager / Systems, Product, AI',
+      badge: 'Product Manager / Systems, Product, AI',
       headlineBefore: 'From problem to product.',
       headlineAccent: 'From strategy',
       headlineAfter: 'to execution.',
@@ -575,7 +576,7 @@ export const ui = {
     projectsPage: {
       title: 'Projects',
       subtitle: 'AI products and technical systems, from discovery to execution. Start with the two featured projects.',
-      description: 'Portfolio of products built and shipped by Lucas Sehnem, Technical Product Manager.',
+      description: 'Portfolio of products built and shipped by Lucas Sehnem, Product Manager.',
       empty: 'No projects published yet. Check back soon!',
       // Sections shown on /projects, in display order.
       // Membership comes from each project's frontmatter `section` field.
@@ -641,22 +642,22 @@ export const ui = {
 
       // SEO meta exclusive to About — not the site-wide siteDescription
       meta: {
-        title: 'About | Lucas Sehnem · Technical Product Manager',
-        description: "Lucas Sehnem's path across users, product and technology — with experience in AI Products, Technical Product, discovery, strategy and hands-on execution.",
+        title: 'About | Lucas Sehnem · Product Manager',
+        description: "Lucas Sehnem's path across users, product and technology — with experience in AI Products, product management, discovery, strategy and hands-on execution.",
       },
 
       // bio.* — three-paragraph home excerpt; the last sentence carries the localized link to the About page (rendered via set:html in HomePage.astro)
       bio: {
         p1: 'I work hands-on across product and technology, directly involved with development, AI, APIs, architecture, automation and prototyping to turn product decisions into real solutions.',
         p2: 'My work does not end with defining what to build. I seek to understand the technical implications, trade-offs and the most efficient path to turn a product decision into real value for the user.',
-        p3: 'Today I am a Technical Product Manager and co-founder of ProfResolve. The full story is on the <a href="/en/about/">About page</a>.',
+        p3: 'Today I am a Product Manager and co-founder of ProfResolve. The full story is on the <a href="/en/about/">About page</a>.',
       },
 
       // intro.* exclusive to the About page — separate from bio.* to avoid Home regression
       intro: {
         productPathTitle: 'How I moved into product',
-        p1: 'I started out in technology close to users. In the TRON DAO / DLive ecosystem, I worked in support, onboarding, localization and feedback; later, I collaborated with global teams on research, testing and product improvements. At Bit2Me and on Play9/NineBlocks projects, I worked across community, technology research and product development.',
-        p2: 'That experience moved me closer to product. At Cripto Host, I worked as a Product Owner, handling technical requirements, infrastructure research and prioritization alongside engineering.',
+        p1: 'I have worked on digital products since 2017, from algorithmic trading to AI SaaS and Web3. I started at DSC Investimentos as a Digital Product Manager, owning the lifecycle of algorithmic trading systems for B3/BMF and Forex, from requirements to launch. My role was to connect developers with financial-market specialists and turn trading strategies into software.',
+        p2: 'After that, I moved closer to users and global teams. In the TRON DAO / DLive ecosystem, I worked in support, onboarding, localization and feedback and, later, in research, testing and improvement of Web3 products. At Bit2Me and Play9/NineBlocks, I worked across community, technology research and product development. At Cripto Host, I was a Product Owner, defining the backlog and technical requirements alongside engineering.',
         todayTitle: 'Today',
         p3: 'Today, as co-founder of ProfResolve, I work from discovery through technical implementation, covering strategy, roadmap, UX and monetization. I took a direct part in building the platform, including frontend, backend, APIs, payments, database, AI infrastructure and reliability mechanisms.',
         p4: 'ProfResolve has over 1,200 organically registered users and active monetization. A survey open to more than 100 teachers and ongoing user feedback help guide product priorities.',
@@ -683,9 +684,10 @@ export const ui = {
         items: [
           { period: '2026 – Present', company: 'ProfResolve', role: profresolveRole, description: 'Co-founder and product lead for an AI SaaS for teachers.', highlight: 'Over 1,200 organically registered users and active monetization.' }, // TODO(conteúdo): add a verifiable evidence highlight.
           { period: '2025 – 2026', company: 'Cripto Host', role: 'Product Owner & Project Manager | Web3 Research', description: 'Backlog, requirements and infrastructure research alongside engineering.', highlight: 'Over 100 node opportunities researched; more than 20 made commercially available by Cripto Host.' }, // TODO(conteúdo): add a verifiable evidence highlight.
-          { period: '2019 – 2025 (5+ years)', company: 'TRON DAO Ecosystem', role: 'Product Operations, Research & Growth | Web3', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) and direct hire TRON DAO (2023 – 2025).', highlight: undefined },
-          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager and Social Media Manager', description: 'Community, localized content and feedback from the Brazilian market.', highlight: 'Bitmeiros community: over 10,000 organic members in under five months.' }, // TODO(conteúdo): add a verifiable evidence highlight.
-          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Product Research, Discovery & Development | Web3 · Community Manager', description: 'Technology research, whitepapers and collaboration on Web3 product development.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2019 – 2025 (5+ years)', company: 'TRON DAO Ecosystem', role: 'Growth, Customer Success & Product Operations | Web3', description: 'Via DLive.tv (2019 – 2021), Freelancer (2021 – 2023) and direct hire TRON DAO (2023 – 2025).', highlight: undefined },
+          { period: '2022 – 2023', company: 'Bit2Me', role: 'Community Manager & Social Media Manager', description: 'Community, localized content and feedback from the Brazilian market.', highlight: 'Bitmeiros community: over 10,000 organic members in under five months.' }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2021 – 2022', company: 'Play9 / NineBlocks', role: 'Community Manager | Product Research & Discovery', description: 'Technology research, whitepapers and collaboration on Web3 product development.', highlight: undefined }, // TODO(conteúdo): add a verifiable evidence highlight.
+          { period: '2017 – 2019', company: 'DSC Investimentos', role: 'Digital Product Manager | Algorithmic Trading & Financial Markets', description: 'Lifecycle of digital products for the financial market, from requirements to launch. Coordinated algorithmic trading systems for B3/BMF and Forex, with backtesting, strategy validation and adoption and usage KPIs.', highlight: 'Portfolio spanning custom trading bots, software licensing and subscription-based commercial models.' },
           { period: '2010 – Present', company: 'YouTube / Independent', role: 'Content Creator across Multiple Channels', description: 'Content strategy, metrics and organic growth across multiple channels.', highlight: 'Over 60 million views and 250,000 followers.' },
         ],
       },
@@ -742,14 +744,14 @@ export const ui = {
       // contact.* kept for TypeScript compatibility — new About CTA uses the global contact.* keys
       contact: {
         title: "Let's talk",
-        subtitle: "I'm open to conversations about opportunities in Technical Product, AI Products and teams building technically complex products.",
+        subtitle: "I'm open to conversations about opportunities in Product Management, AI Products and teams building technically complex products.",
       },
     },
 
     // Contact section
     contact: {
       title: "Let's talk",
-      subtitle: "I'm open to conversations about opportunities in Technical Product, AI Products and teams building technically complex products.",
+      subtitle: "I'm open to conversations about opportunities in Product Management, AI Products and teams building technically complex products.",
       ctaLinkedin: 'LinkedIn',
       ctaEmail: 'Send email',
       ctaCV: 'Download CV (PDF)',
@@ -819,8 +821,8 @@ export const ui = {
 
     // SEO / Meta
     meta: {
-      siteTitle: 'Lucas Sehnem — Technical Product Manager',
-      siteDescription: 'Technical Product Manager at the intersection of AI, Product and Engineering. Building AI-powered products, APIs and SaaS.',
+      siteTitle: 'Lucas Sehnem — Product Manager',
+      siteDescription: 'Product Manager at the intersection of AI, Product and Engineering. Building AI-powered products, APIs and SaaS.',
     },
   },
 } as const;

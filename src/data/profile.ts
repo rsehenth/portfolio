@@ -5,12 +5,12 @@
 
 export const profile = {
   name: 'Lucas Sehnem',
-  headline: 'Technical Product Manager',
+  headline: 'Product Manager',
   tagline: 'Construo produtos na interseção entre IA, Produto e Engenharia.',
-  subheadline: 'Technical Product Manager focado em transformar problemas complexos em produtos simples, escaláveis e tecnicamente viáveis.',
+  subheadline: 'Product Manager focado em transformar problemas complexos em produtos simples, escaláveis e tecnicamente viáveis.',
   description: `Trabalho de forma hands-on entre produto e tecnologia, atuando diretamente com desenvolvimento, IA, APIs, arquitetura, automações e prototipação para transformar decisões de produto em soluções reais.
 
-Foco em Technical Product Management, AI Products, APIs, SaaS, estratégia de produto, crescimento e desenvolvimento hands-on.`,
+Foco em Product Management, AI Products, APIs, SaaS, estratégia de produto, crescimento e desenvolvimento hands-on.`,
   email: 'lucas.sehnemb@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sehenth/',
   github: 'https://github.com/lucassehnem',
@@ -65,7 +65,7 @@ export const footerLinks = [
 ];
 
 export const siteConfig = {
-  title: 'Lucas Sehnem — Technical Product Manager',
-  description: 'Technical Product Manager at the intersection of AI, Product & Engineering. Building AI-powered products, APIs, and SaaS.',
+  title: 'Lucas Sehnem — Product Manager',
+  description: 'Product Manager at the intersection of AI, Product & Engineering. Building AI-powered products, APIs, and SaaS.',
   ogImage: '/og-image.jpg',
 };
